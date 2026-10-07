@@ -47,3 +47,13 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Comptes** : sessions de 2 h, verrouillage 15 min après 5 échecs, cookies `SameSite=Strict`. Pas de double authentification native dans Payload : à ajouter avant la mise en ligne (Better Auth, comme l'espace pro, ou accès à `/admin` restreint par VPN ou liste d'adresses IP).
 - **Source des fiches** : `CONTENT_SOURCE=cms` en production ; les fichiers de `src/content` restent la source en CI et l'amorçage du CMS.
 - **Dépendances** : `undici` et `dompurify` forcés en versions corrigées (`overrides`). Restent signalés `braces` (aucune version corrigée publiée, utilisé seulement au build par `sass`) et `esbuild` (serveur de développement de `drizzle-kit`, jamais en production).
+
+## Annuaire des chirurgiens (Phase 5)
+
+- **Publication** (`src/content/surgeons/rules.ts`) : vérifié au registre officiel il y a moins de 12 mois et abonnement en cours. Au-delà d'un an sans contrôle, le profil disparaît automatiquement.
+- **Vérification** (`src/cms/verification.ts`) : réservée aux administrateurs, horodatée avec l'auteur ; case « Contrôle annuel effectué » pour relancer le délai ; preuve interne jamais publiée.
+- **Ordre** alphabétique par nom de famille ; l'abonnement ne change ni le classement ni le nombre de demandes.
+- **Pages ville** seulement à partir de 3 chirurgiens publiés (sinon 404) ; résultats filtrés et annuaire vide non indexés.
+- **Profils propres à un marché** : pas d'alternatives hreflang entre annuaires de pays différents.
+- **Aucun avis, avant/après ni prix** dans l'annuaire, quel que soit le pays. Présentation soumise à la charte éditoriale.
+- **Chirurgiens fictifs** (`fixtures.ts`) chargés seulement avec `DIRECTORY_FIXTURES=1` (tests de bout en bout), jamais en production.

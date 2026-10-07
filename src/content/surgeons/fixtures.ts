@@ -6,13 +6,20 @@ import type { Surgeon } from "./types";
  * les vrais profils viennent du CMS après vérification au registre.
  * Numéros de registre volontairement invalides (préfixe 0000).
  */
+/** Dates relatives à aujourd'hui, pour que les fixtures restent valides dans le temps. */
+function monthsAgo(months: number): string {
+  const date = new Date();
+  date.setUTCMonth(date.getUTCMonth() - months);
+  return date.toISOString().slice(0, 10);
+}
+
 const base = {
   specialty: "plastic-surgery",
   country: "FR",
   languages: ["fr", "en"],
   subscriptionActive: true,
-  verification: { status: "verified", verifiedAt: "2026-09-01" },
-} as const satisfies Partial<Surgeon>;
+  verification: { status: "verified", verifiedAt: monthsAgo(1) },
+} satisfies Partial<Surgeon>;
 
 const lyon = { postalCode: "69006", city: "Lyon", citySlug: "lyon" };
 
@@ -65,7 +72,7 @@ export const SURGEON_FIXTURES: Surgeon[] = [
     practice: { name: "Cabinet fictif E", address: "5 rue de l'Exemple", postalCode: "75016", city: "Paris", citySlug: "paris" },
     interventions: ["rhinoplasty"],
     // Vérification de plus d'un an : ne doit jamais apparaître.
-    verification: { status: "verified", verifiedAt: "2025-01-15" },
+    verification: { status: "verified", verifiedAt: monthsAgo(13) },
   },
   {
     ...base,

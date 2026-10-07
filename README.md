@@ -15,6 +15,7 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 - Accessibilité : lien d'évitement, focus visible, champs étiquetés, résumé des erreurs, gestion du focus entre étapes, cibles tactiles de 44 px.
 - En-têtes de sécurité HTTP.
 - Back-office éditorial Payload (`/admin`) : fiches d'intervention par marché, relecture médicale signée, charte éditoriale vérifiée à l'enregistrement, historique des versions.
+- Annuaire des chirurgiens (`/fr/chirurgiens`) : seuls les profils vérifiés au registre officiel depuis moins d'un an et abonnés sont publiés, par ordre alphabétique ; pages ville à partir de trois chirurgiens ; ni avis, ni avant/après, ni prix.
 - Tests unitaires (Vitest) et de bout en bout sur mobile (Playwright), intégration continue GitHub Actions.
 
 ## Installation
@@ -99,6 +100,7 @@ src/app/[locale]/         Pages (accueil, interventions, demande, informations)
 src/app/sitemap.ts        Sitemap multilingue
 src/app/(payload)/        Back-office Payload (/admin) et son API (/api), fichiers générés
 src/cms/                  Collections, rôles et règles de relecture médicale du CMS
+src/content/surgeons/     Annuaire : règles de publication, registres officiels, chirurgiens fictifs de test
 src/components/           Composants partagés (en-tête, pied de page, encadré légal, JSON-LD)
 src/content/              Contenus des interventions en fichiers (source par défaut, amorçage du CMS) et charte éditoriale
 src/db/                   Schéma PostgreSQL des demandes (Drizzle), migrations des demandes et du CMS
