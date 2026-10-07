@@ -71,6 +71,6 @@ docs/decisions.md         Décisions et hypothèses
 
 ## Prochaines étapes
 
-- Phase 5 (en cours) : design system, CMS Payload, annuaire des chirurgiens vérifiés, formulaire en 5 étapes, espace pro, envoi des demandes.
-- Phase 6 : tests, accessibilité, performances et sécurité avant mise en ligne.
-- Phase 7 : lancement en France, puis au Royaume-Uni.
+- Phase 2 : arborescence complète, taxonomie et stratégie de mots-clés.
+- Phase 3 : design system et maquettes.
+- Phase 4 : base PostgreSQL chez un hébergeur certifié HDS, CMS, annuaire des chirurgiens vérifiés, espace pro, envoi des demandes.
