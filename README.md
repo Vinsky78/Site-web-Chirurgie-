@@ -93,6 +93,12 @@ docs/decisions.md         Décisions et hypothèses
 - **Phase 3 – design system** : tokens dans `src/app/globals.css`, composants `src/components/ui` (Button, Badge, Alert, Card), page de référence non indexée `/<locale>/design-system`.
 - **Phase 4 – socle** : stockage PostgreSQL (`migrations/001_init.sql`, `LEAD_STORAGE=postgres` + `DATABASE_URL`), annuaire des chirurgiens vérifiés (`/chirurgiens`, vide tant qu'aucune fiche n'est vérifiée), envoi d'une demande à 1 à 3 chirurgiens (`src/lib/lead/dispatch.ts`), espace pro `/pro` (sans authentification, aucune donnée exposée).
 
+## Guides, comparateur et recherche
+
+- `/guides` : 4 guides pratiques (choisir son chirurgien, préparer sa consultation, devis et délai de réflexion, préparation et convalescence), en brouillon (noindex) tant qu'une relecture juridique et médicale n'a pas eu lieu (`src/content/guides.ts`).
+- `/comparateur` : compare 2 ou 3 interventions (anesthésie, durée, hospitalisation, convalescence, risques).
+- `/recherche` : recherche tolérante aux accents sur les interventions et les guides.
+
 ## GEO et mesure d'audience
 
 - **GEO** (visibilité dans les assistants IA) : `/llms.txt` (résumé du site, fiches relues uniquement), `robots.txt` avec robots d'IA autorisés sur les pages publiques, données structurées `Organization` et `WebSite` sur chaque page, en plus des données des fiches (`MedicalWebPage`, `FAQPage`).

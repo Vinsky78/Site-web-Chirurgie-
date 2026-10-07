@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getAlternateSlugs, getInterventions, isIndexable } from "@/content/interventions";
+import { getGuideAlternateSlugs, getGuides, isGuideIndexable } from "@/content/guides";
 import { INFO_PAGE_IDS, INFO_PAGE_SLUGS } from "@/lib/pages";
 import { staticPaths } from "@/content/taxonomy";
 import { absoluteUrl, HREFLANG } from "@/lib/seo";
@@ -26,6 +27,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       entries.push({
         url: absoluteUrl(locale, `/informations/${INFO_PAGE_SLUGS[locale][id]}`),
         alternates: { languages: languagesFor((l) => `/informations/${INFO_PAGE_SLUGS[l][id]}`) },
+      });
+    }
+    for (const guide of getGuides(locale).filter(isGuideIndexable)) {
+      const slugs = getGuideAlternateSlugs(guide.id);
+      entries.push({
+        url: absoluteUrl(locale, `/guides/${guide.slug}`),
+        lastModified: guide.updatedAt,
+        alternates: { languages: languagesFor((l) => (slugs[l] ? `/guides/${slugs[l]}` : undefined)) },
       });
     }
     for (const item of getInterventions(locale).filter(isIndexable)) {

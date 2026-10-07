@@ -42,6 +42,16 @@ export async function Header() {
               </Link>
             </li>
             <li>
+              <Link href="/comparateur" className="underline-offset-4 hover:underline">
+                {t("compare")}
+              </Link>
+            </li>
+            <li>
+              <Link href="/recherche" className="underline-offset-4 hover:underline">
+                {t("search")}
+              </Link>
+            </li>
+            <li>
               <Link href={`/informations/${INFO_PAGE_SLUGS[locale].methodology}`} className="underline-offset-4 hover:underline">
                 {t("method")}
               </Link>
@@ -75,6 +85,7 @@ export async function Header() {
             groups={groups}
             labels={{
               interventions: t("interventions"),
+              guides: t("guides"),
               surgeons: t("surgeons"),
               request: t("request"),
               main: t("main"),

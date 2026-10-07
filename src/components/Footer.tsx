@@ -35,6 +35,9 @@ export async function Footer() {
           <h2 className={heading}>{t("explore")}</h2>
           <ul className={list}>
             <li><Link href="/interventions" className={link}>{tn("interventions")}</Link></li>
+            <li><Link href="/guides" className={link}>{tn("guides")}</Link></li>
+            <li><Link href="/comparateur" className={link}>{tn("compare")}</Link></li>
+            <li><Link href="/recherche" className={link}>{tn("search")}</Link></li>
             <li><Link href="/chirurgiens" className={link}>{tn("surgeons")}</Link></li>
             <li><Link href="/demande" className={link}>{tn("request")}</Link></li>
             <li><Link href="/pro" className={link}>{tn("pro")}</Link></li>

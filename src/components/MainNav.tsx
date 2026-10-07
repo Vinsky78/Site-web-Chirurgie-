@@ -6,7 +6,7 @@ import { MegaMenu, type MenuGroup } from "@/components/MegaMenu";
 import { buttonClasses } from "@/components/ui/Button";
 
 interface Props {
-  labels: { interventions: string; surgeons: string; request: string; main: string; open: string; close: string; all: string };
+  labels: { interventions: string; guides: string; surgeons: string; request: string; main: string; open: string; close: string; all: string };
   groups: MenuGroup[];
 }
 
@@ -30,6 +30,11 @@ export function MainNav({ labels, groups }: Props) {
         className={`${open ? "flex" : "hidden"} flex-col gap-3 pb-4 pt-2 text-sm md:flex md:flex-row md:items-center md:gap-x-6 md:p-0`}
       >
         <MegaMenu label={labels.interventions} groups={groups} allLabel={labels.all} allHref="/interventions" />
+        <li>
+          <Link href="/guides" className="inline-flex min-h-11 items-center font-medium hover:text-primary">
+            {labels.guides}
+          </Link>
+        </li>
         <li>
           <Link href="/chirurgiens" className="inline-flex min-h-11 items-center font-medium hover:text-primary">
             {labels.surgeons}

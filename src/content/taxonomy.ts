@@ -59,5 +59,5 @@ export function isCategory(value: string): value is CategoryId {
 
 /** Arborescence du site : chemins (après la locale) à publier, hors fiches. */
 export function staticPaths(): string[] {
-  return ["", "/interventions", "/chirurgiens", ...CATEGORY_IDS.map((c) => `/interventions/categories/${c}`)];
+  return ["", "/interventions", "/guides", "/chirurgiens", "/comparateur", ...CATEGORY_IDS.map((c) => `/interventions/categories/${c}`)];
 }

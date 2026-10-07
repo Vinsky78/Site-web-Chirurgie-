@@ -22,7 +22,10 @@
     "announceClose": "Fermer l'annonce",
     "viewCategory": "Voir le domaine",
     "menuOpen": "Menu",
-    "menuClose": "Fermer"
+    "menuClose": "Fermer",
+    "guides": "Guides",
+    "compare": "Comparateur",
+    "search": "Rechercher"
   },
   "footer": {
     "legal": "Informations",
@@ -36,7 +39,8 @@
     "markets": "Marchés",
     "france": "France",
     "uk": "Royaume-Uni",
-    "cookies": "Cookies"
+    "cookies": "Cookies",
+    "tools": "Outils"
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -354,5 +358,41 @@
   },
   "layout": {
     "announce": "Les fiches sont rédigées selon une charte stricte et en cours de relecture par des chirurgiens qualifiés."
+  },
+  "guides": {
+    "title": "Guides pratiques",
+    "lead": "Choisir son chirurgien, préparer sa consultation, comprendre le devis et la convalescence.",
+    "draftBanner": "Guide en attente de relecture juridique et médicale. Il peut encore évoluer.",
+    "updatedAt": "Mis à jour le {date}",
+    "breadcrumb": "Fil d'Ariane",
+    "read": "Lire le guide",
+    "others": "Autres guides",
+    "cta": "Préparer une demande de consultation"
+  },
+  "compare": {
+    "title": "Comparer des interventions",
+    "lead": "Mettez côte à côte l'anesthésie, la durée, l'hospitalisation et la convalescence de deux ou trois interventions.",
+    "choose": "Intervention {n}",
+    "none": "Aucune",
+    "button": "Comparer",
+    "empty": "Choisissez au moins deux interventions pour les comparer.",
+    "domain": "Domaine",
+    "anaesthesia": "Anesthésie",
+    "duration": "Durée",
+    "hospitalStay": "Hospitalisation",
+    "recovery": "Convalescence",
+    "risks": "Principaux risques",
+    "view": "Voir la fiche",
+    "note": "Ce tableau est un repère général. Seul un chirurgien peut vous indiquer ce qui s'applique à votre situation."
+  },
+  "search": {
+    "title": "Recherche",
+    "lead": "Cherchez une intervention ou un guide.",
+    "label": "Votre recherche",
+    "button": "Rechercher",
+    "results": "{count, plural, =0 {Aucun résultat} one {# résultat} other {# résultats}} pour « {q} »",
+    "interventions": "Interventions",
+    "guides": "Guides",
+    "hint": "Essayez « nez », « seins », « cicatrice » ou « injections »."
   }
 }

@@ -1,4 +1,5 @@
 import { routing } from "@/i18n/routing";
+import { getGuides, isGuideIndexable } from "@/content/guides";
 import { getInterventions, isIndexable } from "@/content/interventions";
 import { INFO_PAGE_IDS, INFO_PAGE_SLUGS } from "@/lib/pages";
 import { absoluteUrl } from "@/lib/seo";
@@ -27,6 +28,14 @@ export function GET() {
     for (const item of items) {
       lines.push(`- [${item.title}](${absoluteUrl(locale, `/interventions/${item.slug}`)}): ${item.summary}`);
     }
+    lines.push("");
+  }
+
+  for (const locale of routing.locales) {
+    const guides = getGuides(locale).filter(isGuideIndexable);
+    if (guides.length === 0) continue;
+    lines.push(`## Guides (${locale})`, "");
+    for (const g of guides) lines.push(`- [${g.title}](${absoluteUrl(locale, `/guides/${g.slug}`)}): ${g.summary}`);
     lines.push("");
   }
 

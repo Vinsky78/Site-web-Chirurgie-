@@ -22,7 +22,10 @@
     "announceClose": "Close announcement",
     "viewCategory": "View area",
     "menuOpen": "Menu",
-    "menuClose": "Close"
+    "menuClose": "Close",
+    "guides": "Guides",
+    "compare": "Compare",
+    "search": "Search"
   },
   "footer": {
     "legal": "Information",
@@ -36,7 +39,8 @@
     "markets": "Markets",
     "france": "France",
     "uk": "United Kingdom",
-    "cookies": "Cookies"
+    "cookies": "Cookies",
+    "tools": "Tools"
   },
   "home": {
     "title": "Understand before you decide",
@@ -353,5 +357,41 @@
   },
   "layout": {
     "announce": "Our pages follow a strict editorial charter and are being reviewed by qualified surgeons."
+  },
+  "guides": {
+    "title": "Practical guides",
+    "lead": "Choosing a surgeon, preparing your consultation, understanding the quote and recovery.",
+    "draftBanner": "This guide is awaiting legal and medical review. It may still change.",
+    "updatedAt": "Updated {date}",
+    "breadcrumb": "Breadcrumb",
+    "read": "Read the guide",
+    "others": "Other guides",
+    "cta": "Prepare a consultation request"
+  },
+  "compare": {
+    "title": "Compare procedures",
+    "lead": "Put the anaesthetic, duration, hospital stay and recovery of two or three procedures side by side.",
+    "choose": "Procedure {n}",
+    "none": "None",
+    "button": "Compare",
+    "empty": "Choose at least two procedures to compare them.",
+    "domain": "Area",
+    "anaesthesia": "Anaesthetic",
+    "duration": "Duration",
+    "hospitalStay": "Hospital stay",
+    "recovery": "Recovery",
+    "risks": "Main risks",
+    "view": "View the page",
+    "note": "This table is a general guide. Only a surgeon can tell you what applies to your situation."
+  },
+  "search": {
+    "title": "Search",
+    "lead": "Look for a procedure or a guide.",
+    "label": "Your search",
+    "button": "Search",
+    "results": "{count, plural, =0 {No results} one {# result} other {# results}} for “{q}”",
+    "interventions": "Procedures",
+    "guides": "Guides",
+    "hint": "Try “nose”, “breast”, “scar” or “injectables”."
   }
 }
