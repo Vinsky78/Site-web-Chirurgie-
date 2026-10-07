@@ -25,8 +25,8 @@ export default async function GuidesPage({ params }: PageProps<"/[locale]/guides
         <ul className="grid gap-6 sm:grid-cols-2">
           {guides.map((g, i) => (
             <li key={g.id}>
-              <article className="reveal card-lift group relative flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card">
-                <span aria-hidden="true" className="icon-pop flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft font-serif text-lg font-semibold text-primary">
+              <article className="group relative flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card transition hover:-translate-y-1 hover:border-primary">
+                <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft font-serif text-lg font-semibold text-primary">
                   {i + 1}
                 </span>
                 <h2 className="mt-4 font-serif text-xl font-semibold text-primary-strong">

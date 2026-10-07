@@ -3,9 +3,9 @@ import type { ButtonHTMLAttributes } from "react";
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  primary: "btn-fx btn-fx-primary bg-primary text-white",
-  secondary: "btn-fx border border-primary bg-surface text-primary hover:bg-accent-soft",
-  ghost: "btn-fx text-primary hover:bg-accent-soft",
+  primary: "bg-primary text-white hover:bg-primary-strong",
+  secondary: "border border-primary bg-surface text-primary hover:bg-accent-soft",
+  ghost: "text-primary hover:bg-accent-soft",
 };
 
 /** Classes d'un bouton, utilisables aussi sur un lien. Cible tactile minimale de 44 px (WCAG 2.5.8). */

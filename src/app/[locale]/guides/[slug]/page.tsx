@@ -84,7 +84,7 @@ export default async function GuidePage({ params }: Props) {
         {!guide.reviewed && <Alert tone="warning">{t("draftBanner")}</Alert>}
         {guide.sections.map((section, i) => (
           <section key={section.heading} aria-labelledby={`s-${i}`} className="mt-10">
-            <h2 id={`s-${i}`} className="heading-accent font-serif text-2xl font-semibold text-primary-strong">{section.heading}</h2>
+            <h2 id={`s-${i}`} className="font-serif text-2xl font-semibold text-primary-strong">{section.heading}</h2>
             <div className="mt-4 space-y-4">
               {section.paragraphs.map((p) => (
                 <p key={p}>{p}</p>

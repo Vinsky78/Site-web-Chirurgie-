@@ -48,8 +48,8 @@ export default async function InterventionsPage({ params }: PageProps<"/[locale]
         const items = interventions.filter((item) => item.category === category);
         if (items.length === 0) return null;
         return (
-          <section key={category} aria-labelledby={`cat-${category}`} className="reveal mt-12 scroll-mt-28">
-            <h2 id={`cat-${category}`} className="heading-accent font-serif text-2xl font-semibold text-primary-strong">
+          <section key={category} aria-labelledby={`cat-${category}`} className="mt-12 scroll-mt-28">
+            <h2 id={`cat-${category}`} className="font-serif text-2xl font-semibold text-primary-strong">
               <Link href={`/interventions/categories/${category}`} className="underline-offset-4 hover:underline">
                 {tc(category)}
               </Link>

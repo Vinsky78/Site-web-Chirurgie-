@@ -37,22 +37,22 @@ export async function Header() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-1.5">
           <ul className="hidden flex-wrap gap-x-5 sm:flex">
             <li>
-              <Link href="/pro" className="link-fx">
+              <Link href="/pro" className="underline-offset-4 hover:underline">
                 {t("pro")}
               </Link>
             </li>
             <li>
-              <Link href="/comparateur" className="link-fx">
+              <Link href="/comparateur" className="underline-offset-4 hover:underline">
                 {t("compare")}
               </Link>
             </li>
             <li>
-              <Link href="/recherche" className="link-fx">
+              <Link href="/recherche" className="underline-offset-4 hover:underline">
                 {t("search")}
               </Link>
             </li>
             <li>
-              <Link href={`/informations/${INFO_PAGE_SLUGS[locale].methodology}`} className="link-fx">
+              <Link href={`/informations/${INFO_PAGE_SLUGS[locale].methodology}`} className="underline-offset-4 hover:underline">
                 {t("method")}
               </Link>
             </li>
@@ -66,7 +66,7 @@ export async function Header() {
                   hrefLang={l}
                   lang={l}
                   aria-current={l === locale ? "true" : undefined}
-                  className={l === locale ? "font-semibold" : "text-muted link-fx"}
+                  className={l === locale ? "font-semibold" : "text-muted underline-offset-4 hover:underline"}
                 >
                   {t(`languages.${l}`)}
                 </Link>
@@ -76,7 +76,7 @@ export async function Header() {
         </div>
       </div>
 
-      <div className="header-shadow sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
+      <div className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-4 py-3">
           <Link href="/" className="py-1 max-w-[60%] font-serif text-base font-semibold leading-tight text-primary-strong sm:max-w-none sm:text-xl">
             {SITE_NAME}
