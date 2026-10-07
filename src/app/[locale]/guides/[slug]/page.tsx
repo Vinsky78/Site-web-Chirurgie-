@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Alert } from "@/components/ui/Alert";
 import { buttonClasses } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { absoluteUrl, localeAlternates } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, socialMetadata } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 
 type Props = PageProps<"/[locale]/guides/[slug]">;
@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: guide.title,
     description: guide.summary,
     alternates: localeAlternates(locale as Locale, (l) => (alternates[l] ? `/guides/${alternates[l]}` : undefined)),
+    ...socialMetadata({ locale: locale as Locale, title: guide.title, description: guide.summary, path: `/guides/${guide.slug}`, type: "article" }),
     robots: isGuideIndexable(guide) ? undefined : { index: false, follow: true },
   };
 }
@@ -51,6 +52,7 @@ export default async function GuidePage({ params }: Props) {
     dateModified: guide.updatedAt,
     url: absoluteUrl(locale as Locale, `/guides/${guide.slug}`),
     publisher: { "@type": "Organization", name: SITE_NAME },
+    author: { "@type": "Organization", name: SITE_NAME },
   };
 
   return (
@@ -99,7 +101,7 @@ export default async function GuidePage({ params }: Props) {
         ))}
 
         <p className="mt-12">
-          <Link href="/demande" className={buttonClasses()}>{t("cta")}</Link>
+          <Link href="/demande" data-track="guide_request" className={buttonClasses()}>{t("cta")}</Link>
         </p>
 
         <section aria-labelledby="others" className="mt-12">

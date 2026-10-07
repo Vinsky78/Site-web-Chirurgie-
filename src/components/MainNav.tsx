@@ -41,7 +41,7 @@ export function MainNav({ labels, groups }: Props) {
           </Link>
         </li>
         <li>
-          <Link href="/demande" className={`${buttonClasses()} w-full md:w-auto`}>
+          <Link href="/demande" data-track="header_request" className={`${buttonClasses()} w-full md:w-auto`}>
             {labels.request}
           </Link>
         </li>

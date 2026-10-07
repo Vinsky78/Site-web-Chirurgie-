@@ -15,7 +15,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { JsonLd } from "@/components/JsonLd";
 import { LegalBox } from "@/components/LegalBox";
 import { LOCALE_COUNTRY } from "@/lib/countries";
-import { absoluteUrl, localeAlternates } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, socialMetadata } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 
 type Props = PageProps<"/[locale]/interventions/[slug]">;
@@ -40,6 +40,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: localeAlternates(locale as Locale, (l) =>
       alternates[l] ? `/interventions/${alternates[l]}` : undefined,
     ),
+    ...socialMetadata({
+      locale: locale as Locale,
+      title: intervention.title,
+      description: intervention.summary,
+      path: `/interventions/${intervention.slug}`,
+      type: "article",
+    }),
     // Un contenu non relu par un chirurgien n'est pas indexé (exigence YMYL / E-E-A-T).
     robots: isIndexable(intervention) ? undefined : { index: false, follow: true },
   };
@@ -58,6 +65,7 @@ function structuredData(intervention: Intervention, listTitle: string) {
       inLanguage: intervention.locale,
       dateModified: intervention.updatedAt,
       publisher: { "@type": "Organization", name: SITE_NAME },
+      author: { "@type": "Organization", name: SITE_NAME },
       ...(review.status === "reviewed" && {
         lastReviewed: review.reviewedAt,
         reviewedBy: { "@type": "Person", name: review.reviewer, jobTitle: review.qualification },
@@ -285,6 +293,7 @@ export default async function InterventionPage({ params }: Props) {
               <p className="mt-2 text-sm text-primary-soft">{t("ctaText")}</p>
               <Link
                 href={`/demande?intervention=${intervention.id}`}
+                data-track="sidebar_request"
                 className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-control bg-white px-4 py-2 text-center text-sm font-medium text-primary-strong hover:bg-primary-soft"
               >
                 {t("cta")}

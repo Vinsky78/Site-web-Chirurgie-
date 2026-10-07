@@ -9,7 +9,7 @@ import { CATEGORY_IDS } from "@/content/types";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { InterventionCard } from "@/components/InterventionCard";
 import { JsonLd } from "@/components/JsonLd";
-import { absoluteUrl, localeAlternates } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, socialMetadata } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/interventions/categories/[category]">;
 
@@ -28,6 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("title", { category: tc(category) }),
     description: t(`${category}.lead`),
     alternates: localeAlternates(locale as Locale, () => `/interventions/categories/${category}`),
+    ...socialMetadata({
+      locale: locale as Locale,
+      title: t("title", { category: tc(category) }),
+      description: t(`${category}.lead`),
+      path: `/interventions/categories/${category}`,
+    }),
   };
 }
 

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Analytics } from "@/components/Analytics";
@@ -10,7 +10,8 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { siteStructuredData } from "@/lib/jsonld";
 import { INFO_PAGE_SLUGS } from "@/lib/pages";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { socialMetadata } from "@/lib/seo";
+import { BING_SITE_VERIFICATION, GOOGLE_SITE_VERIFICATION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -24,6 +25,11 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     metadataBase: new URL(SITE_URL),
     title: { default: SITE_NAME, template: `%s | ${SITE_NAME}` },
     description: t("siteDescription"),
+    ...socialMetadata({ locale: locale as Locale, title: SITE_NAME, description: t("siteDescription"), path: "" }),
+    verification: {
+      google: GOOGLE_SITE_VERIFICATION,
+      other: BING_SITE_VERIFICATION ? { "msvalidate.01": BING_SITE_VERIFICATION } : undefined,
+    },
   };
 }
 

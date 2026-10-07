@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { routing, type Locale } from "@/i18n/routing";
-import { SITE_URL } from "./site";
+import { SITE_NAME, SITE_URL } from "./site";
 
 /** Valeur hreflang de chaque locale (langue-pays quand la locale cible un marché). */
 export const HREFLANG: Record<Locale, string> = {
@@ -32,5 +32,32 @@ export function localeAlternates(
   return {
     canonical: absoluteUrl(locale, pathFor(locale) ?? ""),
     languages,
+  };
+}
+
+/** Balises de partage (Open Graph, X/Twitter) d'une page. L'image vient de opengraph-image du layout. */
+export function socialMetadata({
+  locale,
+  title,
+  description,
+  path,
+  type = "website",
+}: {
+  locale: Locale;
+  title: string;
+  description?: string;
+  path: string;
+  type?: "website" | "article";
+}): Pick<Metadata, "openGraph" | "twitter"> {
+  return {
+    openGraph: {
+      type,
+      siteName: SITE_NAME,
+      locale: HREFLANG[locale].replace("-", "_"),
+      url: absoluteUrl(locale, path),
+      title,
+      description,
+    },
+    twitter: { card: "summary_large_image", title, description },
   };
 }

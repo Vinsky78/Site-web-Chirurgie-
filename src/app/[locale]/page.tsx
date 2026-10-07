@@ -8,7 +8,7 @@ import { buttonClasses } from "@/components/ui/Button";
 import { CategoryIcon } from "@/components/ui/CategoryIcon";
 import { HeroArt } from "@/components/ui/HeroArt";
 import { JsonLd } from "@/components/JsonLd";
-import { localeAlternates } from "@/lib/seo";
+import { localeAlternates, socialMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">) {
   return {
     title: t("title"),
     alternates: localeAlternates(locale as Locale, () => ""),
+    ...socialMetadata({ locale: locale as Locale, title: t("title"), description: t("lead"), path: "" }),
   };
 }
 
@@ -68,8 +69,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               ))}
             </ul>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/demande" className={`${buttonClasses()} px-6 shadow-card`}>{t("ctaRequest")}</Link>
-              <Link href="/interventions" className={`${buttonClasses("secondary")} px-6`}>{t("ctaInterventions")}</Link>
+              <Link href="/demande" data-track="hero_request" className={`${buttonClasses()} px-6 shadow-card`}>{t("ctaRequest")}</Link>
+              <Link href="/interventions" data-track="hero_interventions" className={`${buttonClasses("secondary")} px-6`}>{t("ctaInterventions")}</Link>
             </div>
             <ul className="mt-8 flex flex-wrap gap-3 text-xs font-medium text-muted">
               {[0, 1].map((i) => (
@@ -173,7 +174,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             <h2 id="confiance" className="font-serif text-2xl font-semibold text-primary-strong">{t("trustTitle")}</h2>
             <p className="mt-3 max-w-3xl text-muted">{t("trustText")}</p>
           </div>
-          <Link href="/chirurgiens" className={`${buttonClasses()} px-6`}>{t("trustCta")}</Link>
+          <Link href="/chirurgiens" data-track="directory_cta" className={`${buttonClasses()} px-6`}>{t("trustCta")}</Link>
         </div>
       </section>
 
@@ -190,7 +191,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           <h2 id="parlons" className="mx-auto max-w-2xl font-serif text-3xl font-semibold">{t("talkTitle")}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-primary-soft">{t("talkText")}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/demande" className="inline-flex min-h-11 items-center rounded-control bg-white px-6 font-medium text-primary-strong hover:bg-primary-soft">{t("ctaRequest")}</Link>
+            <Link href="/demande" data-track="band_request" className="inline-flex min-h-11 items-center rounded-control bg-white px-6 font-medium text-primary-strong hover:bg-primary-soft">{t("ctaRequest")}</Link>
             <Link href="/chirurgiens" className="inline-flex min-h-11 items-center rounded-control border border-white px-6 font-medium text-white hover:bg-white/10">{t("talkSecondary")}</Link>
           </div>
         </div>

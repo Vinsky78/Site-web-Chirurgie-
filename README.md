@@ -104,6 +104,12 @@ docs/decisions.md         Décisions et hypothèses
 - **GEO** (visibilité dans les assistants IA) : `/llms.txt` (résumé du site, fiches relues uniquement), `robots.txt` avec robots d'IA autorisés sur les pages publiques, données structurées `Organization` et `WebSite` sur chaque page, en plus des données des fiches (`MedicalWebPage`, `FAQPage`).
 - **Google Analytics 4** : renseigner `NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX` (voir `.env.example`). Chargé uniquement après consentement (bandeau avec « Refuser » aussi simple qu'« Accepter », lien « Gérer mes cookies » dans le pied de page), finalités publicitaires désactivées, jamais actif sur `/demande`, `/pro` ni `/design-system`. Sans identifiant, aucun script et aucun bandeau.
 
+### Référencement et mesure : réglages à renseigner
+
+Variables optionnelles (voir `.env.example`), publiées seulement si elles sont renseignées :
+`NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`, `NEXT_PUBLIC_BING_SITE_VERIFICATION`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_SAME_AS`, `NEXT_PUBLIC_SITE_URL`.
+Événement de mesure `cta_click` sur les boutons clés (identifiants fermés dans `src/lib/analytics.ts`, aucun paramètre libre). Balises Open Graph et X/Twitter avec image générée (`opengraph-image.tsx`).
+
 ## Reste à faire
 
 - Héberger la base chez un hébergeur certifié HDS et appliquer la migration.

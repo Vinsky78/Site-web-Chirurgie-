@@ -3,7 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useSyncExternalStore } from "react";
-import { GA_ID, isValidGaId, shouldTrack } from "@/lib/analytics";
+import { GA_ID, isTrackedCta, isValidGaId, shouldTrack } from "@/lib/analytics";
 import { readConsent, subscribeConsent } from "@/lib/consent";
 
 /**
@@ -44,6 +44,18 @@ export function Analytics() {
       page_title: document.title,
     });
   }, [enabled, pathname]);
+
+  useEffect(() => {
+    if (!enabled) return;
+    const onClick = (event: MouseEvent) => {
+      const target = (event.target as Element | null)?.closest<HTMLElement>("[data-track]");
+      const id = target?.dataset.track;
+      if (!isTrackedCta(id) || !shouldTrack(window.location.pathname)) return;
+      window.gtag?.("event", "cta_click", { cta_id: id, page_path: window.location.pathname });
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, [enabled]);
 
   if (!enabled) return null;
   return <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />;
