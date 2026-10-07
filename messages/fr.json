@@ -12,14 +12,18 @@
     "languages": {
       "fr": "Français (France)",
       "en-gb": "English (UK)"
-    }
+    },
+    "surgeons": "Chirurgiens",
+    "menuHome": "Accueil"
   },
   "footer": {
     "legal": "Mentions légales",
     "privacy": "Confidentialité",
     "methodology": "Notre méthode",
     "disclaimer": "Les informations de ce site ne remplacent pas une consultation médicale. Seul un chirurgien qualifié, après examen, peut vous indiquer si une intervention est adaptée à votre situation.",
-    "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant."
+    "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant.",
+    "explore": "Explorer",
+    "about": "À propos"
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -43,7 +47,37 @@
     },
     "featured": "Interventions",
     "reflectionTitle": "Prendre le temps de réfléchir",
-    "reflectionText": "En France, la loi impose un délai minimal de 15 jours entre la remise du devis détaillé et l'intervention. Ce temps vous appartient."
+    "reflectionText": "En France, la loi impose un délai minimal de 15 jours entre la remise du devis détaillé et l'intervention. Ce temps vous appartient.",
+    "steps": {
+      "title": "Comment ça marche",
+      "items": [
+        {
+          "title": "Vous vous informez",
+          "text": "Lisez les fiches : indications, risques, convalescence, alternatives."
+        },
+        {
+          "title": "Vous préparez votre demande",
+          "text": "Un court questionnaire fermé, sans photo ni texte médical libre."
+        },
+        {
+          "title": "Vous choisissez 1 à 3 chirurgiens",
+          "text": "Parmi des praticiens vérifiés, présentés par ordre alphabétique."
+        },
+        {
+          "title": "Vous prenez le temps",
+          "text": "Consultation, devis détaillé, puis délai de réflexion légal."
+        }
+      ]
+    },
+    "seeAll": "Voir toutes les interventions",
+    "eyebrow": "Information médicale indépendante",
+    "trust": [
+      "Risques toujours détaillés",
+      "Chirurgiens vérifiés",
+      "Sans pression commerciale"
+    ],
+    "ctaBandTitle": "Un projet en tête ? Commencez par le préparer.",
+    "ctaBandText": "Quelques questions fermées, sans photo ni texte médical libre. Vous choisissez ensuite à qui votre demande est envoyée."
   },
   "categories": {
     "face": "Visage",
@@ -70,7 +104,10 @@
     "noPromise": "Aucun résultat ne peut être garanti. Les résultats varient d'une personne à l'autre.",
     "cta": "Préparer une demande de consultation",
     "listTitle": "Interventions",
-    "listLead": "Des fiches factuelles pour comprendre chaque intervention, ses risques et ses alternatives."
+    "listLead": "Des fiches factuelles pour comprendre chaque intervention, ses risques et ses alternatives.",
+    "toc": "Sommaire",
+    "ctaTitle": "Préparer une demande",
+    "ctaText": "Sans engagement. Vous choisissez les chirurgiens."
   },
   "legalBox": {
     "title": "Vos droits en France",
@@ -204,5 +241,31 @@
   "notFound": {
     "title": "Page introuvable",
     "back": "Retour à l'accueil"
+  },
+  "category": {
+    "title": "{category} : interventions",
+    "others": "Autres catégories",
+    "face": {
+      "lead": "Interventions chirurgicales et médicales du visage : indications, risques, convalescence et alternatives."
+    },
+    "body": {
+      "lead": "Interventions sur la silhouette : indications, risques, convalescence et alternatives."
+    },
+    "breast": {
+      "lead": "Interventions sur les seins : indications, risques, convalescence et alternatives."
+    }
+  },
+  "surgeons": {
+    "title": "Chirurgiens vérifiés",
+    "lead": "Seuls des chirurgiens dont l'inscription à l'ordre a été contrôlée sont référencés.",
+    "independence": "Les praticiens sont présentés par ordre alphabétique. Aucun classement n'est payant.",
+    "emptyTitle": "Annuaire en cours de constitution",
+    "empty": "Aucun chirurgien n'est encore référencé. Vous pouvez tout de même préparer votre demande de consultation.",
+    "verified": "Vérifié ({registry})"
+  },
+  "pro": {
+    "title": "Espace professionnel",
+    "noticeTitle": "Accès sur invitation",
+    "notice": "Cet espace est réservé aux chirurgiens vérifiés. Il sera ouvert avec une authentification renforcée."
   }
 }

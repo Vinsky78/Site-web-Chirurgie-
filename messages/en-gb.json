@@ -12,14 +12,18 @@
     "languages": {
       "fr": "Français (France)",
       "en-gb": "English (UK)"
-    }
+    },
+    "surgeons": "Surgeons",
+    "menuHome": "Home"
   },
   "footer": {
     "legal": "Legal notice",
     "privacy": "Privacy",
     "methodology": "How we work",
     "disclaimer": "The information on this site does not replace a medical consultation. Only a qualified surgeon, after examining you, can tell you whether a procedure is right for you.",
-    "independence": "Independent platform: no commission on procedures, no paid rankings."
+    "independence": "Independent platform: no commission on procedures, no paid rankings.",
+    "explore": "Explore",
+    "about": "About"
   },
   "home": {
     "title": "Understand before you decide",
@@ -43,7 +47,37 @@
     },
     "featured": "Procedures",
     "reflectionTitle": "Take time to reflect",
-    "reflectionText": "UK professional standards recommend at least two weeks between your consultation and agreeing to surgery. That time is yours."
+    "reflectionText": "UK professional standards recommend at least two weeks between your consultation and agreeing to surgery. That time is yours.",
+    "steps": {
+      "title": "How it works",
+      "items": [
+        {
+          "title": "You get informed",
+          "text": "Read our pages: indications, risks, recovery and alternatives."
+        },
+        {
+          "title": "You prepare your request",
+          "text": "A short closed questionnaire, with no photos or free-text medical details."
+        },
+        {
+          "title": "You choose 1 to 3 surgeons",
+          "text": "From verified practitioners, listed alphabetically."
+        },
+        {
+          "title": "You take your time",
+          "text": "Consultation, detailed quote, then the legal cooling-off period."
+        }
+      ]
+    },
+    "seeAll": "See all procedures",
+    "eyebrow": "Independent medical information",
+    "trust": [
+      "Risks always explained",
+      "Verified surgeons",
+      "No sales pressure"
+    ],
+    "ctaBandTitle": "Thinking about it? Start by preparing your request.",
+    "ctaBandText": "A few closed questions, with no photos or free-text medical details. You then choose who receives your request."
   },
   "categories": {
     "face": "Face",
@@ -70,7 +104,10 @@
     "noPromise": "No result can be guaranteed. Results vary from person to person.",
     "cta": "Prepare a consultation request",
     "listTitle": "Procedures",
-    "listLead": "Factual guides to understand each procedure, its risks and alternatives."
+    "listLead": "Factual guides to understand each procedure, its risks and alternatives.",
+    "toc": "Contents",
+    "ctaTitle": "Prepare a request",
+    "ctaText": "No commitment. You choose the surgeons."
   },
   "legalBox": {
     "title": "Your rights in the UK",
@@ -203,5 +240,31 @@
   "notFound": {
     "title": "Page not found",
     "back": "Back to home"
+  },
+  "category": {
+    "title": "{category}: procedures",
+    "others": "Other categories",
+    "face": {
+      "lead": "Surgical and medical procedures for the face: indications, risks, recovery and alternatives."
+    },
+    "body": {
+      "lead": "Procedures for the body: indications, risks, recovery and alternatives."
+    },
+    "breast": {
+      "lead": "Procedures for the breast: indications, risks, recovery and alternatives."
+    }
+  },
+  "surgeons": {
+    "title": "Verified surgeons",
+    "lead": "Only surgeons whose professional registration has been checked are listed.",
+    "independence": "Practitioners are listed alphabetically. No ranking can be paid for.",
+    "emptyTitle": "Directory being built",
+    "empty": "No surgeons are listed yet. You can still prepare your consultation request.",
+    "verified": "Verified ({registry})"
+  },
+  "pro": {
+    "title": "Professional area",
+    "noticeTitle": "Access by invitation",
+    "notice": "This area is reserved for verified surgeons. It will open with strong authentication."
   }
 }

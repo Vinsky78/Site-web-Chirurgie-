@@ -16,6 +16,24 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 - En-têtes de sécurité HTTP.
 - Tests unitaires (Vitest) et de bout en bout sur mobile (Playwright), intégration continue GitHub Actions.
 
+## Liens utiles (développement local)
+
+Après `npm run dev`, le site est sur http://localhost:3000 (ces liens ne fonctionnent que sur ta machine, serveur lancé).
+
+| Page | Lien |
+| --- | --- |
+| Accueil | http://localhost:3000/fr |
+| Interventions | http://localhost:3000/fr/interventions |
+| Catégorie (visage) | http://localhost:3000/fr/interventions/categories/face |
+| Fiche rhinoplastie | http://localhost:3000/fr/interventions/rhinoplastie |
+| Demande de consultation | http://localhost:3000/fr/demande |
+| Chirurgiens | http://localhost:3000/fr/chirurgiens |
+| Design system | http://localhost:3000/fr/design-system |
+| Espace pro | http://localhost:3000/fr/pro |
+| Version britannique | http://localhost:3000/en-gb |
+
+Dépôt : https://github.com/Vinsky78/Site-web-Chirurgie-
+
 ## Installation
 
 Prérequis : Node.js 22 ou plus récent.
@@ -69,8 +87,20 @@ docs/decisions.md         Décisions et hypothèses
 2. Créer `messages/<locale>.json` et les contenus dans `src/content/interventions/`.
 3. Vérifier la règle du pays dans `src/lib/countries.ts`, la faire valider par un avocat local (`legalReview: "validated"`), puis l'ajouter à `ACTIVE_COUNTRIES`.
 
-## Prochaines étapes
+## Phases 2 à 4 (code en place)
 
-- Phase 2 : arborescence complète, taxonomie et stratégie de mots-clés.
-- Phase 3 : design system et maquettes.
-- Phase 4 : base PostgreSQL chez un hébergeur certifié HDS, CMS, annuaire des chirurgiens vérifiés, espace pro, envoi des demandes.
+- **Phase 2 – taxonomie** : pages par catégorie (`/interventions/categories/<face|body|breast>`), plan de mots-clés (`src/content/taxonomy.ts`), sitemap étendu, fil d'Ariane schema.org.
+- **Phase 3 – design system** : tokens dans `src/app/globals.css`, composants `src/components/ui` (Button, Badge, Alert, Card), page de référence non indexée `/<locale>/design-system`.
+- **Phase 4 – socle** : stockage PostgreSQL (`migrations/001_init.sql`, `LEAD_STORAGE=postgres` + `DATABASE_URL`), annuaire des chirurgiens vérifiés (`/chirurgiens`, vide tant qu'aucune fiche n'est vérifiée), envoi d'une demande à 1 à 3 chirurgiens (`src/lib/lead/dispatch.ts`), espace pro `/pro` (sans authentification, aucune donnée exposée).
+
+## Reste à faire
+
+- Héberger la base chez un hébergeur certifié HDS et appliquer la migration.
+- Brancher l'envoi réel (`Notifier`), l'authentification de l'espace pro et le CMS.
+- Alimenter l'annuaire après vérification des registres (RPPS, GMC).
+- Ajouter la sélection des chirurgiens dans le formulaire de demande et appeler `dispatchLead`.
+- Faire relire les contenus médicaux par un chirurgien.
+
+## Outils
+
+`node "Website surgery.js" check | new | standalone` : vérification de cohérence fr/en-gb, création d'une fiche, page autonome.

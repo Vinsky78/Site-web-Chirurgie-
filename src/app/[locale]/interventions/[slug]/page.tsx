@@ -10,6 +10,8 @@ import {
   isIndexable,
 } from "@/content/interventions";
 import type { Intervention } from "@/content/types";
+import { CategoryIcon } from "@/components/ui/CategoryIcon";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { JsonLd } from "@/components/JsonLd";
 import { LegalBox } from "@/components/LegalBox";
 import { LOCALE_COUNTRY } from "@/lib/countries";
@@ -93,7 +95,7 @@ function structuredData(intervention: Intervention, listTitle: string) {
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section aria-labelledby={id} className="mt-10">
-      <h2 id={id} className="font-serif text-2xl font-semibold">
+      <h2 id={id} className="scroll-mt-24 font-serif text-2xl font-semibold text-primary-strong">
         {title}
       </h2>
       <div className="mt-4">{children}</div>
@@ -101,9 +103,20 @@ function Section({ id, title, children }: { id: string; title: string; children:
   );
 }
 
+const TOC = [
+  ["description", "whatIs"],
+  ["indications", "indications"],
+  ["contre-indications", "contraindications"],
+  ["risques", "risks"],
+  ["deroulement", "procedure"],
+  ["convalescence", "recovery"],
+  ["alternatives", "alternatives"],
+  ["faq", "faq"],
+] as const;
+
 function BulletList({ items }: { items: string[] }) {
   return (
-    <ul className="list-disc space-y-2 pl-5">
+    <ul className="list-disc space-y-2 pl-5 marker:text-clay">
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}
@@ -124,42 +137,48 @@ export default async function InterventionPage({ params }: Props) {
   const formatDate = (iso: string) => format.dateTime(new Date(iso), { dateStyle: "long" });
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12">
+    <article>
       <JsonLd data={structuredData(intervention, t("listTitle"))} />
 
-      <nav aria-label={t("breadcrumb")} className="text-sm text-muted">
-        <ol className="flex flex-wrap gap-2">
-          <li>
-            <Link href="/" className="underline underline-offset-4">
-              {tn("home")}
-            </Link>
-            <span aria-hidden="true"> / </span>
-          </li>
-          <li>
-            <Link href="/interventions" className="underline underline-offset-4">
-              {t("listTitle")}
-            </Link>
-            <span aria-hidden="true"> / </span>
-          </li>
-          <li aria-current="page">{intervention.title}</li>
-        </ol>
-      </nav>
+      <PageHeader
+        title={intervention.title}
+        lead={intervention.summary}
+        eyebrow={
+          <nav aria-label={t("breadcrumb")}>
+            <ol className="flex flex-wrap gap-2 normal-case tracking-normal">
+              <li>
+                <Link href="/" className="underline underline-offset-4">
+                  {tn("home")}
+                </Link>
+                <span aria-hidden="true"> / </span>
+              </li>
+              <li>
+                <Link href="/interventions" className="underline underline-offset-4">
+                  {t("listTitle")}
+                </Link>
+                <span aria-hidden="true"> / </span>
+              </li>
+              <li aria-current="page">{intervention.title}</li>
+            </ol>
+          </nav>
+        }
+      >
+        <p className="mt-5 flex items-center gap-2 text-sm text-muted">
+          <CategoryIcon category={intervention.category} className="h-6 w-6 text-primary" />
+          {review.status === "reviewed"
+            ? t("reviewedBy", {
+                reviewer: review.reviewer,
+                qualification: review.qualification,
+                date: formatDate(review.reviewedAt),
+              })
+            : t("updatedAt", { date: formatDate(intervention.updatedAt) })}
+        </p>
+      </PageHeader>
 
-      <h1 className="mt-6 font-serif text-3xl font-semibold text-primary-strong sm:text-4xl">{intervention.title}</h1>
-      <p className="mt-4 text-lg text-muted">{intervention.summary}</p>
-
-      <p className="mt-4 text-sm text-muted">
-        {review.status === "reviewed"
-          ? t("reviewedBy", {
-              reviewer: review.reviewer,
-              qualification: review.qualification,
-              date: formatDate(review.reviewedAt),
-            })
-          : t("updatedAt", { date: formatDate(intervention.updatedAt) })}
-      </p>
-
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="max-w-3xl">
       {review.status === "draft" && (
-        <p role="note" className="mt-6 rounded-md bg-warning-bg p-4 text-warning-ink">
+        <p role="note" className="mt-8 rounded-control border-l-4 border-warning-ink bg-warning-bg p-4 text-warning-ink">
           {t("draftBanner")}
         </p>
       )}
@@ -227,15 +246,35 @@ export default async function InterventionPage({ params }: Props) {
       </Section>
 
       <p className="mt-10 text-sm text-muted">{t("noPromise")}</p>
+        </div>
 
-      <p className="mt-6">
-        <Link
-          href={`/demande?intervention=${intervention.id}`}
-          className="inline-flex min-h-11 items-center rounded-md bg-primary px-5 font-medium text-white hover:bg-primary-strong"
-        >
-          {t("cta")}
-        </Link>
-      </p>
+        <aside className="lg:sticky lg:top-24 lg:self-start">
+          <div className="mt-10 space-y-6">
+            <nav aria-label={t("toc")} className="rounded-card border border-border bg-surface p-5">
+              <h2 className="font-serif text-lg font-semibold text-primary-strong">{t("toc")}</h2>
+              <ul className="mt-3 space-y-2 text-sm">
+                {TOC.map(([id, key]) => (
+                  <li key={id}>
+                    <a href={`#${id}`} className="text-muted underline-offset-4 hover:text-primary hover:underline">
+                      {t(key)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="rounded-card bg-primary-strong p-5 text-white">
+              <h2 className="font-serif text-lg font-semibold">{t("ctaTitle")}</h2>
+              <p className="mt-2 text-sm text-primary-soft">{t("ctaText")}</p>
+              <Link
+                href={`/demande?intervention=${intervention.id}`}
+                className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-control bg-white px-4 py-2 text-center text-sm font-medium text-primary-strong hover:bg-primary-soft"
+              >
+                {t("cta")}
+              </Link>
+            </div>
+          </div>
+        </aside>
+      </div>
     </article>
   );
 }

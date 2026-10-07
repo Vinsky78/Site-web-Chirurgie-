@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getAlternateSlugs, getInterventions, isIndexable } from "@/content/interventions";
 import { INFO_PAGE_IDS, INFO_PAGE_SLUGS } from "@/lib/pages";
+import { staticPaths } from "@/content/taxonomy";
 import { absoluteUrl, HREFLANG } from "@/lib/seo";
 
 /** Sitemap multilingue avec alternatives hreflang. Les contenus non relus en sont exclus. */
@@ -18,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   };
 
   for (const locale of routing.locales) {
-    for (const path of ["", "/interventions"]) {
+    for (const path of staticPaths()) {
       entries.push({ url: absoluteUrl(locale, path), alternates: { languages: languagesFor(() => path) } });
     }
     for (const id of INFO_PAGE_IDS) {

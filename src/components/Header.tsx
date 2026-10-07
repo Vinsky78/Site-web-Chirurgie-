@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { buttonClasses } from "@/components/ui/Button";
 import { SITE_NAME } from "@/lib/site";
 
 export async function Header() {
@@ -8,7 +9,7 @@ export async function Header() {
   const locale = await getLocale();
 
   return (
-    <header className="border-b border-border bg-surface">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
       <a
         href="#contenu"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-primary focus:px-4 focus:py-2 focus:text-white"
@@ -27,9 +28,14 @@ export async function Header() {
               </Link>
             </li>
             <li>
+              <Link href="/chirurgiens" className="underline-offset-4 hover:underline">
+                {t("surgeons")}
+              </Link>
+            </li>
+            <li>
               <Link
                 href="/demande"
-                className="inline-flex min-h-11 items-center rounded-md bg-primary px-4 font-medium text-white hover:bg-primary-strong"
+                className={buttonClasses()}
               >
                 {t("request")}
               </Link>

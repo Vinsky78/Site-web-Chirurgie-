@@ -1,4 +1,5 @@
 import type { LeadInput } from "./schema";
+import { PostgresLeadRepository } from "./postgres";
 
 /** Demande telle qu'elle est stockée : sans les champs techniques d'anti-spam. */
 export type StoredLead = Omit<LeadInput, "website" | "startedAt"> & {
@@ -13,9 +14,9 @@ export interface LeadRepository {
 
 /**
  * Stockage de développement, en mémoire, jamais journalisé.
- * En production, la base PostgreSQL chez un hébergeur certifié HDS (Phase 4)
- * remplacera cette implémentation ; tant qu'elle n'est pas configurée, la
- * soumission échoue explicitement plutôt que de perdre des données.
+ * En production, LEAD_STORAGE=postgres et DATABASE_URL (base chez un hébergeur
+ * certifié HDS) activent PostgresLeadRepository ; sans cela, la soumission
+ * échoue explicitement plutôt que de perdre des données.
  */
 class InMemoryLeadRepository implements LeadRepository {
   private readonly leads: StoredLead[] = [];
@@ -35,10 +36,14 @@ let instance: LeadRepository | undefined;
 
 export function getLeadRepository(): LeadRepository {
   if (!instance) {
-    instance =
-      process.env.NODE_ENV === "production" && process.env.LEAD_STORAGE !== "memory"
-        ? new NotConfiguredLeadRepository()
-        : new InMemoryLeadRepository();
+    const mode = process.env.LEAD_STORAGE;
+    if (mode === "postgres" && process.env.DATABASE_URL) {
+      instance = new PostgresLeadRepository(process.env.DATABASE_URL);
+    } else if (process.env.NODE_ENV === "production" && mode !== "memory") {
+      instance = new NotConfiguredLeadRepository();
+    } else {
+      instance = new InMemoryLeadRepository();
+    }
   }
   return instance;
 }
