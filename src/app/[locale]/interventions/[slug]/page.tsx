@@ -15,6 +15,7 @@ import { LegalBox } from "@/components/LegalBox";
 import { LOCALE_COUNTRY } from "@/lib/countries";
 import { absoluteUrl, localeAlternates } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
+import { buttonClasses } from "@/components/ui/button";
 
 type Props = PageProps<"/[locale]/interventions/[slug]">;
 
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: intervention.title,
     description: intervention.summary,
     alternates: localeAlternates(locale as Locale, (l) =>
-      alternates[l] ? `/interventions/${alternates[l]}` : undefined,
+      alternates[l] ? { pathname: "/interventions/[slug]", params: { slug: alternates[l] } } : undefined,
     ),
     // Un contenu non relu par un chirurgien n'est pas indexé (exigence YMYL / E-E-A-T).
     robots: isIndexable(intervention) ? undefined : { index: false, follow: true },
@@ -44,7 +45,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 function structuredData(intervention: Intervention, listTitle: string) {
-  const url = absoluteUrl(intervention.locale, `/interventions/${intervention.slug}`);
+  const url = absoluteUrl(intervention.locale, {
+    pathname: "/interventions/[slug]",
+    params: { slug: intervention.slug },
+  });
   const review = intervention.medicalReview;
   return [
     {
@@ -73,7 +77,7 @@ function structuredData(intervention: Intervention, listTitle: string) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: SITE_NAME, item: absoluteUrl(intervention.locale, "") },
+        { "@type": "ListItem", position: 1, name: SITE_NAME, item: absoluteUrl(intervention.locale, "/") },
         { "@type": "ListItem", position: 2, name: listTitle, item: absoluteUrl(intervention.locale, "/interventions") },
         { "@type": "ListItem", position: 3, name: intervention.title, item: url },
       ],
@@ -93,7 +97,7 @@ function structuredData(intervention: Intervention, listTitle: string) {
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section aria-labelledby={id} className="mt-10">
-      <h2 id={id} className="font-serif text-2xl font-semibold">
+      <h2 id={id} className="font-serif text-h2">
         {title}
       </h2>
       <div className="mt-4">{children}</div>
@@ -124,10 +128,10 @@ export default async function InterventionPage({ params }: Props) {
   const formatDate = (iso: string) => format.dateTime(new Date(iso), { dateStyle: "long" });
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12">
+    <article className="mx-auto max-w-reading px-4 py-12">
       <JsonLd data={structuredData(intervention, t("listTitle"))} />
 
-      <nav aria-label={t("breadcrumb")} className="text-sm text-muted">
+      <nav aria-label={t("breadcrumb")} className="text-small text-muted">
         <ol className="flex flex-wrap gap-2">
           <li>
             <Link href="/" className="underline underline-offset-4">
@@ -145,10 +149,10 @@ export default async function InterventionPage({ params }: Props) {
         </ol>
       </nav>
 
-      <h1 className="mt-6 font-serif text-3xl font-semibold text-primary-strong sm:text-4xl">{intervention.title}</h1>
-      <p className="mt-4 text-lg text-muted">{intervention.summary}</p>
+      <h1 className="mt-6 font-serif text-h1 text-primary-strong">{intervention.title}</h1>
+      <p className="mt-4 text-muted">{intervention.summary}</p>
 
-      <p className="mt-4 text-sm text-muted">
+      <p className="mt-4 text-small text-muted">
         {review.status === "reviewed"
           ? t("reviewedBy", {
               reviewer: review.reviewer,
@@ -159,7 +163,7 @@ export default async function InterventionPage({ params }: Props) {
       </p>
 
       {review.status === "draft" && (
-        <p role="note" className="mt-6 rounded-md bg-warning-bg p-4 text-warning-ink">
+        <p role="note" className="mt-6 rounded-control bg-warning-bg p-4 text-warning-ink">
           {t("draftBanner")}
         </p>
       )}
@@ -182,7 +186,7 @@ export default async function InterventionPage({ params }: Props) {
 
       <Section id="risques" title={t("risks")}>
         <p className="text-muted">{t("risksIntro")}</p>
-        <dl className="mt-4 divide-y divide-border rounded-lg border border-border bg-surface">
+        <dl className="mt-4 divide-y divide-border rounded-card border border-border bg-surface">
           {intervention.risks.map((risk) => (
             <div key={risk.name} className="p-4">
               <dt className="font-semibold">{risk.name}</dt>
@@ -195,8 +199,8 @@ export default async function InterventionPage({ params }: Props) {
       <Section id="deroulement" title={t("procedure")}>
         <dl className="grid gap-4 sm:grid-cols-3">
           {(["anaesthesia", "duration", "hospitalStay"] as const).map((key) => (
-            <div key={key} className="rounded-lg border border-border bg-surface p-4">
-              <dt className="text-sm font-medium text-primary">{t(key)}</dt>
+            <div key={key} className="rounded-card border border-border bg-surface p-4">
+              <dt className="text-small font-medium text-primary">{t(key)}</dt>
               <dd className="mt-1">{intervention.procedure[key]}</dd>
             </div>
           ))}
@@ -218,7 +222,7 @@ export default async function InterventionPage({ params }: Props) {
       <Section id="faq" title={t("faq")}>
         <div className="space-y-3">
           {intervention.faq.map((item) => (
-            <details key={item.question} className="rounded-lg border border-border bg-surface p-4">
+            <details key={item.question} className="rounded-card border border-border bg-surface p-4">
               <summary className="cursor-pointer font-semibold">{item.question}</summary>
               <p className="mt-2 text-muted">{item.answer}</p>
             </details>
@@ -226,12 +230,12 @@ export default async function InterventionPage({ params }: Props) {
         </div>
       </Section>
 
-      <p className="mt-10 text-sm text-muted">{t("noPromise")}</p>
+      <p className="mt-10 text-small text-muted">{t("noPromise")}</p>
 
       <p className="mt-6">
         <Link
-          href={`/demande?intervention=${intervention.id}`}
-          className="inline-flex min-h-11 items-center rounded-md bg-primary px-5 font-medium text-white hover:bg-primary-strong"
+          href={{ pathname: "/demande", query: { intervention: intervention.id } }}
+          className={buttonClasses("primary")}
         >
           {t("cta")}
         </Link>

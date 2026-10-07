@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { sans, serif } from "../fonts";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -32,7 +33,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   setRequestLocale(locale);
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={`${sans.variable} ${serif.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <NextIntlClientProvider>
           <Header />

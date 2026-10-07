@@ -4,13 +4,14 @@ import type { Locale } from "@/i18n/routing";
 import { getInterventions } from "@/content/interventions";
 import { InterventionCard } from "@/components/InterventionCard";
 import { localeAlternates } from "@/lib/seo";
+import { buttonClasses } from "@/components/ui/button";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
   return {
     title: t("title"),
-    alternates: localeAlternates(locale as Locale, () => ""),
+    alternates: localeAlternates(locale as Locale, () => "/"),
   };
 }
 
@@ -25,21 +26,21 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   return (
     <>
       <section className="bg-accent-soft">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-          <h1 className="max-w-3xl font-serif text-4xl font-semibold leading-tight text-primary-strong sm:text-5xl">
+        <div className="mx-auto max-w-page px-4 py-16 sm:py-24">
+          <h1 className="max-w-3xl font-serif text-display text-primary-strong">
             {t("title")}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted">{t("lead")}</p>
+          <p className="mt-6 max-w-reading text-muted">{t("lead")}</p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/interventions"
-              className="inline-flex min-h-11 items-center rounded-md bg-primary px-5 font-medium text-white hover:bg-primary-strong"
+              className={buttonClasses("primary")}
             >
               {t("ctaInterventions")}
             </Link>
             <Link
               href="/demande"
-              className="inline-flex min-h-11 items-center rounded-md border border-primary px-5 font-medium text-primary hover:bg-surface"
+              className={buttonClasses("secondary")}
             >
               {t("ctaRequest")}
             </Link>
@@ -47,22 +48,22 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </div>
       </section>
 
-      <section aria-labelledby="engagements" className="mx-auto max-w-6xl px-4 py-16">
-        <h2 id="engagements" className="font-serif text-2xl font-semibold">
+      <section aria-labelledby="engagements" className="mx-auto max-w-page px-4 py-16">
+        <h2 id="engagements" className="font-serif text-h2">
           {t("pillarsTitle")}
         </h2>
         <ul className="mt-8 grid gap-6 sm:grid-cols-3">
           {PILLARS.map((key) => (
-            <li key={key} className="rounded-lg border border-border bg-surface p-6">
-              <h3 className="font-semibold">{t(`pillars.${key}.title`)}</h3>
+            <li key={key} className="rounded-card border border-border bg-surface p-6">
+              <h3 className="text-h3">{t(`pillars.${key}.title`)}</h3>
               <p className="mt-2 text-muted">{t(`pillars.${key}.text`)}</p>
             </li>
           ))}
         </ul>
       </section>
 
-      <section aria-labelledby="interventions" className="mx-auto max-w-6xl px-4 pb-16">
-        <h2 id="interventions" className="font-serif text-2xl font-semibold">
+      <section aria-labelledby="interventions" className="mx-auto max-w-page px-4 pb-16">
+        <h2 id="interventions" className="font-serif text-h2">
           {t("featured")}
         </h2>
         <ul className="mt-8 grid gap-6 sm:grid-cols-3">
@@ -74,9 +75,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </ul>
       </section>
 
-      <section aria-labelledby="reflexion" className="mx-auto max-w-6xl px-4 pb-8">
-        <div className="rounded-lg border border-border bg-surface p-6">
-          <h2 id="reflexion" className="font-serif text-xl font-semibold">
+      <section aria-labelledby="reflexion" className="mx-auto max-w-page px-4 pb-8">
+        <div className="rounded-card border border-border bg-surface p-6">
+          <h2 id="reflexion" className="font-serif text-h3">
             {t("reflectionTitle")}
           </h2>
           <p className="mt-2 text-muted">{t("reflectionText")}</p>

@@ -22,7 +22,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "pages" });
   return {
     title: t(`${id}.title`),
-    alternates: localeAlternates(locale as Locale, (l) => `/informations/${INFO_PAGE_SLUGS[l][id]}`),
+    alternates: localeAlternates(locale as Locale, (l) => ({
+      pathname: "/informations/[page]",
+      params: { page: INFO_PAGE_SLUGS[l][id] },
+    })),
   };
 }
 
@@ -35,8 +38,8 @@ export default async function InfoPage({ params }: Props) {
   const paragraphs = t.raw(`${id}.body`) as string[];
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="font-serif text-3xl font-semibold text-primary-strong">{t(`${id}.title`)}</h1>
+    <div className="mx-auto max-w-reading px-4 py-12">
+      <h1 className="font-serif text-h1 text-primary-strong">{t(`${id}.title`)}</h1>
       <div className="mt-6 space-y-4">
         {paragraphs.map((p) => (
           <p key={p}>{p}</p>
