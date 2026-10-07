@@ -14,16 +14,27 @@
       "en-gb": "English (UK)"
     },
     "surgeons": "Chirurgiens",
-    "menuHome": "Accueil"
+    "menuHome": "Accueil",
+    "menu": "Interventions par domaine",
+    "allInterventions": "Toutes les interventions",
+    "pro": "Espace chirurgiens",
+    "method": "Notre méthode",
+    "announceClose": "Fermer l'annonce",
+    "viewCategory": "Voir le domaine"
   },
   "footer": {
-    "legal": "Mentions légales",
+    "legal": "Informations",
     "privacy": "Confidentialité",
     "methodology": "Notre méthode",
     "disclaimer": "Les informations de ce site ne remplacent pas une consultation médicale. Seul un chirurgien qualifié, après examen, peut vous indiquer si une intervention est adaptée à votre situation.",
     "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant.",
     "explore": "Explorer",
-    "about": "À propos"
+    "about": "À propos",
+    "domains": "Domaines",
+    "markets": "Marchés",
+    "france": "France",
+    "uk": "Royaume-Uni",
+    "cookies": "Cookies"
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -77,12 +88,41 @@
       "Sans pression commerciale"
     ],
     "ctaBandTitle": "Un projet en tête ? Commencez par le préparer.",
-    "ctaBandText": "Quelques questions fermées, sans photo ni texte médical libre. Vous choisissez ensuite à qui votre demande est envoyée."
+    "ctaBandText": "Quelques questions fermées, sans photo ni texte médical libre. Vous choisissez ensuite à qui votre demande est envoyée.",
+    "points": [
+      "Risques et contre-indications toujours détaillés",
+      "Chirurgiens dont l'inscription est vérifiée",
+      "Vous choisissez 1 à 3 chirurgiens",
+      "Aucune commission sur les interventions"
+    ],
+    "badges": [
+      "Données hébergées dans l'Union européenne",
+      "Contenus adaptés à chaque pays"
+    ],
+    "figuresTitle": "La plateforme en chiffres",
+    "figures": {
+      "sheets": "fiches d'information",
+      "domains": "domaines",
+      "markets": "marchés (France, Royaume-Uni)",
+      "commission": "commission sur les interventions"
+    },
+    "domainsTitle": "Nos domaines",
+    "domainsLead": "Explorez les interventions par grande famille.",
+    "domainCount": "{count, plural, one {# fiche} other {# fiches}}",
+    "discover": "Découvrir",
+    "trustTitle": "Des chirurgiens vérifiés, présentés sans classement payant",
+    "trustText": "Chaque chirurgien est contrôlé auprès du registre officiel de son pays avant d'apparaître. Les praticiens sont listés par ordre alphabétique.",
+    "trustCta": "Voir l'annuaire",
+    "talkTitle": "Parlons de votre projet",
+    "talkText": "Préparez votre demande en quelques minutes ou consultez les chirurgiens vérifiés.",
+    "talkSecondary": "Consulter les chirurgiens"
   },
   "categories": {
     "face": "Visage",
     "body": "Silhouette",
-    "breast": "Seins"
+    "breast": "Seins",
+    "hair": "Cheveux",
+    "injectables": "Injections"
   },
   "intervention": {
     "draftBanner": "Contenu en attente de relecture par un chirurgien qualifié. Il peut encore évoluer.",
@@ -254,6 +294,12 @@
     },
     "breast": {
       "lead": "Interventions sur les seins : indications, risques, convalescence et alternatives."
+    },
+    "hair": {
+      "lead": "Restauration capillaire : indications, techniques, risques, repousse et alternatives."
+    },
+    "injectables": {
+      "lead": "Médecine esthétique par injections : effets temporaires, risques et alternatives."
     }
   },
   "surgeons": {
@@ -276,5 +322,8 @@
     "accept": "Accepter",
     "refuse": "Refuser",
     "manage": "Gérer mes cookies"
+  },
+  "layout": {
+    "announce": "Les fiches sont rédigées selon une charte stricte et en cours de relecture par des chirurgiens qualifiés."
   }
 }

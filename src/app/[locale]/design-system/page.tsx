@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Alert } from "@/components/ui/Alert";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
 
 export const metadata: Metadata = { title: "Design system", robots: { index: false, follow: false } };
@@ -15,8 +16,9 @@ export default async function DesignSystemPage({ params }: PageProps<"/[locale]/
   setRequestLocale(locale);
 
   return (
-    <div className="mx-auto max-w-6xl space-y-12 px-4 py-12">
-      <h1 className="font-serif text-3xl font-semibold text-primary-strong">Design system</h1>
+    <>
+      <PageHeader title="Design system" lead="Référence des tokens et composants du site." />
+      <div className="mx-auto max-w-6xl space-y-12 px-4 pb-12 pt-10">
 
       <section aria-labelledby="ds-colors">
         <h2 id="ds-colors" className="font-serif text-2xl font-semibold">Couleurs</h2>
@@ -61,6 +63,7 @@ export default async function DesignSystemPage({ params }: PageProps<"/[locale]/
           <p className="mt-2 text-muted">Contenu de carte avec ombre légère et bordure.</p>
         </Card>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

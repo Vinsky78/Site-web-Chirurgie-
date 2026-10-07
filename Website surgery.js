@@ -7,7 +7,7 @@
  *       Vérifie la cohérence fr / en-gb : interventions, slugs, messages,
  *       longueur des résumés, termes promotionnels interdits, relecture médicale.
  *
- *   node "Website surgery.js" new <id> <slug-fr> <slug-en> <face|body|breast> "<Titre fr>" "<Title en>"
+ *   node "Website surgery.js" new <id> <slug-fr> <slug-en> <catégorie> "<Titre fr>" "<Title en>"
  *       Crée une fiche intervention (brouillon à rédiger) en fr et en-gb et
  *       l'ajoute à INTERVENTION_IDS.
  *       Ex. : node "Website surgery.js" new liposuction liposuccion liposuction body "Liposuccion" "Liposuction"
@@ -24,7 +24,6 @@ const FR_FILE = path.join(ROOT, "src/content/interventions/fr.ts");
 const EN_FILE = path.join(ROOT, "src/content/interventions/en-gb.ts");
 const TYPES_FILE = path.join(ROOT, "src/content/types.ts");
 const MESSAGES = { fr: path.join(ROOT, "messages/fr.json"), "en-gb": path.join(ROOT, "messages/en-gb.json") };
-const CATEGORIES = ["face", "body", "breast"];
 
 /** Termes promotionnels interdits par la charte éditoriale (voir content.test.ts). */
 const FORBIDDEN = [
@@ -33,6 +32,9 @@ const FORBIDDEN = [
 ];
 
 const read = (file) => fs.readFileSync(file, "utf8");
+
+/** Catégories lues dans src/content/types.ts pour rester synchronisées avec le site. */
+const CATEGORIES = [...read(TYPES_FILE).match(/CATEGORY_IDS = \[([^\]]*)\]/)[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
 
 /** Extrait les champs simples de chaque intervention d'un fichier de contenu. */
 function parseInterventions(file) {
@@ -155,7 +157,7 @@ function appendTo(file, entry) {
 function create(args) {
   const [id, slugFr, slugEn, category, titleFr, titleEn] = args;
   if (args.length < 6) {
-    console.error('Usage : new <id> <slug-fr> <slug-en> <face|body|breast> "<Titre fr>" "<Title en>"');
+    console.error('Usage : new <id> <slug-fr> <slug-en> <catégorie> "<Titre fr>" "<Title en>"');
     return 1;
   }
   const slugRe = /^[a-z0-9]+(-[a-z0-9]+)*$/;

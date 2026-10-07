@@ -14,16 +14,27 @@
       "en-gb": "English (UK)"
     },
     "surgeons": "Surgeons",
-    "menuHome": "Home"
+    "menuHome": "Home",
+    "menu": "Procedures by area",
+    "allInterventions": "All procedures",
+    "pro": "Surgeon area",
+    "method": "How we work",
+    "announceClose": "Close announcement",
+    "viewCategory": "View area"
   },
   "footer": {
-    "legal": "Legal notice",
+    "legal": "Information",
     "privacy": "Privacy",
     "methodology": "How we work",
     "disclaimer": "The information on this site does not replace a medical consultation. Only a qualified surgeon, after examining you, can tell you whether a procedure is right for you.",
     "independence": "Independent platform: no commission on procedures, no paid rankings.",
     "explore": "Explore",
-    "about": "About"
+    "about": "About",
+    "domains": "Areas",
+    "markets": "Markets",
+    "france": "France",
+    "uk": "United Kingdom",
+    "cookies": "Cookies"
   },
   "home": {
     "title": "Understand before you decide",
@@ -77,12 +88,41 @@
       "No sales pressure"
     ],
     "ctaBandTitle": "Thinking about it? Start by preparing your request.",
-    "ctaBandText": "A few closed questions, with no photos or free-text medical details. You then choose who receives your request."
+    "ctaBandText": "A few closed questions, with no photos or free-text medical details. You then choose who receives your request.",
+    "points": [
+      "Risks and contraindications always explained",
+      "Surgeons whose registration is verified",
+      "You choose 1 to 3 surgeons",
+      "No commission on procedures"
+    ],
+    "badges": [
+      "Data hosted in the European Union",
+      "Content tailored to each country"
+    ],
+    "figuresTitle": "The platform in numbers",
+    "figures": {
+      "sheets": "information pages",
+      "domains": "areas",
+      "markets": "markets (France, United Kingdom)",
+      "commission": "commission on procedures"
+    },
+    "domainsTitle": "Our areas",
+    "domainsLead": "Explore procedures by family.",
+    "domainCount": "{count, plural, one {# page} other {# pages}}",
+    "discover": "Explore",
+    "trustTitle": "Verified surgeons, listed with no paid ranking",
+    "trustText": "Each surgeon is checked against their country's official register before appearing. Practitioners are listed alphabetically.",
+    "trustCta": "See the directory",
+    "talkTitle": "Let's talk about your plans",
+    "talkText": "Prepare your request in a few minutes or browse verified surgeons.",
+    "talkSecondary": "Browse surgeons"
   },
   "categories": {
     "face": "Face",
     "body": "Body",
-    "breast": "Breast"
+    "breast": "Breast",
+    "hair": "Hair",
+    "injectables": "Injectables"
   },
   "intervention": {
     "draftBanner": "This content is awaiting review by a qualified surgeon and may change.",
@@ -253,6 +293,12 @@
     },
     "breast": {
       "lead": "Procedures for the breast: indications, risks, recovery and alternatives."
+    },
+    "hair": {
+      "lead": "Hair restoration: who it suits, techniques, risks, regrowth and alternatives."
+    },
+    "injectables": {
+      "lead": "Aesthetic medicine by injection: temporary effects, risks and alternatives."
     }
   },
   "surgeons": {
@@ -275,5 +321,8 @@
     "accept": "Accept",
     "refuse": "Refuse",
     "manage": "Manage cookies"
+  },
+  "layout": {
+    "announce": "Our pages follow a strict editorial charter and are being reviewed by qualified surgeons."
   }
 }

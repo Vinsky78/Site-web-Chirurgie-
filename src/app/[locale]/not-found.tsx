@@ -1,16 +1,18 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { buttonClasses } from "@/components/ui/Button";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 export default async function NotFound() {
   const t = await getTranslations("notFound");
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="font-serif text-3xl font-semibold">{t("title")}</h1>
-      <p className="mt-6">
-        <Link href="/" className="text-primary underline underline-offset-4">
+    <>
+      <PageHeader title={t("title")} eyebrow="404" />
+      <div className="mx-auto max-w-3xl px-4 pb-12 pt-10">
+        <Link href="/" className={buttonClasses()}>
           {t("back")}
         </Link>
-      </p>
-    </div>
+      </div>
+    </>
   );
 }

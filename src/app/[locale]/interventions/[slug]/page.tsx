@@ -231,7 +231,7 @@ export default async function InterventionPage({ params }: Props) {
       </Section>
 
       <div className="mt-10">
-        <LegalBox country={LOCALE_COUNTRY[locale as Locale]} />
+        <LegalBox country={LOCALE_COUNTRY[locale as Locale]} surgical={intervention.category !== "injectables"} />
       </div>
 
       <Section id="faq" title={t("faq")}>

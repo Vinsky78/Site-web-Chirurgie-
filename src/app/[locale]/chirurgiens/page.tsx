@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Alert } from "@/components/ui/Alert";
 import { Badge } from "@/components/ui/Badge";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { LOCALE_COUNTRY } from "@/lib/countries";
 import { localeAlternates } from "@/lib/seo";
@@ -21,10 +22,11 @@ export default async function SurgeonsPage({ params }: PageProps<"/[locale]/chir
   const surgeons = listPublicSurgeons({ country: LOCALE_COUNTRY[locale as Locale] });
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <h1 className="font-serif text-3xl font-semibold text-primary-strong sm:text-4xl">{t("title")}</h1>
-      <p className="mt-4 max-w-2xl text-lg text-muted">{t("lead")}</p>
-      <p className="mt-2 max-w-2xl text-sm text-muted">{t("independence")}</p>
+    <>
+      <PageHeader title={t("title")} lead={t("lead")}>
+        <p className="mt-2 max-w-2xl text-sm text-muted">{t("independence")}</p>
+      </PageHeader>
+      <div className="mx-auto max-w-6xl px-4 pb-12 pt-10">
       {surgeons.length === 0 ? (
         <div className="mt-8 max-w-2xl">
           <Alert title={t("emptyTitle")}>{t("empty")}</Alert>
@@ -42,6 +44,7 @@ export default async function SurgeonsPage({ params }: PageProps<"/[locale]/chir
           ))}
         </ul>
       )}
-    </div>
+      </div>
+    </>
   );
 }

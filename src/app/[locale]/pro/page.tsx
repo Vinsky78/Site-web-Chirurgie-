@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Alert } from "@/components/ui/Alert";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -15,11 +16,11 @@ export default async function ProPage({ params }: PageProps<"/[locale]/pro">) {
   setRequestLocale(locale);
   const t = await getTranslations("pro");
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="font-serif text-3xl font-semibold text-primary-strong">{t("title")}</h1>
-      <div className="mt-6">
+    <>
+      <PageHeader title={t("title")} />
+      <div className="mx-auto max-w-3xl px-4 pb-12 pt-10">
         <Alert title={t("noticeTitle")}>{t("notice")}</Alert>
       </div>
-    </div>
+    </>
   );
 }

@@ -91,6 +91,9 @@ export const PREGNANCY_RELEVANT = [
   "breast-reduction",
   "mastopexy",
   "liposuction",
+  "botulinum-toxin",
+  "hyaluronic-fillers",
+  "breast-implant-removal",
 ] as const;
 
 export function isPregnancyRelevant(interventionId: string | undefined): boolean {

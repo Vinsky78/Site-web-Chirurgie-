@@ -146,7 +146,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
   if (result && (result.ok || result.reason === "underage")) {
     const key = result.ok ? "success" : "underage";
     return (
-      <div role="status" className="mt-8 rounded-lg border border-border bg-surface p-6">
+      <div role="status" className="mt-8 rounded-card border border-border bg-surface p-6">
         <h2 ref={headingRef} tabIndex={-1} className="font-serif text-2xl font-semibold focus:outline-none">
           {t(`result.${key}Title`)}
         </h2>
@@ -162,7 +162,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
     <form
       noValidate
       aria-labelledby={`${formId}-step-title`}
-      className="mt-8"
+      className="mt-0"
       onSubmit={(event) => {
         event.preventDefault();
         if (step === "contact") submit();
@@ -186,7 +186,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
           ref={summaryRef}
           tabIndex={-1}
           role="alert"
-          className="mt-4 rounded-md border border-danger p-4 text-danger focus:outline-none"
+          className="mt-4 rounded-control border border-danger p-4 text-danger focus:outline-none"
         >
           <p className="font-semibold">{t("errors.summary", { count: errorCount })}</p>
           <ul className="mt-2 list-disc pl-5">
@@ -202,7 +202,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
       )}
 
       {result && !result.ok && result.reason !== "underage" && (
-        <p role="alert" className="mt-4 rounded-md border border-danger p-4 text-danger">
+        <p role="alert" className="mt-4 rounded-control border border-danger p-4 text-danger">
           {t("result.error")}
         </p>
       )}
@@ -254,7 +254,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
 
         {step === "health" && (
           <>
-            <p className="rounded-md bg-accent-soft p-4 text-sm">{t("healthNotice")}</p>
+            <p className="rounded-control bg-accent-soft p-4 text-sm">{t("healthNotice")}</p>
             <RadioGroup
               {...fieldProps("smoker")}
               legend={t("fields.smoker")}
@@ -286,7 +286,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
 
         {step === "reflection" && (
           <>
-            <p className="rounded-md bg-accent-soft p-4 text-sm">{t("reflection.intro")}</p>
+            <p className="rounded-control bg-accent-soft p-4 text-sm">{t("reflection.intro")}</p>
             {REFLECTION_QUESTIONS.map((q) => (
               <RadioGroup
                 key={q}
@@ -301,7 +301,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
             ))}
             <div aria-live="polite">
               {reflectionComplete && yesCount >= REFLECTION_THRESHOLD && (
-                <div className="rounded-md border-l-4 border-primary bg-surface p-4">
+                <div className="rounded-control border-l-4 border-primary bg-surface p-4">
                   <p className="font-semibold">{t("reflection.supportTitle")}</p>
                   <p className="mt-1">{t("reflection.supportText")}</p>
                 </div>
@@ -395,7 +395,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
               setErrors({});
               setStepIndex((i) => i - 1);
             }}
-            className="inline-flex min-h-11 items-center rounded-md border border-primary px-5 font-medium text-primary"
+            className="inline-flex min-h-11 items-center rounded-control border border-primary px-5 font-medium text-primary hover:bg-accent-soft"
           >
             {t("back")}
           </button>
@@ -404,7 +404,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
           type="submit"
           disabled={isPending}
           aria-disabled={isPending}
-          className="inline-flex min-h-11 items-center rounded-md bg-primary px-5 font-medium text-white hover:bg-primary-strong disabled:opacity-70"
+          className="inline-flex min-h-11 items-center rounded-control bg-primary px-5 font-medium text-white hover:bg-primary-strong disabled:opacity-70"
         >
           {step === "contact" ? (isPending ? t("submitting") : t("submit")) : t("next")}
         </button>
@@ -431,7 +431,7 @@ function FieldError({ id, error }: { id: string; error?: string }) {
 }
 
 const inputClass =
-  "mt-1 block min-h-11 w-full rounded-md border border-border-input bg-surface px-3 py-2 text-base aria-invalid:border-danger";
+  "mt-1 block min-h-11 w-full rounded-control border border-border-input bg-surface px-3 py-2 text-base aria-invalid:border-danger";
 
 function TextField({
   id,
@@ -536,7 +536,7 @@ function RadioGroup({
         {options.map((o) => (
           <label
             key={o.value}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-border-input bg-surface px-4 has-checked:border-primary has-checked:bg-accent-soft"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-control border border-border-input bg-surface px-4 has-checked:border-primary has-checked:bg-accent-soft"
           >
             <input
               type="radio"

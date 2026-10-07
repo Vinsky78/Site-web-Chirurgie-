@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
 import { routing, type Locale } from "@/i18n/routing";
 import { INFO_PAGE_IDS, INFO_PAGE_SLUGS, infoPageIdFromSlug } from "@/lib/pages";
 import { localeAlternates } from "@/lib/seo";
@@ -35,13 +37,17 @@ export default async function InfoPage({ params }: Props) {
   const paragraphs = t.raw(`${id}.body`) as string[];
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="font-serif text-3xl font-semibold text-primary-strong">{t(`${id}.title`)}</h1>
-      <div className="mt-6 space-y-4">
-        {paragraphs.map((p) => (
-          <p key={p}>{p}</p>
-        ))}
+    <>
+      <PageHeader title={t(`${id}.title`)} />
+      <div className="mx-auto max-w-3xl px-4 pb-12 pt-10">
+        <Card>
+          <div className="space-y-4 leading-relaxed">
+            {paragraphs.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+          </div>
+        </Card>
       </div>
-    </div>
+    </>
   );
 }

@@ -4,6 +4,8 @@ import type { Locale } from "@/i18n/routing";
 import { getInterventions } from "@/content/interventions";
 import { INTERVENTION_IDS, type InterventionId } from "@/content/types";
 import { INFO_PAGE_SLUGS } from "@/lib/pages";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
 import { RequestForm } from "./RequestForm";
 
 type Props = PageProps<"/[locale]/demande">;
@@ -27,14 +29,17 @@ export default async function RequestPage({ params, searchParams }: Props) {
     : undefined;
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12">
-      <h1 className="font-serif text-3xl font-semibold text-primary-strong">{t("title")}</h1>
-      <p className="mt-4 text-muted">{t("lead")}</p>
-      <RequestForm
-        interventions={options}
-        initialIntervention={initialIntervention}
-        privacySlug={INFO_PAGE_SLUGS[locale as Locale].privacy}
-      />
-    </div>
+    <>
+      <PageHeader title={t("title")} lead={t("lead")} />
+      <div className="mx-auto max-w-3xl px-4 pb-12 pt-10">
+        <Card>
+          <RequestForm
+            interventions={options}
+            initialIntervention={initialIntervention}
+            privacySlug={INFO_PAGE_SLUGS[locale as Locale].privacy}
+          />
+        </Card>
+      </div>
+    </>
   );
 }

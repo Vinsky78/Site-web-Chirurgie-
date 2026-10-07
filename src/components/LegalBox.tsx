@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { COUNTRY_RULES, type CountryCode } from "@/lib/countries";
 
 /** Encadré des obligations légales du pays de la locale (délai de réflexion, devis, vérification). */
-export async function LegalBox({ country }: { country: CountryCode }) {
+export async function LegalBox({ country, surgical = true }: { country: CountryCode; surgical?: boolean }) {
   const t = await getTranslations("legalBox");
   const rules = COUNTRY_RULES[country];
 
@@ -12,9 +12,9 @@ export async function LegalBox({ country }: { country: CountryCode }) {
         {t("title")}
       </h2>
       <ul className="mt-3 list-disc space-y-2 pl-5">
-        {rules.writtenQuoteMandatory && <li>{t("quote")}</li>}
-        {rules.legalReflectionDays !== null && <li>{t("reflection", { days: rules.legalReflectionDays })}</li>}
-        {rules.legalReflectionDays === null && rules.recommendedReflectionDays !== null && (
+        {surgical && rules.writtenQuoteMandatory && <li>{t("quote")}</li>}
+        {surgical && rules.legalReflectionDays !== null && <li>{t("reflection", { days: rules.legalReflectionDays })}</li>}
+        {surgical && rules.legalReflectionDays === null && rules.recommendedReflectionDays !== null && (
           <li>{t("recommended", { days: rules.recommendedReflectionDays })}</li>
         )}
         <li>{t("verify", { registry: rules.verificationRegistry })}</li>
