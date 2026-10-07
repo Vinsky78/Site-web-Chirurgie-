@@ -225,7 +225,8 @@
         "Responsable de traitement : [société]. Délégué à la protection des données : [contact].",
         "Données collectées : projet d'intervention, critères médicaux fermés, coordonnées. Base légale : votre consentement explicite (article 9.2.a du RGPD).",
         "Destinataires : uniquement les chirurgiens que vous sélectionnez. Hébergement : Union européenne, hébergeur certifié HDS.",
-        "Durée de conservation : 6 mois après l'envoi de la demande. Vous pouvez à tout moment accéder à vos données, les rectifier, les effacer ou retirer votre consentement, et introduire une réclamation auprès de la CNIL."
+        "Durée de conservation : 6 mois après l'envoi de la demande. Vous pouvez à tout moment accéder à vos données, les rectifier, les effacer ou retirer votre consentement, et introduire une réclamation auprès de la CNIL.",
+        "Mesure d'audience : Google Analytics 4, uniquement après votre consentement (vous pouvez refuser ou changer d'avis à tout moment via « Gérer mes cookies »). Seules les pages publiques sont mesurées ; le formulaire de demande ne l'est jamais. Les finalités publicitaires sont désactivées."
       ]
     },
     "methodology": {
@@ -267,5 +268,13 @@
     "title": "Espace professionnel",
     "noticeTitle": "Accès sur invitation",
     "notice": "Cet espace est réservé aux chirurgiens vérifiés. Il sera ouvert avec une authentification renforcée."
+  },
+  "consent": {
+    "title": "Mesure d'audience",
+    "text": "Avec votre accord, nous utilisons Google Analytics pour comprendre quelles pages sont lues. Aucune donnée du formulaire de demande n'est mesurée et aucune publicité n'est activée.",
+    "learnMore": "En savoir plus",
+    "accept": "Accepter",
+    "refuse": "Refuser",
+    "manage": "Gérer mes cookies"
   }
 }

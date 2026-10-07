@@ -224,7 +224,8 @@
         "[TO COMPLETE after the data protection impact assessment and appointment of the DPO.]",
         "Data collected: planned procedure, closed medical questions, contact details. Legal basis: your explicit consent (UK GDPR Article 9(2)(a)).",
         "Recipients: only the surgeons you select. Hosting: European Union.",
-        "Retention: 6 months after your request is sent. You can access, correct or delete your data or withdraw consent at any time, and complain to the Information Commissioner's Office (ICO)."
+        "Retention: 6 months after your request is sent. You can access, correct or delete your data or withdraw consent at any time, and complain to the Information Commissioner's Office (ICO).",
+        "Audience measurement: Google Analytics 4, only after your consent (you can refuse or change your mind at any time via “Manage cookies”). Only public pages are measured; the request form never is. Advertising purposes are disabled."
       ]
     },
     "methodology": {
@@ -266,5 +267,13 @@
     "title": "Professional area",
     "noticeTitle": "Access by invitation",
     "notice": "This area is reserved for verified surgeons. It will open with strong authentication."
+  },
+  "consent": {
+    "title": "Audience measurement",
+    "text": "With your consent, we use Google Analytics to understand which pages are read. Nothing from the request form is measured and no advertising is enabled.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "refuse": "Refuse",
+    "manage": "Manage cookies"
   }
 }

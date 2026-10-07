@@ -5,6 +5,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Analytics } from "@/components/Analytics";
+import { CookieBanner } from "@/components/CookieBanner";
+import { JsonLd } from "@/components/JsonLd";
+import { siteStructuredData } from "@/lib/jsonld";
+import { INFO_PAGE_SLUGS } from "@/lib/pages";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "../globals.css";
 
@@ -30,16 +35,20 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return (
     <html lang={locale}>
       <body className="flex min-h-screen flex-col antialiased">
         <NextIntlClientProvider>
+          <JsonLd data={siteStructuredData(locale, t("siteDescription"))} />
           <Header />
           <main id="contenu" tabIndex={-1} className="flex-1 focus:outline-none">
             {children}
           </main>
           <Footer />
+          <CookieBanner privacyHref={`/informations/${INFO_PAGE_SLUGS[locale].privacy}`} />
+          <Analytics />
         </NextIntlClientProvider>
       </body>
     </html>

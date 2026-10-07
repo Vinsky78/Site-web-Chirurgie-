@@ -93,6 +93,11 @@ docs/decisions.md         Décisions et hypothèses
 - **Phase 3 – design system** : tokens dans `src/app/globals.css`, composants `src/components/ui` (Button, Badge, Alert, Card), page de référence non indexée `/<locale>/design-system`.
 - **Phase 4 – socle** : stockage PostgreSQL (`migrations/001_init.sql`, `LEAD_STORAGE=postgres` + `DATABASE_URL`), annuaire des chirurgiens vérifiés (`/chirurgiens`, vide tant qu'aucune fiche n'est vérifiée), envoi d'une demande à 1 à 3 chirurgiens (`src/lib/lead/dispatch.ts`), espace pro `/pro` (sans authentification, aucune donnée exposée).
 
+## GEO et mesure d'audience
+
+- **GEO** (visibilité dans les assistants IA) : `/llms.txt` (résumé du site, fiches relues uniquement), `robots.txt` avec robots d'IA autorisés sur les pages publiques, données structurées `Organization` et `WebSite` sur chaque page, en plus des données des fiches (`MedicalWebPage`, `FAQPage`).
+- **Google Analytics 4** : renseigner `NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX` (voir `.env.example`). Chargé uniquement après consentement (bandeau avec « Refuser » aussi simple qu'« Accepter », lien « Gérer mes cookies » dans le pied de page), finalités publicitaires désactivées, jamais actif sur `/demande`, `/pro` ni `/design-system`. Sans identifiant, aucun script et aucun bandeau.
+
 ## Reste à faire
 
 - Héberger la base chez un hébergeur certifié HDS et appliquer la migration.

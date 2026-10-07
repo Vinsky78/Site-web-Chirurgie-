@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 import { INFO_PAGE_IDS, INFO_PAGE_SLUGS } from "@/lib/pages";
 import { SITE_NAME } from "@/lib/site";
 
@@ -36,6 +37,9 @@ export async function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <CookieSettingsButton className={link} />
+            </li>
           </ul>
         </nav>
       </div>
