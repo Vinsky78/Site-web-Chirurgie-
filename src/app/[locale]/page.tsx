@@ -23,7 +23,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("home");
-  const interventions = getInterventions(locale as Locale);
+  const interventions = getInterventions(locale as Locale).slice(0, 6);
   const steps = [0, 1, 2, 3];
 
   return (

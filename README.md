@@ -8,7 +8,7 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 
 - Next.js 16 (App Router, Server Components), TypeScript strict, Tailwind CSS 4.
 - Deux marchés : France (`/fr`) et Royaume-Uni (`/en-gb`), avec des contenus localisés et non simplement traduits.
-- Accueil, liste des interventions, fiches intervention (rhinoplastie, abdominoplastie, augmentation mammaire) avec risques, contre-indications, alternatives et droits du patient du pays.
+- Accueil, liste des interventions, fiches intervention (10 : rhinoplastie, blépharoplastie, lifting du visage, otoplastie, liposuccion, abdominoplastie, augmentation et réduction mammaires, lifting mammaire, gynécomastie) avec risques, contre-indications, alternatives et droits du patient du pays.
 - Formulaire de demande en 4 étapes, validé côté client et serveur (Zod) : refus des mineurs, consentement explicite aux données de santé, étape de réflexion non enregistrée, anti-spam (pot de miel + durée minimale).
 - Règles de conformité par pays (publicité, avant/après, témoignages, délai de réflexion, devis).
 - SEO : balises canonical et hreflang, sitemap multilingue, robots.txt, données structurées schema.org (MedicalWebPage, MedicalProcedure, BreadcrumbList, FAQPage).

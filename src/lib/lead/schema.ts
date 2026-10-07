@@ -85,7 +85,13 @@ export const STEP_FIELDS = {
 export type StepId = keyof typeof STEP_FIELDS;
 
 /** Interventions pour lesquelles un projet de grossesse change l'indication. */
-export const PREGNANCY_RELEVANT = ["abdominoplasty", "breast-augmentation"] as const;
+export const PREGNANCY_RELEVANT = [
+  "abdominoplasty",
+  "breast-augmentation",
+  "breast-reduction",
+  "mastopexy",
+  "liposuction",
+] as const;
 
 export function isPregnancyRelevant(interventionId: string | undefined): boolean {
   return (PREGNANCY_RELEVANT as readonly string[]).includes(interventionId ?? "");
