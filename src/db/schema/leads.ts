@@ -1,4 +1,4 @@
-import { index, integer, pgSchema, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, integer, pgSchema, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 /**
  * Schéma `leads` : demandes de consultation (données de santé).
@@ -39,6 +39,21 @@ export const requestHealth = leads.table("request_health", {
     .references(() => requests.id, { onDelete: "cascade" }),
   payloadEnc: text("payload_enc").notNull(),
 });
+
+/**
+ * Chirurgiens choisis par le patient (1 à 3) : seuls destinataires de la
+ * demande. Référencés par leur slug d'annuaire, supprimés avec la demande.
+ */
+export const requestRecipients = leads.table(
+  "request_recipients",
+  {
+    requestId: uuid("request_id")
+      .notNull()
+      .references(() => requests.id, { onDelete: "cascade" }),
+    surgeonSlug: text("surgeon_slug").notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.requestId, t.surgeonSlug] }), index("request_recipients_surgeon_idx").on(t.surgeonSlug)],
+);
 
 /**
  * Preuves de consentement. Conservées après la purge de la demande (sans

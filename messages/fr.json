@@ -114,7 +114,7 @@
     "verifiedOn": "Qualification vérifiée le {date}. Prochain contrôle avant le {next}.",
     "checkYourself": "Vérifier vous-même sur le registre officiel",
     "cta": "Préparer une demande de consultation",
-    "ctaNote": "Vous choisirez les chirurgiens qui recevront votre demande. Aucune information n'est transmise sans votre accord.",
+    "ctaNote": "Ce chirurgien sera présélectionné ; vous pourrez en ajouter jusqu'à deux autres. Aucune information n'est transmise sans votre accord.",
     "noReviews": "Conformément aux règles déontologiques françaises, nous ne publions ni avis de patients, ni photos avant/après, ni tarifs.",
     "languagesList": "Langues : {list}"
   },
@@ -127,12 +127,13 @@
   },
   "form": {
     "title": "Demande de consultation",
-    "lead": "Trois étapes courtes. Vos réponses servent uniquement à transmettre une demande aux chirurgiens que vous choisirez.",
+    "lead": "Cinq étapes courtes. Vos réponses servent uniquement à transmettre une demande aux chirurgiens que vous choisirez.",
     "stepOf": "Étape {current} sur {total}",
     "steps": {
       "project": "Votre projet",
       "health": "Quelques questions médicales",
       "reflection": "Un temps de réflexion",
+      "surgeons": "Choisir vos chirurgiens",
       "contact": "Vos coordonnées"
     },
     "next": "Continuer",
@@ -157,7 +158,8 @@
       "isAdult": "Je certifie avoir 18 ans ou plus.",
       "consentHealthData": "J'accepte que les informations de santé de ce formulaire soient traitées pour transmettre ma demande aux chirurgiens que je sélectionnerai. Je peux retirer ce consentement à tout moment.",
       "consentNewsletter": "Je souhaite recevoir des contenus d'information par e-mail (sans lien avec mes réponses médicales).",
-      "website": "Ne pas remplir ce champ"
+      "website": "Ne pas remplir ce champ",
+      "surgeons": "Chirurgiens qui recevront votre demande"
     },
     "options": {
       "country": {
@@ -208,16 +210,26 @@
       "underage": "Nous ne pouvons pas transmettre de demande pour une personne de moins de 18 ans.",
       "isAdult": "Cette confirmation est obligatoire.",
       "consentHealthData": "Ce consentement est nécessaire pour transmettre votre demande.",
+      "surgeons": "Cette sélection n'est pas valide. Choisissez parmi les chirurgiens proposés.",
+      "surgeonsRequired": "Choisissez au moins un chirurgien.",
+      "surgeonsMax": "Vous pouvez choisir trois chirurgiens au maximum.",
+      "surgeonsNone": "Aucun chirurgien vérifié ne pratique cette intervention pour l'instant.",
       "summary": "Le formulaire contient {count, plural, one {une erreur} other {# erreurs}}."
     },
     "result": {
-      "successTitle": "Votre demande est prête",
-      "successText": "Prochaine étape : choisir jusqu'à trois chirurgiens vérifiés qui recevront votre demande. L'annuaire est en cours de constitution ; nous vous écrirons dès qu'il sera disponible dans votre région.",
+      "successTitle": "Votre demande est enregistrée",
+      "successText": "Elle sera transmise uniquement aux chirurgiens que vous avez choisis, qui vous recontacteront. Rien ne vous engage : prenez le temps de la consultation et du délai de réflexion.",
       "underageTitle": "Nous ne pouvons pas donner suite",
       "underageText": "La plateforme n'accepte pas de demande de personnes de moins de 18 ans. Si une question médicale vous préoccupe, parlez-en à votre médecin traitant.",
       "error": "Votre demande n'a pas pu être envoyée. Merci de réessayer plus tard."
     },
-    "privacyLink": "Notre politique de confidentialité"
+    "privacyLink": "Notre politique de confidentialité",
+    "surgeons": {
+      "help": "Choisissez de 1 à {max} chirurgiens. Ils sont présentés par ordre alphabétique, ceux de votre ville en premier ; aucun n'a payé pour être mieux placé.",
+      "none": "Aucun chirurgien vérifié ne pratique encore cette intervention dans ce pays. Nous ne pouvons pas transmettre votre demande pour l'instant : revenez à l'étape 1 pour modifier votre choix, ou consultez l'annuaire plus tard.",
+      "max": "Vous avez choisi {max} chirurgiens, le maximum. Décochez-en un pour en choisir un autre.",
+      "profile": "Voir la fiche (nouvel onglet)"
+    }
   },
   "pages": {
     "legal": {

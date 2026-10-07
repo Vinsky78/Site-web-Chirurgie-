@@ -114,7 +114,7 @@
     "verifiedOn": "Registration checked on {date}. Next check due by {next}.",
     "checkYourself": "Check the official register yourself",
     "cta": "Prepare a consultation request",
-    "ctaNote": "You choose which surgeons receive your request. Nothing is shared without your consent.",
+    "ctaNote": "This surgeon will be preselected; you can add up to two more. Nothing is shared without your consent.",
     "noReviews": "We do not publish patient reviews, before-and-after photos or prices in the directory.",
     "languagesList": "Languages: {list}"
   },
@@ -127,12 +127,13 @@
   },
   "form": {
     "title": "Consultation request",
-    "lead": "Three short steps. Your answers are only used to send a request to the surgeons you choose.",
+    "lead": "Five short steps. Your answers are only used to send a request to the surgeons you choose.",
     "stepOf": "Step {current} of {total}",
     "steps": {
       "project": "Your plans",
       "health": "A few medical questions",
       "reflection": "A moment to reflect",
+      "surgeons": "Choose your surgeons",
       "contact": "Your details"
     },
     "next": "Continue",
@@ -157,7 +158,8 @@
       "isAdult": "I confirm that I am 18 or over.",
       "consentHealthData": "I agree that the health information in this form is processed to send my request to the surgeons I select. I can withdraw this consent at any time.",
       "consentNewsletter": "I would like to receive informational content by email (unrelated to my medical answers).",
-      "website": "Leave this field empty"
+      "website": "Leave this field empty",
+      "surgeons": "Surgeons who will receive your request"
     },
     "options": {
       "country": {
@@ -208,16 +210,26 @@
       "underage": "We cannot send a request for anyone under 18.",
       "isAdult": "This confirmation is required.",
       "consentHealthData": "This consent is needed to send your request.",
+      "surgeons": "This selection is not valid. Choose from the surgeons listed.",
+      "surgeonsRequired": "Choose at least one surgeon.",
+      "surgeonsMax": "You can choose up to three surgeons.",
+      "surgeonsNone": "No verified surgeon offers this procedure yet.",
       "summary": "There {count, plural, one {is one error} other {are # errors}} in the form."
     },
     "result": {
-      "successTitle": "Your request is ready",
-      "successText": "Next step: choose up to three verified surgeons to receive your request. Our directory is being built; we will email you as soon as it is available in your area.",
+      "successTitle": "Your request has been saved",
+      "successText": "It will only be sent to the surgeons you chose, who will get back to you. You are not committed to anything: take your time over the consultation and the cooling-off period.",
       "underageTitle": "We cannot continue",
       "underageText": "This platform does not accept requests from anyone under 18. If you have a medical concern, please talk to your GP.",
       "error": "Your request could not be sent. Please try again later."
     },
-    "privacyLink": "Our privacy policy"
+    "privacyLink": "Our privacy policy",
+    "surgeons": {
+      "help": "Choose 1 to {max} surgeons. They are listed alphabetically, with those in your town first; none has paid for a better position.",
+      "none": "No verified surgeon offers this procedure in this country yet. We cannot send your request for now: go back to step 1 to change your choice, or check the directory later.",
+      "max": "You have chosen {max} surgeons, the maximum. Untick one to choose another.",
+      "profile": "View profile (new tab)"
+    }
   },
   "pages": {
     "legal": {

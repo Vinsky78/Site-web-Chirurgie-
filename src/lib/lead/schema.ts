@@ -18,6 +18,9 @@ export const SMOKER = ["yes", "no", "stopped"] as const;
 
 export const MIN_AGE = 18;
 
+/** Le patient choisit lui-même de 1 à 3 chirurgiens (Phase 1) : la demande n'est transmise qu'à eux. */
+export const MAX_SURGEONS = 3;
+
 const yesNo = z.enum(YES_NO, { error: "required" });
 
 export const leadBaseSchema = z.object({
@@ -33,7 +36,13 @@ export const leadBaseSchema = z.object({
   previousSurgerySameArea: yesNo,
   pregnancyPlanned: yesNo.optional(),
 
-  // Étape 3 – contact et consentements
+  // Étape 4 – chirurgiens choisis (slugs de l'annuaire, contrôlés côté serveur)
+  surgeons: z
+    .array(z.string().regex(/^[a-z0-9-]{1,120}$/, { error: "surgeons" }), { error: "surgeons" })
+    .max(MAX_SURGEONS, { error: "surgeonsMax" })
+    .refine((slugs) => new Set(slugs).size === slugs.length, { error: "surgeons" }),
+
+  // Étape 5 – contact et consentements
   firstName: z.string({ error: "required" }).trim().min(1, { error: "required" }).max(60, { error: "firstName" }),
   email: z.email({ error: "email" }).max(254, { error: "email" }),
   phone: z
@@ -79,6 +88,7 @@ export function createLeadSchema(now: Date = new Date()) {
 export const STEP_FIELDS = {
   project: ["interventionId", "country", "city", "timeframe", "budget"],
   health: ["smoker", "previousSurgerySameArea", "pregnancyPlanned"],
+  surgeons: ["surgeons"],
   contact: ["firstName", "email", "phone", "birthYear", "isAdult", "consentHealthData", "consentNewsletter"],
 } as const satisfies Record<string, readonly (keyof LeadInput)[]>;
 
