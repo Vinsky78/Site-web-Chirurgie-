@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "./site";
 
@@ -8,29 +9,38 @@ export const HREFLANG: Record<Locale, string> = {
   "en-gb": "en-GB",
 };
 
-export function absoluteUrl(locale: Locale, path: string): string {
-  return `${SITE_URL}/${locale}${path}`;
+/** Lien interne typé : route interne (et ses paramètres), traduite par getPathname. */
+export type Href = Parameters<typeof getPathname>[0]["href"];
+
+/** URL absolue d'une route dans une locale, avec le chemin traduit de ce marché. */
+export function absoluteUrl(locale: Locale, href: Href): string {
+  return `${SITE_URL}${getPathname({ locale, href })}`;
 }
 
 /**
- * URL canonique et alternatives hreflang. `pathFor` renvoie le chemin (après
- * la locale) de la page équivalente dans une locale, ou undefined si la page
- * n'existe pas dans cette locale.
+ * Alternatives hreflang. `hrefFor` renvoie la route de la page équivalente dans
+ * une locale, ou undefined si la page n'existe pas dans cette locale.
  */
-export function localeAlternates(
-  locale: Locale,
-  pathFor: (locale: Locale) => string | undefined,
-): Metadata["alternates"] {
+export function hreflangAlternates(hrefFor: (locale: Locale) => Href | undefined): Record<string, string> {
   const languages: Record<string, string> = {};
   for (const l of routing.locales) {
-    const path = pathFor(l);
-    if (path !== undefined) languages[HREFLANG[l]] = absoluteUrl(l, path);
+    const href = hrefFor(l);
+    if (href !== undefined) languages[HREFLANG[l]] = absoluteUrl(l, href);
   }
-  const defaultPath = pathFor(routing.defaultLocale);
-  if (defaultPath !== undefined) languages["x-default"] = absoluteUrl(routing.defaultLocale, defaultPath);
+  return languages;
+}
+
+/** URL canonique et alternatives hreflang (avec x-default sur la locale par défaut). */
+export function localeAlternates(
+  locale: Locale,
+  hrefFor: (locale: Locale) => Href | undefined,
+): Metadata["alternates"] {
+  const languages = hreflangAlternates(hrefFor);
+  const defaultHref = hrefFor(routing.defaultLocale);
+  if (defaultHref !== undefined) languages["x-default"] = absoluteUrl(routing.defaultLocale, defaultHref);
 
   return {
-    canonical: absoluteUrl(locale, pathFor(locale) ?? ""),
+    canonical: absoluteUrl(locale, hrefFor(locale) ?? "/"),
     languages,
   };
 }

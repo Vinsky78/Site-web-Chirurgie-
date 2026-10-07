@@ -26,4 +26,12 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 
 - **Contenus** : fichiers TypeScript typés dans `src/content`, derrière une interface qui sera branchée sur le CMS headless sans changer les pages. Recommandation : Payload CMS (auto-hébergeable en UE, même base PostgreSQL, TypeScript natif).
 - **Hébergement** : la base de données et l'API du formulaire doivent être hébergées en UE chez un hébergeur certifié HDS (OVHcloud, Scaleway, Clever Cloud).
-- **Polices** : polices système, pour la performance (aucun téléchargement de police).
+- **Polices** : remplacé en Phase 5 par Source Serif 4 et Inter, auto-hébergées par `next/font` (voir ci-dessous).
+
+## Design system (Phase 5, d'après la Phase 3)
+
+- **Tokens** dans `src/app/globals.css` : couleurs (contrastes indiqués en tête de fichier), échelle typographique `text-display`, `text-h1` à `text-h3`, `text-body` (18 px), `text-small`, `text-label`, rayons `rounded-control` (6 px) et `rounded-card` (12 px), `shadow-float`, largeurs `max-w-reading` (680 px) et `max-w-page` (1 152 px).
+- **Polices** : Source Serif 4 (titres) et Inter (texte), sous-ensembles latin et latin-ext, servies depuis notre domaine par `next/font` (`src/app/fonts.ts`). Le navigateur du visiteur n'appelle jamais Google.
+- **Composants de base** : `buttonClasses()` pour les boutons et liens d'action, `Callout` pour les encadrés. Radix UI sera ajouté avec le premier composant interactif qui en a besoin (sélecteur de chirurgiens, fenêtre de dialogue).
+- **Nom de marque** : Éclaira par défaut (`src/lib/site.ts`), surchargeable par `NEXT_PUBLIC_SITE_NAME` tant que la marque et les domaines ne sont pas vérifiés.
+- **Adresses traduites** : `pathnames` dans `src/i18n/routing.ts`. Les dossiers de `src/app` restent en français ; le Royaume-Uni voit `/en-gb/procedures`, `/en-gb/request`, `/en-gb/information/...`. Les liens internes passent par des routes typées (`{ pathname, params }`).

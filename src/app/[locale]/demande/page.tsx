@@ -27,8 +27,8 @@ export default async function RequestPage({ params, searchParams }: Props) {
     : undefined;
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12">
-      <h1 className="font-serif text-3xl font-semibold text-primary-strong">{t("title")}</h1>
+    <div className="mx-auto max-w-reading px-4 py-12">
+      <h1 className="font-serif text-h1 text-primary-strong">{t("title")}</h1>
       <p className="mt-4 text-muted">{t("lead")}</p>
       <RequestForm
         interventions={options}

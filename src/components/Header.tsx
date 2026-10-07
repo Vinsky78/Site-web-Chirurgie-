@@ -2,6 +2,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { SITE_NAME } from "@/lib/site";
+import { buttonClasses } from "@/components/ui/button";
 
 export async function Header() {
   const t = await getTranslations("nav");
@@ -15,12 +16,12 @@ export async function Header() {
       >
         {t("skip")}
       </a>
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
-        <Link href="/" className="font-serif text-xl font-semibold text-primary-strong">
+      <div className="mx-auto flex max-w-page flex-wrap items-center justify-between gap-4 px-4 py-4">
+        <Link href="/" className="font-serif text-h3 text-primary-strong">
           {SITE_NAME}
         </Link>
         <nav aria-label={t("main")}>
-          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-small">
             <li>
               <Link href="/interventions" className="underline-offset-4 hover:underline">
                 {t("interventions")}
@@ -29,7 +30,7 @@ export async function Header() {
             <li>
               <Link
                 href="/demande"
-                className="inline-flex min-h-11 items-center rounded-md bg-primary px-4 font-medium text-white hover:bg-primary-strong"
+                className={buttonClasses("primary")}
               >
                 {t("request")}
               </Link>

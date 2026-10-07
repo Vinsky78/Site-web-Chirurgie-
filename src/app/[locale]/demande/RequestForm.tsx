@@ -17,6 +17,7 @@ import {
 import type { SubmitResult } from "@/lib/lead/submit";
 import { ACTIVE_COUNTRIES } from "@/lib/countries";
 import type { InterventionId } from "@/content/types";
+import { buttonClasses } from "@/components/ui/button";
 
 type Field = keyof LeadInput;
 type Values = Partial<Record<Field, string | boolean>>;
@@ -146,8 +147,8 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
   if (result && (result.ok || result.reason === "underage")) {
     const key = result.ok ? "success" : "underage";
     return (
-      <div role="status" className="mt-8 rounded-lg border border-border bg-surface p-6">
-        <h2 ref={headingRef} tabIndex={-1} className="font-serif text-2xl font-semibold focus:outline-none">
+      <div role="status" className="mt-8 rounded-card border border-border bg-surface p-6">
+        <h2 ref={headingRef} tabIndex={-1} className="font-serif text-h2 focus:outline-none">
           {t(`result.${key}Title`)}
         </h2>
         <p className="mt-3">{t(`result.${key}Text`)}</p>
@@ -169,14 +170,14 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
         else goNext();
       }}
     >
-      <p className="text-sm font-medium text-primary">
+      <p className="text-small font-medium text-primary">
         {t("stepOf", { current: stepIndex + 1, total: STEPS.length })}
       </p>
       <h2
         id={`${formId}-step-title`}
         ref={headingRef}
         tabIndex={-1}
-        className="mt-1 font-serif text-2xl font-semibold focus:outline-none"
+        className="mt-1 font-serif text-h2 focus:outline-none"
       >
         {t(`steps.${step}`)}
       </h2>
@@ -186,7 +187,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
           ref={summaryRef}
           tabIndex={-1}
           role="alert"
-          className="mt-4 rounded-md border border-danger p-4 text-danger focus:outline-none"
+          className="mt-4 rounded-control border border-danger p-4 text-danger focus:outline-none"
         >
           <p className="font-semibold">{t("errors.summary", { count: errorCount })}</p>
           <ul className="mt-2 list-disc pl-5">
@@ -202,7 +203,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
       )}
 
       {result && !result.ok && result.reason !== "underage" && (
-        <p role="alert" className="mt-4 rounded-md border border-danger p-4 text-danger">
+        <p role="alert" className="mt-4 rounded-control border border-danger p-4 text-danger">
           {t("result.error")}
         </p>
       )}
@@ -254,7 +255,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
 
         {step === "health" && (
           <>
-            <p className="rounded-md bg-accent-soft p-4 text-sm">{t("healthNotice")}</p>
+            <p className="rounded-control bg-accent-soft p-4 text-small">{t("healthNotice")}</p>
             <RadioGroup
               {...fieldProps("smoker")}
               legend={t("fields.smoker")}
@@ -286,7 +287,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
 
         {step === "reflection" && (
           <>
-            <p className="rounded-md bg-accent-soft p-4 text-sm">{t("reflection.intro")}</p>
+            <p className="rounded-control bg-accent-soft p-4 text-small">{t("reflection.intro")}</p>
             {REFLECTION_QUESTIONS.map((q) => (
               <RadioGroup
                 key={q}
@@ -301,7 +302,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
             ))}
             <div aria-live="polite">
               {reflectionComplete && yesCount >= REFLECTION_THRESHOLD && (
-                <div className="rounded-md border-l-4 border-primary bg-surface p-4">
+                <div className="rounded-control border-l-4 border-primary bg-surface p-4">
                   <p className="font-semibold">{t("reflection.supportTitle")}</p>
                   <p className="mt-1">{t("reflection.supportText")}</p>
                 </div>
@@ -377,9 +378,9 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
                 onChange={(e) => set("website", e.target.value)}
               />
             </div>
-            <p className="text-sm text-muted">
+            <p className="text-small text-muted">
               {t("privacy")}{" "}
-              <Link href={`/informations/${privacySlug}`} className="underline underline-offset-4">
+              <Link href={{ pathname: "/informations/[page]", params: { page: privacySlug } }} className="underline underline-offset-4">
                 {t("privacyLink")}
               </Link>
             </p>
@@ -395,7 +396,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
               setErrors({});
               setStepIndex((i) => i - 1);
             }}
-            className="inline-flex min-h-11 items-center rounded-md border border-primary px-5 font-medium text-primary"
+            className={buttonClasses("secondary")}
           >
             {t("back")}
           </button>
@@ -404,7 +405,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
           type="submit"
           disabled={isPending}
           aria-disabled={isPending}
-          className="inline-flex min-h-11 items-center rounded-md bg-primary px-5 font-medium text-white hover:bg-primary-strong disabled:opacity-70"
+          className={buttonClasses("primary")}
         >
           {step === "contact" ? (isPending ? t("submitting") : t("submit")) : t("next")}
         </button>
@@ -424,14 +425,14 @@ interface BaseFieldProps {
 function FieldError({ id, error }: { id: string; error?: string }) {
   if (!error) return null;
   return (
-    <p id={id} className="mt-1 text-sm font-medium text-danger">
+    <p id={id} className="mt-1 text-small font-medium text-danger">
       {error}
     </p>
   );
 }
 
 const inputClass =
-  "mt-1 block min-h-11 w-full rounded-md border border-border-input bg-surface px-3 py-2 text-base aria-invalid:border-danger";
+  "mt-1 block min-h-11 w-full rounded-control border border-border-input bg-surface px-3 py-2 aria-invalid:border-danger";
 
 function TextField({
   id,
@@ -453,7 +454,7 @@ function TextField({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="font-medium">
+      <label htmlFor={id} className="text-label">
         {label}
       </label>
       <input
@@ -490,7 +491,7 @@ function SelectField({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="font-medium">
+      <label htmlFor={id} className="text-label">
         {label}
       </label>
       <select
@@ -531,12 +532,12 @@ function RadioGroup({
 }) {
   return (
     <fieldset id={id} tabIndex={-1} aria-describedby={error ? errorId : undefined} className="focus:outline-none">
-      <legend className="font-medium">{legend}</legend>
+      <legend className="text-label">{legend}</legend>
       <div className="mt-2 flex flex-wrap gap-3">
         {options.map((o) => (
           <label
             key={o.value}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-border-input bg-surface px-4 has-checked:border-primary has-checked:bg-accent-soft"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-control border border-border-input bg-surface px-4 has-checked:border-primary has-checked:bg-accent-soft"
           >
             <input
               type="radio"

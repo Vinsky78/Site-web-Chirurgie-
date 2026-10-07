@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { COUNTRY_RULES, type CountryCode } from "@/lib/countries";
+import { Callout } from "@/components/ui/Callout";
 
 /** Encadré des obligations légales du pays de la locale (délai de réflexion, devis, vérification). */
 export async function LegalBox({ country }: { country: CountryCode }) {
@@ -7,11 +8,8 @@ export async function LegalBox({ country }: { country: CountryCode }) {
   const rules = COUNTRY_RULES[country];
 
   return (
-    <aside aria-labelledby="droits" className="rounded-lg border-l-4 border-primary bg-accent-soft p-6">
-      <h2 id="droits" className="font-semibold">
-        {t("title")}
-      </h2>
-      <ul className="mt-3 list-disc space-y-2 pl-5">
+    <Callout as="aside" title={t("title")} titleId="droits">
+      <ul className="list-disc space-y-2 pl-5">
         {rules.writtenQuoteMandatory && <li>{t("quote")}</li>}
         {rules.legalReflectionDays !== null && <li>{t("reflection", { days: rules.legalReflectionDays })}</li>}
         {rules.legalReflectionDays === null && rules.recommendedReflectionDays !== null && (
@@ -19,6 +17,6 @@ export async function LegalBox({ country }: { country: CountryCode }) {
         )}
         <li>{t("verify", { registry: rules.verificationRegistry })}</li>
       </ul>
-    </aside>
+    </Callout>
   );
 }
