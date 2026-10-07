@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
 /*
- * Design system (Phase 3) : tokens de couleur, de forme et d'échelle.
- * Les composants sont dans src/components/ui. Contrastes vérifiés pour WCAG 2.2 AA sur fond clair :
- * ink/bg ≈ 15:1, muted/bg ≈ 7:1, primary/bg ≈ 8:1, blanc/primary ≈ 8:1.
+ * Design system (Phase 3) : tokens de couleur, de forme et d'échelle ; les
+ * composants sont dans src/components/ui. Contrastes vérifiés pour WCAG 2.2 AA
+ * sur fond clair : ink/bg 15:1, muted/bg 7,3:1, primary/bg 9,1:1,
+ * blanc/primary 9,5:1.
+ * `border` est décoratif (1,35:1) ; les champs utilisent `border-input`
+ * (3,9:1), conforme au critère 1.4.11 (contraste des composants, 3:1).
  */
 :root {
   --color-bg: #fbfaf8;
@@ -14,6 +17,7 @@
   --color-primary-strong: #0a3642;
   --color-accent-soft: #e6efef;
   --color-border: #d5dade;
+  --color-border-input: #737f8c;
   --color-warning-bg: #fff6e0;
   --color-warning-ink: #6b4500;
   --color-danger: #a1242b;
@@ -38,6 +42,7 @@
   --color-primary-strong: var(--color-primary-strong);
   --color-accent-soft: var(--color-accent-soft);
   --color-border: var(--color-border);
+  --color-border-input: var(--color-border-input);
   --color-warning-bg: var(--color-warning-bg);
   --color-warning-ink: var(--color-warning-ink);
   --color-danger: var(--color-danger);
