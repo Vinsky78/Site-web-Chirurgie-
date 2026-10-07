@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "siteDescription": "Information médicale indépendante sur la chirurgie et la médecine esthétiques, et mise en relation avec des chirurgiens qualifiés et vérifiés."
+  },
+  "nav": {
+    "skip": "Aller au contenu principal",
+    "home": "Accueil",
+    "interventions": "Interventions",
+    "request": "Demander une consultation",
+    "main": "Navigation principale",
+    "language": "Langue",
+    "languages": {
+      "fr": "Français (France)",
+      "en-gb": "English (UK)"
+    }
+  },
+  "footer": {
+    "legal": "Mentions légales",
+    "privacy": "Confidentialité",
+    "methodology": "Notre méthode",
+    "disclaimer": "Les informations de ce site ne remplacent pas une consultation médicale. Seul un chirurgien qualifié, après examen, peut vous indiquer si une intervention est adaptée à votre situation.",
+    "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant."
+  },
+  "home": {
+    "title": "Comprendre avant de décider",
+    "lead": "Une information médicale claire, risques compris, et des chirurgiens dont nous vérifions les qualifications. Sans pression commerciale.",
+    "ctaInterventions": "Découvrir les interventions",
+    "ctaRequest": "Préparer une demande de consultation",
+    "pillarsTitle": "Nos engagements",
+    "pillars": {
+      "info": {
+        "title": "Une information complète",
+        "text": "Chaque fiche détaille les indications, les contre-indications, les risques et la convalescence."
+      },
+      "verified": {
+        "title": "Des chirurgiens vérifiés",
+        "text": "Nous contrôlons les qualifications de chaque chirurgien auprès du registre officiel de son pays."
+      },
+      "choice": {
+        "title": "Vous choisissez",
+        "text": "Votre demande n'est envoyée qu'aux chirurgiens que vous sélectionnez. Vous gardez la maîtrise de vos données."
+      }
+    },
+    "featured": "Interventions",
+    "reflectionTitle": "Prendre le temps de réfléchir",
+    "reflectionText": "En France, la loi impose un délai minimal de 15 jours entre la remise du devis détaillé et l'intervention. Ce temps vous appartient."
+  },
+  "categories": {
+    "face": "Visage",
+    "body": "Silhouette",
+    "breast": "Seins"
+  },
+  "intervention": {
+    "draftBanner": "Contenu en attente de relecture par un chirurgien qualifié. Il peut encore évoluer.",
+    "reviewedBy": "Relu par {reviewer}, {qualification}, le {date}",
+    "updatedAt": "Mis à jour le {date}",
+    "breadcrumb": "Fil d'Ariane",
+    "whatIs": "En quoi consiste l'intervention ?",
+    "indications": "Pour qui ?",
+    "contraindications": "Contre-indications",
+    "risks": "Risques et complications",
+    "risksIntro": "Toute intervention chirurgicale comporte des risques. Cette liste n'est pas exhaustive : votre chirurgien doit vous les présenter en détail lors de la consultation.",
+    "procedure": "Déroulement",
+    "anaesthesia": "Anesthésie",
+    "duration": "Durée",
+    "hospitalStay": "Hospitalisation",
+    "recovery": "Convalescence",
+    "alternatives": "Alternatives",
+    "faq": "Questions fréquentes",
+    "noPromise": "Aucun résultat ne peut être garanti. Les résultats varient d'une personne à l'autre.",
+    "cta": "Préparer une demande de consultation",
+    "listTitle": "Interventions",
+    "listLead": "Des fiches factuelles pour comprendre chaque intervention, ses risques et ses alternatives."
+  },
+  "legalBox": {
+    "title": "Vos droits en France",
+    "quote": "Un devis détaillé et daté doit vous être remis avant toute intervention de chirurgie esthétique.",
+    "reflection": "Un délai minimal de {days} jours doit être respecté entre la remise du devis et l'intervention. Aucune somme autre que les honoraires de consultation ne peut être exigée avant la fin de ce délai.",
+    "recommended": "Les instances professionnelles recommandent un délai de réflexion d'au moins {days} jours.",
+    "verify": "Vérifiez la qualification de votre chirurgien : {registry}."
+  },
+  "form": {
+    "title": "Demande de consultation",
+    "lead": "Trois étapes courtes. Vos réponses servent uniquement à transmettre une demande aux chirurgiens que vous choisirez.",
+    "stepOf": "Étape {current} sur {total}",
+    "steps": {
+      "project": "Votre projet",
+      "health": "Quelques questions médicales",
+      "reflection": "Un temps de réflexion",
+      "contact": "Vos coordonnées"
+    },
+    "next": "Continuer",
+    "back": "Retour",
+    "submit": "Envoyer ma demande",
+    "submitting": "Envoi en cours…",
+    "optional": "facultatif",
+    "fields": {
+      "interventionId": "Intervention envisagée",
+      "choose": "Choisir…",
+      "country": "Pays où vous souhaitez être opéré(e)",
+      "city": "Ville ou région souhaitée",
+      "timeframe": "Dans quel délai envisagez-vous l'intervention ?",
+      "budget": "Budget envisagé",
+      "smoker": "Fumez-vous ?",
+      "previousSurgerySameArea": "Avez-vous déjà été opéré(e) sur cette zone ?",
+      "pregnancyPlanned": "Envisagez-vous une grossesse dans les prochaines années ?",
+      "firstName": "Prénom",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone",
+      "birthYear": "Année de naissance",
+      "isAdult": "Je certifie avoir 18 ans ou plus.",
+      "consentHealthData": "J'accepte que les informations de santé de ce formulaire soient traitées pour transmettre ma demande aux chirurgiens que je sélectionnerai. Je peux retirer ce consentement à tout moment.",
+      "consentNewsletter": "Je souhaite recevoir des contenus d'information par e-mail (sans lien avec mes réponses médicales).",
+      "website": "Ne pas remplir ce champ"
+    },
+    "options": {
+      "country": {
+        "FR": "France"
+      },
+      "timeframe": {
+        "lt3m": "Moins de 3 mois",
+        "3to6m": "3 à 6 mois",
+        "6to12m": "6 à 12 mois",
+        "gt12m": "Plus d'un an",
+        "unknown": "Je ne sais pas encore"
+      },
+      "budget": {
+        "lt3k": "Moins de 3 000 €",
+        "3to6k": "3 000 à 6 000 €",
+        "6to10k": "6 000 à 10 000 €",
+        "gt10k": "Plus de 10 000 €",
+        "unknown": "Je préfère ne pas répondre"
+      },
+      "smoker": {
+        "yes": "Oui",
+        "no": "Non",
+        "stopped": "J'ai arrêté"
+      },
+      "yesNo": {
+        "yes": "Oui",
+        "no": "Non"
+      }
+    },
+    "healthNotice": "Ces questions aident le chirurgien à préparer votre consultation. Elles ne remplacent pas l'examen médical.",
+    "reflection": {
+      "intro": "Ces questions sont pour vous seul(e). Vos réponses ne sont ni enregistrées ni transmises.",
+      "q1": "Pensez-vous à cette partie de votre corps plus d'une heure par jour ?",
+      "q2": "Cette préoccupation vous empêche-t-elle de sortir, de travailler ou de voir vos proches ?",
+      "q3": "Ce projet vient-il surtout de la demande ou de la remarque d'une autre personne ?",
+      "supportTitle": "Prenez soin de vous",
+      "supportText": "Vos réponses montrent que cette préoccupation pèse sur votre quotidien. Il peut être utile d'en parler à votre médecin traitant ou à un psychologue avant d'envisager une intervention. Vous pouvez continuer si vous le souhaitez ; parlez-en aussi au chirurgien lors de la consultation.",
+      "ok": "Merci. Gardez en tête qu'une intervention se décide sans urgence."
+    },
+    "privacy": "Vos données sont hébergées dans l'Union européenne et supprimées 6 mois après l'envoi de votre demande.",
+    "errors": {
+      "required": "Ce champ est obligatoire.",
+      "city": "Indiquez une ville ou une région (2 à 80 caractères).",
+      "firstName": "Le prénom est trop long.",
+      "email": "Indiquez une adresse e-mail valide.",
+      "phone": "Indiquez un numéro de téléphone valide.",
+      "birthYear": "Indiquez une année de naissance valide.",
+      "underage": "Nous ne pouvons pas transmettre de demande pour une personne de moins de 18 ans.",
+      "isAdult": "Cette confirmation est obligatoire.",
+      "consentHealthData": "Ce consentement est nécessaire pour transmettre votre demande.",
+      "summary": "Le formulaire contient {count, plural, one {une erreur} other {# erreurs}}."
+    },
+    "result": {
+      "successTitle": "Votre demande est prête",
+      "successText": "Prochaine étape : choisir jusqu'à trois chirurgiens vérifiés qui recevront votre demande. L'annuaire est en cours de constitution ; nous vous écrirons dès qu'il sera disponible dans votre région.",
+      "underageTitle": "Nous ne pouvons pas donner suite",
+      "underageText": "La plateforme n'accepte pas de demande de personnes de moins de 18 ans. Si une question médicale vous préoccupe, parlez-en à votre médecin traitant.",
+      "error": "Votre demande n'a pas pu être envoyée. Merci de réessayer plus tard."
+    },
+    "privacyLink": "Notre politique de confidentialité"
+  },
+  "pages": {
+    "legal": {
+      "title": "Mentions légales",
+      "body": [
+        "[À COMPLÉTER] Raison sociale, forme juridique, capital, siège social, numéro RCS, directeur de la publication, hébergeur (nom, adresse, certification HDS).",
+        "Ce site est une plateforme d'information. Il ne fournit aucun acte médical et ne perçoit aucune commission sur les interventions."
+      ]
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "body": [
+        "[À COMPLÉTER après l'analyse d'impact (AIPD) et la désignation du DPO.]",
+        "Responsable de traitement : [société]. Délégué à la protection des données : [contact].",
+        "Données collectées : projet d'intervention, critères médicaux fermés, coordonnées. Base légale : votre consentement explicite (article 9.2.a du RGPD).",
+        "Destinataires : uniquement les chirurgiens que vous sélectionnez. Hébergement : Union européenne, hébergeur certifié HDS.",
+        "Durée de conservation : 6 mois après l'envoi de la demande. Vous pouvez à tout moment accéder à vos données, les rectifier, les effacer ou retirer votre consentement, et introduire une réclamation auprès de la CNIL."
+      ]
+    },
+    "methodology": {
+      "title": "Notre méthode",
+      "body": [
+        "Contenus : chaque fiche est rédigée selon une charte qui exclut toute promesse de résultat et impose une section sur les risques. Elle est relue par un chirurgien qualifié dont le nom et la date de relecture sont affichés.",
+        "Vérification des chirurgiens : nous contrôlons la qualification de chaque chirurgien auprès du registre officiel de son pays, puis chaque année.",
+        "Classement : les chirurgiens sont présentés selon la spécialité, la localisation et les langues parlées. Aucun chirurgien ne peut payer pour être mieux classé.",
+        "Financement : les chirurgiens paient un abonnement fixe, indépendant du nombre de demandes reçues. Nous ne percevons aucune commission sur les interventions."
+      ]
+    }
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "back": "Retour à l'accueil"
+  }
+}

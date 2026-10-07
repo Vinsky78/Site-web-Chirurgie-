@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "siteDescription": "Independent medical information about cosmetic surgery and aesthetic medicine, and contact with qualified, verified surgeons."
+  },
+  "nav": {
+    "skip": "Skip to main content",
+    "home": "Home",
+    "interventions": "Procedures",
+    "request": "Request a consultation",
+    "main": "Main navigation",
+    "language": "Language",
+    "languages": {
+      "fr": "Français (France)",
+      "en-gb": "English (UK)"
+    }
+  },
+  "footer": {
+    "legal": "Legal notice",
+    "privacy": "Privacy",
+    "methodology": "How we work",
+    "disclaimer": "The information on this site does not replace a medical consultation. Only a qualified surgeon, after examining you, can tell you whether a procedure is right for you.",
+    "independence": "Independent platform: no commission on procedures, no paid rankings."
+  },
+  "home": {
+    "title": "Understand before you decide",
+    "lead": "Clear medical information, risks included, and surgeons whose qualifications we check. No sales pressure.",
+    "ctaInterventions": "Explore procedures",
+    "ctaRequest": "Prepare a consultation request",
+    "pillarsTitle": "Our commitments",
+    "pillars": {
+      "info": {
+        "title": "Complete information",
+        "text": "Every page covers who a procedure suits, who it doesn't, its risks and recovery."
+      },
+      "verified": {
+        "title": "Verified surgeons",
+        "text": "We check every surgeon's qualifications against the official register in their country."
+      },
+      "choice": {
+        "title": "You choose",
+        "text": "Your request only goes to the surgeons you select. You stay in control of your data."
+      }
+    },
+    "featured": "Procedures",
+    "reflectionTitle": "Take time to reflect",
+    "reflectionText": "UK professional standards recommend at least two weeks between your consultation and agreeing to surgery. That time is yours."
+  },
+  "categories": {
+    "face": "Face",
+    "body": "Body",
+    "breast": "Breast"
+  },
+  "intervention": {
+    "draftBanner": "This content is awaiting review by a qualified surgeon and may change.",
+    "reviewedBy": "Reviewed by {reviewer}, {qualification}, on {date}",
+    "updatedAt": "Updated on {date}",
+    "breadcrumb": "Breadcrumb",
+    "whatIs": "What does the procedure involve?",
+    "indications": "Who is it for?",
+    "contraindications": "When it is not advisable",
+    "risks": "Risks and complications",
+    "risksIntro": "All surgery carries risks. This list is not exhaustive: your surgeon must explain them in detail at your consultation.",
+    "procedure": "The procedure",
+    "anaesthesia": "Anaesthesia",
+    "duration": "Duration",
+    "hospitalStay": "Hospital stay",
+    "recovery": "Recovery",
+    "alternatives": "Alternatives",
+    "faq": "Frequently asked questions",
+    "noPromise": "No result can be guaranteed. Results vary from person to person.",
+    "cta": "Prepare a consultation request",
+    "listTitle": "Procedures",
+    "listLead": "Factual guides to understand each procedure, its risks and alternatives."
+  },
+  "legalBox": {
+    "title": "Your rights in the UK",
+    "quote": "Ask for a written quote that lists everything included before you agree to surgery.",
+    "reflection": "A minimum period of {days} days must pass between the quote and the operation.",
+    "recommended": "Professional standards recommend a cooling-off period of at least {days} days.",
+    "verify": "Check your surgeon's registration: {registry}."
+  },
+  "form": {
+    "title": "Consultation request",
+    "lead": "Three short steps. Your answers are only used to send a request to the surgeons you choose.",
+    "stepOf": "Step {current} of {total}",
+    "steps": {
+      "project": "Your plans",
+      "health": "A few medical questions",
+      "reflection": "A moment to reflect",
+      "contact": "Your details"
+    },
+    "next": "Continue",
+    "back": "Back",
+    "submit": "Send my request",
+    "submitting": "Sending…",
+    "optional": "optional",
+    "fields": {
+      "interventionId": "Procedure you are considering",
+      "choose": "Choose…",
+      "country": "Country where you would like surgery",
+      "city": "Preferred city or region",
+      "timeframe": "When are you thinking of having the procedure?",
+      "budget": "Budget",
+      "smoker": "Do you smoke?",
+      "previousSurgerySameArea": "Have you had surgery on this area before?",
+      "pregnancyPlanned": "Are you planning a pregnancy in the next few years?",
+      "firstName": "First name",
+      "email": "Email address",
+      "phone": "Phone",
+      "birthYear": "Year of birth",
+      "isAdult": "I confirm that I am 18 or over.",
+      "consentHealthData": "I agree that the health information in this form is processed to send my request to the surgeons I select. I can withdraw this consent at any time.",
+      "consentNewsletter": "I would like to receive informational content by email (unrelated to my medical answers).",
+      "website": "Leave this field empty"
+    },
+    "options": {
+      "country": {
+        "FR": "France"
+      },
+      "timeframe": {
+        "lt3m": "Within 3 months",
+        "3to6m": "3 to 6 months",
+        "6to12m": "6 to 12 months",
+        "gt12m": "More than a year",
+        "unknown": "I don't know yet"
+      },
+      "budget": {
+        "lt3k": "Under €3,000",
+        "3to6k": "€3,000 to €6,000",
+        "6to10k": "€6,000 to €10,000",
+        "gt10k": "Over €10,000",
+        "unknown": "Prefer not to say"
+      },
+      "smoker": {
+        "yes": "Yes",
+        "no": "No",
+        "stopped": "I have stopped"
+      },
+      "yesNo": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "healthNotice": "These questions help the surgeon prepare your consultation. They do not replace a medical examination.",
+    "reflection": {
+      "intro": "These questions are for you alone. Your answers are neither saved nor sent.",
+      "q1": "Do you think about this part of your body for more than an hour a day?",
+      "q2": "Does this concern stop you going out, working or seeing people close to you?",
+      "q3": "Is this mainly someone else's idea or a response to someone's comments?",
+      "supportTitle": "Look after yourself",
+      "supportText": "Your answers suggest this concern weighs on your daily life. It may help to talk to your GP or a psychologist before considering a procedure. You can continue if you wish; please mention it to the surgeon at your consultation too.",
+      "ok": "Thank you. Remember that there is never any rush to decide."
+    },
+    "privacy": "Your data is hosted in the European Union and deleted 6 months after your request is sent.",
+    "errors": {
+      "required": "This field is required.",
+      "city": "Enter a city or region (2 to 80 characters).",
+      "firstName": "First name is too long.",
+      "email": "Enter a valid email address.",
+      "phone": "Enter a valid phone number.",
+      "birthYear": "Enter a valid year of birth.",
+      "underage": "We cannot send a request for anyone under 18.",
+      "isAdult": "This confirmation is required.",
+      "consentHealthData": "This consent is needed to send your request.",
+      "summary": "There {count, plural, one {is one error} other {are # errors}} in the form."
+    },
+    "result": {
+      "successTitle": "Your request is ready",
+      "successText": "Next step: choose up to three verified surgeons to receive your request. Our directory is being built; we will email you as soon as it is available in your area.",
+      "underageTitle": "We cannot continue",
+      "underageText": "This platform does not accept requests from anyone under 18. If you have a medical concern, please talk to your GP.",
+      "error": "Your request could not be sent. Please try again later."
+    },
+    "privacyLink": "Our privacy policy"
+  },
+  "pages": {
+    "legal": {
+      "title": "Legal notice",
+      "body": [
+        "[TO COMPLETE] Company name, legal form, registered office, registration number, publication director, hosting provider.",
+        "This site is an information platform. It does not provide medical care and takes no commission on procedures."
+      ]
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "body": [
+        "[TO COMPLETE after the data protection impact assessment and appointment of the DPO.]",
+        "Data collected: planned procedure, closed medical questions, contact details. Legal basis: your explicit consent (UK GDPR Article 9(2)(a)).",
+        "Recipients: only the surgeons you select. Hosting: European Union.",
+        "Retention: 6 months after your request is sent. You can access, correct or delete your data or withdraw consent at any time, and complain to the Information Commissioner's Office (ICO)."
+      ]
+    },
+    "methodology": {
+      "title": "How we work",
+      "body": [
+        "Content: every guide follows an editorial charter that rules out any promise of results and requires a section on risks. It is reviewed by a named, qualified surgeon, with the review date shown.",
+        "Surgeon verification: we check every surgeon against the official register in their country, then again every year.",
+        "Ranking: surgeons are listed by specialty, location and languages spoken. No surgeon can pay to rank higher.",
+        "Funding: surgeons pay a fixed subscription, regardless of how many requests they receive. We take no commission on procedures."
+      ]
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "back": "Back to home"
+  }
+}
