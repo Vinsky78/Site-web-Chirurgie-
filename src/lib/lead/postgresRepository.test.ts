@@ -5,7 +5,7 @@ import { migrate } from "drizzle-orm/pglite/migrator";
 import { beforeEach, describe, expect, it } from "vitest";
 import type { Database } from "@/db/client";
 import * as schema from "@/db/schema";
-import { consents, requestHealth, requests } from "@/db/schema";
+import { consents, requestHealth, requestRecipients, requests } from "@/db/schema";
 import { blindIndex, decrypt, keyringFromEnv } from "@/lib/crypto/fieldCrypto";
 import { CONSENT_TEXT_VERSION, deleteAfter, PostgresLeadRepository } from "./postgresRepository";
 import { purgeExpiredLeads } from "./purge";
@@ -37,6 +37,7 @@ function lead(overrides: Partial<StoredLead> = {}): StoredLead {
     isAdult: true,
     consentHealthData: true,
     consentNewsletter: false,
+    surgeons: ["alice-demo-lyon", "bruno-essai-lyon"],
     ...overrides,
   };
 }
@@ -70,6 +71,9 @@ describe("PostgresLeadRepository", () => {
       previousSurgerySameArea: "no",
       pregnancyPlanned: "no",
     });
+
+    const recipients = await db.select().from(requestRecipients);
+    expect(recipients.map((r) => r.surgeonSlug).sort()).toEqual(["alice-demo-lyon", "bruno-essai-lyon"]);
   });
 
   it("trace le consentement santé, et le consentement newsletter seulement s'il est donné", async () => {
@@ -104,6 +108,7 @@ describe("purgeExpiredLeads", () => {
     expect(count).toBe(1);
     expect(await db.select().from(requests)).toHaveLength(1);
     expect(await db.select().from(requestHealth)).toHaveLength(1);
+    expect(await db.select().from(requestRecipients)).toHaveLength(2);
     const proofs = await db.select().from(consents);
     expect(proofs).toHaveLength(2);
     expect(proofs.filter((p) => p.requestId === null)).toHaveLength(1);

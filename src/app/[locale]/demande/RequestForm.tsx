@@ -8,6 +8,7 @@ import {
   BUDGETS,
   createLeadSchema,
   isPregnancyRelevant,
+  MAX_SURGEONS,
   SMOKER,
   STEP_FIELDS,
   TIMEFRAMES,
@@ -16,6 +17,7 @@ import {
 } from "@/lib/lead/schema";
 import type { SubmitResult } from "@/lib/lead/submit";
 import { ACTIVE_COUNTRIES } from "@/lib/countries";
+import { slugify } from "@/lib/slug";
 import type { InterventionId } from "@/content/types";
 import { buttonClasses } from "@/components/ui/button";
 
@@ -23,20 +25,45 @@ type Field = keyof LeadInput;
 type Values = Partial<Record<Field, string | boolean>>;
 type Errors = Partial<Record<Field, string>>;
 
-const STEPS = ["project", "health", "reflection", "contact"] as const;
+const STEPS = ["project", "health", "reflection", "surgeons", "contact"] as const;
 type Step = (typeof STEPS)[number];
 
 /** Nombre de réponses « oui » à l'étape de réflexion à partir duquel on affiche un message de soutien. */
 const REFLECTION_THRESHOLD = 2;
 const REFLECTION_QUESTIONS = ["q1", "q2", "q3"] as const;
 
+/** Chirurgien publié proposable dans le formulaire (informations déjà publiques). */
+export interface SurgeonOption {
+  slug: string;
+  displayName: string;
+  specialtyLabel: string;
+  city: string;
+  citySlug: string;
+  country: string;
+  interventions: InterventionId[];
+}
+
 interface Props {
   interventions: { id: InterventionId; title: string }[];
   initialIntervention?: InterventionId;
+  surgeons: SurgeonOption[];
+  initialSurgeon?: string;
   privacySlug: string;
 }
 
-function toCandidate(values: Values, startedAt: number): Record<string, unknown> {
+/**
+ * Chirurgiens publiés du pays qui pratiquent l'intervention choisie. Ceux de la
+ * ville indiquée passent en premier ; l'ordre reste sinon alphabétique (aucun critère commercial).
+ */
+function availableSurgeons(surgeons: SurgeonOption[], values: Values): SurgeonOption[] {
+  const matching = surgeons.filter(
+    (s) => s.country === values.country && s.interventions.includes(values.interventionId as InterventionId),
+  );
+  const city = slugify(String(values.city ?? ""));
+  return [...matching.filter((s) => s.citySlug === city), ...matching.filter((s) => s.citySlug !== city)];
+}
+
+function toCandidate(values: Values, startedAt: number, surgeons: string[]): Record<string, unknown> {
   const str = (field: Field) => (typeof values[field] === "string" && values[field] !== "" ? values[field] : undefined);
   return {
     interventionId: str("interventionId"),
@@ -57,14 +84,19 @@ function toCandidate(values: Values, startedAt: number): Record<string, unknown>
     consentHealthData: values.consentHealthData === true,
     consentNewsletter: values.consentNewsletter === true,
     website: typeof values.website === "string" ? values.website : "",
+    surgeons,
     startedAt,
   };
 }
 
-function validateStep(step: Step, values: Values, startedAt: number): Errors {
+function validateStep(step: Step, values: Values, startedAt: number, surgeons: string[], available: number): Errors {
   if (step === "reflection") return {};
+  if (step === "surgeons") {
+    if (available === 0) return { surgeons: "surgeonsNone" };
+    if (surgeons.length === 0) return { surgeons: "surgeonsRequired" };
+  }
   const fields = STEP_FIELDS[step] as readonly Field[];
-  const result = createLeadSchema().safeParse(toCandidate(values, startedAt));
+  const result = createLeadSchema().safeParse(toCandidate(values, startedAt, surgeons));
   const errors: Errors = {};
   for (const issue of result.error?.issues ?? []) {
     const field = issue.path[0] as Field;
@@ -78,7 +110,7 @@ function validateStep(step: Step, values: Values, startedAt: number): Errors {
   return errors;
 }
 
-export function RequestForm({ interventions, initialIntervention, privacySlug }: Props) {
+export function RequestForm({ interventions, initialIntervention, surgeons, initialSurgeon, privacySlug }: Props) {
   const t = useTranslations("form");
   const formId = useId();
   const [startedAt] = useState(() => Date.now());
@@ -89,6 +121,7 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
     consentNewsletter: false,
     website: "",
   });
+  const [chosen, setChosen] = useState<string[]>(initialSurgeon ? [initialSurgeon] : []);
   const [errors, setErrors] = useState<Errors>({});
   // Réponses de l'étape de réflexion : gardées en mémoire du navigateur uniquement, jamais envoyées.
   const [reflection, setReflection] = useState<Partial<Record<(typeof REFLECTION_QUESTIONS)[number], "yes" | "no">>>({});
@@ -100,6 +133,14 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
 
   const step = STEPS[stepIndex];
   const errorCount = Object.keys(errors).length;
+  const available = availableSurgeons(surgeons, values);
+  // Un choix devenu incompatible (intervention ou pays modifiés) n'est jamais envoyé.
+  const selected = chosen.filter((slug) => available.some((s) => s.slug === slug));
+
+  const toggleSurgeon = (slug: string, checked: boolean) => {
+    setChosen((prev) => (checked ? [...prev.filter((s) => s !== slug), slug] : prev.filter((s) => s !== slug)));
+    if (errors.surgeons) setErrors((prev) => ({ ...prev, surgeons: undefined }));
+  };
 
   // Déplace le focus sur le titre de l'étape à chaque changement (WCAG 2.4.3).
   useEffect(() => {
@@ -126,18 +167,30 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
   });
 
   const goNext = () => {
-    const stepErrors = validateStep(step, values, startedAt);
+    const stepErrors = validateStep(step, values, startedAt, selected, available.length);
     setErrors(stepErrors);
     if (Object.keys(stepErrors).length === 0) setStepIndex((i) => i + 1);
   };
 
   const submit = () => {
-    const stepErrors = validateStep("contact", values, startedAt);
+    const stepErrors = validateStep("contact", values, startedAt, selected, available.length);
     setErrors(stepErrors);
     if (Object.keys(stepErrors).length > 0) return;
     startTransition(async () => {
       try {
-        setResult(await submitLeadAction(toCandidate(values, startedAt)));
+        const outcome = await submitLeadAction(toCandidate(values, startedAt, selected));
+        if (!outcome.ok && outcome.reason === "invalid") {
+          // Contrôle serveur (ex. chirurgien retiré de l'annuaire entre-temps) : retour à l'étape concernée.
+          const fieldErrors = outcome.fieldErrors as Errors;
+          const target = STEPS.findIndex((s) =>
+            (STEP_FIELDS[s as keyof typeof STEP_FIELDS] as readonly Field[] | undefined)?.some((f) => fieldErrors[f]),
+          );
+          setErrors(fieldErrors);
+          if (target >= 0) setStepIndex(target);
+          setResult(null);
+          return;
+        }
+        setResult(outcome);
       } catch {
         setResult({ ok: false, reason: "unavailable" });
       }
@@ -314,6 +367,20 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
           </>
         )}
 
+        {step === "surgeons" && (
+          <SurgeonPicker
+            {...fieldProps("surgeons")}
+            legend={t("fields.surgeons")}
+            help={t("surgeons.help", { max: MAX_SURGEONS })}
+            emptyText={t("surgeons.none")}
+            maxText={t("surgeons.max", { max: MAX_SURGEONS })}
+            profileText={t("surgeons.profile")}
+            options={available}
+            selected={selected}
+            onToggle={toggleSurgeon}
+          />
+        )}
+
         {step === "contact" && (
           <>
             <TextField
@@ -401,14 +468,11 @@ export function RequestForm({ interventions, initialIntervention, privacySlug }:
             {t("back")}
           </button>
         )}
-        <button
-          type="submit"
-          disabled={isPending}
-          aria-disabled={isPending}
-          className={buttonClasses("primary")}
-        >
-          {step === "contact" ? (isPending ? t("submitting") : t("submit")) : t("next")}
-        </button>
+        {!(step === "surgeons" && available.length === 0) && (
+          <button type="submit" disabled={isPending} aria-disabled={isPending} className={buttonClasses("primary")}>
+            {step === "contact" ? (isPending ? t("submitting") : t("submit")) : t("next")}
+          </button>
+        )}
       </div>
     </form>
   );
@@ -580,5 +644,92 @@ function CheckboxField({
       </div>
       <FieldError id={errorId} error={error} />
     </div>
+  );
+}
+
+function SurgeonPicker({
+  id,
+  errorId,
+  error,
+  legend,
+  help,
+  emptyText,
+  maxText,
+  profileText,
+  options,
+  selected,
+  onToggle,
+}: BaseFieldProps & {
+  legend: string;
+  help: string;
+  emptyText: string;
+  maxText: string;
+  profileText: string;
+  options: SurgeonOption[];
+  selected: string[];
+  onToggle: (slug: string, checked: boolean) => void;
+}) {
+  const helpId = `${id}-help`;
+  if (options.length === 0) {
+    return (
+      <p id={id} tabIndex={-1} className="rounded-control border-l-4 border-primary bg-surface p-4 focus:outline-none">
+        {emptyText}
+      </p>
+    );
+  }
+  const full = selected.length >= MAX_SURGEONS;
+  return (
+    <fieldset
+      id={id}
+      tabIndex={-1}
+      aria-describedby={[helpId, error ? errorId : ""].filter(Boolean).join(" ")}
+      className="focus:outline-none"
+    >
+      <legend className="text-label">{legend}</legend>
+      <p id={helpId} className="mt-1 text-small text-muted">
+        {help}
+      </p>
+      <ul className="mt-3 space-y-3">
+        {options.map((s) => {
+          const inputId = `${id}-${s.slug}`;
+          const checked = selected.includes(s.slug);
+          return (
+            <li
+              key={s.slug}
+              className="flex items-start gap-3 rounded-control border border-border-input bg-surface p-4 has-checked:border-primary has-checked:bg-accent-soft"
+            >
+              <input
+                id={inputId}
+                type="checkbox"
+                checked={checked}
+                disabled={!checked && full}
+                onChange={(e) => onToggle(s.slug, e.target.checked)}
+                className="mt-1 size-5 shrink-0 accent-[var(--color-primary)]"
+              />
+              <div>
+                <label htmlFor={inputId} className="font-semibold">
+                  {s.displayName}
+                </label>
+                <p className="text-small text-muted">
+                  {s.specialtyLabel} · {s.city}
+                </p>
+                <Link
+                  href={{ pathname: "/chirurgiens/[slug]", params: { slug: s.slug } }}
+                  target="_blank"
+                  className="text-small underline underline-offset-4"
+                >
+                  {profileText}
+                  <span className="sr-only"> ({s.displayName})</span>
+                </Link>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      <p aria-live="polite" className="mt-3 text-small">
+        {full ? maxText : ""}
+      </p>
+      <FieldError id={errorId} error={error} />
+    </fieldset>
   );
 }

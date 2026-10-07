@@ -1,5 +1,5 @@
 import type { Database } from "@/db/client";
-import { consents, requestHealth, requests } from "@/db/schema";
+import { consents, requestHealth, requestRecipients, requests } from "@/db/schema";
 import { blindIndex, encrypt, encryptOptional, type Keyring } from "@/lib/crypto/fieldCrypto";
 import type { LeadRepository, StoredLead } from "./repository";
 
@@ -51,6 +51,12 @@ export class PostgresLeadRepository implements LeadRepository {
         requestId: lead.id,
         payloadEnc: encrypt(JSON.stringify(health), this.keyring),
       });
+
+      if (lead.surgeons.length > 0) {
+        await tx
+          .insert(requestRecipients)
+          .values(lead.surgeons.map((surgeonSlug) => ({ requestId: lead.id, surgeonSlug })));
+      }
 
       await tx.insert(consents).values([
         { requestId: lead.id, type: "health_data", textVersion: CONSENT_TEXT_VERSION, grantedAt: createdAt },

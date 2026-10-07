@@ -8,6 +8,8 @@ export type SubmitResult =
 
 interface SubmitDeps {
   repository: LeadRepository;
+  /** Slugs des chirurgiens publiés qui pratiquent l'intervention dans le pays demandé. */
+  availableSurgeons: (country: string, interventionId: string) => Promise<string[]>;
   now?: Date;
   generateId?: () => string;
 }
@@ -36,6 +38,19 @@ export async function submitLead(raw: unknown, locale: string, deps: SubmitDeps)
     return { ok: false, reason: "spam" };
   }
 
+  // Les chirurgiens choisis doivent être publiés et pratiquer l'intervention : jamais d'envoi à un profil non vérifié.
+  let available: string[];
+  try {
+    available = await deps.availableSurgeons(data.country, data.interventionId);
+  } catch {
+    return { ok: false, reason: "unavailable" };
+  }
+  if (available.length === 0) return { ok: false, reason: "invalid", fieldErrors: { surgeons: "surgeonsNone" } };
+  if (data.surgeons.length === 0) return { ok: false, reason: "invalid", fieldErrors: { surgeons: "surgeonsRequired" } };
+  if (data.surgeons.some((slug) => !available.includes(slug))) {
+    return { ok: false, reason: "invalid", fieldErrors: { surgeons: "surgeons" } };
+  }
+
   const lead: StoredLead = {
     interventionId: data.interventionId,
     country: data.country,
@@ -51,6 +66,7 @@ export async function submitLead(raw: unknown, locale: string, deps: SubmitDeps)
     isAdult: data.isAdult,
     consentHealthData: data.consentHealthData,
     consentNewsletter: data.consentNewsletter,
+    surgeons: data.surgeons,
     // La question grossesse n'est conservée que lorsqu'elle est pertinente.
     pregnancyPlanned: isPregnancyRelevant(data.interventionId) ? data.pregnancyPlanned : undefined,
     id: deps.generateId?.() ?? crypto.randomUUID(),

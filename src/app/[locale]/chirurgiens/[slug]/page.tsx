@@ -152,7 +152,7 @@ export default async function SurgeonPage({ params }: Props) {
 
       <div className="mt-12">
         <Link
-          href={{ pathname: "/demande", query: { intervention: interventions[0]?.id ?? "" } }}
+          href={{ pathname: "/demande", query: { intervention: interventions[0]?.id ?? "", surgeon: surgeon.slug } }}
           className={buttonClasses("primary")}
         >
           {t("cta")}
