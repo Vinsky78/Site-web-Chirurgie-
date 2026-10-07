@@ -95,3 +95,20 @@ export const consents = leads.table(
   },
   (t) => [index("consents_request_id_idx").on(t.requestId)],
 );
+
+/**
+ * Lien personnel de gestion envoyé au patient (pas de compte patient) : seul
+ * le hash SHA-256 du jeton est stocké. Expire avec la demande.
+ */
+export const accessTokens = leads.table(
+  "access_tokens",
+  {
+    tokenHash: text("token_hash").primaryKey(),
+    requestId: uuid("request_id")
+      .notNull()
+      .references(() => requests.id, { onDelete: "cascade" }),
+    purpose: text("purpose", { enum: ["manage"] }).notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  },
+  (t) => [index("access_tokens_request_id_idx").on(t.requestId)],
+);

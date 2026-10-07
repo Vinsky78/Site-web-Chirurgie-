@@ -24,3 +24,23 @@ test.describe("espace pro et back-office", () => {
     expect(login.status()).toBe(401);
   });
 });
+
+test.describe("mots de passe et lien patient", () => {
+  test("mot de passe oublié : formulaire accessible depuis la connexion", async ({ page }) => {
+    await page.goto("/fr/pro/connexion");
+    await page.getByRole("link", { name: "Mot de passe oublié ?" }).click();
+    await expect(page.getByRole("heading", { level: 1, name: "Mot de passe oublié" })).toBeVisible();
+    await expect(page.getByLabel("Adresse e-mail professionnelle")).toBeVisible();
+  });
+
+  test("un lien de mot de passe incomplet propose d'en demander un autre", async ({ page }) => {
+    await page.goto("/fr/pro/mot-de-passe/nouveau");
+    await expect(page.getByText("Ce lien est incomplet.")).toBeVisible();
+  });
+
+  test("un lien patient inconnu ne révèle rien et ne fuit pas dans le Referer", async ({ page }) => {
+    const response = await page.goto("/fr/ma-demande/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    expect(response?.status()).toBe(404);
+    expect(response?.headers()["referrer-policy"]).toBe("no-referrer");
+  });
+});

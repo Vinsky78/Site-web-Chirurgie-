@@ -1,7 +1,10 @@
 import "server-only";
 import { getDb } from "@/db/client";
+import { getEmailSender, sendSafely } from "@/lib/email";
+import { proPasswordEmail } from "@/lib/email/templates";
 import { SITE_URL } from "@/lib/site";
 import { createAuth, type Auth } from "./config";
+import { passwordLinkUrl } from "./passwordLink";
 
 let instance: Auth | undefined;
 
@@ -14,7 +17,16 @@ export function getAuth(): Auth {
   if (!instance) {
     const secret = process.env.BETTER_AUTH_SECRET;
     if (!secret || secret.length < 32) throw new Error("BETTER_AUTH_SECRET manquant ou trop court (32 caractères minimum).");
-    instance = createAuth(getDb(), { secret, baseURL: SITE_URL });
+    instance = createAuth(getDb(), {
+      secret,
+      baseURL: SITE_URL,
+      sendPasswordLink: async ({ email, name, token }) => {
+        await sendSafely(
+          getEmailSender(),
+          proPasswordEmail("fr", { email, name, url: passwordLinkUrl(token), invitation: false }),
+        );
+      },
+    });
   }
   return instance;
 }

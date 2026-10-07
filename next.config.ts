@@ -15,7 +15,17 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      // Le lien personnel du patient ne doit jamais fuiter dans l'en-tête Referer, ni rester en cache.
+      ...["/:locale/ma-demande/:token", "/:locale/my-request/:token"].map((source) => ({
+        source,
+        headers: [
+          { key: "Referrer-Policy", value: "no-referrer" },
+          { key: "Cache-Control", value: "no-store" },
+        ],
+      })),
+    ];
   },
 };
 

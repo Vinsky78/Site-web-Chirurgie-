@@ -13,12 +13,19 @@ const PASSWORD = "mot-de-passe-provisoire-1";
 
 let db: Database;
 let auth: Auth;
+let links: { email: string; token: string }[];
 
 beforeEach(async () => {
   const pg = drizzle(new PGlite(), { schema });
   await migrate(pg, { migrationsFolder: "src/db/migrations" });
   db = pg as unknown as Database;
-  auth = createAuth(db, { secret: "s".repeat(32), baseURL: "http://localhost:3000", withNextCookies: false });
+  links = [];
+  auth = createAuth(db, {
+    secret: "s".repeat(32),
+    baseURL: "http://localhost:3000",
+    withNextCookies: false,
+    sendPasswordLink: async ({ email, token }) => void links.push({ email, token }),
+  });
   await createProAccount(auth, db, { email: "Dr@Example.com", name: "Dr Démo", role: "surgeon", surgeonSlug: "alice-demo-lyon" }, PASSWORD);
 });
 
@@ -109,5 +116,24 @@ describe("authentification de l'espace pro", () => {
     const secret = await enrol();
     const [row] = await db.select().from(schema.proTwoFactors);
     expect(row.secret).not.toContain(secret);
+  });
+
+  it("envoie un lien de choix du mot de passe, utilisable une seule fois, et ferme les sessions", async () => {
+    const before = cookiesFrom(await signIn());
+    await auth.api.requestPasswordReset({ body: { email: "dr@example.com" } });
+    expect(links).toEqual([{ email: "dr@example.com", token: expect.any(String) }]);
+
+    const newPassword = "une phrase de passe toute neuve";
+    await auth.api.resetPassword({ body: { token: links[0].token, newPassword } });
+    await expect(auth.api.resetPassword({ body: { token: links[0].token, newPassword: "encore une autre phrase" } })).rejects.toThrow();
+
+    expect(await auth.api.getSession({ headers: before })).toBeNull();
+    expect((await signIn()).status).toBe(401);
+    expect((await signIn(newPassword)).status).toBe(200);
+  });
+
+  it("n'envoie rien pour une adresse inconnue", async () => {
+    await auth.api.requestPasswordReset({ body: { email: "inconnu@example.com" } }).catch(() => undefined);
+    expect(links).toEqual([]);
   });
 });

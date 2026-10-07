@@ -5,11 +5,12 @@ import { migrate } from "drizzle-orm/pglite/migrator";
 import { beforeEach, describe, expect, it } from "vitest";
 import type { Database } from "@/db/client";
 import * as schema from "@/db/schema";
-import { consents, requestHealth, requestRecipients, requests } from "@/db/schema";
+import { accessTokens, consents, requestHealth, requestRecipients, requests } from "@/db/schema";
 import { blindIndex, decrypt, keyringFromEnv } from "@/lib/crypto/fieldCrypto";
 import { CONSENT_TEXT_VERSION, deleteAfter, PostgresLeadRepository } from "./postgresRepository";
 import { purgeExpiredLeads } from "./purge";
 import type { StoredLead } from "./repository";
+import { createManageToken, hashManageToken } from "./manageToken";
 
 const keyring = keyringFromEnv({
   LEAD_ENCRYPTION_KEYS: `k1:${randomBytes(32).toString("base64")}`,
@@ -37,6 +38,7 @@ function lead(overrides: Partial<StoredLead> = {}): StoredLead {
     isAdult: true,
     consentHealthData: true,
     consentNewsletter: false,
+    manageToken: createManageToken(),
     surgeons: ["alice-demo-lyon", "bruno-essai-lyon"],
     ...overrides,
   };
@@ -74,6 +76,11 @@ describe("PostgresLeadRepository", () => {
 
     const recipients = await db.select().from(requestRecipients);
     expect(recipients.map((r) => r.surgeonSlug).sort()).toEqual(["alice-demo-lyon", "bruno-essai-lyon"]);
+ 
+    const [token] = await db.select().from(accessTokens);
+    expect(token).toMatchObject({ requestId: input.id, purpose: "manage", tokenHash: hashManageToken(input.manageToken) });
+    expect(JSON.stringify(token)).not.toContain(input.manageToken);
+    expect(token.expiresAt).toEqual(row.deleteAfter);
   });
 
   it("trace le consentement santé, et le consentement newsletter seulement s'il est donné", async () => {

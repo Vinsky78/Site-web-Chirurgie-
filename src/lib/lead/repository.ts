@@ -5,6 +5,8 @@ export type StoredLead = Omit<LeadInput, "website" | "startedAt"> & {
   id: string;
   createdAt: string;
   locale: string;
+  /** Jeton du lien de gestion envoyé au patient ; seul son hash est enregistré. */
+  manageToken: string;
 };
 
 export interface LeadRepository {

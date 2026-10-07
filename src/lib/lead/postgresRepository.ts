@@ -1,6 +1,7 @@
 import type { Database } from "@/db/client";
-import { consents, requestHealth, requestRecipients, requests } from "@/db/schema";
+import { accessTokens, consents, requestHealth, requestRecipients, requests } from "@/db/schema";
 import { blindIndex, encrypt, encryptOptional, type Keyring } from "@/lib/crypto/fieldCrypto";
+import { hashManageToken } from "./manageToken";
 import type { LeadRepository, StoredLead } from "./repository";
 
 /** Durée de conservation d'une demande sur la plateforme (Phase 1 : 6 mois). */
@@ -57,6 +58,13 @@ export class PostgresLeadRepository implements LeadRepository {
           .insert(requestRecipients)
           .values(lead.surgeons.map((surgeonSlug) => ({ requestId: lead.id, surgeonSlug })));
       }
+
+      await tx.insert(accessTokens).values({
+        tokenHash: hashManageToken(lead.manageToken),
+        requestId: lead.id,
+        purpose: "manage",
+        expiresAt: deleteAfter(createdAt),
+      });
 
       await tx.insert(consents).values([
         { requestId: lead.id, type: "health_data", textVersion: CONSENT_TEXT_VERSION, grantedAt: createdAt },

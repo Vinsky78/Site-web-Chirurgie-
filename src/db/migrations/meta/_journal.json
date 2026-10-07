@@ -22,6 +22,13 @@
       "when": 1791414147961,
       "tag": "0002_pro_space",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791415548629,
+      "tag": "0003_manage_tokens",
+      "breakpoints": true
     }
   ]
 }

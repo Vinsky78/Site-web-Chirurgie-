@@ -141,4 +141,21 @@ describe("submitLead", () => {
     expect(result).toMatchObject({ ok: false, fieldErrors: { surgeons: "surgeonsNone" } });
     expect(saved).toHaveLength(0);
   });
+
+  it("prévient après l'enregistrement avec un jeton de gestion, sans faire échouer la demande", async () => {
+    const { saved, repository } = memoryRepo();
+    const notified: string[] = [];
+    const result = await submitLead(validInput(), "fr", {
+      repository,
+      availableSurgeons,
+      now: NOW,
+      onSaved: async (lead) => {
+        notified.push(lead.manageToken);
+        throw new Error("Brevo indisponible");
+      },
+    });
+    expect(result).toEqual({ ok: true });
+    expect(notified).toEqual([saved[0].manageToken]);
+    expect(saved[0].manageToken).toMatch(/^[A-Za-z0-9_-]{43}$/);
+  });
 });

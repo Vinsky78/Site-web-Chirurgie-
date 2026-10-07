@@ -10,9 +10,14 @@ import { SITE_NAME } from "@/lib/site";
 export const SESSION_HOURS = 12;
 export const MIN_PASSWORD_LENGTH = 12;
 
+/** Durée de validité d'un lien de choix du mot de passe (invitation ou oubli). */
+export const PASSWORD_LINK_HOURS = 48;
+
 interface AuthOptions {
   secret: string;
   baseURL: string;
+  /** Envoie le lien de choix du mot de passe (le jeton seul : la page est la nôtre, pas une route Better Auth). */
+  sendPasswordLink?: (data: { email: string; name: string; token: string }) => Promise<void>;
   /** Next.js : écrit les cookies depuis les actions serveur. Désactivé dans les tests. */
   withNextCookies?: boolean;
 }
@@ -20,12 +25,13 @@ interface AuthOptions {
 /**
  * Authentification de l'espace pro et de l'équipe interne.
  *
- * - Pas d'inscription libre : les comptes sont créés par l'équipe (scripts/pro-create-user.mts).
+ * - Pas d'inscription libre : les comptes sont créés par l'équipe (scripts/pro-create-user.mts),
+ *   qui reçoivent un lien pour choisir leur mot de passe.
  * - Double authentification TOTP obligatoire : tant qu'elle n'est pas activée,
  *   le compte n'accède qu'à la page d'activation (voir guard.ts).
  * - Aucune route HTTP Better Auth n'est exposée : tout passe par des actions serveur.
  */
-export function createAuth(db: Database, { secret, baseURL, withNextCookies = true }: AuthOptions) {
+export function createAuth(db: Database, { secret, baseURL, sendPasswordLink, withNextCookies = true }: AuthOptions) {
   return betterAuth({
     appName: SITE_NAME,
     secret,
@@ -44,6 +50,11 @@ export function createAuth(db: Database, { secret, baseURL, withNextCookies = tr
       enabled: true,
       disableSignUp: true,
       minPasswordLength: MIN_PASSWORD_LENGTH,
+      resetPasswordTokenExpiresIn: PASSWORD_LINK_HOURS * 60 * 60,
+      revokeSessionsOnPasswordReset: true,
+      sendResetPassword: async ({ user, token }) => {
+        await sendPasswordLink?.({ email: user.email, name: user.name, token });
+      },
     },
     user: {
       additionalFields: {

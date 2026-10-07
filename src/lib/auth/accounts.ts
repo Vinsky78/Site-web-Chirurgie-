@@ -11,7 +11,7 @@ export interface NewProAccount {
   surgeonSlug?: string;
 }
 
-/** Mot de passe provisoire lisible, à transmettre par un canal distinct de l'e-mail du compte. */
+/** Mot de passe aléatoire initial, jamais communiqué : la personne choisit le sien par le lien d'invitation. */
 export function temporaryPassword(): string {
   return randomBytes(18).toString("base64url");
 }
