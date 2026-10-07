@@ -2,7 +2,7 @@
 
 Plateforme européenne d'information sur la chirurgie et la médecine esthétiques, avec demande de consultation auprès de chirurgiens qualifiés et vérifiés.
 
-> **Statut : première version (MVP technique).** Les contenus médicaux sont des brouillons à faire relire par un chirurgien qualifié ; ils sont exclus de l'indexation tant que ce n'est pas fait. Aucune base de données n'est encore branchée : les demandes ne sont pas conservées en production.
+> **Statut : en développement (Phase 5).** Les contenus médicaux sont des brouillons à faire relire par un chirurgien qualifié ; ils sont exclus de l'indexation tant que ce n'est pas fait.
 
 ## Ce qui est en place
 
@@ -28,6 +28,22 @@ npm run dev
 
 Puis ouvrir http://localhost:3000 (redirige vers `/fr`).
 
+Sans base de données, les demandes sont gardées en mémoire (développement uniquement).
+
+### Avec la base de données (recommandé)
+
+Prérequis : Docker.
+
+```bash
+docker compose up -d                 # PostgreSQL local
+npm run keys:generate >> .env.local  # clés de chiffrement (ne jamais les committer)
+echo 'DATABASE_URL=postgres://chirurgie:chirurgie@localhost:5432/chirurgie' >> .env.local
+npm run db:migrate                   # lit .env.local
+npm run dev
+```
+
+Les demandes sont alors enregistrées dans le schéma PostgreSQL `leads`. Prénom, e-mail, téléphone et réponses médicales sont chiffrés par l'application (AES-256-GCM) avant l'écriture ; seule une empreinte HMAC de l'e-mail permet de retrouver les demandes d'une personne. Chaque demande est supprimée 6 mois après sa création par `npm run leads:purge`, à planifier chaque jour.
+
 ## Commandes
 
 | Commande | Rôle |
@@ -39,6 +55,10 @@ Puis ouvrir http://localhost:3000 (redirige vers `/fr`).
 | `npm run typecheck` | Vérification TypeScript |
 | `npm test` | Tests unitaires (Vitest) |
 | `npm run test:e2e` | Tests de bout en bout (Playwright, après `npm run build`) |
+| `npm run db:generate` | Génère une migration après modification de `src/db/schema` |
+| `npm run db:migrate` | Applique les migrations (`DATABASE_URL` requis) |
+| `npm run leads:purge` | Supprime les demandes de plus de 6 mois (tâche quotidienne) |
+| `npm run keys:generate` | Génère des clés de chiffrement pour l'environnement local |
 
 ## Structure
 
@@ -48,7 +68,9 @@ src/app/[locale]/         Pages (accueil, interventions, demande, informations)
 src/app/sitemap.ts        Sitemap multilingue
 src/components/           Composants partagés (en-tête, pied de page, encadré légal, JSON-LD)
 src/content/              Contenus des interventions par locale (en attendant le CMS)
+src/db/                   Schéma PostgreSQL (Drizzle) et migrations
 src/i18n/                 Routage et configuration des langues
+src/lib/crypto/           Chiffrement des champs sensibles
 src/lib/countries.ts      Règles de conformité par pays
 src/lib/lead/             Formulaire de demande : schéma, soumission, stockage
 src/lib/seo.ts            Canonical et hreflang
@@ -71,6 +93,4 @@ docs/decisions.md         Décisions et hypothèses
 
 ## Prochaines étapes
 
-- Phase 2 : arborescence complète, taxonomie et stratégie de mots-clés.
-- Phase 3 : design system et maquettes.
-- Phase 4 : base PostgreSQL chez un hébergeur certifié HDS, CMS, annuaire des chirurgiens vérifiés, espace pro, envoi des demandes.
+- Design system, URL anglaises localisées, CMS Payload, annuaire des chirurgiens, formulaire en 5 étapes, espace pro, e-mails (voir les documents des Phases 3 et 4).
