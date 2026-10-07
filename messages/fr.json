@@ -332,7 +332,80 @@
       "code": "Ce code n'est pas valide. Vérifiez l'heure de votre téléphone et réessayez.",
       "codeRequired": "Saisissez le code.",
       "expired": "Le délai de saisie du code est dépassé. Reconnectez-vous.",
-      "unavailable": "Le service de connexion est momentanément indisponible. Réessayez plus tard."
+      "unavailable": "Le service de connexion est momentanément indisponible. Réessayez plus tard.",
+      "passwordLength": "Le mot de passe doit contenir au moins 12 caractères.",
+      "passwordMismatch": "Les deux mots de passe ne sont pas identiques.",
+      "linkInvalid": "Ce lien n'est plus valable (déjà utilisé ou expiré). Demandez-en un nouveau."
+    },
+    "password": {
+      "requestTitle": "Mot de passe oublié",
+      "requestLead": "Indiquez l'adresse de votre compte professionnel. Si elle existe, vous recevrez un lien valable 48 heures pour choisir un nouveau mot de passe.",
+      "email": "Adresse e-mail professionnelle",
+      "send": "Recevoir le lien",
+      "sent": "Si un compte existe pour cette adresse, un e-mail vient de lui être envoyé. Pensez à vérifier vos courriers indésirables.",
+      "newTitle": "Choisir votre mot de passe",
+      "newLead": "Au moins 12 caractères. Une phrase de plusieurs mots est plus sûre et plus facile à retenir.",
+      "new": "Nouveau mot de passe",
+      "confirm": "Confirmer le mot de passe",
+      "save": "Enregistrer",
+      "done": "Votre mot de passe est enregistré. Vous pouvez vous connecter ; la double authentification vous sera demandée.",
+      "signIn": "Aller à la connexion",
+      "missingToken": "Ce lien est incomplet. Ouvrez celui de votre e-mail, ou demandez-en un nouveau.",
+      "forgot": "Mot de passe oublié ?"
     }
+  },
+  "emails": {
+    "footer": "Vous recevez cet e-mail parce qu'une demande de consultation a été envoyée avec cette adresse. Si ce n'est pas vous, ouvrez le lien ci-dessus pour la supprimer.",
+    "footerPro": "E-mail de service de l'espace professionnel. Aucune donnée de santé n'est transmise par e-mail.",
+    "proLinkValidity": "Ce lien est valable 48 heures et ne peut servir qu'une fois.",
+    "patient": {
+      "subject": "Votre demande de consultation est enregistrée",
+      "greeting": "Bonjour {firstName},",
+      "sent": "Votre demande a été transmise uniquement aux chirurgiens que vous avez choisis :",
+      "reflection": "Rappel : après la consultation, la loi impose un délai de réflexion de {days} jours entre la remise du devis détaillé et l'intervention. Rien ne vous engage.",
+      "manage": "Avec votre lien personnel, vous pouvez consulter votre demande ou la supprimer à tout moment. Ne le partagez pas : il donne accès à votre demande.",
+      "manageAction": "Voir ou supprimer ma demande"
+    },
+    "surgeonNew": {
+      "subject": "Vous avez reçu une nouvelle demande de consultation",
+      "body": "Un patient vous a choisi pour une demande de consultation (catégorie : {category}).",
+      "secure": "Pour protéger ses données de santé, le détail se lit uniquement dans votre espace professionnel, après double authentification.",
+      "action": "Ouvrir mon espace professionnel"
+    },
+    "surgeonWithdrawn": {
+      "subject": "Une demande a été retirée",
+      "body": "Un patient a supprimé une demande qu'il vous avait adressée. Elle n'apparaît plus dans votre espace professionnel. Si vous aviez noté ses coordonnées, merci de ne plus le contacter à ce sujet."
+    },
+    "proInvite": {
+      "subject": "Votre accès à l'espace professionnel",
+      "body": "Bonjour {name}, votre compte professionnel est prêt. Choisissez votre mot de passe, puis activez la double authentification lors de votre première connexion.",
+      "action": "Choisir mon mot de passe"
+    },
+    "proReset": {
+      "subject": "Réinitialisation de votre mot de passe",
+      "body": "Bonjour {name}, une réinitialisation du mot de passe de votre compte professionnel a été demandée. Si ce n'est pas vous, ignorez cet e-mail : votre mot de passe reste inchangé.",
+      "action": "Choisir un nouveau mot de passe"
+    }
+  },
+  "manage": {
+    "metaTitle": "Ma demande",
+    "title": "Votre demande du {date}",
+    "lead": "Cette page est accessible uniquement avec le lien reçu par e-mail. Ne le partagez pas.",
+    "retention": "Votre demande sera supprimée automatiquement le {date}.",
+    "surgeons": "Chirurgiens destinataires",
+    "viewed": "Ouverte par le chirurgien",
+    "sent": "Pas encore ouverte",
+    "project": "Votre projet",
+    "health": "Vos réponses médicales",
+    "contact": "Vos coordonnées",
+    "noPhone": "Non communiqué",
+    "birthYear": "Année de naissance",
+    "country": "Pays",
+    "deleteTitle": "Supprimer ma demande",
+    "deleteText": "La suppression est définitive : votre demande et vos réponses médicales sont effacées, et les chirurgiens ne peuvent plus la consulter. Ils sont prévenus, sans aucun détail. Si un chirurgien vous a déjà contacté, vos échanges avec lui relèvent de son cabinet.",
+    "deleteConfirm": "Je confirme vouloir supprimer définitivement ma demande.",
+    "deleteAction": "Supprimer définitivement",
+    "deleted": "Votre demande a été supprimée. Les chirurgiens destinataires en ont été informés.",
+    "error": "La suppression n'a pas pu être faite. Cochez la confirmation, puis réessayez. Si le problème persiste, écrivez-nous."
   }
 }

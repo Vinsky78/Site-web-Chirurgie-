@@ -331,7 +331,80 @@
       "code": "This code is not valid. Check your phone's clock and try again.",
       "codeRequired": "Enter the code.",
       "expired": "The time to enter the code has run out. Please sign in again.",
-      "unavailable": "The sign-in service is temporarily unavailable. Please try again later."
+      "unavailable": "The sign-in service is temporarily unavailable. Please try again later.",
+      "passwordLength": "The password must be at least 12 characters long.",
+      "passwordMismatch": "The two passwords do not match.",
+      "linkInvalid": "This link is no longer valid (already used or expired). Request a new one."
+    },
+    "password": {
+      "requestTitle": "Forgotten password",
+      "requestLead": "Enter the address of your professional account. If it exists, you will receive a link valid for 48 hours to choose a new password.",
+      "email": "Work email address",
+      "send": "Send me the link",
+      "sent": "If an account exists for this address, an email has just been sent to it. Remember to check your spam folder.",
+      "newTitle": "Choose your password",
+      "newLead": "At least 12 characters. A phrase of several words is safer and easier to remember.",
+      "new": "New password",
+      "confirm": "Confirm password",
+      "save": "Save",
+      "done": "Your password has been saved. You can now sign in; you will be asked for your two-factor code.",
+      "signIn": "Go to sign-in",
+      "missingToken": "This link is incomplete. Open the one in your email, or request a new one.",
+      "forgot": "Forgotten your password?"
     }
+  },
+  "emails": {
+    "footer": "You are receiving this email because a consultation request was sent using this address. If this was not you, open the link above to delete it.",
+    "footerPro": "Service email from the professional area. No health data is ever sent by email.",
+    "proLinkValidity": "This link is valid for 48 hours and can only be used once.",
+    "patient": {
+      "subject": "Your consultation request has been saved",
+      "greeting": "Hello {firstName},",
+      "sent": "Your request has only been sent to the surgeons you chose:",
+      "reflection": "Reminder: after the consultation, the law requires a {days}-day cooling-off period between the detailed quote and the operation. You are not committed to anything.",
+      "manage": "With your personal link, you can view or delete your request at any time. Do not share it: it gives access to your request.",
+      "manageAction": "View or delete my request"
+    },
+    "surgeonNew": {
+      "subject": "You have received a new consultation request",
+      "body": "A patient has chosen you for a consultation request (category: {category}).",
+      "secure": "To protect their health data, the details can only be read in your professional area, after two-factor authentication.",
+      "action": "Open my professional area"
+    },
+    "surgeonWithdrawn": {
+      "subject": "A request has been withdrawn",
+      "body": "A patient has deleted a request they had sent you. It no longer appears in your professional area. If you had noted their contact details, please do not contact them about it."
+    },
+    "proInvite": {
+      "subject": "Your access to the professional area",
+      "body": "Hello {name}, your professional account is ready. Choose your password, then turn on two-factor authentication when you first sign in.",
+      "action": "Choose my password"
+    },
+    "proReset": {
+      "subject": "Reset your password",
+      "body": "Hello {name}, a password reset was requested for your professional account. If this was not you, ignore this email: your password stays the same.",
+      "action": "Choose a new password"
+    }
+  },
+  "manage": {
+    "metaTitle": "My request",
+    "title": "Your request of {date}",
+    "lead": "This page can only be opened with the link you received by email. Do not share it.",
+    "retention": "Your request will be deleted automatically on {date}.",
+    "surgeons": "Surgeons it was sent to",
+    "viewed": "Opened by the surgeon",
+    "sent": "Not opened yet",
+    "project": "Your plans",
+    "health": "Your medical answers",
+    "contact": "Your details",
+    "noPhone": "Not provided",
+    "birthYear": "Year of birth",
+    "country": "Country",
+    "deleteTitle": "Delete my request",
+    "deleteText": "Deletion is permanent: your request and medical answers are erased, and surgeons can no longer see it. They are told, without any details. If a surgeon has already contacted you, your exchanges with them are a matter for their practice.",
+    "deleteConfirm": "I confirm that I want to permanently delete my request.",
+    "deleteAction": "Delete permanently",
+    "deleted": "Your request has been deleted. The surgeons it was sent to have been told.",
+    "error": "The deletion could not be completed. Tick the confirmation and try again. If the problem continues, contact us."
   }
 }

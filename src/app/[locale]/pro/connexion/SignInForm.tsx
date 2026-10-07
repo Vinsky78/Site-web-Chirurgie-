@@ -2,6 +2,7 @@
 
 import { startTransition, useActionState, useEffect, useId, useRef } from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { signInAction, type SignInState } from "@/lib/auth/actions";
 import { buttonClasses } from "@/components/ui/button";
 import { inputClass } from "../fields";
@@ -68,9 +69,14 @@ export function SignInForm({ next }: { next?: string }) {
               className={inputClass}
             />
           </div>
-          <button type="submit" disabled={pending} className={buttonClasses("primary")}>
-            {t("signIn.submit")}
-          </button>
+          <div className="flex flex-wrap items-center gap-6">
+            <button type="submit" disabled={pending} className={buttonClasses("primary")}>
+              {t("signIn.submit")}
+            </button>
+            <Link href="/pro/mot-de-passe" className="underline underline-offset-4">
+              {t("password.forgot")}
+            </Link>
+          </div>
         </>
       ) : (
         <>

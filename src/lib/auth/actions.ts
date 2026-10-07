@@ -8,6 +8,7 @@ import { isAPIError } from "better-auth/api";
 import { redirect } from "@/i18n/navigation";
 import { isLocale, type Locale } from "@/i18n/routing";
 import { getAuth, getProSession, isAuthConfigured } from ".";
+import { MIN_PASSWORD_LENGTH } from "./config";
 import { safeNext } from "./redirects";
 import { LoginThrottle } from "./throttle";
 
@@ -136,4 +137,43 @@ export async function signOutAction(): Promise<never> {
     }
   }
   return redirect({ href: "/pro/connexion", locale });
+}
+
+export type ResetRequestState = { sent?: boolean; error?: string };
+
+/** Mot de passe oublié : même réponse que l'adresse existe ou non. */
+export async function requestResetAction(_prev: ResetRequestState, form: FormData): Promise<ResetRequestState> {
+  if (!isAuthConfigured()) return { error: "unavailable" };
+  const email = String(form.get("email") ?? "").trim().toLowerCase();
+  if (!email) return { error: "required" };
+  const key = `reset:${email}`;
+  if (throttle.isLocked(key)) return { sent: true };
+  throttle.fail(key);
+  try {
+    await getAuth().api.requestPasswordReset({ body: { email } });
+  } catch (error) {
+    // Adresse mal formée ou inconnue : on ne le révèle pas.
+    if (!isAPIError(error)) {
+      console.error("Demande de réinitialisation impossible :", error instanceof Error ? error.message : "erreur inconnue");
+    }
+  }
+  return { sent: true };
+}
+
+export type ResetState = { done?: boolean; error?: string };
+
+export async function resetPasswordAction(_prev: ResetState, form: FormData): Promise<ResetState> {
+  if (!isAuthConfigured()) return { error: "unavailable" };
+  const token = String(form.get("token") ?? "");
+  const password = String(form.get("password") ?? "");
+  if (password.length < MIN_PASSWORD_LENGTH) return { error: "passwordLength" };
+  if (password !== String(form.get("confirm") ?? "")) return { error: "passwordMismatch" };
+  try {
+    await getAuth().api.resetPassword({ body: { token, newPassword: password } });
+  } catch (error) {
+    if (isAPIError(error)) return { error: "linkInvalid" };
+    console.error("Changement de mot de passe impossible :", error instanceof Error ? error.message : "erreur inconnue");
+    return { error: "unavailable" };
+  }
+  return { done: true };
 }

@@ -61,10 +61,17 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 ## Espace pro (Phase 5)
 
 - **Better Auth** (`src/lib/auth`), tables dans le schéma PostgreSQL `pro`, séparé de `leads` et `cms`. Aucune route HTTP Better Auth exposée : connexion par actions serveur uniquement.
-- **Pas d'inscription libre** : comptes créés par l'équipe (`npm run pro:create-user`), reliés à une fiche de l'annuaire (`pro.surgeon_links`) ; un assistant partage la fiche de son chirurgien. Les cabinets à plusieurs chirurgiens (`practices`) viendront avec la facturation.
+- **Pas d'inscription libre** : comptes créés par l'équipe (`npm run pro:create-user`), qui reçoivent un lien de choix du mot de passe (48 h, usage unique, ferme les sessions ouvertes), reliés à une fiche de l'annuaire (`pro.surgeon_links`) ; un assistant partage la fiche de son chirurgien. Les cabinets à plusieurs chirurgiens (`practices`) viendront avec la facturation.
 - **Double authentification obligatoire** (TOTP, codes de secours) : sans elle, le compte n'accède qu'à la page d'activation. Pas d'appareil « de confiance » ; code redemandé à chaque connexion ; sessions de 12 h sans prolongation.
 - **Tentatives** : 5 mots de passe faux bloquent l'adresse 15 minutes (en mémoire, par conteneur : à déplacer en base si plusieurs instances) ; 5 codes faux bloquent le compte 15 minutes (Better Auth). Les messages ne révèlent pas si une adresse existe.
 - **Secrets TOTP et codes de secours** chiffrés en base par Better Auth (`BETTER_AUTH_SECRET`).
 - **Accès aux demandes** contrôlé dans chaque requête SQL (destinataire = fiche reliée au compte) : un identifiant deviné donne une 404. La liste ne déchiffre rien ; chaque ouverture est tracée dans `leads.access_log` et passe le destinataire en « ouverte ».
 - **Back-office** : le proxy exige, devant `/admin` et `/api`, une session de l'équipe interne (`staff`) ayant validé son code. La connexion Payload reste nécessaire ensuite.
 - **Dépendance signalée** : `vitest` 4.0 (outil de test, jamais en production) fait l'objet d'avis de sécurité ; la mise à jour vers 4.1.11 bute sur une erreur de npm et sera faite à part.
+
+## E-mails et lien patient (Phase 5)
+
+- **Brevo** par son API transactionnelle (`src/lib/email/brevo.ts`), sans SDK. Sans clé : console en développement, refus journalisé en production. Un échec d'envoi ne fait jamais échouer l'action de l'utilisateur ; les e-mails d'une demande partent après la réponse (`after`).
+- **Aucune donnée de santé par e-mail** (`src/lib/email/templates.ts`, testé) : ni intervention, ni réponse médicale, ni ville. Le patient reçoit la liste des chirurgiens choisis (indique une démarche de chirurgie esthétique : accepté en Phase 4) ; le chirurgien, la seule catégorie (Visage, Silhouette, Seins).
+- **Lien personnel du patient** : jeton de 256 bits, seul son hash SHA-256 est stocké (`leads.access_tokens`), expire avec la demande. Page non indexée, sans cache, sans en-tête Referer.
+- **Suppression par le patient** : demande, données de santé, destinataires, journal d'accès et lien effacés ; preuves de consentement gardées, marquées retirées, sans lien vers la demande ; chirurgiens prévenus sans détail.

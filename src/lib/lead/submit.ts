@@ -1,4 +1,5 @@
 import { createLeadSchema, isPregnancyRelevant, MIN_FILL_DURATION_MS, type LeadInput } from "./schema";
+import { createManageToken } from "./manageToken";
 import type { LeadRepository, StoredLead } from "./repository";
 
 export type SubmitResult =
@@ -10,6 +11,8 @@ interface SubmitDeps {
   repository: LeadRepository;
   /** Slugs des chirurgiens publiés qui pratiquent l'intervention dans le pays demandé. */
   availableSurgeons: (country: string, interventionId: string) => Promise<string[]>;
+  /** Après l'enregistrement (e-mails). Son échec ne fait jamais échouer la demande. */
+  onSaved?: (lead: StoredLead) => Promise<void>;
   now?: Date;
   generateId?: () => string;
 }
@@ -70,6 +73,7 @@ export async function submitLead(raw: unknown, locale: string, deps: SubmitDeps)
     // La question grossesse n'est conservée que lorsqu'elle est pertinente.
     pregnancyPlanned: isPregnancyRelevant(data.interventionId) ? data.pregnancyPlanned : undefined,
     id: deps.generateId?.() ?? crypto.randomUUID(),
+    manageToken: createManageToken(),
     createdAt: now.toISOString(),
     locale,
   };
@@ -78,6 +82,11 @@ export async function submitLead(raw: unknown, locale: string, deps: SubmitDeps)
     await deps.repository.save(lead);
   } catch {
     return { ok: false, reason: "unavailable" };
+  }
+  try {
+    await deps.onSaved?.(lead);
+  } catch (error) {
+    console.error("Notifications de la demande impossibles :", error instanceof Error ? error.message : "erreur inconnue");
   }
   return { ok: true };
 }

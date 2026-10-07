@@ -9,6 +9,7 @@ import { accessLog, requestRecipients } from "@/db/schema";
 import { keyringFromEnv } from "@/lib/crypto/fieldCrypto";
 import { PostgresLeadRepository } from "@/lib/lead/postgresRepository";
 import type { StoredLead } from "@/lib/lead/repository";
+import { createManageToken } from "@/lib/lead/manageToken";
 import { listInbox, markRelevance, openRequest } from "./inbox";
 
 const keyring = keyringFromEnv({
@@ -38,6 +39,7 @@ function lead(overrides: Partial<StoredLead> = {}): StoredLead {
     isAdult: true,
     consentHealthData: true,
     consentNewsletter: false,
+    manageToken: createManageToken(),
     surgeons: ["alice-demo-lyon", "chloe-fictif-lyon"],
     ...overrides,
   };

@@ -17,6 +17,8 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 - Back-office éditorial Payload (`/admin`) : fiches d'intervention par marché, relecture médicale signée, charte éditoriale vérifiée à l'enregistrement, historique des versions.
 - Annuaire des chirurgiens (`/fr/chirurgiens`) : seuls les profils vérifiés au registre officiel depuis moins d'un an et abonnés sont publiés, par ordre alphabétique ; pages ville à partir de trois chirurgiens ; ni avis, ni avant/après, ni prix.
 - Espace pro (`/fr/pro`) : connexion avec double authentification obligatoire (code TOTP), boîte de réception des demandes adressées au chirurgien, ouverture tracée dans un journal d'accès, avis de pertinence en un clic.
+- E-mails (Brevo) sans aucune donnée de santé : confirmation au patient avec son lien personnel, alerte sans détail aux chirurgiens, invitation et mot de passe oublié pour les comptes pro.
+- Lien personnel du patient (`/fr/ma-demande/…`, valable jusqu'à la suppression automatique) : consulter sa demande, la supprimer ; les chirurgiens en sont prévenus.
 - Back-office `/admin` et son API accessibles seulement à l'équipe interne après double authentification.
 - Tests unitaires (Vitest) et de bout en bout sur mobile (Playwright), intégration continue GitHub Actions.
 
@@ -89,7 +91,7 @@ Une fiche modifiée par un autre compte qu'un relecteur médical repasse en brou
 | `npm run db:migrate` | Applique les migrations (`DATABASE_URL` requis) |
 | `npm run leads:purge` | Supprime les demandes de plus de 6 mois (tâche quotidienne) |
 | `npm run keys:generate` | Génère des clés de chiffrement pour l'environnement local |
-| `npm run pro:create-user` | Crée un compte pro ou d'équipe et affiche un mot de passe provisoire |
+| `npm run pro:create-user` | Crée un compte pro ou d'équipe et lui envoie un lien pour choisir son mot de passe |
 | `npm run cms:migrate` | Applique les migrations du CMS (schéma `cms`) |
 | `npm run cms:migrate:create` | Génère une migration après modification d'une collection (`src/cms/collections`) |
 | `npm run cms:seed` | Crée le premier administrateur et importe les fiches de `src/content` |
@@ -110,6 +112,7 @@ src/db/                   Schéma PostgreSQL des demandes (Drizzle), migrations 
 src/i18n/                 Routage et configuration des langues
 src/lib/auth/             Better Auth : connexion, double authentification, accès à /admin
 src/lib/crypto/           Chiffrement des champs sensibles
+src/lib/email/            E-mails : envoi Brevo, gabarits sans donnée de santé
 src/lib/pro/              Espace pro : boîte de réception, ouverture tracée des demandes
 src/lib/countries.ts      Règles de conformité par pays
 src/lib/lead/             Formulaire de demande : schéma, soumission, stockage
@@ -133,11 +136,11 @@ docs/decisions.md         Décisions et hypothèses
 ## Espace pro et accès à /admin
 
 1. Définir `BETTER_AUTH_SECRET` (32 caractères au moins) et appliquer les migrations (`npm run db:migrate`).
-2. Créer les comptes : `npm run pro:create-user -- --email dr@exemple.fr --name "Dr Claire Martin" --role surgeon --surgeon <slug>` pour un chirurgien (`assistant` pour son assistant, même fiche), `--role staff` pour l'équipe interne. Le mot de passe provisoire s'affiche une seule fois : transmettez-le par un autre canal que l'e-mail.
-3. À la première connexion (`/fr/pro/connexion`), la personne active la double authentification avec une application (QR code, codes de secours) avant tout accès.
-4. L'équipe ouvre `/admin` : elle passe d'abord par cette connexion avec code, puis par la connexion Payload.
+2. Configurer Brevo (`BREVO_API_KEY`, `EMAIL_FROM`) et désactiver le suivi des ouvertures et des clics dans le compte Brevo.
+3. Créer les comptes : `npm run pro:create-user -- --email dr@exemple.fr --name "Dr Claire Martin" --role surgeon --surgeon <slug>` pour un chirurgien (`assistant` pour son assistant, même fiche), `--role staff` pour l'équipe interne. La personne reçoit un lien valable 48 h pour choisir son mot de passe (en développement, le lien s'affiche dans la console).
+4. À la première connexion (`/fr/pro/connexion`), la personne active la double authentification avec une application (QR code, codes de secours) avant tout accès.
+5. L'équipe ouvre `/admin` : elle passe d'abord par cette connexion avec code, puis par la connexion Payload.
 
 ## Prochaines étapes
 
-- E-mails Brevo sans donnée de santé, lien de gestion de la demande pour le patient, invitation des comptes pro par e-mail.
 - Sous-pages des dossiers d'intervention, guides et glossaire.
