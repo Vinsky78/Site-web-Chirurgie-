@@ -11,12 +11,7 @@ export interface LeadRepository {
   save(lead: StoredLead): Promise<void>;
 }
 
-/**
- * Stockage de développement, en mémoire, jamais journalisé.
- * En production, la base PostgreSQL chez un hébergeur certifié HDS (Phase 4)
- * remplacera cette implémentation ; tant qu'elle n'est pas configurée, la
- * soumission échoue explicitement plutôt que de perdre des données.
- */
+/** Stockage de développement, en mémoire, jamais journalisé. */
 class InMemoryLeadRepository implements LeadRepository {
   private readonly leads: StoredLead[] = [];
 
@@ -25,6 +20,7 @@ class InMemoryLeadRepository implements LeadRepository {
   }
 }
 
+/** Production sans base configurée : la soumission échoue plutôt que de perdre des données. */
 class NotConfiguredLeadRepository implements LeadRepository {
   async save(): Promise<void> {
     throw new Error("LEAD_STORAGE_NOT_CONFIGURED");
@@ -33,12 +29,25 @@ class NotConfiguredLeadRepository implements LeadRepository {
 
 let instance: LeadRepository | undefined;
 
-export function getLeadRepository(): LeadRepository {
+/**
+ * - DATABASE_URL défini : PostgreSQL, champs sensibles chiffrés.
+ * - Sinon, en développement ou avec LEAD_STORAGE=memory : mémoire (démo, tests).
+ * - Sinon, en production : refus explicite.
+ */
+export async function getLeadRepository(): Promise<LeadRepository> {
   if (!instance) {
-    instance =
-      process.env.NODE_ENV === "production" && process.env.LEAD_STORAGE !== "memory"
-        ? new NotConfiguredLeadRepository()
-        : new InMemoryLeadRepository();
+    if (process.env.DATABASE_URL) {
+      const [{ getDb }, { keyringFromEnv }, { PostgresLeadRepository }] = await Promise.all([
+        import("@/db/client"),
+        import("@/lib/crypto/fieldCrypto"),
+        import("./postgresRepository"),
+      ]);
+      instance = new PostgresLeadRepository(getDb(), keyringFromEnv());
+    } else if (process.env.NODE_ENV !== "production" || process.env.LEAD_STORAGE === "memory") {
+      instance = new InMemoryLeadRepository();
+    } else {
+      instance = new NotConfiguredLeadRepository();
+    }
   }
   return instance;
 }
