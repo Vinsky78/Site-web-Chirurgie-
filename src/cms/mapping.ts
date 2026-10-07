@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/routing";
 import type { Intervention, MedicalReview } from "@/content/types";
-import type { Intervention as CmsIntervention } from "@/payload-types";
+import type { Surgeon } from "@/content/surgeons/types";
+import type { Intervention as CmsIntervention, Surgeon as CmsSurgeon } from "@/payload-types";
 
 type Texts = { text: string }[] | null | undefined;
 
@@ -72,4 +73,31 @@ export function interventionToCms(item: Intervention) {
     faq: item.faq.map(({ question, answer }) => ({ question, answer })),
     medicalReview: { status: "draft" as const },
   } satisfies Omit<CmsIntervention, "id" | "createdAt" | "updatedAt">;
+}
+
+/** Convertit un profil du CMS vers le type de l'annuaire (la publication est décidée ensuite par isListed). */
+export function surgeonFromCms(doc: CmsSurgeon): Surgeon {
+  return {
+    slug: doc.slug,
+    displayName: doc.displayName,
+    lastName: doc.lastName,
+    specialty: doc.specialty,
+    country: doc.country,
+    registryNumber: doc.registryNumber,
+    practice: {
+      name: doc.practiceName,
+      address: doc.address,
+      postalCode: doc.postalCode,
+      city: doc.city,
+      citySlug: doc.citySlug ?? "",
+    },
+    languages: doc.languages,
+    interventions: doc.interventions,
+    bio: doc.bio ?? undefined,
+    verification: {
+      status: doc.verification.status,
+      verifiedAt: doc.verification.verifiedAt ?? undefined,
+    },
+    subscriptionActive: doc.subscriptionActive === true,
+  };
 }

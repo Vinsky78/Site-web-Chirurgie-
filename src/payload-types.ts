@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     interventions: Intervention;
+    surgeons: Surgeon;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     interventions: InterventionsSelect<false> | InterventionsSelect<true>;
+    surgeons: SurgeonsSelect<false> | SurgeonsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -217,6 +219,61 @@ export interface Intervention {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "surgeons".
+ */
+export interface Surgeon {
+  id: number;
+  /**
+   * Tel qu'inscrit au registre, ex. « Dr Claire Martin ».
+   */
+  displayName: string;
+  lastName: string;
+  /**
+   * Calculée à partir du nom et de la ville si laissée vide.
+   */
+  slug: string;
+  specialty: 'plastic-surgery' | 'ent' | 'maxillofacial' | 'oculoplastic';
+  country: 'FR' | 'GB' | 'DE' | 'NL' | 'BE' | 'CH' | 'ES' | 'IT';
+  /**
+   * RPPS (France), numéro GMC (Royaume-Uni)…
+   */
+  registryNumber: string;
+  practiceName: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  /**
+   * Calculé.
+   */
+  citySlug?: string | null;
+  languages: ('fr' | 'en' | 'de' | 'nl' | 'es' | 'it' | 'ar' | 'pt')[];
+  interventions: ('rhinoplasty' | 'abdominoplasty' | 'breast-augmentation')[];
+  /**
+   * Factuelle : parcours, spécialité. Aucune promesse, aucun superlatif.
+   */
+  bio?: string | null;
+  /**
+   * Réservée aux administrateurs. Le profil n'est publié que vérifié depuis moins d'un an.
+   */
+  verification: {
+    status: 'pending' | 'verified' | 'suspended';
+    renew?: boolean | null;
+    verifiedAt?: string | null;
+    verifiedBy?: string | null;
+    /**
+     * Ex. capture de la fiche RPPS du jour, lien vers le registre. Jamais publiée.
+     */
+    evidence?: string | null;
+  };
+  /**
+   * Abonnement fixe : il ne change ni le classement ni le nombre de demandes.
+   */
+  subscriptionActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -246,6 +303,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'interventions';
         value: number | Intervention;
+      } | null)
+    | ({
+        relationTo: 'surgeons';
+        value: number | Surgeon;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -384,6 +445,38 @@ export interface InterventionsSelect<T extends boolean = true> {
         qualification?: T;
         reviewedAt?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "surgeons_select".
+ */
+export interface SurgeonsSelect<T extends boolean = true> {
+  displayName?: T;
+  lastName?: T;
+  slug?: T;
+  specialty?: T;
+  country?: T;
+  registryNumber?: T;
+  practiceName?: T;
+  address?: T;
+  postalCode?: T;
+  city?: T;
+  citySlug?: T;
+  languages?: T;
+  interventions?: T;
+  bio?: T;
+  verification?:
+    | T
+    | {
+        status?: T;
+        renew?: T;
+        verifiedAt?: T;
+        verifiedBy?: T;
+        evidence?: T;
+      };
+  subscriptionActive?: T;
   updatedAt?: T;
   createdAt?: T;
 }

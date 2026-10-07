@@ -10,6 +10,6 @@ export default defineConfig({
     command: `npm run start -- --port ${PORT}`,
     port: PORT,
     reuseExistingServer: !process.env.CI,
-    env: { LEAD_STORAGE: "memory" },
+    env: { LEAD_STORAGE: "memory", DIRECTORY_FIXTURES: "1" },
   },
 });

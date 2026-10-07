@@ -5,6 +5,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import { routing } from "./i18n/routing";
 import { Interventions } from "./cms/collections/Interventions";
+import { Surgeons } from "./cms/collections/Surgeons";
 import { Users } from "./cms/collections/Users";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -24,7 +25,7 @@ export default buildConfig({
     importMap: { baseDir: dirname },
     meta: { titleSuffix: " · Éclaira CMS" },
   },
-  collections: [Users, Interventions],
+  collections: [Users, Interventions, Surgeons],
   editor: lexicalEditor(),
   localization: {
     locales: [...routing.locales],
