@@ -46,6 +46,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   return (
     <html lang={locale}>
       <body className="flex min-h-screen flex-col antialiased">
+        <div aria-hidden="true" className="scroll-progress" />
         <NextIntlClientProvider>
           <JsonLd data={siteStructuredData(locale, t("siteDescription"))} />
           <Header />

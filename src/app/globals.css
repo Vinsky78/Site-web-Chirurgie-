@@ -97,3 +97,329 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Effets visuels (Phase 3) : animations, survols, motifs et finitions.
+   Toutes les animations sont coupées sous prefers-reduced-motion (voir fin).
+   ========================================================================== */
+
+html {
+  scrollbar-color: var(--color-primary) var(--color-accent-soft);
+}
+
+body {
+  background-image: radial-gradient(rgb(15 76 92 / 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* --- Apparition au défilement ------------------------------------------- */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  animation: reveal-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
+/* --- Mouvement doux des formes d'illustration ---------------------------- */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes float-reverse {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.float-slow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: float 7s ease-in-out infinite;
+}
+
+.float-slow-reverse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: float-reverse 9s ease-in-out infinite;
+}
+
+/* --- Fonds ---------------------------------------------------------------- */
+.hero-bg {
+  background-image:
+    radial-gradient(circle at 85% 15%, rgb(15 76 92 / 0.1), transparent 38%),
+    radial-gradient(circle at 8% 92%, rgb(143 67 44 / 0.09), transparent 34%),
+    radial-gradient(rgb(15 76 92 / 0.08) 1px, transparent 1px);
+  background-size: auto, auto, 22px 22px;
+}
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    radial-gradient(circle at 92% 10%, rgb(15 76 92 / 0.1), transparent 36%),
+    radial-gradient(circle at 4% 100%, rgb(143 67 44 / 0.1), transparent 32%),
+    radial-gradient(rgb(143 67 44 / 0.1) 1px, transparent 1px);
+  background-size: auto, auto, 20px 20px;
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+  right: -4rem;
+  bottom: -5rem;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 9999px;
+  border: 2px solid rgb(15 76 92 / 0.12);
+  box-shadow:
+    0 0 0 2rem rgb(15 76 92 / 0.05),
+    0 0 0 4rem rgb(15 76 92 / 0.03);
+  pointer-events: none;
+}
+
+.band-dark {
+  background:
+    radial-gradient(circle at 12% 0%, rgb(255 255 255 / 0.1), transparent 42%),
+    radial-gradient(circle at 92% 100%, rgb(143 67 44 / 0.28), transparent 40%),
+    linear-gradient(135deg, var(--color-primary-strong), var(--color-primary));
+}
+
+.footer-bg {
+  position: relative;
+  background:
+    radial-gradient(circle at 90% 0%, rgb(255 255 255 / 0.07), transparent 40%),
+    linear-gradient(180deg, var(--color-primary-strong), #072a34);
+}
+
+.footer-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-clay), var(--color-primary-soft), var(--color-primary));
+}
+
+/* --- Titres de section ----------------------------------------------------- */
+.heading-accent::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-top: 0.75rem;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--color-clay), var(--color-primary));
+}
+
+/* --- Boutons ---------------------------------------------------------------- */
+.btn-fx {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.btn-fx:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -6px rgb(15 76 92 / 0.4);
+}
+
+.btn-fx:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-fx-primary {
+  background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-strong));
+}
+
+.btn-fx-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+.btn-fx-primary:hover::after {
+  transform: translateX(120%);
+}
+
+/* --- Cartes ------------------------------------------------------------------ */
+.card-lift {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card-lift:hover,
+.card-lift:focus-within {
+  transform: translateY(-5px);
+  border-color: var(--color-primary);
+  box-shadow: 0 18px 36px -14px rgb(15 76 92 / 0.28);
+}
+
+.icon-pop {
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.card-lift:hover .icon-pop,
+.card-lift:focus-within .icon-pop {
+  transform: scale(1.12) rotate(-5deg);
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+/* --- Liens : soulignement qui se dessine ---------------------------------- */
+.link-fx {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.3s ease;
+}
+
+.link-fx:hover,
+.link-fx:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* --- En-tête --------------------------------------------------------------- */
+.header-shadow {
+  box-shadow: 0 8px 24px -16px rgb(28 36 48 / 0.3);
+}
+
+/* --- Barre de progression de lecture --------------------------------------- */
+@keyframes progress-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.scroll-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 60;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-clay), var(--color-primary));
+    transform-origin: left;
+    animation: progress-grow linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+/* --- Formulaires ----------------------------------------------------------------- */
+input,
+select,
+textarea {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgb(15 76 92 / 0.15);
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--color-primary);
+}
+
+/* --- FAQ et accordéons ----------------------------------------------------- */
+details > summary {
+  transition: color 0.2s ease;
+}
+
+details > summary:hover {
+  color: var(--color-primary);
+}
+
+details[open] > summary ~ * {
+  animation: reveal-up 0.35s ease both;
+}
+
+/* --- Impression : contenu seul, sans navigation --------------------------- */
+@media print {
+  header,
+  footer,
+  .scroll-progress,
+  [role="dialog"] {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: var(--color-muted);
+  }
+}
+
+/* --- Mouvement réduit : aucune animation ----------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .float-slow,
+  .float-slow-reverse,
+  .scroll-progress,
+  details[open] > summary ~ * {
+    animation: none !important;
+  }
+
+  .btn-fx,
+  .btn-fx::after,
+  .card-lift,
+  .icon-pop,
+  .link-fx {
+    transition: none !important;
+  }
+
+  .card-lift:hover,
+  .btn-fx:hover:not(:disabled) {
+    transform: none;
+  }
+}

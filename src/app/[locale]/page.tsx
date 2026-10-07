@@ -54,7 +54,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     <>
       <JsonLd data={faqData} />
       {/* Bandeau d'accueil : titre, quatre points clés, appel à l'action, illustration */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-sand via-bg to-accent-soft">
+      <section className="hero-bg relative overflow-hidden bg-gradient-to-br from-sand via-bg to-accent-soft">
         <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 sm:py-20 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-clay">{t("eyebrow")}</p>
@@ -83,7 +83,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Chiffres clés */}
-      <section aria-labelledby="chiffres" className="bg-primary-strong text-white">
+      <section aria-labelledby="chiffres" className="band-dark text-white">
         <div className="mx-auto max-w-6xl px-4 py-10">
           <h2 id="chiffres" className="sr-only">{t("figuresTitle")}</h2>
           <dl className="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
@@ -98,17 +98,17 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Nos domaines */}
-      <section aria-labelledby="domaines" className="mx-auto max-w-6xl px-4 py-16">
-        <h2 id="domaines" className="font-serif text-3xl font-semibold text-primary-strong">{t("domainsTitle")}</h2>
+      <section aria-labelledby="domaines" className="reveal mx-auto max-w-6xl px-4 py-16">
+        <h2 id="domaines" className="heading-accent font-serif text-3xl font-semibold text-primary-strong">{t("domainsTitle")}</h2>
         <p className="mt-2 max-w-2xl text-muted">{t("domainsLead")}</p>
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {domains.map((d) => (
             <li key={d.id}>
               <Link
                 href={`/interventions/categories/${d.id}`}
-                className="group flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card transition hover:-translate-y-1 hover:border-primary"
+                className="card-lift group flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card"
               >
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-primary">
+                <span className="icon-pop flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-primary">
                   <CategoryIcon category={d.id} />
                 </span>
                 <span className="mt-4 font-serif text-xl font-semibold text-primary-strong">{tc(d.id)}</span>
@@ -121,9 +121,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Comment ça marche */}
-      <section aria-labelledby="etapes" className="bg-surface py-16">
+      <section aria-labelledby="etapes" className="reveal bg-surface py-16">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 id="etapes" className="font-serif text-3xl font-semibold text-primary-strong">{t("steps.title")}</h2>
+          <h2 id="etapes" className="heading-accent font-serif text-3xl font-semibold text-primary-strong">{t("steps.title")}</h2>
           <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((i) => (
               <li key={i} className="flex gap-4">
@@ -139,9 +139,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Interventions */}
-      <section aria-labelledby="interventions" className="mx-auto max-w-6xl px-4 py-16">
+      <section aria-labelledby="interventions" className="reveal mx-auto max-w-6xl px-4 py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 id="interventions" className="font-serif text-3xl font-semibold text-primary-strong">{t("featured")}</h2>
+          <h2 id="interventions" className="heading-accent font-serif text-3xl font-semibold text-primary-strong">{t("featured")}</h2>
           <Link href="/interventions" className="font-medium text-primary underline underline-offset-4">{t("seeAll")}</Link>
         </div>
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -152,8 +152,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Questions fréquentes */}
-      <section aria-labelledby="faq" className="mx-auto max-w-3xl px-4 pb-16">
-        <h2 id="faq" className="font-serif text-3xl font-semibold text-primary-strong">{t("faqTitle")}</h2>
+      <section aria-labelledby="faq" className="reveal mx-auto max-w-3xl px-4 pb-16">
+        <h2 id="faq" className="heading-accent font-serif text-3xl font-semibold text-primary-strong">{t("faqTitle")}</h2>
         <div className="mt-6 space-y-3">
           {FAQ.map((i) => (
             <details key={i} className="group rounded-card border border-border bg-surface p-5 open:border-primary">
@@ -168,7 +168,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Confiance */}
-      <section aria-labelledby="confiance" className="mx-auto max-w-6xl px-4 pb-8">
+      <section aria-labelledby="confiance" className="reveal mx-auto max-w-6xl px-4 pb-8">
         <div className="grid items-center gap-6 rounded-card bg-accent-soft p-8 md:grid-cols-[1fr_auto]">
           <div>
             <h2 id="confiance" className="font-serif text-2xl font-semibold text-primary-strong">{t("trustTitle")}</h2>
@@ -178,7 +178,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </div>
       </section>
 
-      <section aria-labelledby="reflexion" className="mx-auto max-w-6xl px-4 pb-8">
+      <section aria-labelledby="reflexion" className="reveal mx-auto max-w-6xl px-4 pb-8">
         <div className="rounded-card border-l-4 border-clay bg-sand p-8">
           <h2 id="reflexion" className="font-serif text-2xl font-semibold text-primary-strong">{t("reflectionTitle")}</h2>
           <p className="mt-3 max-w-3xl text-lg text-muted">{t("reflectionText")}</p>
@@ -186,8 +186,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Parlons de votre projet */}
-      <section aria-labelledby="parlons" className="mx-auto max-w-6xl px-4 pb-4 pt-8">
-        <div className="rounded-card bg-primary-strong px-8 py-12 text-center text-white sm:px-16">
+      <section aria-labelledby="parlons" className="reveal mx-auto max-w-6xl px-4 pb-4 pt-8">
+        <div className="band-dark rounded-card px-8 py-12 text-center text-white shadow-card sm:px-16">
           <h2 id="parlons" className="mx-auto max-w-2xl font-serif text-3xl font-semibold">{t("talkTitle")}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-primary-soft">{t("talkText")}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">

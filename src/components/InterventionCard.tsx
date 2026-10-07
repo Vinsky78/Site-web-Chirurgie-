@@ -6,8 +6,8 @@ import type { Intervention } from "@/content/types";
 export async function InterventionCard({ intervention }: { intervention: Intervention }) {
   const t = await getTranslations("categories");
   return (
-    <article className="group relative flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card transition duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-primary">
+    <article className="reveal card-lift group relative flex h-full flex-col rounded-card border border-border bg-surface p-6 shadow-card">
+      <div className="icon-pop flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-primary">
         <CategoryIcon category={intervention.category} />
       </div>
       <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-clay">{t(intervention.category)}</p>

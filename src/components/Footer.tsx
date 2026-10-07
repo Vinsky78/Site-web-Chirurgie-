@@ -11,12 +11,12 @@ export async function Footer() {
   const tn = await getTranslations("nav");
   const tc = await getTranslations("categories");
   const locale = (await getLocale()) as Locale;
-  const link = "underline-offset-4 hover:underline";
+  const link = "link-fx";
   const heading = "font-semibold text-white";
   const list = "mt-3 space-y-2";
 
   return (
-    <footer className="mt-20 bg-primary-strong text-primary-soft">
+    <footer className="footer-bg mt-20 text-primary-soft">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 text-sm md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]">
         <div className="space-y-3">
           <p className="font-serif text-xl font-semibold text-white">{SITE_NAME}</p>

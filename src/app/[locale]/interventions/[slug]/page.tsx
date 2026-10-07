@@ -103,7 +103,7 @@ function structuredData(intervention: Intervention, listTitle: string) {
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section aria-labelledby={id} className="mt-10">
-      <h2 id={id} className="scroll-mt-24 font-serif text-2xl font-semibold text-primary-strong">
+      <h2 id={id} className="heading-accent scroll-mt-24 font-serif text-2xl font-semibold text-primary-strong">
         {title}
       </h2>
       <div className="mt-4">{children}</div>
