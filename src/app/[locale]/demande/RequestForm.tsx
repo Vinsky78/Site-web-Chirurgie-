@@ -431,7 +431,7 @@ function FieldError({ id, error }: { id: string; error?: string }) {
 }
 
 const inputClass =
-  "mt-1 block min-h-11 w-full rounded-md border border-border bg-surface px-3 py-2 text-base aria-invalid:border-danger";
+  "mt-1 block min-h-11 w-full rounded-md border border-border-input bg-surface px-3 py-2 text-base aria-invalid:border-danger";
 
 function TextField({
   id,
@@ -536,7 +536,7 @@ function RadioGroup({
         {options.map((o) => (
           <label
             key={o.value}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-border bg-surface px-4 has-checked:border-primary has-checked:bg-accent-soft"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-border-input bg-surface px-4 has-checked:border-primary has-checked:bg-accent-soft"
           >
             <input
               type="radio"
