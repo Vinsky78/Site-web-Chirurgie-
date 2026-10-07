@@ -21,7 +21,7 @@ export default async function RequestPage({ params, searchParams }: Props) {
   const t = await getTranslations("form");
   const { intervention } = await searchParams;
 
-  const options = getInterventions(locale as Locale).map((item) => ({ id: item.id, title: item.title }));
+  const options = (await getInterventions(locale as Locale)).map((item) => ({ id: item.id, title: item.title }));
   const initialIntervention = (INTERVENTION_IDS as readonly string[]).includes(String(intervention))
     ? (intervention as InterventionId)
     : undefined;

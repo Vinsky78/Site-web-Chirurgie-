@@ -14,6 +14,7 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 - SEO : balises canonical et hreflang, sitemap multilingue, robots.txt, données structurées schema.org (MedicalWebPage, MedicalProcedure, BreadcrumbList, FAQPage).
 - Accessibilité : lien d'évitement, focus visible, champs étiquetés, résumé des erreurs, gestion du focus entre étapes, cibles tactiles de 44 px.
 - En-têtes de sécurité HTTP.
+- Back-office éditorial Payload (`/admin`) : fiches d'intervention par marché, relecture médicale signée, charte éditoriale vérifiée à l'enregistrement, historique des versions.
 - Tests unitaires (Vitest) et de bout en bout sur mobile (Playwright), intégration continue GitHub Actions.
 
 ## Installation
@@ -44,6 +45,32 @@ npm run dev
 
 Les demandes sont alors enregistrées dans le schéma PostgreSQL `leads`. Prénom, e-mail, téléphone et réponses médicales sont chiffrés par l'application (AES-256-GCM) avant l'écriture ; seule une empreinte HMAC de l'e-mail permet de retrouver les demandes d'une personne. Chaque demande est supprimée 6 mois après sa création par `npm run leads:purge`, à planifier chaque jour.
 
+### Avec le CMS (back-office éditorial)
+
+Prérequis : la base de données ci-dessus.
+
+```bash
+echo "PAYLOAD_SECRET=$(openssl rand -hex 32)" >> .env.local
+npm run cms:migrate                  # crée le schéma PostgreSQL `cms`
+CMS_ADMIN_EMAIL=vous@exemple.fr CMS_ADMIN_PASSWORD='…' CMS_ADMIN_NAME='Prénom Nom' npm run cms:seed
+echo 'CONTENT_SOURCE=cms' >> .env.local
+npm run dev
+```
+
+`cms:seed` crée le premier administrateur et importe les fiches de `src/content` en brouillon. Le back-office est sur http://localhost:3000/admin. Sans `CONTENT_SOURCE=cms`, le site lit les fichiers de `src/content` (c'est le cas en intégration continue).
+
+Rôles :
+
+| Rôle | Peut |
+| --- | --- |
+| Administrateur | Gérer les comptes et les rôles, supprimer une fiche |
+| Rédacteur | Créer et modifier les fiches |
+| Relecteur médical | Tout ce que fait le rédacteur, et valider une fiche : son nom, sa qualification et la date s'affichent sur la page, qui devient indexable |
+
+Une fiche modifiée par un autre compte qu'un relecteur médical repasse en brouillon (non indexée) jusqu'à une nouvelle relecture. Un terme interdit par la charte (« meilleur », « indolore », « sans risque »…) bloque l'enregistrement.
+
+> En production, lancer `cms:seed` juste après le premier déploiement : tant qu'aucun compte n'existe, `/admin` propose de créer un administrateur à quiconque y accède.
+
 ## Commandes
 
 | Commande | Rôle |
@@ -59,6 +86,10 @@ Les demandes sont alors enregistrées dans le schéma PostgreSQL `leads`. Préno
 | `npm run db:migrate` | Applique les migrations (`DATABASE_URL` requis) |
 | `npm run leads:purge` | Supprime les demandes de plus de 6 mois (tâche quotidienne) |
 | `npm run keys:generate` | Génère des clés de chiffrement pour l'environnement local |
+| `npm run cms:migrate` | Applique les migrations du CMS (schéma `cms`) |
+| `npm run cms:migrate:create` | Génère une migration après modification d'une collection (`src/cms/collections`) |
+| `npm run cms:seed` | Crée le premier administrateur et importe les fiches de `src/content` |
+| `npm run cms:types` | Régénère `src/payload-types.ts` après modification d'une collection |
 
 ## Structure
 
@@ -66,9 +97,11 @@ Les demandes sont alors enregistrées dans le schéma PostgreSQL `leads`. Préno
 messages/                 Textes d'interface par locale (fr, en-gb)
 src/app/[locale]/         Pages (accueil, interventions, demande, informations)
 src/app/sitemap.ts        Sitemap multilingue
+src/app/(payload)/        Back-office Payload (/admin) et son API (/api), fichiers générés
+src/cms/                  Collections, rôles et règles de relecture médicale du CMS
 src/components/           Composants partagés (en-tête, pied de page, encadré légal, JSON-LD)
-src/content/              Contenus des interventions par locale (en attendant le CMS)
-src/db/                   Schéma PostgreSQL (Drizzle) et migrations
+src/content/              Contenus des interventions en fichiers (source par défaut, amorçage du CMS) et charte éditoriale
+src/db/                   Schéma PostgreSQL des demandes (Drizzle), migrations des demandes et du CMS
 src/i18n/                 Routage et configuration des langues
 src/lib/crypto/           Chiffrement des champs sensibles
 src/lib/countries.ts      Règles de conformité par pays
@@ -80,10 +113,9 @@ docs/decisions.md         Décisions et hypothèses
 
 ## Ajouter une intervention
 
-1. Ajouter son identifiant dans `INTERVENTION_IDS` (`src/content/types.ts`).
-2. Rédiger la fiche dans chaque fichier de `src/content/interventions/` en respectant la charte (risques, contre-indications, alternatives, aucune promesse).
-3. Lancer `npm test` : les tests vérifient les sections obligatoires et l'absence de termes promotionnels.
-4. Après relecture par un chirurgien, passer `medicalReview` à `reviewed` avec son nom, sa qualification et la date : la fiche devient indexable.
+1. Ajouter son identifiant dans `INTERVENTION_IDS` (`src/content/types.ts`), puis `npm run cms:migrate:create` et `npm run cms:migrate` (la liste est une énumération en base).
+2. Rédiger la fiche dans le back-office, pour chaque marché, en respectant la charte (au moins trois risques, contre-indications, alternatives, aucune promesse). Pour le développement sans base, la rédiger aussi dans `src/content/interventions/` : `npm test` vérifie ces fichiers.
+3. Un relecteur médical la valide dans le back-office : elle devient indexable.
 
 ## Ouvrir un nouveau marché
 
@@ -93,4 +125,4 @@ docs/decisions.md         Décisions et hypothèses
 
 ## Prochaines étapes
 
-- Design system, URL anglaises localisées, CMS Payload, annuaire des chirurgiens, formulaire en 5 étapes, espace pro, e-mails (voir les documents des Phases 3 et 4).
+- Annuaire des chirurgiens, formulaire en 5 étapes, espace pro, e-mails (voir les documents des Phases 3 et 4).

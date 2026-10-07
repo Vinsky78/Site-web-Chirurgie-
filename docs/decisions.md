@@ -35,3 +35,15 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Composants de base** : `buttonClasses()` pour les boutons et liens d'action, `Callout` pour les encadrés. Radix UI sera ajouté avec le premier composant interactif qui en a besoin (sélecteur de chirurgiens, fenêtre de dialogue).
 - **Nom de marque** : Éclaira par défaut (`src/lib/site.ts`), surchargeable par `NEXT_PUBLIC_SITE_NAME` tant que la marque et les domaines ne sont pas vérifiés.
 - **Adresses traduites** : `pathnames` dans `src/i18n/routing.ts`. Les dossiers de `src/app` restent en français ; le Royaume-Uni voit `/en-gb/procedures`, `/en-gb/request`, `/en-gb/information/...`. Les liens internes passent par des routes typées (`{ pathname, params }`).
+
+## CMS (Phase 5, d'après la Phase 4)
+
+- **Payload 3** dans la même application Next.js (`/admin`), tables dans le schéma PostgreSQL `cms`, séparé de `leads`. Structure gérée par migrations (`push: false`), jamais par synchronisation automatique.
+- **Fiches localisées par marché** (`localization`, sans repli) : chaque locale a son slug, ses risques et son contexte légal. Une fiche absente d'un marché n'y est pas publiée.
+- **Catalogue dans le code** : identifiants et catégories restent dans `src/content/types.ts`, car le formulaire de demande en dépend.
+- **Relecture médicale** (`src/cms/reviewWorkflow.ts`) : seul un relecteur médical valide ; sa signature est horodatée ; toute modification médicale par un autre compte repasse la fiche en brouillon. L'administrateur ne peut pas valider.
+- **Charte éditoriale** (`src/content/charter.ts`) partagée par les tests et le CMS.
+- **API REST** du CMS réservée aux comptes connectés ; le site lit par l'API locale, côté serveur. GraphQL désactivé.
+- **Comptes** : sessions de 2 h, verrouillage 15 min après 5 échecs, cookies `SameSite=Strict`. Pas de double authentification native dans Payload : à ajouter avant la mise en ligne (Better Auth, comme l'espace pro, ou accès à `/admin` restreint par VPN ou liste d'adresses IP).
+- **Source des fiches** : `CONTENT_SOURCE=cms` en production ; les fichiers de `src/content` restent la source en CI et l'amorçage du CMS.
+- **Dépendances** : `undici` et `dompurify` forcés en versions corrigées (`overrides`). Restent signalés `braces` (aucune version corrigée publiée, utilisé seulement au build par `sass`) et `esbuild` (serveur de développement de `drizzle-kit`, jamais en production).

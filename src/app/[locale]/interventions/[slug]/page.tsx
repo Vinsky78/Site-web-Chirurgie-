@@ -19,19 +19,23 @@ import { buttonClasses } from "@/components/ui/button";
 
 type Props = PageProps<"/[locale]/interventions/[slug]">;
 
-export function generateStaticParams() {
-  return routing.locales.flatMap((locale) =>
-    getInterventions(locale).map((item) => ({ locale, slug: item.slug })),
+export async function generateStaticParams() {
+  const perLocale = await Promise.all(
+    routing.locales.map(async (locale) =>
+      (await getInterventions(locale)).map((item) => ({ locale, slug: item.slug })),
+    ),
   );
+  return perLocale.flat();
 }
 
-export const dynamicParams = false;
+// Une adresse modifiée dans le CMS est servie sans nouveau build ; un slug inconnu renvoie une 404.
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const intervention = getInterventionBySlug(locale as Locale, slug);
+  const intervention = await getInterventionBySlug(locale as Locale, slug);
   if (!intervention) return {};
-  const alternates = getAlternateSlugs(intervention.id);
+  const alternates = await getAlternateSlugs(intervention.id);
 
   return {
     title: intervention.title,
@@ -118,7 +122,7 @@ function BulletList({ items }: { items: string[] }) {
 export default async function InterventionPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const intervention = getInterventionBySlug(locale as Locale, slug);
+  const intervention = await getInterventionBySlug(locale as Locale, slug);
   if (!intervention) notFound();
 
   const t = await getTranslations("intervention");

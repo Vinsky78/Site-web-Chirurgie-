@@ -1,25 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { routing } from "@/i18n/routing";
 import { INTERVENTION_IDS } from "../types";
-import { getAlternateSlugs, getInterventions } from ".";
+import { findForbiddenTerms } from "../charter";
+import { INTERVENTIONS_FROM_FILES } from "./files";
 
-/** Termes promotionnels interdits par la charte éditoriale (Phase 1). */
-const FORBIDDEN = [
-  /\bmeilleur(e|s)?\b/i,
-  /résultats? garantis?/i,
-  /\bpromo(tion)?\b/i,
-  /\boffre\b/i,
-  /\bsans risque\b/i,
-  /\bindolore\b/i,
-  /\bbest\b/i,
-  /\brisk-free\b/i,
-  /\bpainless\b/i,
-  /\bspecial offer\b/i,
-];
-
-describe("contenus interventions", () => {
+describe("contenus interventions (fichiers)", () => {
   for (const locale of routing.locales) {
-    const items = getInterventions(locale);
+    const items = INTERVENTIONS_FROM_FILES[locale];
 
     it(`${locale} : couvre toutes les interventions avec des slugs uniques`, () => {
       expect(items.map((i) => i.id).sort()).toEqual([...INTERVENTION_IDS].sort());
@@ -37,15 +24,16 @@ describe("contenus interventions", () => {
       });
 
       it(`${locale}/${item.slug} : aucun terme promotionnel`, () => {
-        const text = JSON.stringify(item);
-        for (const pattern of FORBIDDEN) expect(text).not.toMatch(pattern);
+        expect(findForbiddenTerms(JSON.stringify(item))).toEqual([]);
       });
     }
   }
 
   it("fournit un slug par locale pour chaque intervention (hreflang)", () => {
     for (const id of INTERVENTION_IDS) {
-      expect(Object.keys(getAlternateSlugs(id)).sort()).toEqual([...routing.locales].sort());
+      for (const locale of routing.locales) {
+        expect(INTERVENTIONS_FROM_FILES[locale].some((item) => item.id === id)).toBe(true);
+      }
     }
   });
 });
