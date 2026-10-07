@@ -1,4 +1,4 @@
-import { index, integer, pgSchema, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, index, integer, pgSchema, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 /**
  * Schéma `leads` : demandes de consultation (données de santé).
@@ -51,8 +51,32 @@ export const requestRecipients = leads.table(
       .notNull()
       .references(() => requests.id, { onDelete: "cascade" }),
     surgeonSlug: text("surgeon_slug").notNull(),
+    /** sent : pas encore ouverte ; viewed : ouverte dans l'espace pro. */
+    status: text("status", { enum: ["sent", "viewed"] }).notNull().default("sent"),
+    viewedAt: timestamp("viewed_at", { withTimezone: true }),
+    /** Avis du chirurgien en un clic : la demande correspondait-elle à sa pratique ? */
+    relevant: boolean("relevant"),
   },
   (t) => [primaryKey({ columns: [t.requestId, t.surgeonSlug] }), index("request_recipients_surgeon_idx").on(t.surgeonSlug)],
+);
+
+/**
+ * Journal des consultations : chaque ouverture d'une demande dans l'espace pro
+ * est tracée (qui, quand). Ajout seulement ; supprimé avec la demande.
+ */
+export const accessLog = leads.table(
+  "access_log",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    requestId: uuid("request_id")
+      .notNull()
+      .references(() => requests.id, { onDelete: "cascade" }),
+    /** Identifiant du compte pro (schéma pro), sans clé étrangère entre schémas. */
+    proUserId: text("pro_user_id").notNull(),
+    action: text("action", { enum: ["view"] }).notNull(),
+    at: timestamp("at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("access_log_request_id_idx").on(t.requestId)],
 );
 
 /**

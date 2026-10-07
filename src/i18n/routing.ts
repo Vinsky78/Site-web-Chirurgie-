@@ -22,6 +22,11 @@ export const routing = defineRouting({
     "/chirurgiens/ville/[city]": { fr: "/chirurgiens/ville/[city]", "en-gb": "/surgeons/city/[city]" },
     "/demande": { fr: "/demande", "en-gb": "/request" },
     "/informations/[page]": { fr: "/informations/[page]", "en-gb": "/information/[page]" },
+    // Espace pro : non indexé, hors sitemap.
+    "/pro": "/pro",
+    "/pro/connexion": { fr: "/pro/connexion", "en-gb": "/pro/sign-in" },
+    "/pro/securite": { fr: "/pro/securite", "en-gb": "/pro/security" },
+    "/pro/demandes/[id]": { fr: "/pro/demandes/[id]", "en-gb": "/pro/requests/[id]" },
   },
 });
 

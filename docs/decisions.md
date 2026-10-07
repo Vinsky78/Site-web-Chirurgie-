@@ -44,7 +44,7 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Relecture médicale** (`src/cms/reviewWorkflow.ts`) : seul un relecteur médical valide ; sa signature est horodatée ; toute modification médicale par un autre compte repasse la fiche en brouillon. L'administrateur ne peut pas valider.
 - **Charte éditoriale** (`src/content/charter.ts`) partagée par les tests et le CMS.
 - **API REST** du CMS réservée aux comptes connectés ; le site lit par l'API locale, côté serveur. GraphQL désactivé.
-- **Comptes** : sessions de 2 h, verrouillage 15 min après 5 échecs, cookies `SameSite=Strict`. Pas de double authentification native dans Payload : à ajouter avant la mise en ligne (Better Auth, comme l'espace pro, ou accès à `/admin` restreint par VPN ou liste d'adresses IP).
+- **Comptes** : sessions de 2 h, verrouillage 15 min après 5 échecs, cookies `SameSite=Strict`. Payload n'a pas de double authentification : `/admin` et `/api` sont protégés en amont (voir « Espace pro »).
 - **Source des fiches** : `CONTENT_SOURCE=cms` en production ; les fichiers de `src/content` restent la source en CI et l'amorçage du CMS.
 - **Dépendances** : `undici` et `dompurify` forcés en versions corrigées (`overrides`). Restent signalés `braces` (aucune version corrigée publiée, utilisé seulement au build par `sass`) et `esbuild` (serveur de développement de `drizzle-kit`, jamais en production).
 
@@ -57,3 +57,14 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Profils propres à un marché** : pas d'alternatives hreflang entre annuaires de pays différents.
 - **Aucun avis, avant/après ni prix** dans l'annuaire, quel que soit le pays. Présentation soumise à la charte éditoriale.
 - **Chirurgiens fictifs** (`fixtures.ts`) chargés seulement avec `DIRECTORY_FIXTURES=1` (tests de bout en bout), jamais en production.
+
+## Espace pro (Phase 5)
+
+- **Better Auth** (`src/lib/auth`), tables dans le schéma PostgreSQL `pro`, séparé de `leads` et `cms`. Aucune route HTTP Better Auth exposée : connexion par actions serveur uniquement.
+- **Pas d'inscription libre** : comptes créés par l'équipe (`npm run pro:create-user`), reliés à une fiche de l'annuaire (`pro.surgeon_links`) ; un assistant partage la fiche de son chirurgien. Les cabinets à plusieurs chirurgiens (`practices`) viendront avec la facturation.
+- **Double authentification obligatoire** (TOTP, codes de secours) : sans elle, le compte n'accède qu'à la page d'activation. Pas d'appareil « de confiance » ; code redemandé à chaque connexion ; sessions de 12 h sans prolongation.
+- **Tentatives** : 5 mots de passe faux bloquent l'adresse 15 minutes (en mémoire, par conteneur : à déplacer en base si plusieurs instances) ; 5 codes faux bloquent le compte 15 minutes (Better Auth). Les messages ne révèlent pas si une adresse existe.
+- **Secrets TOTP et codes de secours** chiffrés en base par Better Auth (`BETTER_AUTH_SECRET`).
+- **Accès aux demandes** contrôlé dans chaque requête SQL (destinataire = fiche reliée au compte) : un identifiant deviné donne une 404. La liste ne déchiffre rien ; chaque ouverture est tracée dans `leads.access_log` et passe le destinataire en « ouverte ».
+- **Back-office** : le proxy exige, devant `/admin` et `/api`, une session de l'équipe interne (`staff`) ayant validé son code. La connexion Payload reste nécessaire ensuite.
+- **Dépendance signalée** : `vitest` 4.0 (outil de test, jamais en production) fait l'objet d'avis de sécurité ; la mise à jour vers 4.1.11 bute sur une erreur de npm et sera faite à part.

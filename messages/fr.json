@@ -20,7 +20,8 @@
     "privacy": "Confidentialité",
     "methodology": "Notre méthode",
     "disclaimer": "Les informations de ce site ne remplacent pas une consultation médicale. Seul un chirurgien qualifié, après examen, peut vous indiquer si une intervention est adaptée à votre situation.",
-    "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant."
+    "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant.",
+    "pro": "Espace pro"
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -262,5 +263,76 @@
   "notFound": {
     "title": "Page introuvable",
     "back": "Retour à l'accueil"
+  },
+  "pro": {
+    "metaTitle": "Espace professionnel",
+    "signIn": {
+      "title": "Connexion à l'espace professionnel",
+      "lead": "Réservé aux chirurgiens vérifiés de l'annuaire et à leurs assistants. Chaque connexion demande un code de double authentification.",
+      "email": "Adresse e-mail professionnelle",
+      "password": "Mot de passe",
+      "submit": "Continuer",
+      "codeTitle": "Code de vérification",
+      "codeHelp": "Saisissez le code à 6 chiffres affiché par votre application d'authentification, ou l'un de vos codes de secours.",
+      "code": "Code",
+      "verify": "Se connecter",
+      "noAccount": "Pas encore de compte ? L'inscription se fait après vérification de votre inscription à l'Ordre ou au registre de votre pays. Écrivez-nous pour en faire la demande."
+    },
+    "security": {
+      "title": "Activer la double authentification",
+      "lead": "Les demandes de patients contiennent des données de santé. La double authentification est obligatoire avant d'y accéder.",
+      "step1": "Confirmez votre mot de passe pour générer votre clé.",
+      "password": "Mot de passe",
+      "generate": "Générer ma clé",
+      "step2": "Scannez ce QR code avec une application d'authentification (par exemple Google Authenticator, Microsoft Authenticator ou 1Password).",
+      "qrAlt": "QR code de configuration de la double authentification",
+      "manual": "Vous ne pouvez pas scanner ? Saisissez cette clé dans l'application :",
+      "backupTitle": "Vos codes de secours",
+      "backupHelp": "Chaque code fonctionne une seule fois si vous perdez votre téléphone. Conservez-les dans un endroit sûr : ils ne seront plus affichés.",
+      "code": "Code à 6 chiffres affiché par l'application",
+      "confirm": "Activer",
+      "enabled": "La double authentification est active sur votre compte.",
+      "signedInAs": "Connecté en tant que {email}."
+    },
+    "inbox": {
+      "title": "Demandes reçues",
+      "lead": "Les demandes que des patients vous ont adressées. Elles sont supprimées automatiquement six mois après leur envoi.",
+      "empty": "Aucune demande pour l'instant.",
+      "noProfile": "Votre compte n'est relié à aucune fiche de l'annuaire. Contactez-nous pour le relier.",
+      "date": "Reçue le",
+      "intervention": "Intervention",
+      "city": "Ville souhaitée",
+      "status": "Statut",
+      "sent": "Nouvelle",
+      "viewed": "Ouverte",
+      "open": "Ouvrir la demande du {date}"
+    },
+    "request": {
+      "back": "Toutes les demandes",
+      "title": "Demande du {date}",
+      "notice": "Cette consultation est enregistrée dans le journal d'accès. Contactez le patient par vos propres moyens ; vos échanges ultérieurs relèvent de votre responsabilité de professionnel de santé.",
+      "reflection": "Rappel : dans ce pays, un délai de réflexion de {days} jours est obligatoire entre la remise du devis détaillé et l'intervention.",
+      "project": "Projet",
+      "health": "Critères médicaux déclarés",
+      "contact": "Coordonnées",
+      "country": "Pays",
+      "birthYear": "Année de naissance",
+      "noPhone": "Non communiqué",
+      "relevantQuestion": "Cette demande correspondait-elle à votre pratique ?",
+      "relevantYes": "Oui, pertinente",
+      "relevantNo": "Non, pas pertinente",
+      "relevantSaved": "Merci, votre avis est enregistré.",
+      "relevantHelp": "Votre réponse nous aide à améliorer l'orientation des patients. Elle ne leur est pas communiquée."
+    },
+    "signOut": "Se déconnecter",
+    "errors": {
+      "required": "Remplissez tous les champs.",
+      "invalid": "Adresse e-mail ou mot de passe incorrect.",
+      "locked": "Trop de tentatives. Réessayez dans 15 minutes.",
+      "code": "Ce code n'est pas valide. Vérifiez l'heure de votre téléphone et réessayez.",
+      "codeRequired": "Saisissez le code.",
+      "expired": "Le délai de saisie du code est dépassé. Reconnectez-vous.",
+      "unavailable": "Le service de connexion est momentanément indisponible. Réessayez plus tard."
+    }
   }
 }

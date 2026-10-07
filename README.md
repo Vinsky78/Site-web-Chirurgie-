@@ -9,13 +9,15 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 - Next.js 16 (App Router, Server Components), TypeScript strict, Tailwind CSS 4.
 - Deux marchés : France (`/fr`) et Royaume-Uni (`/en-gb`), avec des contenus localisés et non simplement traduits.
 - Accueil, liste des interventions, fiches intervention (rhinoplastie, abdominoplastie, augmentation mammaire) avec risques, contre-indications, alternatives et droits du patient du pays.
-- Formulaire de demande en 4 étapes, validé côté client et serveur (Zod) : refus des mineurs, consentement explicite aux données de santé, étape de réflexion non enregistrée, anti-spam (pot de miel + durée minimale).
+- Formulaire de demande en 5 étapes (dont le choix de 1 à 3 chirurgiens), validé côté client et serveur (Zod) : refus des mineurs, consentement explicite aux données de santé, étape de réflexion non enregistrée, anti-spam (pot de miel + durée minimale).
 - Règles de conformité par pays (publicité, avant/après, témoignages, délai de réflexion, devis).
 - SEO : balises canonical et hreflang, sitemap multilingue, robots.txt, données structurées schema.org (MedicalWebPage, MedicalProcedure, BreadcrumbList, FAQPage).
 - Accessibilité : lien d'évitement, focus visible, champs étiquetés, résumé des erreurs, gestion du focus entre étapes, cibles tactiles de 44 px.
 - En-têtes de sécurité HTTP.
 - Back-office éditorial Payload (`/admin`) : fiches d'intervention par marché, relecture médicale signée, charte éditoriale vérifiée à l'enregistrement, historique des versions.
 - Annuaire des chirurgiens (`/fr/chirurgiens`) : seuls les profils vérifiés au registre officiel depuis moins d'un an et abonnés sont publiés, par ordre alphabétique ; pages ville à partir de trois chirurgiens ; ni avis, ni avant/après, ni prix.
+- Espace pro (`/fr/pro`) : connexion avec double authentification obligatoire (code TOTP), boîte de réception des demandes adressées au chirurgien, ouverture tracée dans un journal d'accès, avis de pertinence en un clic.
+- Back-office `/admin` et son API accessibles seulement à l'équipe interne après double authentification.
 - Tests unitaires (Vitest) et de bout en bout sur mobile (Playwright), intégration continue GitHub Actions.
 
 ## Installation
@@ -87,6 +89,7 @@ Une fiche modifiée par un autre compte qu'un relecteur médical repasse en brou
 | `npm run db:migrate` | Applique les migrations (`DATABASE_URL` requis) |
 | `npm run leads:purge` | Supprime les demandes de plus de 6 mois (tâche quotidienne) |
 | `npm run keys:generate` | Génère des clés de chiffrement pour l'environnement local |
+| `npm run pro:create-user` | Crée un compte pro ou d'équipe et affiche un mot de passe provisoire |
 | `npm run cms:migrate` | Applique les migrations du CMS (schéma `cms`) |
 | `npm run cms:migrate:create` | Génère une migration après modification d'une collection (`src/cms/collections`) |
 | `npm run cms:seed` | Crée le premier administrateur et importe les fiches de `src/content` |
@@ -105,7 +108,9 @@ src/components/           Composants partagés (en-tête, pied de page, encadré
 src/content/              Contenus des interventions en fichiers (source par défaut, amorçage du CMS) et charte éditoriale
 src/db/                   Schéma PostgreSQL des demandes (Drizzle), migrations des demandes et du CMS
 src/i18n/                 Routage et configuration des langues
+src/lib/auth/             Better Auth : connexion, double authentification, accès à /admin
 src/lib/crypto/           Chiffrement des champs sensibles
+src/lib/pro/              Espace pro : boîte de réception, ouverture tracée des demandes
 src/lib/countries.ts      Règles de conformité par pays
 src/lib/lead/             Formulaire de demande : schéma, soumission, stockage
 src/lib/seo.ts            Canonical et hreflang
@@ -125,6 +130,14 @@ docs/decisions.md         Décisions et hypothèses
 2. Créer `messages/<locale>.json` et les contenus dans `src/content/interventions/`.
 3. Vérifier la règle du pays dans `src/lib/countries.ts`, la faire valider par un avocat local (`legalReview: "validated"`), puis l'ajouter à `ACTIVE_COUNTRIES`.
 
+## Espace pro et accès à /admin
+
+1. Définir `BETTER_AUTH_SECRET` (32 caractères au moins) et appliquer les migrations (`npm run db:migrate`).
+2. Créer les comptes : `npm run pro:create-user -- --email dr@exemple.fr --name "Dr Claire Martin" --role surgeon --surgeon <slug>` pour un chirurgien (`assistant` pour son assistant, même fiche), `--role staff` pour l'équipe interne. Le mot de passe provisoire s'affiche une seule fois : transmettez-le par un autre canal que l'e-mail.
+3. À la première connexion (`/fr/pro/connexion`), la personne active la double authentification avec une application (QR code, codes de secours) avant tout accès.
+4. L'équipe ouvre `/admin` : elle passe d'abord par cette connexion avec code, puis par la connexion Payload.
+
 ## Prochaines étapes
 
-- Annuaire des chirurgiens, formulaire en 5 étapes, espace pro, e-mails (voir les documents des Phases 3 et 4).
+- E-mails Brevo sans donnée de santé, lien de gestion de la demande pour le patient, invitation des comptes pro par e-mail.
+- Sous-pages des dossiers d'intervention, guides et glossaire.

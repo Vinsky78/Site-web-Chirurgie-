@@ -20,7 +20,8 @@
     "privacy": "Privacy",
     "methodology": "How we work",
     "disclaimer": "The information on this site does not replace a medical consultation. Only a qualified surgeon, after examining you, can tell you whether a procedure is right for you.",
-    "independence": "Independent platform: no commission on procedures, no paid rankings."
+    "independence": "Independent platform: no commission on procedures, no paid rankings.",
+    "pro": "Professional area"
   },
   "home": {
     "title": "Understand before you decide",
@@ -261,5 +262,76 @@
   "notFound": {
     "title": "Page not found",
     "back": "Back to home"
+  },
+  "pro": {
+    "metaTitle": "Professional area",
+    "signIn": {
+      "title": "Sign in to the professional area",
+      "lead": "For verified surgeons listed in the directory and their assistants. Every sign-in requires a two-factor authentication code.",
+      "email": "Work email address",
+      "password": "Password",
+      "submit": "Continue",
+      "codeTitle": "Verification code",
+      "codeHelp": "Enter the 6-digit code shown in your authenticator app, or one of your backup codes.",
+      "code": "Code",
+      "verify": "Sign in",
+      "noAccount": "No account yet? Accounts are opened once we have checked your registration with your country's medical register. Contact us to apply."
+    },
+    "security": {
+      "title": "Turn on two-factor authentication",
+      "lead": "Patient requests contain health data. Two-factor authentication is required before you can access them.",
+      "step1": "Confirm your password to generate your key.",
+      "password": "Password",
+      "generate": "Generate my key",
+      "step2": "Scan this QR code with an authenticator app (for example Google Authenticator, Microsoft Authenticator or 1Password).",
+      "qrAlt": "QR code to set up two-factor authentication",
+      "manual": "Can't scan it? Enter this key in the app:",
+      "backupTitle": "Your backup codes",
+      "backupHelp": "Each code works once if you lose your phone. Keep them somewhere safe: they will not be shown again.",
+      "code": "6-digit code shown in the app",
+      "confirm": "Turn on",
+      "enabled": "Two-factor authentication is on for your account.",
+      "signedInAs": "Signed in as {email}."
+    },
+    "inbox": {
+      "title": "Requests received",
+      "lead": "Requests that patients have sent you. They are deleted automatically six months after they were sent.",
+      "empty": "No requests yet.",
+      "noProfile": "Your account is not linked to a directory profile. Contact us to link it.",
+      "date": "Received",
+      "intervention": "Procedure",
+      "city": "Preferred town",
+      "status": "Status",
+      "sent": "New",
+      "viewed": "Opened",
+      "open": "Open the request of {date}"
+    },
+    "request": {
+      "back": "All requests",
+      "title": "Request of {date}",
+      "notice": "This access is recorded in the access log. Contact the patient through your own channels; any further exchanges are your responsibility as a healthcare professional.",
+      "reflection": "Reminder: in this country, a {days}-day cooling-off period is mandatory between handing over the detailed quote and the operation.",
+      "project": "Plans",
+      "health": "Declared medical criteria",
+      "contact": "Contact details",
+      "country": "Country",
+      "birthYear": "Year of birth",
+      "noPhone": "Not provided",
+      "relevantQuestion": "Did this request match your practice?",
+      "relevantYes": "Yes, relevant",
+      "relevantNo": "No, not relevant",
+      "relevantSaved": "Thank you, your answer has been saved.",
+      "relevantHelp": "Your answer helps us guide patients better. It is not shared with them."
+    },
+    "signOut": "Sign out",
+    "errors": {
+      "required": "Fill in all the fields.",
+      "invalid": "Incorrect email address or password.",
+      "locked": "Too many attempts. Try again in 15 minutes.",
+      "code": "This code is not valid. Check your phone's clock and try again.",
+      "codeRequired": "Enter the code.",
+      "expired": "The time to enter the code has run out. Please sign in again.",
+      "unavailable": "The sign-in service is temporarily unavailable. Please try again later."
+    }
   }
 }
