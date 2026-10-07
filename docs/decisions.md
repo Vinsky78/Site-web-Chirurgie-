@@ -75,3 +75,14 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Aucune donnée de santé par e-mail** (`src/lib/email/templates.ts`, testé) : ni intervention, ni réponse médicale, ni ville. Le patient reçoit la liste des chirurgiens choisis (indique une démarche de chirurgie esthétique : accepté en Phase 4) ; le chirurgien, la seule catégorie (Visage, Silhouette, Seins).
 - **Lien personnel du patient** : jeton de 256 bits, seul son hash SHA-256 est stocké (`leads.access_tokens`), expire avec la demande. Page non indexée, sans cache, sans en-tête Referer.
 - **Suppression par le patient** : demande, données de santé, destinataires, journal d'accès et lien effacés ; preuves de consentement gardées, marquées retirées, sans lien vers la demande ; chirurgiens prévenus sans détail.
+
+## Sous-pages, guides et lexique (Phase 5)
+
+- **Silos** : 5 sous-pages par fiche (risques, prix, convalescence, avant de se décider, alternatives) à `/fr/interventions/<fiche>/<sujet>` et `/en-gb/procedures/<fiche>/<sujet>`. Le segment du sujet est fixé dans le code (`src/content/subpages/slugs.ts`), pas dans le CMS.
+- **Maillage** : sommaire « Dans ce dossier » sur la fiche et ses sous-pages, fil d'Ariane avec données structurées, liens « Lire aussi » depuis les sections Risques, Convalescence et Alternatives de la fiche, deux guides liés, termes du lexique employés par la fiche.
+- **Pas d'appel à la demande sur les pages de risques** (parcours Camille, Phase 2).
+- **Pages prix sans montant** : aucune donnée vérifiée ; elles expliquent le contenu d'un devis, les règles du pays, la prise en charge éventuelle et le coût des complications. Des fourchettes ne seront ajoutées qu'à partir de données sourcées.
+- **Lexique relié automatiquement** (`src/content/glossary/match.ts`) : une entrée renvoie vers les fiches qui emploient le terme ou une variante (mot entier, sans casse), et inversement. Les variantes trop larges (« cicatrice ») sont proscrites.
+- **Relecture** : mêmes règles que les fiches pour les trois gabarits (seul un relecteur médical valide, toute modification du contenu par un autre compte repasse en brouillon, charte testée à l'enregistrement). Le lexique, prévu « relecture éditeur » en Phase 2, suit la règle médicale, plus stricte.
+- **Indexation** : chaque contenu est indexé (et listé dans le sitemap) seulement une fois relu, indépendamment de sa fiche.
+- **Contenus de la vague 1** : 30 sous-pages, 12 guides et 30 entrées de lexique rédigés en brouillon (France et Royaume-Uni adaptés, non traduits), plus courts que les longueurs cibles de la Phase 2. Ils servent de base au rédacteur médical et au comité de relecture.

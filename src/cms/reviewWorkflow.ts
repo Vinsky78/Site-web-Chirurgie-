@@ -10,7 +10,7 @@ import { hasRole } from "./roles";
  *    fiche en brouillon : elle sort de l'index jusqu'à une nouvelle relecture.
  */
 
-/** Champs dont la modification impose une nouvelle relecture. */
+/** Champs d'une fiche d'intervention dont la modification impose une nouvelle relecture. */
 export const MEDICAL_CONTENT_FIELDS = [
   "title",
   "summary",
@@ -23,6 +23,11 @@ export const MEDICAL_CONTENT_FIELDS = [
   "alternatives",
   "faq",
 ] as const;
+
+/** Champs relus des autres gabarits (sous-pages, guides, lexique). */
+export const SUBPAGE_CONTENT_FIELDS = ["title", "summary", "answer", "sections", "sources"] as const;
+export const GUIDE_CONTENT_FIELDS = ["title", "summary", "answer", "steps", "warningSigns", "resources"] as const;
+export const GLOSSARY_CONTENT_FIELDS = ["term", "aliases", "definition", "detail"] as const;
 
 export interface ReviewState {
   status: "draft" | "reviewed";
@@ -55,9 +60,10 @@ function stripIds(value: unknown): unknown {
 export function medicalContentChanged(
   data: Record<string, unknown>,
   original: Record<string, unknown> | undefined,
+  fields: readonly string[] = MEDICAL_CONTENT_FIELDS,
 ): boolean {
   if (!original) return true;
-  return MEDICAL_CONTENT_FIELDS.some(
+  return fields.some(
     (field) =>
       field in data && JSON.stringify(stripIds(data[field])) !== JSON.stringify(stripIds(original[field])),
   );
@@ -98,7 +104,10 @@ export function nextReviewState({
 }
 
 /** Erreurs de charte éditoriale, avec le chemin du champ fautif (ex. "risks.0.detail"). */
-export function charterErrors(data: Record<string, unknown>): { path: string; message: string }[] {
+export function charterErrors(
+  data: Record<string, unknown>,
+  fields: readonly string[] = MEDICAL_CONTENT_FIELDS,
+): { path: string; message: string }[] {
   const errors: { path: string; message: string }[] = [];
   const walk = (value: unknown, path: string) => {
     if (typeof value === "string") {
@@ -112,6 +121,6 @@ export function charterErrors(data: Record<string, unknown>): { path: string; me
       for (const [key, v] of Object.entries(value)) if (key !== "id") walk(v, path ? `${path}.${key}` : key);
     }
   };
-  for (const field of MEDICAL_CONTENT_FIELDS) if (field in data) walk(data[field], field);
+  for (const field of fields) if (field in data) walk(data[field], field);
   return errors;
 }

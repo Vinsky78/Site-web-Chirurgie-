@@ -1,5 +1,6 @@
 import * as migration_20261007_215412_init_cms from './20261007_215412_init_cms';
 import * as migration_20261007_222932_directory from './20261007_222932_directory';
+import * as migration_20261007_234308_editorial from './20261007_234308_editorial';
 
 export const migrations = [
   {
@@ -10,6 +11,11 @@ export const migrations = [
   {
     up: migration_20261007_222932_directory.up,
     down: migration_20261007_222932_directory.down,
-    name: '20261007_222932_directory'
+    name: '20261007_222932_directory',
+  },
+  {
+    up: migration_20261007_234308_editorial.up,
+    down: migration_20261007_234308_editorial.down,
+    name: '20261007_234308_editorial'
   },
 ];

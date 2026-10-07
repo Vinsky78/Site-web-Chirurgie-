@@ -4,7 +4,10 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import { routing } from "./i18n/routing";
+import { GlossaryTerms } from "./cms/collections/GlossaryTerms";
+import { Guides } from "./cms/collections/Guides";
 import { Interventions } from "./cms/collections/Interventions";
+import { InterventionSubpages } from "./cms/collections/InterventionSubpages";
 import { Surgeons } from "./cms/collections/Surgeons";
 import { Users } from "./cms/collections/Users";
 
@@ -25,7 +28,7 @@ export default buildConfig({
     importMap: { baseDir: dirname },
     meta: { titleSuffix: " · Éclaira CMS" },
   },
-  collections: [Users, Interventions, Surgeons],
+  collections: [Users, Interventions, InterventionSubpages, Guides, GlossaryTerms, Surgeons],
   editor: lexicalEditor(),
   localization: {
     locales: [...routing.locales],

@@ -16,6 +16,11 @@ import { LOCALE_COUNTRY } from "@/lib/countries";
 import { absoluteUrl, localeAlternates } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 import { buttonClasses } from "@/components/ui/button";
+import { DossierNav } from "@/components/editorial/DossierNav";
+import { getSubpages, SUBPAGE_SLUGS } from "@/content/subpages";
+import { getGuidesFor } from "@/content/guides";
+import { getGlossary } from "@/content/glossary";
+import { termsUsedBy } from "@/content/glossary/match";
 
 type Props = PageProps<"/[locale]/interventions/[slug]">;
 
@@ -127,6 +132,11 @@ export default async function InterventionPage({ params }: Props) {
 
   const t = await getTranslations("intervention");
   const tn = await getTranslations("nav");
+  const te = await getTranslations("editorial");
+  const subpages = await getSubpages(locale as Locale, intervention.id);
+  const subpageOf = (kind: (typeof subpages)[number]["kind"]) => subpages.find((item) => item.kind === kind);
+  const guides = await getGuidesFor(locale as Locale, intervention.id);
+  const terms = termsUsedBy(intervention, await getGlossary(locale as Locale));
   const format = await getFormatter();
   const review = intervention.medicalReview;
   const formatDate = (iso: string) => format.dateTime(new Date(iso), { dateStyle: "long" });
@@ -172,6 +182,8 @@ export default async function InterventionPage({ params }: Props) {
         </p>
       )}
 
+      <DossierNav locale={locale as Locale} intervention={intervention} subpages={subpages} current="overview" />
+
       <Section id="description" title={t("whatIs")}>
         <div className="space-y-4">
           {intervention.description.map((paragraph) => (
@@ -198,6 +210,19 @@ export default async function InterventionPage({ params }: Props) {
             </div>
           ))}
         </dl>
+        {subpageOf("risks") && (
+          <p className="mt-4">
+            <Link
+              href={{
+                pathname: "/interventions/[slug]/[topic]",
+                params: { slug: intervention.slug, topic: SUBPAGE_SLUGS[locale as Locale].risks },
+              }}
+              className="underline underline-offset-4"
+            >
+              {te("readMore", { title: subpageOf("risks")!.title })}
+            </Link>
+          </p>
+        )}
       </Section>
 
       <Section id="deroulement" title={t("procedure")}>
@@ -213,10 +238,36 @@ export default async function InterventionPage({ params }: Props) {
 
       <Section id="convalescence" title={t("recovery")}>
         <BulletList items={intervention.recovery} />
+        {subpageOf("recovery") && (
+          <p className="mt-4">
+            <Link
+              href={{
+                pathname: "/interventions/[slug]/[topic]",
+                params: { slug: intervention.slug, topic: SUBPAGE_SLUGS[locale as Locale].recovery },
+              }}
+              className="underline underline-offset-4"
+            >
+              {te("readMore", { title: subpageOf("recovery")!.title })}
+            </Link>
+          </p>
+        )}
       </Section>
 
       <Section id="alternatives" title={t("alternatives")}>
         <BulletList items={intervention.alternatives} />
+        {subpageOf("alternatives") && (
+          <p className="mt-4">
+            <Link
+              href={{
+                pathname: "/interventions/[slug]/[topic]",
+                params: { slug: intervention.slug, topic: SUBPAGE_SLUGS[locale as Locale].alternatives },
+              }}
+              className="underline underline-offset-4"
+            >
+              {te("readMore", { title: subpageOf("alternatives")!.title })}
+            </Link>
+          </p>
+        )}
       </Section>
 
       <div className="mt-10">
@@ -233,6 +284,34 @@ export default async function InterventionPage({ params }: Props) {
           ))}
         </div>
       </Section>
+
+      {guides.length > 0 && (
+        <Section id="guides" title={te("relatedGuides")}>
+          <ul className="list-disc space-y-2 pl-5">
+            {guides.map((guide) => (
+              <li key={guide.id}>
+                <Link href={{ pathname: "/guides/[slug]", params: { slug: guide.slug } }} className="underline underline-offset-4">
+                  {guide.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+      {terms.length > 0 && (
+        <Section id="lexique" title={te("glossaryTerms")}>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {terms.map((term) => (
+              <li key={term.id}>
+                <Link href={{ pathname: "/lexique/[slug]", params: { slug: term.slug } }} className="underline underline-offset-4">
+                  {term.term}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
       <p className="mt-10 text-small text-muted">{t("noPromise")}</p>
 

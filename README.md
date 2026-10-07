@@ -9,12 +9,15 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 - Next.js 16 (App Router, Server Components), TypeScript strict, Tailwind CSS 4.
 - Deux marchés : France (`/fr`) et Royaume-Uni (`/en-gb`), avec des contenus localisés et non simplement traduits.
 - Accueil, liste des interventions, fiches intervention (rhinoplastie, abdominoplastie, augmentation mammaire) avec risques, contre-indications, alternatives et droits du patient du pays.
+- Dossiers d'intervention : 5 sous-pages par fiche (risques, prix, convalescence, avant de se décider, alternatives), reliées par un sommaire et un fil d'Ariane.
+- Guides (`/fr/guides`) : choisir son chirurgien, se faire opérer à l'étranger, préparer sa consultation, devis et délai de réflexion, signaux d'alerte après une opération, est-ce le bon moment.
+- Lexique (`/fr/lexique`, `/en-gb/glossary`) : définitions courtes, reliées automatiquement aux fiches qui emploient chaque terme.
 - Formulaire de demande en 5 étapes (dont le choix de 1 à 3 chirurgiens), validé côté client et serveur (Zod) : refus des mineurs, consentement explicite aux données de santé, étape de réflexion non enregistrée, anti-spam (pot de miel + durée minimale).
 - Règles de conformité par pays (publicité, avant/après, témoignages, délai de réflexion, devis).
 - SEO : balises canonical et hreflang, sitemap multilingue, robots.txt, données structurées schema.org (MedicalWebPage, MedicalProcedure, BreadcrumbList, FAQPage).
 - Accessibilité : lien d'évitement, focus visible, champs étiquetés, résumé des erreurs, gestion du focus entre étapes, cibles tactiles de 44 px.
 - En-têtes de sécurité HTTP.
-- Back-office éditorial Payload (`/admin`) : fiches d'intervention par marché, relecture médicale signée, charte éditoriale vérifiée à l'enregistrement, historique des versions.
+- Back-office éditorial Payload (`/admin`) : fiches d'intervention, sous-pages, guides et lexique par marché, relecture médicale signée, charte éditoriale vérifiée à l'enregistrement, historique des versions.
 - Annuaire des chirurgiens (`/fr/chirurgiens`) : seuls les profils vérifiés au registre officiel depuis moins d'un an et abonnés sont publiés, par ordre alphabétique ; pages ville à partir de trois chirurgiens ; ni avis, ni avant/après, ni prix.
 - Espace pro (`/fr/pro`) : connexion avec double authentification obligatoire (code TOTP), boîte de réception des demandes adressées au chirurgien, ouverture tracée dans un journal d'accès, avis de pertinence en un clic.
 - E-mails (Brevo) sans aucune donnée de santé : confirmation au patient avec son lien personnel, alerte sans détail aux chirurgiens, invitation et mot de passe oublié pour les comptes pro.

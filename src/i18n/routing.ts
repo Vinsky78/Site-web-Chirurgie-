@@ -17,6 +17,12 @@ export const routing = defineRouting({
     "/": "/",
     "/interventions": { fr: "/interventions", "en-gb": "/procedures" },
     "/interventions/[slug]": { fr: "/interventions/[slug]", "en-gb": "/procedures/[slug]" },
+    // Sous-pages du dossier ; le segment du sujet est traduit dans src/content/subpages/slugs.ts.
+    "/interventions/[slug]/[topic]": { fr: "/interventions/[slug]/[topic]", "en-gb": "/procedures/[slug]/[topic]" },
+    "/guides": "/guides",
+    "/guides/[slug]": "/guides/[slug]",
+    "/lexique": { fr: "/lexique", "en-gb": "/glossary" },
+    "/lexique/[slug]": { fr: "/lexique/[slug]", "en-gb": "/glossary/[slug]" },
     "/chirurgiens": { fr: "/chirurgiens", "en-gb": "/surgeons" },
     "/chirurgiens/[slug]": { fr: "/chirurgiens/[slug]", "en-gb": "/surgeons/[slug]" },
     "/chirurgiens/ville/[city]": { fr: "/chirurgiens/ville/[city]", "en-gb": "/surgeons/city/[city]" },
