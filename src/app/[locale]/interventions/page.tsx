@@ -20,7 +20,7 @@ export default async function InterventionsPage({ params }: PageProps<"/[locale]
   setRequestLocale(locale);
   const t = await getTranslations("intervention");
   const tc = await getTranslations("categories");
-  const interventions = getInterventions(locale as Locale);
+  const interventions = await getInterventions(locale as Locale);
 
   return (
     <div className="mx-auto max-w-page px-4 py-12">
