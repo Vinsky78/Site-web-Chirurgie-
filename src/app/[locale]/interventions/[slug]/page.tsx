@@ -108,7 +108,6 @@ const TOC = [
   ["indications", "indications"],
   ["contre-indications", "contraindications"],
   ["risques", "risks"],
-  ["deroulement", "procedure"],
   ["convalescence", "recovery"],
   ["alternatives", "alternatives"],
   ["faq", "faq"],
@@ -134,6 +133,9 @@ export default async function InterventionPage({ params }: Props) {
   const tn = await getTranslations("nav");
   const format = await getFormatter();
   const review = intervention.medicalReview;
+  const related = getInterventions(locale as Locale)
+    .filter((i) => i.category === intervention.category && i.id !== intervention.id)
+    .slice(0, 4);
   const formatDate = (iso: string) => format.dateTime(new Date(iso), { dateStyle: "long" });
 
   return (
@@ -175,6 +177,17 @@ export default async function InterventionPage({ params }: Props) {
         </p>
       </PageHeader>
 
+      <div className="mx-auto max-w-6xl px-4">
+        <dl aria-label={t("keyFacts")} className="-mt-8 grid gap-4 sm:grid-cols-3">
+          {(["anaesthesia", "duration", "hospitalStay"] as const).map((key) => (
+            <div key={key} className="rounded-card border border-border bg-surface p-5 shadow-card">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-clay">{t(key)}</dt>
+              <dd className="mt-1 text-sm">{intervention.procedure[key]}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
       <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="max-w-3xl">
       {review.status === "draft" && (
@@ -211,17 +224,6 @@ export default async function InterventionPage({ params }: Props) {
         </dl>
       </Section>
 
-      <Section id="deroulement" title={t("procedure")}>
-        <dl className="grid gap-4 sm:grid-cols-3">
-          {(["anaesthesia", "duration", "hospitalStay"] as const).map((key) => (
-            <div key={key} className="rounded-lg border border-border bg-surface p-4">
-              <dt className="text-sm font-medium text-primary">{t(key)}</dt>
-              <dd className="mt-1">{intervention.procedure[key]}</dd>
-            </div>
-          ))}
-        </dl>
-      </Section>
-
       <Section id="convalescence" title={t("recovery")}>
         <BulletList items={intervention.recovery} />
       </Section>
@@ -246,6 +248,22 @@ export default async function InterventionPage({ params }: Props) {
       </Section>
 
       <p className="mt-10 text-sm text-muted">{t("noPromise")}</p>
+
+      {related.length > 0 && (
+        <section aria-labelledby="related" className="mt-12">
+          <h2 id="related" className="font-serif text-2xl font-semibold text-primary-strong">{t("related")}</h2>
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+            {related.map((item) => (
+              <li key={item.id}>
+                <Link href={`/interventions/${item.slug}`} className="block rounded-card border border-border bg-surface p-4 hover:border-primary">
+                  <span className="font-semibold text-primary-strong">{item.title}</span>
+                  <span className="mt-1 block text-sm text-muted">{item.summary}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
         </div>
 
         <aside className="lg:sticky lg:top-24 lg:self-start">

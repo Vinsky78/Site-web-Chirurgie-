@@ -20,7 +20,9 @@
     "pro": "Espace chirurgiens",
     "method": "Notre méthode",
     "announceClose": "Fermer l'annonce",
-    "viewCategory": "Voir le domaine"
+    "viewCategory": "Voir le domaine",
+    "menuOpen": "Menu",
+    "menuClose": "Fermer"
   },
   "footer": {
     "legal": "Informations",
@@ -115,7 +117,30 @@
     "trustCta": "Voir l'annuaire",
     "talkTitle": "Parlons de votre projet",
     "talkText": "Préparez votre demande en quelques minutes ou consultez les chirurgiens vérifiés.",
-    "talkSecondary": "Consulter les chirurgiens"
+    "talkSecondary": "Consulter les chirurgiens",
+    "faqTitle": "Questions fréquentes",
+    "faq": [
+      {
+        "q": "Ces informations remplacent-elles une consultation médicale ?",
+        "a": "Non. Seul un chirurgien qualifié, après examen, peut vous dire si une intervention est adaptée à votre situation. Nos fiches servent à préparer cette consultation."
+      },
+      {
+        "q": "Combien de chirurgiens puis-je contacter ?",
+        "a": "Vous choisissez vous-même entre 1 et 3 chirurgiens. Votre demande n'est envoyée qu'à eux."
+      },
+      {
+        "q": "Comment le site est-il financé ?",
+        "a": "Par un abonnement fixe des chirurgiens référencés. Aucune commission n'est perçue sur les interventions ni sur les demandes, et aucun classement n'est payant."
+      },
+      {
+        "q": "Mes données de santé sont-elles protégées ?",
+        "a": "Le questionnaire est limité à des questions fermées, sans photo ni texte médical libre, avec votre consentement explicite. Les demandes ne sont conservées qu'avec un hébergement dans l'Union européenne chez un hébergeur certifié HDS."
+      },
+      {
+        "q": "Les chirurgiens sont-ils vérifiés ?",
+        "a": "Oui. Leur inscription est contrôlée auprès du registre officiel de leur pays avant d'être référencés."
+      }
+    ]
   },
   "categories": {
     "face": "Visage",
@@ -147,7 +172,11 @@
     "listLead": "Des fiches factuelles pour comprendre chaque intervention, ses risques et ses alternatives.",
     "toc": "Sommaire",
     "ctaTitle": "Préparer une demande",
-    "ctaText": "Sans engagement. Vous choisissez les chirurgiens."
+    "ctaText": "Sans engagement. Vous choisissez les chirurgiens.",
+    "related": "Autres interventions du même domaine",
+    "keyFacts": "En bref",
+    "filterTitle": "Filtrer par domaine",
+    "filterAll": "Tous"
   },
   "legalBox": {
     "title": "Vos droits en France",

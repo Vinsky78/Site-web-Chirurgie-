@@ -7,7 +7,7 @@ export function AnnouncementBar({ text, closeLabel }: { text: string; closeLabel
   const [open, setOpen] = useState(true);
   if (!open) return null;
   return (
-    <div className="bg-primary-strong text-sm text-white">
+    <div className="bg-primary-strong text-xs text-white sm:text-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2">
         <p>{text}</p>
         <button

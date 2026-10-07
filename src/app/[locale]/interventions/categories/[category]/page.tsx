@@ -70,7 +70,7 @@ export default async function CategoryPage({ params }: Props) {
         }
       />
       <div className="mx-auto max-w-6xl px-4 pb-12">
-      <ul className="mt-8 grid gap-6 sm:grid-cols-3">
+      <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (
           <li key={item.id}>
             <InterventionCard intervention={item} />

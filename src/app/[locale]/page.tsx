@@ -7,6 +7,7 @@ import { InterventionCard } from "@/components/InterventionCard";
 import { buttonClasses } from "@/components/ui/Button";
 import { CategoryIcon } from "@/components/ui/CategoryIcon";
 import { HeroArt } from "@/components/ui/HeroArt";
+import { JsonLd } from "@/components/JsonLd";
 import { localeAlternates } from "@/lib/seo";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">) {
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">) {
 }
 
 const POINTS = [0, 1, 2, 3];
+const FAQ = [0, 1, 2, 3, 4];
 const STEPS = [0, 1, 2, 3];
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
@@ -37,8 +39,19 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     { value: "0 %", label: t("figures.commission") },
   ];
 
+  const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((i) => ({
+      "@type": "Question",
+      name: t(`faq.${i}.q`),
+      acceptedAnswer: { "@type": "Answer", text: t(`faq.${i}.a`) },
+    })),
+  };
+
   return (
     <>
+      <JsonLd data={faqData} />
       {/* Bandeau d'accueil : titre, quatre points clés, appel à l'action, illustration */}
       <section className="relative overflow-hidden bg-gradient-to-br from-sand via-bg to-accent-soft">
         <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 sm:py-20 lg:grid-cols-[1.15fr_0.85fr]">
@@ -135,6 +148,22 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             <li key={item.id}><InterventionCard intervention={item} /></li>
           ))}
         </ul>
+      </section>
+
+      {/* Questions fréquentes */}
+      <section aria-labelledby="faq" className="mx-auto max-w-3xl px-4 pb-16">
+        <h2 id="faq" className="font-serif text-3xl font-semibold text-primary-strong">{t("faqTitle")}</h2>
+        <div className="mt-6 space-y-3">
+          {FAQ.map((i) => (
+            <details key={i} className="group rounded-card border border-border bg-surface p-5 open:border-primary">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
+                {t(`faq.${i}.q`)}
+                <span aria-hidden="true" className="text-primary transition group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-3 text-muted">{t(`faq.${i}.a`)}</p>
+            </details>
+          ))}
+        </div>
       </section>
 
       {/* Confiance */}

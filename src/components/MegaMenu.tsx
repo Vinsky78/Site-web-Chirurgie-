@@ -30,7 +30,7 @@ export function MegaMenu({ label, groups, allLabel, allHref }: { label: string; 
   }, [open]);
 
   return (
-    <li ref={root} className="static">
+    <li ref={root} className="md:static">
       <button
         type="button"
         aria-expanded={open}
@@ -42,8 +42,8 @@ export function MegaMenu({ label, groups, allLabel, allHref }: { label: string; 
         <span aria-hidden="true" className={`text-xs transition ${open ? "rotate-180" : ""}`}>▾</span>
       </button>
       {open && (
-        <div id="mega-menu" className="absolute inset-x-0 top-full z-40 border-b border-border bg-surface shadow-lg">
-          <div className="mx-auto max-w-6xl px-4 py-6">
+        <div id="mega-menu" className="z-40 bg-surface md:absolute md:inset-x-0 md:top-full md:border-b md:border-border md:shadow-lg">
+          <div className="mx-auto max-w-6xl py-3 md:px-4 md:py-6">
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {groups.map((g) => (
                 <li key={g.id} className="rounded-card border border-border p-4">

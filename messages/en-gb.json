@@ -20,7 +20,9 @@
     "pro": "Surgeon area",
     "method": "How we work",
     "announceClose": "Close announcement",
-    "viewCategory": "View area"
+    "viewCategory": "View area",
+    "menuOpen": "Menu",
+    "menuClose": "Close"
   },
   "footer": {
     "legal": "Information",
@@ -115,7 +117,30 @@
     "trustCta": "See the directory",
     "talkTitle": "Let's talk about your plans",
     "talkText": "Prepare your request in a few minutes or browse verified surgeons.",
-    "talkSecondary": "Browse surgeons"
+    "talkSecondary": "Browse surgeons",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "Does this information replace a medical consultation?",
+        "a": "No. Only a qualified surgeon, after an examination, can tell you whether a procedure suits your situation. Our pages help you prepare for that consultation."
+      },
+      {
+        "q": "How many surgeons can I contact?",
+        "a": "You choose between 1 and 3 surgeons yourself. Your request is sent only to them."
+      },
+      {
+        "q": "How is the site funded?",
+        "a": "By a fixed subscription from listed surgeons. No commission is taken on procedures or requests, and no ranking can be paid for."
+      },
+      {
+        "q": "Is my health information protected?",
+        "a": "The questionnaire is limited to closed questions, with no photos or free-text medical details, and needs your explicit consent. Requests are only stored with hosting in the European Union by a certified health-data host."
+      },
+      {
+        "q": "Are the surgeons verified?",
+        "a": "Yes. Their registration is checked against their country's official register before they are listed."
+      }
+    ]
   },
   "categories": {
     "face": "Face",
@@ -147,7 +172,11 @@
     "listLead": "Factual guides to understand each procedure, its risks and alternatives.",
     "toc": "Contents",
     "ctaTitle": "Prepare a request",
-    "ctaText": "No commitment. You choose the surgeons."
+    "ctaText": "No commitment. You choose the surgeons.",
+    "related": "Other procedures in the same area",
+    "keyFacts": "At a glance",
+    "filterTitle": "Filter by area",
+    "filterAll": "All"
   },
   "legalBox": {
     "title": "Your rights in the UK",

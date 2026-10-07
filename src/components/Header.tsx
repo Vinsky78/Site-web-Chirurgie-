@@ -2,8 +2,8 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
-import { MegaMenu, type MenuGroup } from "@/components/MegaMenu";
-import { buttonClasses } from "@/components/ui/Button";
+import { MainNav } from "@/components/MainNav";
+import type { MenuGroup } from "@/components/MegaMenu";
 import { getInterventions } from "@/content/interventions";
 import { CATEGORY_IDS } from "@/content/types";
 import { INFO_PAGE_SLUGS } from "@/lib/pages";
@@ -33,9 +33,9 @@ export async function Header() {
       </a>
       <AnnouncementBar text={tl("announce")} closeLabel={t("announceClose")} />
 
-      <div className="border-b border-border bg-sand text-sm">
+      <div className="border-b border-border bg-sand text-xs sm:text-sm">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-1.5">
-          <ul className="flex flex-wrap gap-x-5">
+          <ul className="hidden flex-wrap gap-x-5 sm:flex">
             <li>
               <Link href="/pro" className="underline-offset-4 hover:underline">
                 {t("pro")}
@@ -67,25 +67,22 @@ export async function Header() {
       </div>
 
       <div className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-3">
-          <Link href="/" className="font-serif text-xl font-semibold text-primary-strong">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-4 py-3">
+          <Link href="/" className="py-1 max-w-[60%] font-serif text-base font-semibold leading-tight text-primary-strong sm:max-w-none sm:text-xl">
             {SITE_NAME}
           </Link>
-          <nav aria-label={t("main")}>
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-              <MegaMenu label={t("interventions")} groups={groups} allLabel={t("allInterventions")} allHref="/interventions" />
-              <li>
-                <Link href="/chirurgiens" className="font-medium hover:text-primary">
-                  {t("surgeons")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/demande" className={buttonClasses()}>
-                  {t("request")}
-                </Link>
-              </li>
-            </ul>
-          </nav>
+          <MainNav
+            groups={groups}
+            labels={{
+              interventions: t("interventions"),
+              surgeons: t("surgeons"),
+              request: t("request"),
+              main: t("main"),
+              open: t("menuOpen"),
+              close: t("menuClose"),
+              all: t("allInterventions"),
+            }}
+          />
         </div>
       </div>
     </header>
