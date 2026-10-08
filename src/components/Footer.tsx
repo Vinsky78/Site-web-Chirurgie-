@@ -24,6 +24,11 @@ export async function Footer() {
             </li>
           ))}
           <li>
+            <Link href="/lexique" className="underline underline-offset-4">
+              {t("glossary")}
+            </Link>
+          </li>
+          <li>
             <Link href="/pro" className="underline underline-offset-4">
               {t("pro")}
             </Link>

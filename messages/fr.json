@@ -13,7 +13,8 @@
     "languages": {
       "fr": "Français (France)",
       "en-gb": "English (UK)"
-    }
+    },
+    "guides": "Guides"
   },
   "footer": {
     "legal": "Mentions légales",
@@ -21,7 +22,8 @@
     "methodology": "Notre méthode",
     "disclaimer": "Les informations de ce site ne remplacent pas une consultation médicale. Seul un chirurgien qualifié, après examen, peut vous indiquer si une intervention est adaptée à votre situation.",
     "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant.",
-    "pro": "Espace pro"
+    "pro": "Espace pro",
+    "glossary": "Lexique"
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -407,5 +409,26 @@
     "deleteAction": "Supprimer définitivement",
     "deleted": "Votre demande a été supprimée. Les chirurgiens destinataires en ont été informés.",
     "error": "La suppression n'a pas pu être faite. Cochez la confirmation, puis réessayez. Si le problème persiste, écrivez-nous."
+  },
+  "editorial": {
+    "inThisFile": "Dans ce dossier : {title}",
+    "overview": "Vue d'ensemble",
+    "sources": "Sources",
+    "backToPillar": "Retour à la fiche {title}",
+    "readMore": "Lire aussi : {title}",
+    "relatedGuides": "Guides utiles",
+    "glossaryTerms": "Termes du lexique",
+    "guidesTitle": "Guides",
+    "guidesLead": "Des guides pour décider sans pression et vous protéger : choisir un chirurgien, comprendre un devis, reconnaître les signaux d'alerte.",
+    "warningSigns": "Signaux d'alerte",
+    "resources": "Ressources officielles",
+    "citedInterventions": "Fiches citées dans ce guide",
+    "aboutIntervention": "Comprendre l'intervention : {title}",
+    "glossaryTitle": "Lexique",
+    "glossaryLead": "Les termes médicaux employés dans nos fiches, définis simplement.",
+    "glossaryLink": "Consulter le lexique des termes médicaux",
+    "alphabet": "Index alphabétique",
+    "usedIn": "Fiches qui emploient ce terme",
+    "backToGlossary": "Retour au lexique"
   }
 }

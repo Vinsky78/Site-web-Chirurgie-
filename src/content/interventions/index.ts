@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { routing, type Locale } from "@/i18n/routing";
-import type { Intervention, InterventionId } from "../types";
+import type { Intervention, InterventionId, MedicalReview } from "../types";
 import { INTERVENTIONS_FROM_FILES } from "./files";
 
 /**
@@ -45,6 +45,7 @@ export async function getAlternateSlugs(
   return result;
 }
 
-export function isIndexable(intervention: Intervention): boolean {
-  return intervention.medicalReview.status === "reviewed";
+/** Un contenu (fiche, sous-page, guide, entrée de lexique) n'est indexé qu'une fois relu. */
+export function isIndexable(content: { medicalReview: MedicalReview }): boolean {
+  return content.medicalReview.status === "reviewed";
 }

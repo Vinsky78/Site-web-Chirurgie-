@@ -13,7 +13,8 @@
     "languages": {
       "fr": "Français (France)",
       "en-gb": "English (UK)"
-    }
+    },
+    "guides": "Guides"
   },
   "footer": {
     "legal": "Legal notice",
@@ -21,7 +22,8 @@
     "methodology": "How we work",
     "disclaimer": "The information on this site does not replace a medical consultation. Only a qualified surgeon, after examining you, can tell you whether a procedure is right for you.",
     "independence": "Independent platform: no commission on procedures, no paid rankings.",
-    "pro": "Professional area"
+    "pro": "Professional area",
+    "glossary": "Glossary"
   },
   "home": {
     "title": "Understand before you decide",
@@ -406,5 +408,26 @@
     "deleteAction": "Delete permanently",
     "deleted": "Your request has been deleted. The surgeons it was sent to have been told.",
     "error": "The deletion could not be completed. Tick the confirmation and try again. If the problem continues, contact us."
+  },
+  "editorial": {
+    "inThisFile": "In this guide to {title}",
+    "overview": "Overview",
+    "sources": "Sources",
+    "backToPillar": "Back to {title}",
+    "readMore": "Read more: {title}",
+    "relatedGuides": "Useful guides",
+    "glossaryTerms": "Glossary terms",
+    "guidesTitle": "Guides",
+    "guidesLead": "Guides to help you decide without pressure and protect yourself: choosing a surgeon, understanding a quote, spotting warning signs.",
+    "warningSigns": "Warning signs",
+    "resources": "Official resources",
+    "citedInterventions": "Procedures mentioned in this guide",
+    "aboutIntervention": "About the procedure: {title}",
+    "glossaryTitle": "Glossary",
+    "glossaryLead": "The medical terms used on our procedure pages, explained simply.",
+    "glossaryLink": "Browse the glossary of medical terms",
+    "alphabet": "Alphabetical index",
+    "usedIn": "Procedure pages that use this term",
+    "backToGlossary": "Back to the glossary"
   }
 }

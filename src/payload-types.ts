@@ -69,6 +69,9 @@ export interface Config {
   collections: {
     users: User;
     interventions: Intervention;
+    'intervention-subpages': InterventionSubpage;
+    guides: Guide;
+    'glossary-terms': GlossaryTerm;
     surgeons: Surgeon;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -79,6 +82,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     interventions: InterventionsSelect<false> | InterventionsSelect<true>;
+    'intervention-subpages': InterventionSubpagesSelect<false> | InterventionSubpagesSelect<true>;
+    guides: GuidesSelect<false> | GuidesSelect<true>;
+    'glossary-terms': GlossaryTermsSelect<false> | GlossaryTermsSelect<true>;
     surgeons: SurgeonsSelect<false> | SurgeonsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -219,6 +225,146 @@ export interface Intervention {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "intervention-subpages".
+ */
+export interface InterventionSubpage {
+  id: number;
+  interventionId: 'rhinoplasty' | 'abdominoplasty' | 'breast-augmentation';
+  kind: 'risks' | 'cost' | 'recovery' | 'decision' | 'alternatives';
+  title: string;
+  summary: string;
+  /**
+   * La réponse directe à la question, en deux à quatre phrases.
+   */
+  answer: string;
+  sections: {
+    heading: string;
+    paragraphs?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    bullets?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  sources: {
+    label: string;
+    url?: string | null;
+    id?: string | null;
+  }[];
+  /**
+   * Seul un relecteur médical peut valider. Toute modification du contenu par un autre compte repasse la fiche en brouillon (non indexée).
+   */
+  medicalReview: {
+    status: 'draft' | 'reviewed';
+    reviewer?: string | null;
+    qualification?: string | null;
+    reviewedAt?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides".
+ */
+export interface Guide {
+  id: number;
+  /**
+   * Fixe : relie les versions de chaque marché (hreflang).
+   */
+  guideId:
+    | 'choosing-a-surgeon'
+    | 'surgery-abroad'
+    | 'preparing-consultation'
+    | 'quote-and-cooling-off'
+    | 'warning-signs-after-surgery'
+    | 'right-time';
+  slug: string;
+  title: string;
+  summary: string;
+  answer: string;
+  steps: {
+    heading: string;
+    paragraphs?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    bullets?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  warningSigns: {
+    text: string;
+    id?: string | null;
+  }[];
+  resources: {
+    label: string;
+    url?: string | null;
+    id?: string | null;
+  }[];
+  interventions?: ('rhinoplasty' | 'abdominoplasty' | 'breast-augmentation')[] | null;
+  /**
+   * Seul un relecteur médical peut valider. Toute modification du contenu par un autre compte repasse la fiche en brouillon (non indexée).
+   */
+  medicalReview: {
+    status: 'draft' | 'reviewed';
+    reviewer?: string | null;
+    qualification?: string | null;
+    reviewedAt?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "glossary-terms".
+ */
+export interface GlossaryTerm {
+  id: number;
+  /**
+   * Commun aux marchés (ex. seroma) : relie les versions pour hreflang.
+   */
+  termId: string;
+  slug: string;
+  term: string;
+  aliases?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  definition: string;
+  detail: {
+    text: string;
+    id?: string | null;
+  }[];
+  /**
+   * Seul un relecteur médical peut valider. Toute modification du contenu par un autre compte repasse la fiche en brouillon (non indexée).
+   */
+  medicalReview: {
+    status: 'draft' | 'reviewed';
+    reviewer?: string | null;
+    qualification?: string | null;
+    reviewedAt?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "surgeons".
  */
 export interface Surgeon {
@@ -303,6 +449,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'interventions';
         value: number | Intervention;
+      } | null)
+    | ({
+        relationTo: 'intervention-subpages';
+        value: number | InterventionSubpage;
+      } | null)
+    | ({
+        relationTo: 'guides';
+        value: number | Guide;
+      } | null)
+    | ({
+        relationTo: 'glossary-terms';
+        value: number | GlossaryTerm;
       } | null)
     | ({
         relationTo: 'surgeons';
@@ -435,6 +593,137 @@ export interface InterventionsSelect<T extends boolean = true> {
     | {
         question?: T;
         answer?: T;
+        id?: T;
+      };
+  medicalReview?:
+    | T
+    | {
+        status?: T;
+        reviewer?: T;
+        qualification?: T;
+        reviewedAt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "intervention-subpages_select".
+ */
+export interface InterventionSubpagesSelect<T extends boolean = true> {
+  interventionId?: T;
+  kind?: T;
+  title?: T;
+  summary?: T;
+  answer?: T;
+  sections?:
+    | T
+    | {
+        heading?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        bullets?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  sources?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  medicalReview?:
+    | T
+    | {
+        status?: T;
+        reviewer?: T;
+        qualification?: T;
+        reviewedAt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides_select".
+ */
+export interface GuidesSelect<T extends boolean = true> {
+  guideId?: T;
+  slug?: T;
+  title?: T;
+  summary?: T;
+  answer?: T;
+  steps?:
+    | T
+    | {
+        heading?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        bullets?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  warningSigns?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  resources?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  interventions?: T;
+  medicalReview?:
+    | T
+    | {
+        status?: T;
+        reviewer?: T;
+        qualification?: T;
+        reviewedAt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "glossary-terms_select".
+ */
+export interface GlossaryTermsSelect<T extends boolean = true> {
+  termId?: T;
+  slug?: T;
+  term?: T;
+  aliases?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  definition?: T;
+  detail?:
+    | T
+    | {
+        text?: T;
         id?: T;
       };
   medicalReview?:
