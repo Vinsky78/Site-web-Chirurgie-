@@ -18,7 +18,7 @@ const base = {
   country: "FR",
   languages: ["fr", "en"],
   subscriptionActive: true,
-  verification: { status: "verified", verifiedAt: monthsAgo(1) },
+  verification: { status: "verified", verifiedAt: monthsAgo(1), insuranceExpiresAt: monthsAgo(-6) },
 } satisfies Partial<Surgeon>;
 
 const lyon = { postalCode: "69006", city: "Lyon", citySlug: "lyon" };
@@ -72,7 +72,7 @@ export const SURGEON_FIXTURES: Surgeon[] = [
     practice: { name: "Cabinet fictif E", address: "5 rue de l'Exemple", postalCode: "75016", city: "Paris", citySlug: "paris" },
     interventions: ["rhinoplasty"],
     // Vérification de plus d'un an : ne doit jamais apparaître.
-    verification: { status: "verified", verifiedAt: monthsAgo(13) },
+    verification: { status: "verified", verifiedAt: monthsAgo(13), insuranceExpiresAt: monthsAgo(-6) },
   },
   {
     ...base,

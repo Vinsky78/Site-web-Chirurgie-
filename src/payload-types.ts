@@ -73,6 +73,7 @@ export interface Config {
     guides: Guide;
     'glossary-terms': GlossaryTerm;
     surgeons: Surgeon;
+    'surgeon-applications': SurgeonApplication;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     guides: GuidesSelect<false> | GuidesSelect<true>;
     'glossary-terms': GlossaryTermsSelect<false> | GlossaryTermsSelect<true>;
     surgeons: SurgeonsSelect<false> | SurgeonsSelect<true>;
+    'surgeon-applications': SurgeonApplicationsSelect<false> | SurgeonApplicationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -399,9 +401,21 @@ export interface Surgeon {
    */
   bio?: string | null;
   /**
-   * Réservée aux administrateurs. Le profil n'est publié que vérifié depuis moins d'un an.
+   * Réservée aux administrateurs. « Vérifié » exige tous les contrôles du pays et une assurance valide. Le profil n'est publié que vérifié depuis moins d'un an et assuré.
    */
   verification: {
+    guide?: string | null;
+    checks?: {
+      registryIdentity?: boolean | null;
+      specialtyTitle?: boolean | null;
+      noSanction?: boolean | null;
+      insurance?: boolean | null;
+      facility?: boolean | null;
+    };
+    /**
+     * Le profil est retiré automatiquement à cette date.
+     */
+    insuranceExpiresAt?: string | null;
     status: 'pending' | 'verified' | 'suspended';
     renew?: boolean | null;
     verifiedAt?: string | null;
@@ -415,6 +429,33 @@ export interface Surgeon {
    * Abonnement fixe : il ne change ni le classement ni le nombre de demandes.
    */
   subscriptionActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Contrôler chaque candidature au registre du pays avant de créer la fiche et le compte.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "surgeon-applications".
+ */
+export interface SurgeonApplication {
+  id: number;
+  status: 'new' | 'checking' | 'accepted' | 'rejected';
+  /**
+   * Résultat des contrôles, motif d'un refus. Jamais transmis au candidat tel quel.
+   */
+  notes?: string | null;
+  guide?: string | null;
+  fullName: string;
+  email: string;
+  phone?: string | null;
+  country: 'FR' | 'GB' | 'DE' | 'NL' | 'BE' | 'CH' | 'ES' | 'IT';
+  registryNumber: string;
+  specialty: 'plastic-surgery' | 'ent' | 'maxillofacial' | 'oculoplastic';
+  city: string;
+  interventions: ('rhinoplasty' | 'abdominoplasty' | 'breast-augmentation')[];
+  languages?: ('fr' | 'en' | 'de' | 'nl' | 'es' | 'it' | 'ar' | 'pt')[] | null;
+  locale?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -465,6 +506,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'surgeons';
         value: number | Surgeon;
+      } | null)
+    | ({
+        relationTo: 'surgeon-applications';
+        value: number | SurgeonApplication;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -759,6 +804,17 @@ export interface SurgeonsSelect<T extends boolean = true> {
   verification?:
     | T
     | {
+        guide?: T;
+        checks?:
+          | T
+          | {
+              registryIdentity?: T;
+              specialtyTitle?: T;
+              noSanction?: T;
+              insurance?: T;
+              facility?: T;
+            };
+        insuranceExpiresAt?: T;
         status?: T;
         renew?: T;
         verifiedAt?: T;
@@ -766,6 +822,27 @@ export interface SurgeonsSelect<T extends boolean = true> {
         evidence?: T;
       };
   subscriptionActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "surgeon-applications_select".
+ */
+export interface SurgeonApplicationsSelect<T extends boolean = true> {
+  status?: T;
+  notes?: T;
+  guide?: T;
+  fullName?: T;
+  email?: T;
+  phone?: T;
+  country?: T;
+  registryNumber?: T;
+  specialty?: T;
+  city?: T;
+  interventions?: T;
+  languages?: T;
+  locale?: T;
   updatedAt?: T;
   createdAt?: T;
 }

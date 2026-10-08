@@ -15,6 +15,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx --env-file-if-exists=.env.local scripts/db-migrate.mts",
     "leads:purge": "tsx --env-file-if-exists=.env.local scripts/leads-purge.mts",
+    "launch:check": "tsx --env-file-if-exists=.env.local scripts/launch-check.mts",
     "keys:generate": "tsx scripts/generate-keys.mts",
     "pro:create-user": "tsx --env-file-if-exists=.env.local scripts/pro-create-user.mts",
     "cms:migrate": "payload migrate",

@@ -24,7 +24,8 @@
     "disclaimer": "Les informations de ce site ne remplacent pas une consultation médicale. Seul un chirurgien qualifié, après examen, peut vous indiquer si une intervention est adaptée à votre situation.",
     "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant.",
     "pro": "Espace pro",
-    "glossary": "Lexique"
+    "glossary": "Lexique",
+    "join": "Vous êtes chirurgien ?"
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -235,7 +236,9 @@
       "none": "Aucun chirurgien vérifié ne pratique encore cette intervention dans ce pays. Nous ne pouvons pas transmettre votre demande pour l'instant : revenez à l'étape 1 pour modifier votre choix, ou consultez l'annuaire plus tard.",
       "max": "Vous avez choisi {max} chirurgiens, le maximum. Décochez-en un pour en choisir un autre.",
       "profile": "Voir la fiche (nouvel onglet)"
-    }
+    },
+    "pausedTitle": "Les demandes ouvrent bientôt",
+    "pausedText": "Nous terminons la vérification des chirurgiens de l'annuaire avant d'accepter des demandes de consultation. En attendant, les fiches d'intervention et les guides sont en accès libre."
   },
   "pages": {
     "legal": {
@@ -284,7 +287,8 @@
       "codeHelp": "Saisissez le code à 6 chiffres affiché par votre application d'authentification, ou l'un de vos codes de secours.",
       "code": "Code",
       "verify": "Se connecter",
-      "noAccount": "Pas encore de compte ? L'inscription se fait après vérification de votre inscription à l'Ordre ou au registre de votre pays. Écrivez-nous pour en faire la demande."
+      "noAccount": "Pas encore de compte ? L'accès est ouvert après vérification de votre inscription au registre officiel de votre pays.",
+      "apply": "Déposer une candidature"
     },
     "security": {
       "title": "Activer la double authentification",
@@ -393,6 +397,17 @@
       "subject": "Réinitialisation de votre mot de passe",
       "body": "Bonjour {name}, une réinitialisation du mot de passe de votre compte professionnel a été demandée. Si ce n'est pas vous, ignorez cet e-mail : votre mot de passe reste inchangé.",
       "action": "Choisir un nouveau mot de passe"
+    },
+    "application": {
+      "subject": "Nous avons bien reçu votre candidature",
+      "greeting": "Bonjour {name},",
+      "body": "Merci pour votre candidature. Avant toute publication, nous vérifions votre inscription et votre titre de spécialiste au registre officiel de votre pays, ainsi que votre assurance et l'autorisation de votre lieu d'exercice.",
+      "next": "Nous revenons vers vous sous 2 jours ouvrés pour la suite : un échange de 20 minutes, puis le contrat d'abonnement. Aucun profil n'est publié sans votre validation."
+    },
+    "applicationTeam": {
+      "subject": "Nouvelle candidature : {name}",
+      "body": "{name} ({city}, {country}) a déposé une candidature. Faites les contrôles du pays avant toute réponse.",
+      "action": "Ouvrir la candidature dans le CMS"
     }
   },
   "manage": {
@@ -436,5 +451,63 @@
     "alphabet": "Index alphabétique",
     "usedIn": "Fiches qui emploient ce terme",
     "backToGlossary": "Retour au lexique"
+  },
+  "join": {
+    "metaTitle": "Chirurgiens : rejoindre l'annuaire",
+    "description": "Vous êtes chirurgien qualifié ? Déposez votre candidature : nous vérifions votre titre au registre officiel avant toute publication. Abonnement fixe, sans commission ni classement payant.",
+    "title": "Chirurgiens : rejoindre l'annuaire",
+    "lead": "L'annuaire ne publie que des chirurgiens dont nous avons vérifié le titre au registre officiel de leur pays. La candidature prend deux minutes.",
+    "modelTitle": "Notre modèle",
+    "model": [
+      "Un abonnement fixe : aucune commission sur les interventions, aucun paiement par demande reçue.",
+      "Un classement alphabétique : personne ne peut payer pour apparaître plus haut.",
+      "Le patient choisit lui-même 1 à 3 chirurgiens ; sa demande ne part qu'à eux.",
+      "Ni avis, ni photos avant/après, ni prix sur votre profil, conformément aux règles de votre pays."
+    ],
+    "stepsTitle": "Les étapes",
+    "steps": [
+      "Vous déposez votre candidature.",
+      "Nous vérifions votre inscription, votre titre de spécialiste, votre assurance et l'autorisation de votre lieu d'exercice.",
+      "Un échange de 20 minutes, puis la signature du contrat d'abonnement et de la charte éditoriale.",
+      "Nous créons votre compte (double authentification obligatoire) et rédigeons votre profil, que vous validez avant publication."
+    ],
+    "formTitle": "Votre candidature",
+    "fields": {
+      "fullName": "Nom complet, tel qu'inscrit au registre",
+      "fullNameHint": "Exemple : Dr Claire Martin",
+      "email": "Adresse e-mail professionnelle",
+      "phone": "Téléphone professionnel (facultatif)",
+      "country": "Pays d'exercice",
+      "registryNumber": "Numéro au registre officiel",
+      "registryNumberHint": "RPPS en France, numéro GMC au Royaume-Uni, BIG aux Pays-Bas…",
+      "specialty": "Spécialité",
+      "city": "Ville d'exercice",
+      "interventions": "Interventions que vous pratiquez",
+      "languages": "Langues de consultation",
+      "consent": "J'accepte que ces informations professionnelles soient utilisées pour vérifier ma candidature et me recontacter.",
+      "website": "Ne pas remplir ce champ",
+      "choose": "Choisir"
+    },
+    "privacy": "Nous conservons une candidature refusée 12 mois au plus. Détails dans notre",
+    "privacyLink": "politique de confidentialité",
+    "submit": "Envoyer ma candidature",
+    "sending": "Envoi en cours…",
+    "successTitle": "Candidature envoyée",
+    "success": "Merci. Vous allez recevoir un accusé de réception par e-mail. Nous revenons vers vous sous 2 jours ouvrés, après vérification au registre.",
+    "errorSummary": "Certains champs sont à corriger.",
+    "errors": {
+      "required": "Ce champ est obligatoire.",
+      "fullName": "Indiquez votre nom complet.",
+      "email": "Adresse e-mail invalide.",
+      "phone": "Numéro de téléphone invalide.",
+      "registryNumber": "Numéro invalide : 3 à 30 lettres ou chiffres.",
+      "city": "Indiquez votre ville d'exercice.",
+      "interventions": "Choisissez au moins une intervention.",
+      "outsideSpecialty": "Une ou plusieurs interventions ne relèvent pas de la spécialité choisie.",
+      "languages": "Choisissez au moins une langue.",
+      "consent": "Votre accord est nécessaire pour traiter la candidature.",
+      "spam": "La candidature n'a pas pu être envoyée. Merci de réessayer.",
+      "unavailable": "Le service est momentanément indisponible. Merci de réessayer plus tard."
+    }
   }
 }

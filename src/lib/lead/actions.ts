@@ -9,11 +9,13 @@ import type { InterventionId } from "@/content/types";
 import { COUNTRY_CODES, COUNTRY_RULES, type CountryCode } from "@/lib/countries";
 import { getEmailSender } from "@/lib/email";
 import { absoluteUrl } from "@/lib/seo";
+import { requestsPaused } from "./availability";
 import { notifyNewLead } from "./notify";
 import { getLeadRepository, type LeadRepository, type StoredLead } from "./repository";
 import { submitLead, type SubmitResult } from "./submit";
 
 export async function submitLeadAction(input: unknown): Promise<SubmitResult> {
+  if (requestsPaused()) return { ok: false, reason: "unavailable" };
   const locale = await getLocale();
   let repository: LeadRepository;
   try {

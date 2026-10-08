@@ -6,7 +6,7 @@ import type { Surgeon } from "./types";
 const now = new Date("2026-10-07T12:00:00Z");
 const surgeon = (overrides: Partial<Surgeon> = {}): Surgeon => ({
   ...SURGEON_FIXTURES[0],
-  verification: { status: "verified", verifiedAt: "2026-06-01" },
+  verification: { status: "verified", verifiedAt: "2026-06-01", insuranceExpiresAt: "2027-01-01" },
   subscriptionActive: true,
   ...overrides,
 });
@@ -17,12 +17,17 @@ describe("publication dans l'annuaire", () => {
   });
 
   it("retire un profil dont le contrôle annuel est dépassé", () => {
-    expect(isListed(surgeon({ verification: { status: "verified", verifiedAt: "2025-10-06" } }), now)).toBe(false);
-    expect(isListed(surgeon({ verification: { status: "verified", verifiedAt: "2025-10-08" } }), now)).toBe(true);
+    expect(isListed(surgeon({ verification: { status: "verified", verifiedAt: "2025-10-06", insuranceExpiresAt: "2027-01-01" } }), now)).toBe(false);
+    expect(isListed(surgeon({ verification: { status: "verified", verifiedAt: "2025-10-08", insuranceExpiresAt: "2027-01-01" } }), now)).toBe(true);
   });
 
   it.each(["pending", "suspended"] as const)("ne publie pas un profil %s", (status) => {
     expect(isListed(surgeon({ verification: { status, verifiedAt: "2026-06-01" } }), now)).toBe(false);
+  });
+
+  it("retire un profil dont l'assurance est expirée ou inconnue", () => {
+    expect(isListed(surgeon({ verification: { status: "verified", verifiedAt: "2026-06-01", insuranceExpiresAt: "2026-10-07" } }), now)).toBe(false);
+    expect(isListed(surgeon({ verification: { status: "verified", verifiedAt: "2026-06-01" } }), now)).toBe(false);
   });
 
   it("ne publie pas un chirurgien sans abonnement", () => {

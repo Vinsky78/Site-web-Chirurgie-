@@ -16,13 +16,18 @@ export function verificationExpiresAt(verifiedAt: string): Date {
   return date;
 }
 
-/** Un chirurgien est publié s'il est vérifié depuis moins d'un an et abonné. */
+/**
+ * Un chirurgien est publié s'il est vérifié depuis moins d'un an, assuré à
+ * date et abonné.
+ */
 export function isListed(surgeon: Surgeon, now: Date = new Date()): boolean {
-  const { status, verifiedAt } = surgeon.verification;
+  const { status, verifiedAt, insuranceExpiresAt } = surgeon.verification;
   return (
     status === "verified" &&
     verifiedAt !== undefined &&
     verificationExpiresAt(verifiedAt) > now &&
+    insuranceExpiresAt !== undefined &&
+    new Date(insuranceExpiresAt) > now &&
     surgeon.subscriptionActive
   );
 }
