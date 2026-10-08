@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { redirect as nextRedirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { redirect } from "@/i18n/navigation";
+import { Link, redirect } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { canAccessAdmin, getProSession } from "@/lib/auth";
 import { safeNext } from "@/lib/auth/redirects";
@@ -24,7 +24,12 @@ export default async function SignInPage({ params, searchParams }: PageProps<"/[
       <h1 className="font-serif text-h1 text-primary-strong">{t("title")}</h1>
       <p className="mt-4 text-muted">{t("lead")}</p>
       <SignInForm next={target} />
-      <p className="mt-10 text-small text-muted">{t("noAccount")}</p>
+      <p className="mt-10 text-small text-muted">
+        {t("noAccount")}{" "}
+        <Link href="/rejoindre" className="underline underline-offset-4">
+          {t("apply")}
+        </Link>
+      </p>
     </div>
   );
 }

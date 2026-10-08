@@ -7,7 +7,14 @@ import { COUNTRY_CODES } from "@/lib/countries";
 import { slugify } from "@/lib/slug";
 import { canEditContent, isAdmin, isAdminField, isAuthenticated } from "../roles";
 import { revalidateDirectory } from "../revalidate";
-import { nextVerificationState, type VerificationState } from "../verification";
+import {
+  CHECK_LABELS,
+  interventionsOutsideSpecialty,
+  VERIFICATION_CHECKS,
+  verificationGuide,
+} from "@/content/surgeons/verification";
+import type { CountryCode } from "@/lib/countries";
+import { nextVerificationState, VerificationBlockedError, type VerificationState } from "../verification";
 
 const SPECIALTY_LABELS: Record<(typeof SPECIALTIES)[number], string> = {
   "plastic-surgery": "Chirurgie plastique, reconstructrice et esthétique",
@@ -38,6 +45,16 @@ export const Surgeons: CollectionConfig = {
         if (!data.slug && data.displayName && data.city) {
           data.slug = slugify(`${String(data.displayName).replace(/^Dr\.?\s+/i, "")} ${data.city}`);
         }
+        if (data.specialty && Array.isArray(data.interventions)) {
+          const outside = interventionsOutsideSpecialty(data.specialty, data.interventions);
+          if (outside.length > 0) {
+            throw new ValidationError({
+              collection: collection.slug,
+              errors: [{ path: "interventions", message: `Hors de la spécialité déclarée : ${outside.join(", ")}.` }],
+              req,
+            });
+          }
+        }
         const terms = typeof data.bio === "string" ? findForbiddenTerms(data.bio) : [];
         if (terms.length > 0) {
           throw new ValidationError({
@@ -50,13 +67,22 @@ export const Surgeons: CollectionConfig = {
       },
     ],
     beforeChange: [
-      ({ data, originalDoc, req }) => {
-        data.verification = nextVerificationState({
-          requested: data.verification as VerificationState | undefined,
-          previous: originalDoc?.verification as VerificationState | undefined,
-          user: req.user,
-          now: new Date(),
-        });
+      ({ data, originalDoc, req, collection }) => {
+        try {
+          data.verification = nextVerificationState({
+            requested: data.verification as VerificationState | undefined,
+            previous: originalDoc?.verification as VerificationState | undefined,
+            user: req.user,
+            now: new Date(),
+          });
+        } catch (error) {
+          if (!(error instanceof VerificationBlockedError)) throw error;
+          throw new ValidationError({
+            collection: collection.slug,
+            errors: error.blockers.map((message) => ({ path: "verification.status", message })),
+            req,
+          });
+        }
         return data;
       },
     ],
@@ -154,10 +180,40 @@ export const Surgeons: CollectionConfig = {
       type: "group",
       admin: {
         position: "sidebar",
-        description: "Réservée aux administrateurs. Le profil n'est publié que vérifié depuis moins d'un an.",
+        description:
+          "Réservée aux administrateurs. « Vérifié » exige tous les contrôles du pays et une assurance valide. Le profil n'est publié que vérifié depuis moins d'un an et assuré.",
       },
       access: { update: isAdminField },
       fields: [
+        {
+          name: "guide",
+          label: "Contrôles pour ce pays",
+          type: "textarea",
+          virtual: true,
+          admin: { readOnly: true },
+          hooks: {
+            afterRead: [
+              ({ data }) => (data?.country ? verificationGuide(data.country as CountryCode) : "Choisir le pays d'exercice."),
+            ],
+          },
+        },
+        {
+          name: "checks",
+          label: "Contrôles faits",
+          type: "group",
+          fields: VERIFICATION_CHECKS.map((check) => ({
+            name: check,
+            label: CHECK_LABELS[check],
+            type: "checkbox" as const,
+            defaultValue: false,
+          })),
+        },
+        {
+          name: "insuranceExpiresAt",
+          label: "Fin de validité de l'assurance",
+          type: "date",
+          admin: { description: "Le profil est retiré automatiquement à cette date." },
+        },
         {
           name: "status",
           label: "Statut",

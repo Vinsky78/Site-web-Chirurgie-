@@ -8,6 +8,9 @@ import { INTERVENTION_IDS, type InterventionId } from "@/content/types";
 import { getListedSurgeons } from "@/content/surgeons";
 import { ACTIVE_COUNTRIES } from "@/lib/countries";
 import { INFO_PAGE_SLUGS } from "@/lib/pages";
+import { requestsPaused } from "@/lib/lead/availability";
+import { Link } from "@/i18n/navigation";
+import { Callout } from "@/components/ui/Callout";
 import { RequestForm, type SurgeonOption } from "./RequestForm";
 
 type Props = PageProps<"/[locale]/demande">;
@@ -29,7 +32,27 @@ export default async function RequestPage({ params, searchParams }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("form");
   const tDirectory = await getTranslations("directory");
+  const tNav = await getTranslations("nav");
   const { intervention, surgeon } = await searchParams;
+
+  if (requestsPaused()) {
+    return (
+      <div className="mx-auto max-w-reading px-4 py-12">
+        <h1 className="font-serif text-h1 text-primary-strong">{t("title")}</h1>
+        <Callout title={t("pausedTitle")} className="mt-8">
+          <p>{t("pausedText")}</p>
+          <p className="mt-4 flex flex-wrap gap-4">
+            <Link href="/interventions" className="underline underline-offset-4">
+              {tNav("interventions")}
+            </Link>
+            <Link href="/guides" className="underline underline-offset-4">
+              {tNav("guides")}
+            </Link>
+          </p>
+        </Callout>
+      </div>
+    );
+  }
 
   const options = (await getInterventions(locale as Locale)).map((item) => ({ id: item.id, title: item.title }));
   const initialIntervention = (INTERVENTION_IDS as readonly string[]).includes(String(intervention))

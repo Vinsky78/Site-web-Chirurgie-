@@ -8,6 +8,7 @@ import { GlossaryTerms } from "./cms/collections/GlossaryTerms";
 import { Guides } from "./cms/collections/Guides";
 import { Interventions } from "./cms/collections/Interventions";
 import { InterventionSubpages } from "./cms/collections/InterventionSubpages";
+import { SurgeonApplications } from "./cms/collections/SurgeonApplications";
 import { Surgeons } from "./cms/collections/Surgeons";
 import { Users } from "./cms/collections/Users";
 
@@ -28,7 +29,7 @@ export default buildConfig({
     importMap: { baseDir: dirname },
     meta: { titleSuffix: " · Éclaira CMS" },
   },
-  collections: [Users, Interventions, InterventionSubpages, Guides, GlossaryTerms, Surgeons],
+  collections: [Users, Interventions, InterventionSubpages, Guides, GlossaryTerms, Surgeons, SurgeonApplications],
   editor: lexicalEditor(),
   localization: {
     locales: [...routing.locales],

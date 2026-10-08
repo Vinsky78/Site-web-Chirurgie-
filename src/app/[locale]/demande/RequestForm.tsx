@@ -10,6 +10,7 @@ import type { SubmitResult } from "@/lib/lead/submit";
 import { ACTIVE_COUNTRIES } from "@/lib/countries";
 import { slugify } from "@/lib/slug";
 import type { InterventionId } from "@/content/types";
+import { trackEvent } from "@/lib/analytics";
 import { buttonClasses } from "@/components/ui/button";
 
 type Field = keyof LeadInput;
@@ -175,7 +176,11 @@ export function RequestForm({ interventions, initialIntervention, surgeons, init
   const goNext = async () => {
     const stepErrors = await validateStep(step, values, startedAt, selected, available.length);
     setErrors(stepErrors);
-    if (Object.keys(stepErrors).length === 0) setStepIndex((i) => i + 1);
+    if (Object.keys(stepErrors).length === 0) {
+      // Mesure d'audience : seulement l'étape atteinte, jamais une réponse.
+      trackEvent("Demande : étape", { step: STEPS[stepIndex + 1] });
+      setStepIndex((i) => i + 1);
+    }
   };
 
   const submit = async () => {
@@ -196,6 +201,7 @@ export function RequestForm({ interventions, initialIntervention, surgeons, init
           setResult(null);
           return;
         }
+        if (outcome.ok) trackEvent("Demande envoyée");
         setResult(outcome);
       } catch {
         setResult({ ok: false, reason: "unavailable" });

@@ -4,6 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/Header";
+import { Analytics } from "@/components/Analytics";
 import { Footer } from "@/components/Footer";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { sans, serif } from "../fonts";
@@ -41,6 +42,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             {children}
           </main>
           <Footer />
+          <Analytics />
         </NextIntlClientProvider>
       </body>
     </html>

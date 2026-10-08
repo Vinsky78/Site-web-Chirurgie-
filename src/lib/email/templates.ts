@@ -107,3 +107,28 @@ export function proPasswordEmail(
     footer: t("footerPro"),
   });
 }
+
+/** Accusé de réception au chirurgien candidat (Phase 7). */
+export function applicationConfirmationEmail(locale: Locale, data: { email: string; name: string }): EmailMessage {
+  const t = translator(locale);
+  return render(locale, { email: data.email, name: data.name }, t("application.subject"), "surgeon-application", {
+    paragraphs: [t("application.greeting", { name: data.name }), t("application.body"), t("application.next")],
+    footer: t("footerPro"),
+  });
+}
+
+/** Alerte à l'équipe : une candidature attend son contrôle dans le CMS. Données professionnelles seulement. */
+export function applicationTeamEmail(data: {
+  email: string;
+  fullName: string;
+  country: string;
+  city: string;
+  adminUrl: string;
+}): EmailMessage {
+  const t = translator("fr");
+  return render("fr", { email: data.email }, t("applicationTeam.subject", { name: data.fullName }), "surgeon-application-team", {
+    paragraphs: [t("applicationTeam.body", { name: data.fullName, country: data.country, city: data.city })],
+    action: { label: t("applicationTeam.action"), url: data.adminUrl },
+    footer: t("footerPro"),
+  });
+}

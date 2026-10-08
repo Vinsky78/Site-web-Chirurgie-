@@ -24,7 +24,8 @@
     "disclaimer": "The information on this site does not replace a medical consultation. Only a qualified surgeon, after examining you, can tell you whether a procedure is right for you.",
     "independence": "Independent platform: no commission on procedures, no paid rankings.",
     "pro": "Professional area",
-    "glossary": "Glossary"
+    "glossary": "Glossary",
+    "join": "Are you a surgeon?"
   },
   "home": {
     "title": "Understand before you decide",
@@ -235,7 +236,9 @@
       "none": "No verified surgeon offers this procedure in this country yet. We cannot send your request for now: go back to step 1 to change your choice, or check the directory later.",
       "max": "You have chosen {max} surgeons, the maximum. Untick one to choose another.",
       "profile": "View profile (new tab)"
-    }
+    },
+    "pausedTitle": "Requests open soon",
+    "pausedText": "We are finishing checking the surgeons in the directory before accepting consultation requests. In the meantime, the procedure pages and guides are freely available."
   },
   "pages": {
     "legal": {
@@ -283,7 +286,8 @@
       "codeHelp": "Enter the 6-digit code shown in your authenticator app, or one of your backup codes.",
       "code": "Code",
       "verify": "Sign in",
-      "noAccount": "No account yet? Accounts are opened once we have checked your registration with your country's medical register. Contact us to apply."
+      "noAccount": "No account yet? Accounts are opened once we have checked your registration with your country's official register.",
+      "apply": "Apply to join"
     },
     "security": {
       "title": "Turn on two-factor authentication",
@@ -392,6 +396,17 @@
       "subject": "Reset your password",
       "body": "Hello {name}, a password reset was requested for your professional account. If this was not you, ignore this email: your password stays the same.",
       "action": "Choose a new password"
+    },
+    "application": {
+      "subject": "We have received your application",
+      "greeting": "Dear {name},",
+      "body": "Thank you for applying. Before anything is published, we check your registration and specialist title with the official register of your country, as well as your indemnity cover and the registration of your practice.",
+      "next": "We will get back to you within 2 working days about next steps: a 20-minute call, then the subscription agreement. No profile is published without your approval."
+    },
+    "applicationTeam": {
+      "subject": "New application: {name}",
+      "body": "{name} ({city}, {country}) has applied. Run the country checks before replying.",
+      "action": "Open the application in the CMS"
     }
   },
   "manage": {
@@ -435,5 +450,63 @@
     "alphabet": "Alphabetical index",
     "usedIn": "Procedure pages that use this term",
     "backToGlossary": "Back to the glossary"
+  },
+  "join": {
+    "metaTitle": "Surgeons: join the directory",
+    "description": "Are you a qualified surgeon? Apply to join: we check your specialist registration with the official register before anything is published. Fixed subscription, no commission, no paid ranking.",
+    "title": "Surgeons: join the directory",
+    "lead": "The directory only lists surgeons whose specialist title we have checked with the official register of their country. Applying takes two minutes.",
+    "modelTitle": "How we work",
+    "model": [
+      "A fixed subscription: no commission on procedures, no payment per request received.",
+      "Alphabetical order: nobody can pay to be listed higher.",
+      "Patients choose 1 to 3 surgeons themselves; their request goes only to them.",
+      "No reviews, before-and-after photos or prices on your profile, in line with the rules of your country."
+    ],
+    "stepsTitle": "Next steps",
+    "steps": [
+      "You submit your application.",
+      "We check your registration, specialist title, indemnity cover and the registration of your practice.",
+      "A 20-minute call, then you sign the subscription agreement and the editorial charter.",
+      "We create your account (two-factor authentication required) and draft your profile, which you approve before it goes live."
+    ],
+    "formTitle": "Your application",
+    "fields": {
+      "fullName": "Full name, as on the register",
+      "fullNameHint": "For example: Mr John Smith FRCS (Plast)",
+      "email": "Professional email address",
+      "phone": "Professional phone number (optional)",
+      "country": "Country of practice",
+      "registryNumber": "Official register number",
+      "registryNumberHint": "GMC number in the UK, RPPS in France, BIG in the Netherlands…",
+      "specialty": "Specialty",
+      "city": "City of practice",
+      "interventions": "Procedures you perform",
+      "languages": "Consultation languages",
+      "consent": "I agree that this professional information may be used to check my application and contact me.",
+      "website": "Leave this field empty",
+      "choose": "Choose"
+    },
+    "privacy": "We keep a rejected application for 12 months at most. Details in our",
+    "privacyLink": "privacy policy",
+    "submit": "Send my application",
+    "sending": "Sending…",
+    "successTitle": "Application sent",
+    "success": "Thank you. You will receive an acknowledgement by email. We will get back to you within 2 working days, after checking the register.",
+    "errorSummary": "Some fields need correcting.",
+    "errors": {
+      "required": "This field is required.",
+      "fullName": "Enter your full name.",
+      "email": "Invalid email address.",
+      "phone": "Invalid phone number.",
+      "registryNumber": "Invalid number: 3 to 30 letters or digits.",
+      "city": "Enter your city of practice.",
+      "interventions": "Choose at least one procedure.",
+      "outsideSpecialty": "One or more procedures fall outside the chosen specialty.",
+      "languages": "Choose at least one language.",
+      "consent": "We need your agreement to process the application.",
+      "spam": "The application could not be sent. Please try again.",
+      "unavailable": "The service is temporarily unavailable. Please try again later."
+    }
   }
 }

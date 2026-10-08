@@ -20,6 +20,7 @@ const PAGES = [
   "/fr/demande",
   "/fr/informations/confidentialite",
   "/fr/pro/connexion",
+  "/fr/rejoindre",
   "/fr/page-inexistante",
 ];
 

@@ -2,7 +2,7 @@
 
 Plateforme européenne d'information sur la chirurgie et la médecine esthétiques, avec demande de consultation auprès de chirurgiens qualifiés et vérifiés.
 
-> **Statut : en développement (Phase 5).** Les contenus médicaux sont des brouillons à faire relire par un chirurgien qualifié ; ils sont exclus de l'indexation tant que ce n'est pas fait.
+> **Statut : prêt pour la bêta privée (Phase 7).** Les contenus médicaux sont des brouillons à faire relire par un chirurgien qualifié ; ils sont exclus de l'indexation tant que ce n'est pas fait. La mise en ligne attend les prérequis de la section « Mise en production ».
 
 ## Ce qui est en place
 
@@ -23,6 +23,9 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 - E-mails (Brevo) sans aucune donnée de santé : confirmation au patient avec son lien personnel, alerte sans détail aux chirurgiens, invitation et mot de passe oublié pour les comptes pro.
 - Lien personnel du patient (`/fr/ma-demande/…`, valable jusqu'à la suppression automatique) : consulter sa demande, la supprimer ; les chirurgiens en sont prévenus.
 - Back-office `/admin` et son API accessibles seulement à l'équipe interne après double authentification.
+- Candidature des chirurgiens (`/fr/rejoindre`, `/en-gb/join`) : données professionnelles seulement, intervention hors spécialité refusée, candidature traitée dans `/admin` avec les contrôles du pays.
+- Vérification par pays : registre, titre de spécialiste, sanctions, assurance et autorisation du lieu d'exercice à cocher avant « Vérifié » ; profil retiré à l'expiration de l'assurance.
+- Mesure d'audience sans cookie (Plausible) et Core Web Vitals des vrais visiteurs, inactives sans `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`.
 - Contrôles qualité en CI (`e2e/quality.spec.ts`) : WCAG 2.2 AA (axe-core) sur chaque gabarit, réorganisation à 320 px, balises SEO et Open Graph, budget de JavaScript et de polices.
 - Tests unitaires (Vitest) et de bout en bout sur mobile (Playwright), intégration continue GitHub Actions.
 
@@ -94,6 +97,7 @@ Une fiche modifiée par un autre compte qu'un relecteur médical repasse en brou
 | `npm run db:generate` | Génère une migration après modification de `src/db/schema` |
 | `npm run db:migrate` | Applique les migrations (`DATABASE_URL` requis) |
 | `npm run leads:purge` | Supprime les demandes de plus de 6 mois (tâche quotidienne) |
+| `npm run launch:check` | Contrôle de mise en production de l'environnement (code de sortie 1 si bloquant) |
 | `npm run keys:generate` | Génère des clés de chiffrement pour l'environnement local |
 | `npm run pro:create-user` | Crée un compte pro ou d'équipe et lui envoie un lien pour choisir son mot de passe |
 | `npm run cms:migrate` | Applique les migrations du CMS (schéma `cms`) |
@@ -145,6 +149,23 @@ docs/decisions.md         Décisions et hypothèses
 4. À la première connexion (`/fr/pro/connexion`), la personne active la double authentification avec une application (QR code, codes de secours) avant tout accès.
 5. L'équipe ouvre `/admin` : elle passe d'abord par cette connexion avec code, puis par la connexion Payload.
 
+## Mise en production
+
+Plan complet dans le document « Phase 7 – Lancement et croissance ». En bref :
+
+1. Prérequis : hébergeur certifié HDS sous contrat, AIPD et registre des traitements, validation juridique France, fiches relues par le comité médical, au moins 3 chirurgiens vérifiés par ville de lancement.
+2. Variables : celles de `.env.example`, plus `HDS_PROVIDER`, `TEAM_EMAIL`, `CONTENT_SOURCE=cms` et, pendant la bêta, `REQUESTS_PAUSED=1` (formulaire fermé).
+3. `npm run db:migrate`, `npm run cms:migrate`, puis `npm run launch:check` : aucune erreur bloquante.
+4. Ouvrir les demandes en retirant `REQUESTS_PAUSED` quand l'annuaire est prêt.
+
+## Vérifier un chirurgien
+
+1. Ouvrir la candidature dans `/admin` (Candidatures de chirurgiens) : le cadre « Contrôles pour ce pays » donne le registre et le titre attendu.
+2. Créer la fiche du chirurgien, cocher chaque contrôle fait, saisir la fin de validité de l'assurance, conserver la capture du registre dans la preuve interne, puis passer le statut à « Vérifié ».
+3. Créer son compte (`npm run pro:create-user`) et cocher « Abonnement en cours » à la signature : le profil est publié.
+4. Chaque année, refaire les contrôles et cocher « Contrôle annuel effectué aujourd'hui » ; mettre à jour la date d'assurance à chaque renouvellement.
+
 ## Prochaines étapes
 
-- Sous-pages des dossiers d'intervention, guides et glossaire.
+- Facturation de l'abonnement et cabinets à plusieurs chirurgiens.
+- Ouverture du Royaume-Uni, puis d'un troisième marché.

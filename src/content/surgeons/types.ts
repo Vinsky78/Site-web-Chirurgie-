@@ -13,6 +13,8 @@ export interface SurgeonVerification {
   status: "pending" | "verified" | "suspended";
   /** Date du dernier contrôle au registre officiel (ISO 8601). */
   verifiedAt?: string;
+  /** Fin de validité de l'assurance responsabilité civile professionnelle (ISO 8601). */
+  insuranceExpiresAt?: string;
 }
 
 /**

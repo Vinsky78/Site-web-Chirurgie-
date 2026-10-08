@@ -223,6 +223,7 @@ export function surgeonFromCms(doc: CmsSurgeon): Surgeon {
     verification: {
       status: doc.verification.status,
       verifiedAt: doc.verification.verifiedAt ?? undefined,
+      insuranceExpiresAt: doc.verification.insuranceExpiresAt ?? undefined,
     },
     subscriptionActive: doc.subscriptionActive === true,
   };
