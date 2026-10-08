@@ -3,16 +3,16 @@ import type { Locale } from "@/i18n/routing";
 import { CATEGORY_IDS } from "@/content/types";
 import { getInterventions } from "@/content/interventions";
 import { InterventionCard } from "@/components/InterventionCard";
-import { localeAlternates } from "@/lib/seo";
+import { localeAlternates, withSocial } from "@/lib/seo";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/interventions">) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "intervention" });
-  return {
+  return withSocial(locale as Locale, {
     title: t("listTitle"),
     description: t("listLead"),
     alternates: localeAlternates(locale as Locale, () => "/interventions"),
-  };
+  });
 }
 
 export default async function InterventionsPage({ params }: PageProps<"/[locale]/interventions">) {

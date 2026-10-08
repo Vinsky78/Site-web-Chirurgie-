@@ -8,7 +8,7 @@ import { citiesWithPage, filterSurgeons } from "@/content/surgeons/rules";
 import { SurgeonCard } from "@/components/SurgeonCard";
 import { buttonClasses } from "@/components/ui/button";
 import { LOCALE_COUNTRY } from "@/lib/countries";
-import { localeAlternates } from "@/lib/seo";
+import { localeAlternates, withSocial } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/chirurgiens">;
 
@@ -20,14 +20,14 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const query = await searchParams;
   const surgeons = await getListedSurgeons(LOCALE_COUNTRY[locale as Locale], locale as Locale);
   const filtered = Boolean(param(query.intervention) || param(query.city));
-  return {
+  return withSocial(locale as Locale, {
     title: t("title"),
     description: t("lead"),
     // Chaque marché a son propre annuaire (chirurgiens du pays) : pas d'équivalent dans les autres langues.
     alternates: localeAlternates(locale as Locale, (l) => (l === locale ? "/chirurgiens" : undefined)),
     // Résultats filtrés et annuaire encore vide : pas d'indexation (contenu mince ou dupliqué).
     robots: filtered || surgeons.length === 0 ? { index: false, follow: true } : undefined,
-  };
+  });
 }
 
 export default async function DirectoryPage({ params, searchParams }: Props) {

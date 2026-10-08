@@ -86,3 +86,14 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Relecture** : mêmes règles que les fiches pour les trois gabarits (seul un relecteur médical valide, toute modification du contenu par un autre compte repasse en brouillon, charte testée à l'enregistrement). Le lexique, prévu « relecture éditeur » en Phase 2, suit la règle médicale, plus stricte.
 - **Indexation** : chaque contenu est indexé (et listé dans le sitemap) seulement une fois relu, indépendamment de sa fiche.
 - **Contenus de la vague 1** : 30 sous-pages, 12 guides et 30 entrées de lexique rédigés en brouillon (France et Royaume-Uni adaptés, non traduits), plus courts que les longueurs cibles de la Phase 2. Ils servent de base au rédacteur médical et au comité de relecture.
+
+## SEO, performance et accessibilité (Phase 6)
+
+- **Mesure** : axe-core (WCAG 2.2 AA) sur un exemplaire de chaque gabarit et Lighthouse mobile (4G lente simulée, médiane de 3 passages). Résultats et checklist complète dans le document Phase 6.
+- **En-tête `Critical-CH` de Payload** limité à `/admin` (`src/lib/headers.ts`) : sur tout le site, il faisait relancer par Chrome la première navigation de chaque visiteur (environ 600 ms sur mobile).
+- **Polices** : seul le jeu `latin` d'Inter est préchargé ; Source Serif (titres) se charge sans préchargement. latin-ext reste disponible à la demande.
+- **Traductions côté client** : la mise en page n'en transmet plus aucune ; chaque formulaire reçoit son seul espace de noms (`ClientMessages`).
+- **Schéma Zod du formulaire** chargé après l'affichage (`src/lib/lead/options.ts` sans dépendance) : environ 35 Ko de moins avant le premier rendu de /demande.
+- **404** : une adresse dont le premier segment contient un point (`/llms.txt`) n'est plus prise pour une locale (erreur 500) ; une adresse inconnue sous une locale affiche la 404 du site avec sa langue.
+- **Partage** : Open Graph et carte X sur toutes les pages publiques, image par marché (`opengraph-image.tsx`), favicon et icône de la marque (le favicon de Next.js pesait 26 Ko).
+- **Contrôles en CI** (`e2e/quality.spec.ts`) : zéro violation axe, réorganisation à 320 px, lien d'évitement, balises SEO, descriptions uniques, 404, absence de `Critical-CH`, budget de JavaScript et de polices par page. Le LCP de laboratoire n'est pas un critère bloquant (trop variable d'un passage à l'autre) : il est suivi à la main avec Lighthouse, puis sur données réelles après le lancement.

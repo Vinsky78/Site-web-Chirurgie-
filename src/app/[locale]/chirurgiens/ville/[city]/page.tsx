@@ -7,7 +7,7 @@ import { getListedSurgeons } from "@/content/surgeons";
 import { citiesWithPage, filterSurgeons } from "@/content/surgeons/rules";
 import { SurgeonCard } from "@/components/SurgeonCard";
 import { LOCALE_COUNTRY } from "@/lib/countries";
-import { localeAlternates } from "@/lib/seo";
+import { localeAlternates, withSocial } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/chirurgiens/ville/[city]">;
 
@@ -28,13 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await load(locale, city);
   if (!data) return {};
   const t = await getTranslations({ locale, namespace: "directory" });
-  return {
+  return withSocial(locale as Locale, {
     title: t("cityTitle", { city: data.city.name }),
     description: t("cityLead", { city: data.city.name, count: data.city.count }),
     alternates: localeAlternates(locale as Locale, (l) =>
       l === locale ? { pathname: "/chirurgiens/ville/[city]", params: { city } } : undefined,
     ),
-  };
+  });
 }
 
 export default async function CityPage({ params }: Props) {

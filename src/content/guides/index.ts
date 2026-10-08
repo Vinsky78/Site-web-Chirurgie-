@@ -1,10 +1,11 @@
 import { cache } from "react";
-import { routing, type Locale } from "@/i18n/routing";
+import { isLocale, routing, type Locale } from "@/i18n/routing";
 import { GUIDE_IDS, type Guide, type GuideId, type InterventionId } from "../types";
 import { contentSource } from "../interventions";
 import { GUIDES_FROM_FILES } from "./files";
 
 const loadLocale = cache(async (locale: Locale): Promise<Guide[]> => {
+  if (!isLocale(locale)) return [];
   const items =
     contentSource() === "files"
       ? GUIDES_FROM_FILES[locale]

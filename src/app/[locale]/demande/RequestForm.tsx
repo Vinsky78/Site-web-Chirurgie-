@@ -4,17 +4,8 @@ import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { submitLeadAction } from "@/lib/lead/actions";
-import {
-  BUDGETS,
-  createLeadSchema,
-  isPregnancyRelevant,
-  MAX_SURGEONS,
-  SMOKER,
-  STEP_FIELDS,
-  TIMEFRAMES,
-  YES_NO,
-  type LeadInput,
-} from "@/lib/lead/schema";
+import { BUDGETS, isPregnancyRelevant, MAX_SURGEONS, SMOKER, STEP_FIELDS, TIMEFRAMES, YES_NO } from "@/lib/lead/options";
+import type { LeadInput } from "@/lib/lead/schema";
 import type { SubmitResult } from "@/lib/lead/submit";
 import { ACTIVE_COUNTRIES } from "@/lib/countries";
 import { slugify } from "@/lib/slug";
@@ -89,13 +80,23 @@ function toCandidate(values: Values, startedAt: number, surgeons: string[]): Rec
   };
 }
 
-function validateStep(step: Step, values: Values, startedAt: number, surgeons: string[], available: number): Errors {
+/** Schéma Zod chargé à part, après l'affichage : il ne pèse pas sur le premier rendu. */
+const loadSchema = () => import("@/lib/lead/schema");
+
+async function validateStep(
+  step: Step,
+  values: Values,
+  startedAt: number,
+  surgeons: string[],
+  available: number,
+): Promise<Errors> {
   if (step === "reflection") return {};
   if (step === "surgeons") {
     if (available === 0) return { surgeons: "surgeonsNone" };
     if (surgeons.length === 0) return { surgeons: "surgeonsRequired" };
   }
   const fields = STEP_FIELDS[step] as readonly Field[];
+  const { createLeadSchema } = await loadSchema();
   const result = createLeadSchema().safeParse(toCandidate(values, startedAt, surgeons));
   const errors: Errors = {};
   for (const issue of result.error?.issues ?? []) {
@@ -155,6 +156,11 @@ export function RequestForm({ interventions, initialIntervention, surgeons, init
     if (errorCount > 0) summaryRef.current?.focus();
   }, [errors, errorCount]);
 
+  // Précharge le schéma de validation une fois la page affichée, avant le premier clic.
+  useEffect(() => {
+    void loadSchema();
+  }, []);
+
   const set = (field: Field, value: string | boolean) => {
     setValues((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -166,14 +172,14 @@ export function RequestForm({ interventions, initialIntervention, surgeons, init
     error: errors[field] ? t(`errors.${errors[field]}`) : undefined,
   });
 
-  const goNext = () => {
-    const stepErrors = validateStep(step, values, startedAt, selected, available.length);
+  const goNext = async () => {
+    const stepErrors = await validateStep(step, values, startedAt, selected, available.length);
     setErrors(stepErrors);
     if (Object.keys(stepErrors).length === 0) setStepIndex((i) => i + 1);
   };
 
-  const submit = () => {
-    const stepErrors = validateStep("contact", values, startedAt, selected, available.length);
+  const submit = async () => {
+    const stepErrors = await validateStep("contact", values, startedAt, selected, available.length);
     setErrors(stepErrors);
     if (Object.keys(stepErrors).length > 0) return;
     startTransition(async () => {
@@ -219,8 +225,8 @@ export function RequestForm({ interventions, initialIntervention, surgeons, init
       className="mt-8"
       onSubmit={(event) => {
         event.preventDefault();
-        if (step === "contact") submit();
-        else goNext();
+        if (step === "contact") void submit();
+        else void goNext();
       }}
     >
       <p className="text-small font-medium text-primary">

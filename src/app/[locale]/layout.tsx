@@ -35,7 +35,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   return (
     <html lang={locale} className={`${sans.variable} ${serif.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={null}>
           <Header />
           <main id="contenu" tabIndex={-1} className="flex-1 focus:outline-none">
             {children}

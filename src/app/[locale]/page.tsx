@@ -2,29 +2,60 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getInterventions } from "@/content/interventions";
+import { getGuides } from "@/content/guides";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { InterventionCard } from "@/components/InterventionCard";
-import { localeAlternates } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, withSocial } from "@/lib/seo";
 import { buttonClasses } from "@/components/ui/button";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
-  return {
+  const tm = await getTranslations({ locale, namespace: "meta" });
+  return withSocial(locale as Locale, {
     title: t("title"),
+    description: tm("siteDescription"),
     alternates: localeAlternates(locale as Locale, () => "/"),
-  };
+  });
 }
 
 const PILLARS = ["info", "verified", "choice"] as const;
+
+/** Guides mis en avant sur l'accueil (maillage Phase 2 : accueil → guides clés). */
+const KEY_GUIDES = ["choosing-a-surgeon", "quote-and-cooling-off", "right-time"] as const;
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("home");
+  const tm = await getTranslations("meta");
   const interventions = await getInterventions(locale as Locale);
+  const guides = (await getGuides(locale as Locale)).filter((guide) =>
+    (KEY_GUIDES as readonly string[]).includes(guide.id),
+  );
 
   return (
     <>
+      <JsonLd
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: SITE_NAME,
+            url: SITE_URL,
+            logo: `${SITE_URL}/icon.svg`,
+            description: tm("siteDescription"),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: SITE_NAME,
+            url: absoluteUrl(locale as Locale, "/"),
+            inLanguage: locale,
+          },
+        ]}
+      />
       <section className="bg-accent-soft">
         <div className="mx-auto max-w-page px-4 py-16 sm:py-24">
           <h1 className="max-w-3xl font-serif text-display text-primary-strong">
@@ -74,6 +105,34 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           ))}
         </ul>
       </section>
+
+      {guides.length > 0 && (
+        <section aria-labelledby="guides" className="mx-auto max-w-page px-4 pb-16">
+          <h2 id="guides" className="font-serif text-h2">
+            {t("guidesTitle")}
+          </h2>
+          <ul className="mt-8 grid gap-6 sm:grid-cols-3">
+            {guides.map((guide) => (
+              <li key={guide.id} className="rounded-card border border-border bg-surface p-6">
+                <h3 className="text-h3">
+                  <Link
+                    href={{ pathname: "/guides/[slug]", params: { slug: guide.slug } }}
+                    className="underline-offset-4 hover:underline"
+                  >
+                    {guide.title}
+                  </Link>
+                </h3>
+                <p className="mt-2 text-small text-muted">{guide.summary}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6">
+            <Link href="/guides" className="underline underline-offset-4">
+              {t("allGuides")}
+            </Link>
+          </p>
+        </section>
+      )}
 
       <section aria-labelledby="reflexion" className="mx-auto max-w-page px-4 pb-8">
         <div className="rounded-card border border-border bg-surface p-6">

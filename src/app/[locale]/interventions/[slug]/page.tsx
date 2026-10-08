@@ -13,7 +13,7 @@ import type { Intervention } from "@/content/types";
 import { JsonLd } from "@/components/JsonLd";
 import { LegalBox } from "@/components/LegalBox";
 import { LOCALE_COUNTRY } from "@/lib/countries";
-import { absoluteUrl, localeAlternates } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, withSocial } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 import { buttonClasses } from "@/components/ui/button";
 import { DossierNav } from "@/components/editorial/DossierNav";
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!intervention) return {};
   const alternates = await getAlternateSlugs(intervention.id);
 
-  return {
+  return withSocial(locale as Locale, {
     title: intervention.title,
     description: intervention.summary,
     alternates: localeAlternates(locale as Locale, (l) =>
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ),
     // Un contenu non relu par un chirurgien n'est pas indexé (exigence YMYL / E-E-A-T).
     robots: isIndexable(intervention) ? undefined : { index: false, follow: true },
-  };
+  });
 }
 
 function structuredData(intervention: Intervention, listTitle: string) {

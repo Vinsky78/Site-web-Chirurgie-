@@ -1,6 +1,7 @@
 {
   "meta": {
-    "siteDescription": "Independent medical information about cosmetic surgery and aesthetic medicine, and contact with qualified, verified surgeons."
+    "siteDescription": "Independent medical information about cosmetic surgery and aesthetic medicine, and contact with qualified, verified surgeons.",
+    "ogTagline": "Independent medical information and verified surgeons"
   },
   "nav": {
     "skip": "Skip to main content",
@@ -47,7 +48,9 @@
     },
     "featured": "Procedures",
     "reflectionTitle": "Take time to reflect",
-    "reflectionText": "UK professional standards recommend at least two weeks between your consultation and agreeing to surgery. That time is yours."
+    "reflectionText": "UK professional standards recommend at least two weeks between your consultation and agreeing to surgery. That time is yours.",
+    "guidesTitle": "Guides to help you decide",
+    "allGuides": "All guides"
   },
   "categories": {
     "face": "Face",
@@ -240,7 +243,8 @@
       "body": [
         "[TO COMPLETE] Company name, legal form, registered office, registration number, publication director, hosting provider.",
         "This site is an information platform. It does not provide medical care and takes no commission on procedures."
-      ]
+      ],
+      "description": "Publisher, hosting provider and editorial responsibility for this cosmetic surgery information platform."
     },
     "privacy": {
       "title": "Privacy policy",
@@ -249,7 +253,8 @@
         "Data collected: planned procedure, closed medical questions, contact details. Legal basis: your explicit consent (UK GDPR Article 9(2)(a)).",
         "Recipients: only the surgeons you select. Hosting: European Union.",
         "Retention: 6 months after your request is sent. You can access, correct or delete your data or withdraw consent at any time, and complain to the Information Commissioner's Office (ICO)."
-      ]
+      ],
+      "description": "How we protect your health data: purposes, consent, retention periods, hosting and how to exercise your rights."
     },
     "methodology": {
       "title": "How we work",
@@ -258,7 +263,8 @@
         "Surgeon verification: we check every surgeon against the official register in their country, then again every year.",
         "Ranking: surgeons are listed by specialty, location and languages spoken. No surgeon can pay to rank higher.",
         "Funding: surgeons pay a fixed subscription, regardless of how many requests they receive. We take no commission on procedures."
-      ]
+      ],
+      "description": "How we write and medically review our pages, verify surgeons and stay independent, with no commission or paid ranking."
     }
   },
   "notFound": {

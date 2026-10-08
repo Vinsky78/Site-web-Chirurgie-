@@ -10,7 +10,7 @@ import type { GlossaryTerm } from "@/content/types";
 import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumbs } from "@/components/editorial/Breadcrumbs";
 import { ReviewNotice } from "@/components/editorial/ReviewNotice";
-import { absoluteUrl, localeAlternates } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, withSocial } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/lexique/[slug]">;
 
@@ -28,14 +28,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const term = await getTermBySlug(locale as Locale, slug);
   if (!term) return {};
   const slugs = await getTermAlternateSlugs(term.id);
-  return {
+  return withSocial(locale as Locale, {
     title: term.term,
     description: term.definition.slice(0, 160),
     alternates: localeAlternates(locale as Locale, (l) =>
       slugs[l] ? { pathname: "/lexique/[slug]", params: { slug: slugs[l] } } : undefined,
     ),
     robots: isIndexable(term) ? undefined : { index: false, follow: true },
-  };
+  });
 }
 
 function structuredData(term: GlossaryTerm) {

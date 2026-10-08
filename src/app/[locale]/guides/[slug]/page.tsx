@@ -10,7 +10,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumbs } from "@/components/editorial/Breadcrumbs";
 import { ReviewNotice } from "@/components/editorial/ReviewNotice";
 import { SourceList, TextSections } from "@/components/editorial/TextSections";
-import { absoluteUrl, localeAlternates } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, withSocial } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 
 type Props = PageProps<"/[locale]/guides/[slug]">;
@@ -29,14 +29,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guide = await getGuideBySlug(locale as Locale, slug);
   if (!guide) return {};
   const slugs = await getGuideAlternateSlugs(guide.id);
-  return {
+  return withSocial(locale as Locale, {
     title: guide.title,
     description: guide.summary,
     alternates: localeAlternates(locale as Locale, (l) =>
       slugs[l] ? { pathname: "/guides/[slug]", params: { slug: slugs[l] } } : undefined,
     ),
     robots: isIndexable(guide) ? undefined : { index: false, follow: true },
-  };
+  });
 }
 
 function structuredData(guide: Guide) {

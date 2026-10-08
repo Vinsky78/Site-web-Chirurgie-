@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import { withPayload } from "@payloadcms/next/withPayload";
 import createNextIntlPlugin from "next-intl/plugin";
+import { scopeClientHints } from "./src/lib/headers";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
@@ -29,4 +30,9 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPayload(withNextIntl(nextConfig));
+const config = withPayload(withNextIntl(nextConfig));
+const payloadHeaders = config.headers;
+
+config.headers = async () => scopeClientHints((await payloadHeaders?.()) ?? []);
+
+export default config;

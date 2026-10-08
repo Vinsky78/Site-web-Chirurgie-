@@ -11,7 +11,7 @@ import type { Surgeon } from "@/content/surgeons/types";
 import { JsonLd } from "@/components/JsonLd";
 import { buttonClasses } from "@/components/ui/button";
 import { LOCALE_COUNTRY } from "@/lib/countries";
-import { absoluteUrl, localeAlternates } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, withSocial } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/chirurgiens/[slug]">;
 
@@ -36,14 +36,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const surgeon = await load(locale, slug);
   if (!surgeon) return {};
   const t = await getTranslations({ locale, namespace: "directory" });
-  return {
+  return withSocial(locale as Locale, {
     title: `${surgeon.displayName}, ${surgeon.practice.city}`,
     description: `${t(`specialty.${surgeon.specialty}`)}. ${surgeon.practice.name}, ${surgeon.practice.city}.`,
     // Un profil n'existe que dans le marché de son pays d'exercice.
     alternates: localeAlternates(locale as Locale, (l) =>
       l === locale ? { pathname: "/chirurgiens/[slug]", params: { slug } } : undefined,
     ),
-  };
+  });
 }
 
 export default async function SurgeonPage({ params }: Props) {
