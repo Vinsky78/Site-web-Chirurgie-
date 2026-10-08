@@ -1,5 +1,5 @@
 import { cache } from "react";
-import type { Locale } from "@/i18n/routing";
+import { isLocale, type Locale } from "@/i18n/routing";
 import { SUBPAGE_KINDS, type InterventionId, type InterventionSubpage, type SubpageKind } from "../types";
 import { contentSource } from "../interventions";
 import { SUBPAGES_FROM_FILES } from "./files";
@@ -7,6 +7,7 @@ import { SUBPAGES_FROM_FILES } from "./files";
 export { SUBPAGE_SLUGS, subpageKindFromSlug } from "./slugs";
 
 const loadLocale = cache(async (locale: Locale): Promise<InterventionSubpage[]> => {
+  if (!isLocale(locale)) return [];
   if (contentSource() === "files") return SUBPAGES_FROM_FILES[locale];
   const { findSubpagesInCms } = await import("@/cms/queries");
   return findSubpagesInCms(locale);

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { ClientMessages } from "@/components/ClientMessages";
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]/pro">): Promise<Metadata> {
   const { locale } = await params;
@@ -9,5 +10,9 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]/pro">)
 }
 
 export default function ProLayout({ children }: LayoutProps<"/[locale]/pro">) {
-  return <div className="mx-auto max-w-page px-4 py-12">{children}</div>;
+  return (
+    <ClientMessages namespaces={["pro"]}>
+      <div className="mx-auto max-w-page px-4 py-12">{children}</div>
+    </ClientMessages>
+  );
 }

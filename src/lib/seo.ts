@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { SITE_URL } from "./site";
+import { SITE_NAME, SITE_URL } from "./site";
 
 /** Valeur hreflang de chaque locale (langue-pays quand la locale cible un marché). */
 export const HREFLANG: Record<Locale, string> = {
@@ -42,5 +42,37 @@ export function localeAlternates(
   return {
     canonical: absoluteUrl(locale, hrefFor(locale) ?? "/"),
     languages,
+  };
+}
+
+/** Locale Open Graph (langue_PAYS) de chaque marché. */
+export const OG_LOCALE: Record<Locale, string> = {
+  fr: "fr_FR",
+  "en-gb": "en_GB",
+};
+
+/**
+ * Ajoute les balises de partage (Open Graph, carte Twitter/X) à partir du
+ * titre, de la description et de l'URL canonique de la page. L'image vient de
+ * src/app/[locale]/opengraph-image.tsx.
+ */
+export function withSocial(locale: Locale, metadata: Metadata): Metadata {
+  const title = typeof metadata.title === "string" ? metadata.title : undefined;
+  const description = metadata.description ?? undefined;
+  const canonical = metadata.alternates?.canonical;
+  const url = canonical && typeof canonical === "object" && "url" in canonical ? canonical.url : (canonical ?? undefined);
+  return {
+    ...metadata,
+    openGraph: {
+      type: "website",
+      siteName: SITE_NAME,
+      locale: OG_LOCALE[locale],
+      ...(title && { title }),
+      ...(description && { description }),
+      ...(url && { url }),
+      // Une page qui définit openGraph remplace l'image du segment : on la rappelle ici.
+      images: [{ url: `${SITE_URL}/${locale}/opengraph-image`, width: 1200, height: 630, alt: SITE_NAME }],
+    },
+    twitter: { card: "summary_large_image", ...(title && { title }), ...(description && { description }) },
   };
 }

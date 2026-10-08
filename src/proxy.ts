@@ -3,11 +3,17 @@ import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
 import { canAccessAdmin, getProSession } from "./lib/auth";
 import { adminGate, isBackOfficePath } from "./lib/auth/adminGate";
+import { isRootFile, isStrayFile } from "./lib/paths";
 
 const intl = createMiddleware(routing);
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  if (isRootFile(pathname)) return NextResponse.next();
+  if (isStrayFile(pathname)) {
+    // Page 404 du site dans la langue par défaut, avec le statut 404.
+    return NextResponse.rewrite(new URL(`/${routing.defaultLocale}/introuvable`, request.url));
+  }
   if (!isBackOfficePath(pathname)) return intl(request);
 
   const session = await getProSession(request.headers);
@@ -27,5 +33,6 @@ export default async function proxy(request: NextRequest) {
 export const config = {
   // Pages : toutes sauf fichiers internes Next.js et fichiers statiques.
   // /admin et /api : toujours, fichiers compris, pour la vérification de double authentification.
-  matcher: ["/((?!_next|_vercel|.*\\..*).*)", "/(admin|api)/:path*"],
+  // Premier segment contenant un point : renvoyé vers la 404 du site (isStrayFile).
+  matcher: ["/((?!_next|_vercel|.*\\..*).*)", "/(admin|api)/:path*", "/((?!_next|_vercel)[^/]*\\.[^/]*)/:path*"],
 };

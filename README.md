@@ -23,6 +23,7 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 - E-mails (Brevo) sans aucune donnée de santé : confirmation au patient avec son lien personnel, alerte sans détail aux chirurgiens, invitation et mot de passe oublié pour les comptes pro.
 - Lien personnel du patient (`/fr/ma-demande/…`, valable jusqu'à la suppression automatique) : consulter sa demande, la supprimer ; les chirurgiens en sont prévenus.
 - Back-office `/admin` et son API accessibles seulement à l'équipe interne après double authentification.
+- Contrôles qualité en CI (`e2e/quality.spec.ts`) : WCAG 2.2 AA (axe-core) sur chaque gabarit, réorganisation à 320 px, balises SEO et Open Graph, budget de JavaScript et de polices.
 - Tests unitaires (Vitest) et de bout en bout sur mobile (Playwright), intégration continue GitHub Actions.
 
 ## Installation

@@ -14,7 +14,7 @@ import { ReviewNotice } from "@/components/editorial/ReviewNotice";
 import { SourceList, TextSections } from "@/components/editorial/TextSections";
 import { buttonClasses } from "@/components/ui/button";
 import { LOCALE_COUNTRY } from "@/lib/countries";
-import { absoluteUrl, localeAlternates, type Href } from "@/lib/seo";
+import { absoluteUrl, localeAlternates, type Href, withSocial } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 
 type Props = PageProps<"/[locale]/interventions/[slug]/[topic]">;
@@ -68,14 +68,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ),
   );
 
-  return {
+  return withSocial(locale as Locale, {
     title: subpage.title,
     description: subpage.summary,
     alternates: localeAlternates(locale as Locale, (l) =>
       slugs[l] && available[l] ? subpageHref(l, slugs[l], subpage) : undefined,
     ),
     robots: isIndexable(subpage) ? undefined : { index: false, follow: true },
-  };
+  });
 }
 
 function structuredData(intervention: Intervention, subpage: InterventionSubpage) {

@@ -1,10 +1,11 @@
 import { cache } from "react";
-import { routing, type Locale } from "@/i18n/routing";
+import { isLocale, routing, type Locale } from "@/i18n/routing";
 import type { GlossaryTerm } from "../types";
 import { contentSource } from "../interventions";
 import { GLOSSARY_FROM_FILES } from "./files";
 
 const loadLocale = cache(async (locale: Locale): Promise<GlossaryTerm[]> => {
+  if (!isLocale(locale)) return [];
   const items =
     contentSource() === "files"
       ? GLOSSARY_FROM_FILES[locale]

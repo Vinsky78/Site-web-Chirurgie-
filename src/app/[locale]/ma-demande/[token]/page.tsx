@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ClientMessages } from "@/components/ClientMessages";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
@@ -90,7 +91,9 @@ export default async function ManageRequestPage({ params }: PageProps<"/[locale]
         </dl>
       </section>
 
-      <DeleteForm token={token} />
+      <ClientMessages namespaces={["manage"]}>
+        <DeleteForm token={token} />
+      </ClientMessages>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 {
   "meta": {
-    "siteDescription": "Information médicale indépendante sur la chirurgie et la médecine esthétiques, et mise en relation avec des chirurgiens qualifiés et vérifiés."
+    "siteDescription": "Information médicale indépendante sur la chirurgie et la médecine esthétiques, et mise en relation avec des chirurgiens qualifiés et vérifiés.",
+    "ogTagline": "Information médicale indépendante et chirurgiens vérifiés"
   },
   "nav": {
     "skip": "Aller au contenu principal",
@@ -47,7 +48,9 @@
     },
     "featured": "Interventions",
     "reflectionTitle": "Prendre le temps de réfléchir",
-    "reflectionText": "En France, la loi impose un délai minimal de 15 jours entre la remise du devis détaillé et l'intervention. Ce temps vous appartient."
+    "reflectionText": "En France, la loi impose un délai minimal de 15 jours entre la remise du devis détaillé et l'intervention. Ce temps vous appartient.",
+    "guidesTitle": "Guides pour décider",
+    "allGuides": "Tous les guides"
   },
   "categories": {
     "face": "Visage",
@@ -240,7 +243,8 @@
       "body": [
         "[À COMPLÉTER] Raison sociale, forme juridique, capital, siège social, numéro RCS, directeur de la publication, hébergeur (nom, adresse, certification HDS).",
         "Ce site est une plateforme d'information. Il ne fournit aucun acte médical et ne perçoit aucune commission sur les interventions."
-      ]
+      ],
+      "description": "Éditeur, hébergeur et responsable de la publication de la plateforme d'information sur la chirurgie esthétique."
     },
     "privacy": {
       "title": "Politique de confidentialité",
@@ -250,7 +254,8 @@
         "Données collectées : projet d'intervention, critères médicaux fermés, coordonnées. Base légale : votre consentement explicite (article 9.2.a du RGPD).",
         "Destinataires : uniquement les chirurgiens que vous sélectionnez. Hébergement : Union européenne, hébergeur certifié HDS.",
         "Durée de conservation : 6 mois après l'envoi de la demande. Vous pouvez à tout moment accéder à vos données, les rectifier, les effacer ou retirer votre consentement, et introduire une réclamation auprès de la CNIL."
-      ]
+      ],
+      "description": "Comment nous protégeons vos données de santé : finalités, consentement, durées de conservation, hébergement et exercice de vos droits."
     },
     "methodology": {
       "title": "Notre méthode",
@@ -259,7 +264,8 @@
         "Vérification des chirurgiens : nous contrôlons la qualification de chaque chirurgien auprès du registre officiel de son pays, puis chaque année.",
         "Classement : les chirurgiens sont présentés selon la spécialité, la localisation et les langues parlées. Aucun chirurgien ne peut payer pour être mieux classé.",
         "Financement : les chirurgiens paient un abonnement fixe, indépendant du nombre de demandes reçues. Nous ne percevons aucune commission sur les interventions."
-      ]
+      ],
+      "description": "Comment nous rédigeons et faisons relire nos fiches, vérifions les chirurgiens et restons indépendants, sans commission ni classement payant."
     }
   },
   "notFound": {

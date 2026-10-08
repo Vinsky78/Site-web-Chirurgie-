@@ -4,18 +4,18 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getGuides } from "@/content/guides";
 import { Breadcrumbs } from "@/components/editorial/Breadcrumbs";
-import { localeAlternates } from "@/lib/seo";
+import { localeAlternates, withSocial } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/guides">;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "editorial" });
-  return {
+  return withSocial(locale as Locale, {
     title: t("guidesTitle"),
     description: t("guidesLead"),
     alternates: localeAlternates(locale as Locale, () => "/guides"),
-  };
+  });
 }
 
 export default async function GuidesPage({ params }: Props) {

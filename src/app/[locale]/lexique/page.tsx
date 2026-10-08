@@ -4,18 +4,18 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getGlossary, initialOf } from "@/content/glossary";
 import { Breadcrumbs } from "@/components/editorial/Breadcrumbs";
-import { localeAlternates } from "@/lib/seo";
+import { localeAlternates, withSocial } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/lexique">;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "editorial" });
-  return {
+  return withSocial(locale as Locale, {
     title: t("glossaryTitle"),
     description: t("glossaryLead"),
     alternates: localeAlternates(locale as Locale, () => "/lexique"),
-  };
+  });
 }
 
 export default async function GlossaryPage({ params }: Props) {

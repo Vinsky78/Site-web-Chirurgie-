@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { routing, type Locale } from "@/i18n/routing";
+import { isLocale, routing, type Locale } from "@/i18n/routing";
 import type { Intervention, InterventionId, MedicalReview } from "../types";
 import { INTERVENTIONS_FROM_FILES } from "./files";
 
@@ -15,6 +15,8 @@ export function contentSource(env: Record<string, string | undefined> = process.
 
 /** Une seule lecture par locale et par requête, même si plusieurs composants la demandent. */
 const loadLocale = cache(async (locale: Locale): Promise<Intervention[]> => {
+  // Segment inconnu (ex. /llms.txt pris pour une locale) : aucun contenu, la mise en page renvoie une 404.
+  if (!isLocale(locale)) return [];
   if (contentSource() === "files") return INTERVENTIONS_FROM_FILES[locale];
   const { findInterventionsInCms } = await import("@/cms/queries");
   return findInterventionsInCms(locale);
