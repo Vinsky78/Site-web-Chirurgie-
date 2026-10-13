@@ -1,0 +1,337 @@
+import type { Locale } from "@/i18n/routing";
+import type { Guide } from "../../types";
+
+/** Coût d'une chirurgie esthétique et financement : guide pratique (fr, en-gb). Brouillon à relire par le comité médical. */
+export const guide: Record<Locale, Guide> = {
+  fr: {
+    id: "cost-and-financing",
+    locale: "fr",
+    slug: "cout-et-financement-chirurgie-esthetique",
+    title: "Coût d'une chirurgie esthétique et financement",
+    summary:
+      "Lire un devis, comprendre ce qui fait varier le prix, anticiper les frais cachés, la prise en charge éventuelle, les retouches et le crédit.",
+    answer:
+      "Le coût d'une chirurgie esthétique ne se limite pas aux honoraires du chirurgien : il comprend aussi l'anesthésiste, l'établissement, les nuitées, le matériel et parfois des implants, les vêtements de compression et le suivi, sans oublier les frais indirects comme l'arrêt de travail, en général non indemnisé en esthétique pure. En France, un devis détaillé est obligatoire, un délai de réflexion de 15 jours s'applique et aucun paiement ne peut être exigé avant, hormis la consultation. L'Assurance maladie ne prend en charge que certaines interventions à visée réparatrice, selon des critères précis. Méfiez-vous des prix d'appel et de tout crédit signé dans la précipitation : comparez plusieurs devis complets plutôt que des montants affichés.",
+    steps: [
+      {
+        heading: "Comprendre la composition d'un devis",
+        paragraphs: [
+          "En France, le chirurgien doit remettre un devis détaillé, daté et signé, avant toute intervention de chirurgie esthétique (Code de la santé publique, article L6322-2). Ce devis doit permettre de savoir précisément ce que vous payez. Un montant global sans détail ne suffit pas pour comparer ni pour savoir ce qui n'est pas inclus.",
+          "Demandez un devis pour chaque intervenant si l'anesthésiste ou l'établissement facturent séparément : c'est fréquent, et le total réel peut alors être bien supérieur à celui du seul chirurgien.",
+        ],
+        bullets: [
+          "Honoraires du chirurgien, avec le nom et le détail de l'acte réalisé.",
+          "Honoraires de l'anesthésiste, et consultation d'anesthésie obligatoire.",
+          "Frais d'établissement : bloc opératoire, salle de réveil, personnel, chambre.",
+          "Nombre de nuitées prévues, ou prise en charge en ambulatoire (sortie le jour même).",
+          "Matériel et dispositifs médicaux : implants (marque, modèle), fils, drains, pansements.",
+          "Vêtements de compression : gaine, soutien-gorge, bas de contention, souvent à acheter à part.",
+          "Médicaments de sortie, soins infirmiers à domicile, retrait des fils.",
+          "Consultations de suivi : combien sont incluses, et sur quelle durée.",
+          "Mention de la TVA : les actes à but purement esthétique y sont en principe soumis en France.",
+          "Durée de validité du devis et conditions en cas de report ou d'annulation.",
+        ],
+      },
+      {
+        heading: "Ce qui fait varier le prix",
+        paragraphs: [
+          "Deux devis pour une intervention qui porte le même nom peuvent être très différents, sans que l'un soit forcément plus adapté que l'autre. L'écart s'explique en partie par des éléments objectifs, qu'il est légitime de faire préciser.",
+        ],
+        bullets: [
+          "La technique et l'étendue du geste : une même intervention peut être simple ou beaucoup plus étendue selon votre situation.",
+          "La durée opératoire et le type d'anesthésie (locale, sédation, anesthésie générale).",
+          "Le nombre de nuitées et le type d'établissement.",
+          "Les implants ou le matériel utilisés.",
+          "L'association de plusieurs interventions le même jour.",
+          "La ville, les charges du cabinet et l'expérience du chirurgien.",
+          "Ce qui est inclus ou non : suivi, compression, retouche éventuelle.",
+        ],
+      },
+      {
+        heading: "Anticiper les frais cachés et indirects",
+        paragraphs: [
+          "Une partie du coût réel ne figure jamais sur le devis. La plus importante est souvent la perte de revenus : en France, un arrêt de travail après une intervention purement esthétique n'est en général pas indemnisé par l'Assurance maladie. Renseignez-vous auprès de votre caisse et de votre employeur, et prévoyez des congés ou une épargne si besoin.",
+          "Pensez aussi à l'organisation de la convalescence : pendant plusieurs jours, voire plusieurs semaines, vous ne pourrez ni conduire ni porter de charges selon l'intervention.",
+        ],
+        bullets: [
+          "Jours de congé ou de salaire non perçus pendant la convalescence.",
+          "Garde d'enfants, surtout si porter un enfant est déconseillé plusieurs semaines.",
+          "Transport aller-retour vers la clinique, parfois en taxi car la conduite est interdite.",
+          "Hébergement et repas si la clinique est loin de chez vous.",
+          "Aide à domicile pour les courses et les tâches ménagères.",
+          "Pharmacie non remboursée : crèmes, plaques de silicone, protection solaire.",
+          "Vêtements adaptés pendant la convalescence, ou nouveaux vêtements après une transformation importante.",
+        ],
+      },
+      {
+        heading: "La prise en charge par l'Assurance maladie : dans quels cas",
+        paragraphs: [
+          "L'Assurance maladie ne rembourse pas la chirurgie esthétique pure. Certaines interventions peuvent toutefois être prises en charge lorsqu'elles ont une visée réparatrice ou fonctionnelle, selon des critères définis : par exemple une réduction mammaire pour une hypertrophie importante, une abdominoplastie ou un lifting corporel après une perte de poids massive, une gynécomastie, une paupière qui gêne la vision, une rhinoplastie liée à une gêne respiratoire, ou une reprise d'implants dans certaines situations.",
+          "Pour certains actes, une demande d'accord préalable doit être adressée à votre caisse avant l'intervention. Même en cas de prise en charge, des dépassements d'honoraires et des frais de chambre particulière peuvent rester à votre charge ou à celle de votre complémentaire santé.",
+        ],
+        bullets: [
+          "Demander au chirurgien si votre situation peut relever d'une prise en charge et pourquoi.",
+          "Savoir si une demande d'accord préalable est nécessaire, et attendre la réponse avant d'opérer.",
+          "Vérifier le secteur de conventionnement du chirurgien et le montant des dépassements prévus.",
+          "Interroger votre complémentaire santé par écrit avec le devis et les codes des actes.",
+          "Comprendre qu'une partie esthétique ajoutée à un geste remboursé restera à votre charge.",
+        ],
+      },
+      {
+        heading: "Complications, retouches et assurance",
+        paragraphs: [
+          "Toute intervention comporte un risque de complication (hématome, infection, problème de cicatrisation, coque autour d'un implant) et un risque de résultat qui ne correspond pas à ce qui était attendu. Ces situations peuvent entraîner des consultations supplémentaires, des soins, voire une nouvelle intervention, avec des frais.",
+          "Les soins d'une complication sont en principe pris en charge par l'Assurance maladie dans les conditions habituelles, mais les règles peuvent évoluer et des frais restent souvent à votre charge. Une retouche purement esthétique, elle, ne l'est pas. Demandez ce que prévoit le chirurgien avant de signer.",
+        ],
+        bullets: [
+          "Le chirurgien prend-il en charge ses honoraires en cas de retouche ? Dans quels cas et pendant combien de temps ?",
+          "Qui paie l'établissement et l'anesthésie en cas de reprise ?",
+          "Existe-t-il une assurance complications proposée par le chirurgien ou l'établissement ? Que couvre-t-elle exactement, avec quelles exclusions ?",
+          "Que se passe-t-il pour un implant défectueux : garantie du fabricant, frais d'intervention couverts ou non ?",
+          "Prévoir une marge financière pour un imprévu plutôt que de s'engager au maximum de son budget.",
+        ],
+      },
+      {
+        heading: "Crédit et paiement fractionné : prudence",
+        paragraphs: [
+          "Certains cabinets ou organismes proposent un crédit ou un paiement en plusieurs fois. Un crédit reste un engagement qu'il faudra rembourser quelle que soit l'issue de l'intervention, y compris en cas de complication, de résultat décevant ou d'annulation si le contrat n'est pas lié à l'intervention.",
+          "En France, aucun paiement ne peut être exigé avant la fin du délai de réflexion de 15 jours, hormis les honoraires de consultation. Ne signez donc aucun contrat de crédit ni aucun engagement de paiement pendant ce délai. Un crédit à la consommation comporte en général un délai de rétractation de 14 jours : il ne remplace pas votre délai de réflexion médical.",
+        ],
+        bullets: [
+          "Comparer le coût total du crédit (TAEG, frais, assurance emprunteur), pas seulement la mensualité.",
+          "Vérifier que le prêteur est autorisé à exercer et lire toutes les conditions avant de signer.",
+          "Se demander si la mensualité reste supportable en cas d'arrêt de travail non indemnisé.",
+          "Se méfier d'un crédit proposé ou signé le jour même de la consultation.",
+          "En cas de difficulté, des points conseil budget gratuits peuvent vous aider.",
+        ],
+      },
+      {
+        heading: "Se méfier des prix d'appel",
+        paragraphs: [
+          "Un prix affiché très bas, une réduction limitée dans le temps ou un forfait « tout compris » vendu avant toute consultation doivent alerter. En France, la publicité des médecins est encadrée et une intervention ne se vend pas comme un produit : le prix ne peut être établi qu'après un examen et un devis personnalisé.",
+          "Un prix d'appel cache souvent des frais ajoutés ensuite (anesthésie, nuitée, compression, suivi), un établissement non adapté ou une prise en charge des complications inexistante. Les forfaits à l'étranger posent les mêmes questions, avec en plus le coût du suivi et des complications au retour.",
+        ],
+      },
+      {
+        heading: "Comparer plusieurs devis de façon utile",
+        paragraphs: [
+          "Comparer est légitime, mais le prix ne doit pas être le seul critère. Comparez des devis complets, pour une intervention décrite de la même façon, établis par des chirurgiens qualifiés en chirurgie plastique, reconstructrice et esthétique, dans des établissements autorisés.",
+        ],
+        bullets: [
+          "Le chirurgien est-il inscrit à l'Ordre et qualifié dans la bonne spécialité (vérifiable sur l'Annuaire santé) ?",
+          "L'établissement est-il autorisé par l'ARS pour la chirurgie esthétique ?",
+          "Les devis décrivent-ils la même technique, la même durée d'hospitalisation, le même suivi ?",
+          "Qu'est-ce qui est exclu : compression, médicaments, retouche, consultations après un an ?",
+          "Qui joindre et qui paie en cas de complication la nuit ou le week-end ?",
+        ],
+      },
+    ],
+    warningSigns: [
+      "Un prix affiché avant toute consultation ou un forfait vendu en ligne.",
+      "Une demande d'acompte ou de paiement avant la fin du délai de réflexion de 15 jours.",
+      "Une réduction valable seulement si vous réservez vite.",
+      "Un devis global sans détail des honoraires, de l'anesthésie et de l'établissement.",
+      "Un crédit proposé ou signé le jour de la première consultation.",
+      "Aucune information sur ce qui se passe, et qui paie, en cas de complication ou de retouche.",
+      "Un refus de remettre le devis par écrit ou de vous laisser le temps d'y réfléchir.",
+    ],
+    resources: [
+      { label: "Assurance maladie (ameli)", url: "https://www.ameli.fr" },
+      { label: "Légifrance – Code de la santé publique", url: "https://www.legifrance.gouv.fr" },
+      { label: "Service-public.fr – crédit à la consommation", url: "https://www.service-public.fr" },
+      { label: "Annuaire santé", url: "https://annuaire.sante.fr" },
+      { label: "Société française de chirurgie plastique, reconstructrice et esthétique (SOFCPRE)", url: "https://www.sofcpre.fr" },
+      { label: "Banque de France – crédit et points conseil budget", url: "https://www.banque-france.fr" },
+      { label: "Ministère de l'Économie – DGCCRF", url: "https://www.economie.gouv.fr" },
+    ],
+    interventions: [
+      "rhinoplasty",
+      "abdominoplasty",
+      "breast-augmentation",
+      "liposuction",
+      "blepharoplasty",
+      "facelift",
+      "otoplasty",
+      "breast-lift",
+      "breast-reduction",
+      "gynecomastia",
+      "fat-grafting",
+      "arm-lift",
+      "thigh-lift",
+      "body-lift",
+      "buttock-augmentation",
+      "labiaplasty",
+      "breast-implant-revision",
+      "brow-lift",
+      "genioplasty",
+    ],
+    medicalReview: { status: "draft" },
+    updatedAt: "2026-10-13",
+  },
+  "en-gb": {
+    id: "cost-and-financing",
+    locale: "en-gb",
+    slug: "cost-and-financing-cosmetic-surgery",
+    title: "The cost of cosmetic surgery and how to pay for it",
+    summary:
+      "How to read a quote, what changes the price, hidden costs, when the NHS may fund surgery, revisions, complications insurance and finance.",
+    answer:
+      "The cost of cosmetic surgery is more than the surgeon's fee: it includes the anaesthetist, the hospital, overnight stays, implants or other materials, compression garments and follow-up, as well as indirect costs such as time off work and help at home. The NHS does not generally fund purely cosmetic surgery; some procedures may be funded when strict clinical criteria are met. Ask for a written, itemised quote, take at least two weeks to think, as the GMC recommends, and be wary of low headline prices, time-limited discounts and finance signed in a hurry.",
+    steps: [
+      {
+        heading: "What a quote should include",
+        paragraphs: [
+          "There is no single legal format for a cosmetic surgery quote in the UK, but GMC guidance expects doctors to give clear information about costs, including any extra charges, before you agree to treatment. A single all-in figure with no breakdown makes it hard to compare and to know what is missing.",
+          "Ask whether the anaesthetist and the hospital bill separately: this is common, and the real total can then be much higher than the surgeon's fee alone.",
+        ],
+        bullets: [
+          "The surgeon's fee, naming the exact procedure.",
+          "The anaesthetist's fee and pre-operative assessment.",
+          "Hospital charges: theatre, recovery, nursing, room.",
+          "Number of overnight stays, or day-case treatment.",
+          "Implants and materials, with the make and model where relevant.",
+          "Compression garments, support bras or stockings, often charged separately.",
+          "Medicines to take home, dressings, stitch removal.",
+          "Follow-up appointments: how many are included, and for how long.",
+          "Whether VAT applies and is included.",
+          "How long the quote is valid and the terms for postponing or cancelling, including any deposit refund.",
+        ],
+      },
+      {
+        heading: "What changes the price",
+        paragraphs: [
+          "Two quotes for a procedure with the same name can differ a lot, without one being more suitable than the other. Part of the difference comes from objective factors you are entitled to ask about.",
+        ],
+        bullets: [
+          "The technique and extent of surgery: the same procedure can be simple or far more extensive depending on your situation.",
+          "How long the operation takes and the type of anaesthesia (local, sedation, general).",
+          "The number of nights in hospital and the type of hospital.",
+          "Implants or materials used.",
+          "Combining several procedures in one operation.",
+          "Location, running costs and the surgeon's experience.",
+          "What is included: aftercare, garments, any revision.",
+        ],
+      },
+      {
+        heading: "Plan for hidden and indirect costs",
+        paragraphs: [
+          "Some of the real cost never appears on the quote. Time off work is often the largest: check your employer's sick pay policy, as some employers do not pay company sick pay for elective cosmetic surgery, and you may need to use annual leave or savings. Statutory Sick Pay rules also apply only if you meet the conditions.",
+          "Think about recovery too: for days or weeks you may not be able to drive or lift, depending on the procedure.",
+        ],
+        bullets: [
+          "Unpaid leave or lost earnings, especially if you are self-employed.",
+          "Childcare, particularly if you cannot lift a child for several weeks.",
+          "Travel to and from the hospital, often by taxi as you cannot drive.",
+          "Accommodation and meals if the hospital is far from home.",
+          "Help at home with shopping and housework.",
+          "Items you buy yourself: scar creams, silicone sheets, sunscreen.",
+          "Loose clothing during recovery, or new clothes after a major change in shape.",
+        ],
+      },
+      {
+        heading: "When the NHS may fund surgery",
+        paragraphs: [
+          "The NHS does not generally fund surgery carried out purely to change appearance. Some procedures, such as breast reduction, tummy tuck or body contouring after massive weight loss, eyelid surgery when the eyelids obstruct vision, gynaecomastia surgery, rhinoplasty for breathing problems or removal of problematic implants, may be funded when strict clinical criteria are met. These are often listed by local NHS commissioners as procedures of limited clinical value, and criteria differ across England, Scotland, Wales and Northern Ireland.",
+          "The first step is your GP, who can assess whether you might meet the criteria and refer you. If you fall outside them, an individual funding request (IFR) may be possible when your clinical circumstances are exceptional; it is often declined, and waiting times can be long.",
+        ],
+        bullets: [
+          "Ask your GP whether your situation is covered by local NHS policy.",
+          "Expect criteria such as a stable BMI, being a non-smoker or documented functional problems.",
+          "Ask how long the wait for assessment and surgery is likely to be.",
+          "If you have private medical insurance, check in writing: cosmetic surgery is usually excluded, but treatment of some medical conditions may not be.",
+          "Remember that any purely cosmetic element added to a funded procedure will be charged privately.",
+        ],
+      },
+      {
+        heading: "Complications, revisions and insurance",
+        paragraphs: [
+          "Every operation carries a risk of complications (haematoma, infection, wound problems, capsular contracture around an implant) and of an outcome that does not match what you hoped for. These can mean extra appointments, treatment or further surgery, and costs.",
+          "In an emergency the NHS will treat you, but it will not usually fund corrective cosmetic surgery or revisions for appearance. Ask your surgeon before you sign what is covered.",
+        ],
+        bullets: [
+          "Will the surgeon waive their fee for a revision? In which cases and for how long?",
+          "Who pays for the hospital and anaesthetist if further surgery is needed?",
+          "Is complications insurance included or available? What does it cover exactly, and what is excluded?",
+          "What happens with a faulty implant: manufacturer warranty, surgery costs covered or not?",
+          "Keep a financial cushion for the unexpected rather than committing your whole budget.",
+        ],
+      },
+      {
+        heading: "Finance and paying in instalments: be careful",
+        paragraphs: [
+          "Some clinics or lenders offer finance or payment in instalments. A loan has to be repaid whatever the outcome, including after a complication, a disappointing result or a cancellation if the agreement is not linked to the treatment.",
+          "The GMC recommends a cooling-off period of at least two weeks between your consultation and agreeing to surgery: do not sign any finance agreement or pay a large non-refundable deposit before you have made your decision. Most regulated credit agreements also give you 14 days to withdraw, but this does not replace your time to reflect on the surgery itself.",
+        ],
+        bullets: [
+          "Compare the total amount repayable and the APR, not just the monthly payment.",
+          "Check the lender is authorised on the Financial Conduct Authority register.",
+          "Ask whether the monthly payment is affordable if you need unpaid time off.",
+          "Be wary of finance offered or signed on the day of your first consultation.",
+          "Paying by credit card may give extra protection in some cases: check the conditions.",
+          "Free, impartial money guidance is available from MoneyHelper.",
+        ],
+      },
+      {
+        heading: "Be wary of low headline prices",
+        paragraphs: [
+          "A very low advertised price, a discount that ends soon or an all-inclusive package sold before any consultation should ring alarm bells. Advertising rules for cosmetic interventions do not allow time-limited deals or incentives that pressure people into surgery, and a price can only be set after an examination and a personal quote.",
+          "A low headline price often hides extras added later (anaesthesia, overnight stay, garments, aftercare), an unsuitable facility or no plan for complications. Package deals abroad raise the same questions, plus the cost of aftercare and complications once you are home.",
+        ],
+      },
+      {
+        heading: "Comparing quotes in a useful way",
+        paragraphs: [
+          "Comparing is sensible, but price should not be the only factor. Compare complete quotes for the same procedure from surgeons on the GMC specialist register in plastic surgery, operating in hospitals registered with the CQC in England (or the equivalent regulator elsewhere in the UK).",
+        ],
+        bullets: [
+          "Is the surgeon on the GMC specialist register in the right specialty?",
+          "Is the hospital registered with the CQC, and what does its latest inspection say?",
+          "Do the quotes describe the same technique, hospital stay and aftercare?",
+          "What is excluded: garments, medicines, revisions, appointments after a year?",
+          "Who do you call, and who pays, if there is a problem at night or at the weekend?",
+        ],
+      },
+    ],
+    warningSigns: [
+      "A price advertised before any consultation, or a package sold online.",
+      "Pressure to pay a deposit before you have had at least two weeks to think.",
+      "A discount that only applies if you book quickly.",
+      "A single figure with no breakdown of surgeon, anaesthetist and hospital costs.",
+      "Finance offered or signed on the day of your first consultation.",
+      "No clear answer about what happens, and who pays, if there is a complication or a revision.",
+      "Reluctance to put the quote in writing or to give you time to think.",
+    ],
+    resources: [
+      { label: "NHS – cosmetic procedures", url: "https://www.nhs.uk" },
+      { label: "General Medical Council (GMC) – guidance on cosmetic interventions", url: "https://www.gmc-uk.org" },
+      { label: "Care Quality Commission (CQC)", url: "https://www.cqc.org.uk" },
+      { label: "Financial Conduct Authority (FCA) register", url: "https://www.fca.org.uk" },
+      { label: "MoneyHelper", url: "https://www.moneyhelper.org.uk" },
+      { label: "British Association of Aesthetic Plastic Surgeons (BAAPS)", url: "https://baaps.org.uk" },
+      { label: "British Association of Plastic, Reconstructive and Aesthetic Surgeons (BAPRAS)", url: "https://www.bapras.org.uk" },
+    ],
+    interventions: [
+      "rhinoplasty",
+      "abdominoplasty",
+      "breast-augmentation",
+      "liposuction",
+      "blepharoplasty",
+      "facelift",
+      "otoplasty",
+      "breast-lift",
+      "breast-reduction",
+      "gynecomastia",
+      "fat-grafting",
+      "arm-lift",
+      "thigh-lift",
+      "body-lift",
+      "buttock-augmentation",
+      "labiaplasty",
+      "breast-implant-revision",
+      "brow-lift",
+      "genioplasty",
+    ],
+    medicalReview: { status: "draft" },
+    updatedAt: "2026-10-13",
+  },
+};

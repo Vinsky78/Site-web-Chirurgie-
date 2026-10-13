@@ -118,3 +118,10 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Guides** : 6 guides pratiques ajoutés (préparation, premiers jours à la maison, cicatrices, anesthésie, complications et recours, médecine esthétique ou chirurgie), les 6 existants enrichis, et la page des guides regroupée en trois thèmes (se décider, l'opération, sécurité et droits).
 - **Accueil** : 6 interventions mises en avant, lien vers la liste complète.
 - **Statut** : tout est en brouillon, donc exclu de l'index, jusqu'à la relecture du comité médical. Les affirmations à vérifier en priorité sont listées dans les fichiers du projet (`relecture/points-a-verifier-vague-2.md`).
+
+## Contenus de la vague 3 (13 octobre 2026)
+
+- **8 interventions ajoutées** (19 au total) : lifting des bras, lifting des cuisses, lifting circulaire du corps après perte de poids massive, augmentation des fesses (lipofilling et implants, avec l'alerte sur l'embolie graisseuse), nymphoplastie, changement ou retrait d'implants mammaires, lifting des sourcils, génioplastie. Spécialités : sourcils (plastique, oculoplastique, maxillo-faciale), menton (plastique, maxillo-faciale), les autres en chirurgie plastique. Question de grossesse ajoutée pour le lifting circulaire, les fesses et les implants.
+- **6 guides ajoutés** (18 au total) : coût et financement (sans aucun montant), associer plusieurs interventions, image du corps et attentes, conditions de santé avant l'opération, vivre avec des implants, insatisfaction et retouche.
+- **Page « Comment ça marche »** : parcours en 5 étapes, engagements, ce que la plateforme ne fait pas, 14 questions fréquentes (balisage FAQPage), appel à la demande. Elle décrit les règles réelles du site (3 chirurgiens au plus, conservation 6 mois, lien de suppression) : à mettre à jour si elles changent. Lien dans l'en-tête et sur l'accueil.
+- **Statut** : brouillon, exclu de l'index jusqu'à la relecture médicale. Points prioritaires dans les fichiers du projet (`relecture/points-a-verifier-vague-3.md`).
