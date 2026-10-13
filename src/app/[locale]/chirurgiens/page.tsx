@@ -56,7 +56,7 @@ export default async function DirectoryPage({ params, searchParams }: Props) {
       ) : (
         <>
           <form method="get" className="mt-10 flex flex-wrap items-end gap-4" aria-label={t("filters")}>
-            <div>
+            <div className="w-full min-w-0 sm:w-auto">
               <label htmlFor="filtre-intervention" className="block text-label">
                 {t("intervention")}
               </label>
@@ -64,7 +64,7 @@ export default async function DirectoryPage({ params, searchParams }: Props) {
                 id="filtre-intervention"
                 name="intervention"
                 defaultValue={filters.intervention ?? ""}
-                className="mt-1 min-h-11 rounded-control border border-border-input bg-surface px-3"
+                className="mt-1 min-h-11 w-full max-w-full rounded-control border border-border-input bg-surface px-3"
               >
                 <option value="">{t("all")}</option>
                 {interventions.map((item) => (
@@ -74,7 +74,7 @@ export default async function DirectoryPage({ params, searchParams }: Props) {
                 ))}
               </select>
             </div>
-            <div>
+            <div className="w-full min-w-0 sm:w-auto">
               <label htmlFor="filtre-ville" className="block text-label">
                 {t("city")}
               </label>
@@ -82,7 +82,7 @@ export default async function DirectoryPage({ params, searchParams }: Props) {
                 id="filtre-ville"
                 name="city"
                 defaultValue={filters.city ?? ""}
-                className="mt-1 min-h-11 rounded-control border border-border-input bg-surface px-3"
+                className="mt-1 min-h-11 w-full max-w-full rounded-control border border-border-input bg-surface px-3"
               >
                 <option value="">{t("all")}</option>
                 {cityOptions.map(([slug, name]) => (

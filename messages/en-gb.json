@@ -51,7 +51,8 @@
     "reflectionTitle": "Take time to reflect",
     "reflectionText": "UK professional standards recommend at least two weeks between your consultation and agreeing to surgery. That time is yours.",
     "guidesTitle": "Guides to help you decide",
-    "allGuides": "All guides"
+    "allGuides": "All guides",
+    "allInterventions": "All procedures"
   },
   "categories": {
     "face": "Face",
@@ -439,7 +440,7 @@
     "relatedGuides": "Useful guides",
     "glossaryTerms": "Glossary terms",
     "guidesTitle": "Guides",
-    "guidesLead": "Guides to help you decide without pressure and protect yourself: choosing a surgeon, understanding a quote, spotting warning signs.",
+    "guidesLead": "Practical guides to decide without pressure, prepare for surgery, recover well and protect yourself: choosing a surgeon, understanding a quote, anaesthesia, scars, warning signs, your rights.",
     "warningSigns": "Warning signs",
     "resources": "Official resources",
     "citedInterventions": "Procedures mentioned in this guide",
@@ -449,7 +450,12 @@
     "glossaryLink": "Browse the glossary of medical terms",
     "alphabet": "Alphabetical index",
     "usedIn": "Procedure pages that use this term",
-    "backToGlossary": "Back to the glossary"
+    "backToGlossary": "Back to the glossary",
+    "guideThemes": {
+      "decide": "Choosing and deciding",
+      "surgery": "Before and after surgery",
+      "safety": "Safety and your rights"
+    }
   },
   "join": {
     "metaTitle": "Surgeons: join the directory",

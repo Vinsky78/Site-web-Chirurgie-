@@ -168,7 +168,18 @@ export interface Intervention {
   /**
    * Fixe : utilisé par le formulaire de demande.
    */
-  interventionId: 'rhinoplasty' | 'abdominoplasty' | 'breast-augmentation';
+  interventionId:
+    | 'rhinoplasty'
+    | 'abdominoplasty'
+    | 'breast-augmentation'
+    | 'liposuction'
+    | 'blepharoplasty'
+    | 'facelift'
+    | 'otoplasty'
+    | 'breast-lift'
+    | 'breast-reduction'
+    | 'gynecomastia'
+    | 'fat-grafting';
   category: 'face' | 'body' | 'breast';
   slug: string;
   title: string;
@@ -231,7 +242,18 @@ export interface Intervention {
  */
 export interface InterventionSubpage {
   id: number;
-  interventionId: 'rhinoplasty' | 'abdominoplasty' | 'breast-augmentation';
+  interventionId:
+    | 'rhinoplasty'
+    | 'abdominoplasty'
+    | 'breast-augmentation'
+    | 'liposuction'
+    | 'blepharoplasty'
+    | 'facelift'
+    | 'otoplasty'
+    | 'breast-lift'
+    | 'breast-reduction'
+    | 'gynecomastia'
+    | 'fat-grafting';
   kind: 'risks' | 'cost' | 'recovery' | 'decision' | 'alternatives';
   title: string;
   summary: string;
@@ -287,7 +309,13 @@ export interface Guide {
     | 'preparing-consultation'
     | 'quote-and-cooling-off'
     | 'warning-signs-after-surgery'
-    | 'right-time';
+    | 'right-time'
+    | 'preparing-for-surgery'
+    | 'after-surgery-at-home'
+    | 'scar-care'
+    | 'anaesthesia'
+    | 'complications-and-rights'
+    | 'aesthetic-medicine-vs-surgery';
   slug: string;
   title: string;
   summary: string;
@@ -317,7 +345,21 @@ export interface Guide {
     url?: string | null;
     id?: string | null;
   }[];
-  interventions?: ('rhinoplasty' | 'abdominoplasty' | 'breast-augmentation')[] | null;
+  interventions?:
+    | (
+        | 'rhinoplasty'
+        | 'abdominoplasty'
+        | 'breast-augmentation'
+        | 'liposuction'
+        | 'blepharoplasty'
+        | 'facelift'
+        | 'otoplasty'
+        | 'breast-lift'
+        | 'breast-reduction'
+        | 'gynecomastia'
+        | 'fat-grafting'
+      )[]
+    | null;
   /**
    * Seul un relecteur médical peut valider. Toute modification du contenu par un autre compte repasse la fiche en brouillon (non indexée).
    */
@@ -395,7 +437,19 @@ export interface Surgeon {
    */
   citySlug?: string | null;
   languages: ('fr' | 'en' | 'de' | 'nl' | 'es' | 'it' | 'ar' | 'pt')[];
-  interventions: ('rhinoplasty' | 'abdominoplasty' | 'breast-augmentation')[];
+  interventions: (
+    | 'rhinoplasty'
+    | 'abdominoplasty'
+    | 'breast-augmentation'
+    | 'liposuction'
+    | 'blepharoplasty'
+    | 'facelift'
+    | 'otoplasty'
+    | 'breast-lift'
+    | 'breast-reduction'
+    | 'gynecomastia'
+    | 'fat-grafting'
+  )[];
   /**
    * Factuelle : parcours, spécialité. Aucune promesse, aucun superlatif.
    */
@@ -453,7 +507,19 @@ export interface SurgeonApplication {
   registryNumber: string;
   specialty: 'plastic-surgery' | 'ent' | 'maxillofacial' | 'oculoplastic';
   city: string;
-  interventions: ('rhinoplasty' | 'abdominoplasty' | 'breast-augmentation')[];
+  interventions: (
+    | 'rhinoplasty'
+    | 'abdominoplasty'
+    | 'breast-augmentation'
+    | 'liposuction'
+    | 'blepharoplasty'
+    | 'facelift'
+    | 'otoplasty'
+    | 'breast-lift'
+    | 'breast-reduction'
+    | 'gynecomastia'
+    | 'fat-grafting'
+  )[];
   languages?: ('fr' | 'en' | 'de' | 'nl' | 'es' | 'it' | 'ar' | 'pt')[] | null;
   locale?: string | null;
   updatedAt: string;

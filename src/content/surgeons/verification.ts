@@ -15,6 +15,14 @@ export const SPECIALTIES_BY_INTERVENTION: Record<InterventionId, readonly Specia
   rhinoplasty: ["plastic-surgery", "ent", "maxillofacial"],
   abdominoplasty: ["plastic-surgery"],
   "breast-augmentation": ["plastic-surgery"],
+  liposuction: ["plastic-surgery"],
+  blepharoplasty: ["plastic-surgery", "oculoplastic", "maxillofacial"],
+  facelift: ["plastic-surgery", "ent", "maxillofacial"],
+  otoplasty: ["plastic-surgery", "ent"],
+  "breast-lift": ["plastic-surgery"],
+  "breast-reduction": ["plastic-surgery"],
+  gynecomastia: ["plastic-surgery"],
+  "fat-grafting": ["plastic-surgery"],
 };
 
 /** Interventions déclarées qui ne relèvent pas de la spécialité. */

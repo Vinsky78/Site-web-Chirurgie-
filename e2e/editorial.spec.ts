@@ -37,7 +37,7 @@ test.describe("dossiers d'intervention, guides et lexique", () => {
     await expect(page).toHaveURL(/\/fr\/guides$/);
     await page.getByRole("link", { name: /choisir son chirurgien/i }).click();
     await expect(page).toHaveURL(/\/fr\/guides\/choisir-son-chirurgien$/);
-    await expect(page.getByRole("heading", { level: 2, name: "Signaux d'alerte" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "Signaux d'alerte", exact: true })).toBeVisible();
     await page.getByRole("link", { name: /comprendre l'intervention : rhinoplastie/i }).click();
     await expect(page).toHaveURL(/\/fr\/interventions\/rhinoplastie$/);
   });

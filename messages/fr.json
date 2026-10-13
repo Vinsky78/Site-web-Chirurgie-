@@ -51,7 +51,8 @@
     "reflectionTitle": "Prendre le temps de réfléchir",
     "reflectionText": "En France, la loi impose un délai minimal de 15 jours entre la remise du devis détaillé et l'intervention. Ce temps vous appartient.",
     "guidesTitle": "Guides pour décider",
-    "allGuides": "Tous les guides"
+    "allGuides": "Tous les guides",
+    "allInterventions": "Toutes les interventions"
   },
   "categories": {
     "face": "Visage",
@@ -440,7 +441,7 @@
     "relatedGuides": "Guides utiles",
     "glossaryTerms": "Termes du lexique",
     "guidesTitle": "Guides",
-    "guidesLead": "Des guides pour décider sans pression et vous protéger : choisir un chirurgien, comprendre un devis, reconnaître les signaux d'alerte.",
+    "guidesLead": "Des guides pratiques pour décider sans pression, préparer l'opération, bien récupérer et vous protéger : choisir un chirurgien, comprendre un devis, anesthésie, cicatrices, signaux d'alerte, recours.",
     "warningSigns": "Signaux d'alerte",
     "resources": "Ressources officielles",
     "citedInterventions": "Fiches citées dans ce guide",
@@ -450,7 +451,12 @@
     "glossaryLink": "Consulter le lexique des termes médicaux",
     "alphabet": "Index alphabétique",
     "usedIn": "Fiches qui emploient ce terme",
-    "backToGlossary": "Retour au lexique"
+    "backToGlossary": "Retour au lexique",
+    "guideThemes": {
+      "decide": "Choisir et décider",
+      "surgery": "Avant et après l'opération",
+      "safety": "Sécurité et recours"
+    }
   },
   "join": {
     "metaTitle": "Chirurgiens : rejoindre l'annuaire",

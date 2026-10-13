@@ -22,6 +22,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">) {
 
 const PILLARS = ["info", "verified", "choice"] as const;
 
+/** Interventions les plus demandées, mises en avant sur l'accueil ; les autres sont sur /interventions. */
+const KEY_INTERVENTIONS = ["breast-augmentation", "liposuction", "blepharoplasty", "rhinoplasty", "abdominoplasty", "facelift"] as const;
+
 /** Guides mis en avant sur l'accueil (maillage Phase 2 : accueil → guides clés). */
 const KEY_GUIDES = ["choosing-a-surgeon", "quote-and-cooling-off", "right-time"] as const;
 
@@ -30,7 +33,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   setRequestLocale(locale);
   const t = await getTranslations("home");
   const tm = await getTranslations("meta");
-  const interventions = await getInterventions(locale as Locale);
+  const interventions = (await getInterventions(locale as Locale))
+    .filter((item) => (KEY_INTERVENTIONS as readonly string[]).includes(item.id))
+    .sort((a, b) => (KEY_INTERVENTIONS as readonly string[]).indexOf(a.id) - (KEY_INTERVENTIONS as readonly string[]).indexOf(b.id));
   const guides = (await getGuides(locale as Locale)).filter((guide) =>
     (KEY_GUIDES as readonly string[]).includes(guide.id),
   );
@@ -104,6 +109,11 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             </li>
           ))}
         </ul>
+        <p className="mt-6">
+          <Link href="/interventions" className="underline underline-offset-4">
+            {t("allInterventions")}
+          </Link>
+        </p>
       </section>
 
       {guides.length > 0 && (

@@ -8,7 +8,7 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 
 - Next.js 16 (App Router, Server Components), TypeScript strict, Tailwind CSS 4.
 - Deux marchés : France (`/fr`) et Royaume-Uni (`/en-gb`), avec des contenus localisés et non simplement traduits.
-- Accueil, liste des interventions, fiches intervention (rhinoplastie, abdominoplastie, augmentation mammaire) avec risques, contre-indications, alternatives et droits du patient du pays.
+- Accueil, liste des interventions, fiches intervention (11 : rhinoplastie, abdominoplastie, augmentation mammaire, liposuccion, blépharoplastie, lifting du visage, otoplastie, lifting des seins, réduction mammaire, gynécomastie, lipofilling) avec risques, contre-indications, alternatives et droits du patient du pays.
 - Dossiers d'intervention : 5 sous-pages par fiche (risques, prix, convalescence, avant de se décider, alternatives), reliées par un sommaire et un fil d'Ariane.
 - Guides (`/fr/guides`) : choisir son chirurgien, se faire opérer à l'étranger, préparer sa consultation, devis et délai de réflexion, signaux d'alerte après une opération, est-ce le bon moment.
 - Lexique (`/fr/lexique`, `/en-gb/glossary`) : définitions courtes, reliées automatiquement aux fiches qui emploient chaque terme.
@@ -132,7 +132,7 @@ docs/decisions.md         Décisions et hypothèses
 ## Ajouter une intervention
 
 1. Ajouter son identifiant dans `INTERVENTION_IDS` (`src/content/types.ts`), puis `npm run cms:migrate:create` et `npm run cms:migrate` (la liste est une énumération en base).
-2. Rédiger la fiche dans le back-office, pour chaque marché, en respectant la charte (au moins trois risques, contre-indications, alternatives, aucune promesse). Pour le développement sans base, la rédiger aussi dans `src/content/interventions/` : `npm test` vérifie ces fichiers.
+2. Rédiger la fiche dans le back-office (ou, sans base, un dossier complet dans `src/content/dossiers/<id>.ts` : fiche, 5 sous-pages et termes du lexique par marché, contrôlé par `npx tsx scripts/check-dossier.mts`), puis ajouter les spécialités habilitées dans `SPECIALTIES_BY_INTERVENTION` (`src/content/surgeons/verification.ts`). Rédiger la fiche, pour chaque marché, en respectant la charte (au moins trois risques, contre-indications, alternatives, aucune promesse). Pour le développement sans base, la rédiger aussi dans `src/content/interventions/` : `npm test` vérifie ces fichiers.
 3. Un relecteur médical la valide dans le back-office : elle devient indexable.
 
 ## Ouvrir un nouveau marché

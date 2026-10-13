@@ -110,3 +110,11 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Bêta** : `REQUESTS_PAUSED=1` ferme le formulaire de demande (page et action serveur) sans fermer le reste du site.
 - **Choix validés le 13 octobre 2026** : villes de lancement Paris et Lyon ; abonnement chirurgien de 150 à 250 € HT par mois, montant fixé après test auprès des 20 premiers, 3 mois offerts aux premiers inscrits de chaque ville ; hébergeur HDS OVHcloud (base PostgreSQL managée en France), Clever Cloud en repli. `HDS_PROVIDER=OVHcloud` en production.
 - **Mise en production** : `npm run launch:check` contrôle la configuration (HTTPS, base hors poste local, hébergeur HDS déclaré, clés de chiffrement, secrets, CMS, chirurgiens fictifs désactivés, e-mails) sans afficher aucun secret.
+
+## Contenus de la vague 2 (13 octobre 2026)
+
+- **8 interventions ajoutées**, parmi les plus demandées en Europe : liposuccion, blépharoplastie, lifting du visage, otoplastie, lifting des seins, réduction mammaire, gynécomastie, lipofilling. Chacune a un dossier complet par marché (fiche, 5 sous-pages, termes du lexique) dans `src/content/dossiers/`, un fichier par intervention.
+- **Spécialités habilitées** : blépharoplastie (plastique, oculoplastique, maxillo-faciale), lifting du visage (plastique, ORL, maxillo-faciale), otoplastie (plastique, ORL), les autres en chirurgie plastique seulement. Liposuccion, lifting et réduction des seins ajoutent la question de grossesse au formulaire.
+- **Guides** : 6 guides pratiques ajoutés (préparation, premiers jours à la maison, cicatrices, anesthésie, complications et recours, médecine esthétique ou chirurgie), les 6 existants enrichis, et la page des guides regroupée en trois thèmes (se décider, l'opération, sécurité et droits).
+- **Accueil** : 6 interventions mises en avant, lien vers la liste complète.
+- **Statut** : tout est en brouillon, donc exclu de l'index, jusqu'à la relecture du comité médical. Les affirmations à vérifier en priorité sont listées dans les fichiers du projet (`relecture/points-a-verifier-vague-2.md`).
