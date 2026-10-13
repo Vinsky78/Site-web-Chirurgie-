@@ -74,6 +74,7 @@ export interface Config {
     'glossary-terms': GlossaryTerm;
     surgeons: Surgeon;
     'surgeon-applications': SurgeonApplication;
+    'contact-requests': ContactRequest;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     'glossary-terms': GlossaryTermsSelect<false> | GlossaryTermsSelect<true>;
     surgeons: SurgeonsSelect<false> | SurgeonsSelect<true>;
     'surgeon-applications': SurgeonApplicationsSelect<false> | SurgeonApplicationsSelect<true>;
+    'contact-requests': ContactRequestsSelect<false> | ContactRequestsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -572,6 +574,56 @@ export interface SurgeonApplication {
   createdAt: string;
 }
 /**
+ * Répondre par le moyen de contact choisi. Ne jamais demander d'information médicale par ce canal : orienter vers la demande de consultation.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-requests".
+ */
+export interface ContactRequest {
+  id: number;
+  status: 'new' | 'in-progress' | 'done';
+  notes?: string | null;
+  /**
+   * Même référence que dans le tableau de suivi Google Sheets.
+   */
+  reference: string;
+  subject: 'project' | 'question' | 'surgeon' | 'press' | 'privacy' | 'other';
+  intervention?:
+    | (
+        | 'rhinoplasty'
+        | 'abdominoplasty'
+        | 'breast-augmentation'
+        | 'liposuction'
+        | 'blepharoplasty'
+        | 'facelift'
+        | 'otoplasty'
+        | 'breast-lift'
+        | 'breast-reduction'
+        | 'gynecomastia'
+        | 'fat-grafting'
+        | 'arm-lift'
+        | 'thigh-lift'
+        | 'body-lift'
+        | 'buttock-augmentation'
+        | 'labiaplasty'
+        | 'breast-implant-revision'
+        | 'brow-lift'
+        | 'genioplasty'
+      )
+    | null;
+  timeframe?: ('lt3m' | '3to6m' | '6to12m' | 'gt12m' | 'unknown') | null;
+  firstName: string;
+  email: string;
+  phone?: string | null;
+  channel: 'email' | 'phone';
+  slot?: ('morning' | 'lunch' | 'afternoon' | 'evening' | 'any') | null;
+  message?: string | null;
+  page?: string | null;
+  locale?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -622,6 +674,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'surgeon-applications';
         value: number | SurgeonApplication;
+      } | null)
+    | ({
+        relationTo: 'contact-requests';
+        value: number | ContactRequest;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -954,6 +1010,28 @@ export interface SurgeonApplicationsSelect<T extends boolean = true> {
   city?: T;
   interventions?: T;
   languages?: T;
+  locale?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-requests_select".
+ */
+export interface ContactRequestsSelect<T extends boolean = true> {
+  status?: T;
+  notes?: T;
+  reference?: T;
+  subject?: T;
+  intervention?: T;
+  timeframe?: T;
+  firstName?: T;
+  email?: T;
+  phone?: T;
+  channel?: T;
+  slot?: T;
+  message?: T;
+  page?: T;
   locale?: T;
   updatedAt?: T;
   createdAt?: T;

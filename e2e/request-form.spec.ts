@@ -6,7 +6,7 @@ test.describe("formulaire de demande", () => {
     await expect(page.getByRole("heading", { level: 1, name: "Abdominoplastie" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Risques et complications" })).toBeVisible();
 
-    await page.getByRole("link", { name: "Préparer une demande de consultation" }).last().click();
+    await page.locator("main").getByRole("link", { name: "Préparer une demande de consultation" }).last().click();
     await expect(page.getByLabel("Intervention envisagée")).toHaveValue("abdominoplasty");
 
     await page.getByLabel("Ville ou région souhaitée").fill("Lyon");
@@ -47,7 +47,7 @@ test.describe("formulaire de demande", () => {
 
   test("présélectionne le chirurgien depuis sa fiche et limite le choix à trois", async ({ page }) => {
     await page.goto("/fr/chirurgiens/alice-demo-lyon");
-    await page.getByRole("link", { name: "Préparer une demande de consultation" }).last().click();
+    await page.locator("main").getByRole("link", { name: "Préparer une demande de consultation" }).last().click();
     await page.waitForURL(/surgeon=alice-demo-lyon/);
 
     await page.getByLabel("Intervention envisagée").selectOption("rhinoplasty");

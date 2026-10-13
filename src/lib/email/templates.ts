@@ -132,3 +132,22 @@ export function applicationTeamEmail(data: {
     footer: t("footerPro"),
   });
 }
+
+/** Accusé de réception d'une demande de contact. Sans reprise du message (qui pourrait contenir des données de santé). */
+export function contactConfirmationEmail(locale: Locale, data: { email: string; name: string }): EmailMessage {
+  const t = translator(locale);
+  return render(locale, { email: data.email, name: data.name }, t("contact.subject"), "contact-confirmation", {
+    paragraphs: [t("contact.greeting", { name: data.name }), t("contact.body"), t("contact.next")],
+    footer: t("footer"),
+  });
+}
+
+/** Alerte à l'équipe : une demande de contact attend dans le CMS. Seul l'objet est indiqué. */
+export function contactTeamEmail(data: { email: string; subject: string; adminUrl: string }): EmailMessage {
+  const t = translator("fr");
+  return render("fr", { email: data.email }, t("contactTeam.subject", { subject: data.subject }), "contact-team", {
+    paragraphs: [t("contactTeam.body", { subject: data.subject })],
+    action: { label: t("contactTeam.action"), url: data.adminUrl },
+    footer: t("footerPro"),
+  });
+}

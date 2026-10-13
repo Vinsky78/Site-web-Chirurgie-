@@ -125,3 +125,10 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **6 guides ajoutés** (18 au total) : coût et financement (sans aucun montant), associer plusieurs interventions, image du corps et attentes, conditions de santé avant l'opération, vivre avec des implants, insatisfaction et retouche.
 - **Page « Comment ça marche »** : parcours en 5 étapes, engagements, ce que la plateforme ne fait pas, 14 questions fréquentes (balisage FAQPage), appel à la demande. Elle décrit les règles réelles du site (3 chirurgiens au plus, conservation 6 mois, lien de suppression) : à mettre à jour si elles changent. Lien dans l'en-tête et sur l'accueil.
 - **Statut** : brouillon, exclu de l'index jusqu'à la relecture médicale. Points prioritaires dans les fichiers du projet (`relecture/points-a-verifier-vague-3.md`).
+
+## Demandes de contact (octobre 2026)
+
+- Les demandes de contact sont enregistrées dans le CMS (hébergement HDS en production) et conservées 12 mois au plus.
+- Le suivi opérationnel démarre dans Google Sheets. Google Sheets n'étant pas certifié HDS, seules les données de contact et de suivi y sont envoyées : jamais l'intervention envisagée ni le message.
+- Les e-mails (accusé de réception, alerte à l'équipe) ne reprennent jamais le contenu de la demande.
+

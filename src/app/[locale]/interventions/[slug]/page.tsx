@@ -358,6 +358,12 @@ export default async function InterventionPage({ params }: Props) {
             >
               {t("cta")}
             </Link>
+            <Link
+              href={{ pathname: "/contact", query: { objet: "project", intervention: intervention.id } }}
+              className="mt-3 block text-center text-small text-primary-soft underline underline-offset-4 hover:text-white"
+            >
+              {t("askQuestion")}
+            </Link>
           </div>
         </div>
       </aside>

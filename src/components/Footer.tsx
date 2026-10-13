@@ -4,16 +4,38 @@ import type { Locale } from "@/i18n/routing";
 import { INFO_PAGE_IDS, INFO_PAGE_SLUGS } from "@/lib/pages";
 import { SITE_NAME } from "@/lib/site";
 import { LogoMark } from "@/components/ui/Logo";
+import { buttonClasses } from "@/components/ui/button";
 
 export async function Footer() {
   const t = await getTranslations("footer");
   const tn = await getTranslations("nav");
+  const tl = await getTranslations("layout");
   const locale = (await getLocale()) as Locale;
   const link = "text-primary-soft underline-offset-4 hover:text-white hover:underline";
   const heading = "text-label font-semibold text-white";
 
   return (
-    <footer className="mt-16 bg-primary-strong text-small text-primary-soft">
+    <>
+    {/* Bandeau de contact présent sur toutes les pages. */}
+    <section aria-labelledby="contact-band" className="mt-16 border-t border-border bg-sand">
+      <div className="mx-auto flex max-w-page flex-col gap-6 px-4 py-10 md:flex-row md:items-center md:justify-between">
+        <div className="max-w-reading">
+          <h2 id="contact-band" className="font-serif text-h2 text-primary-strong">
+            {tl("contactTitle")}
+          </h2>
+          <p className="mt-2 text-muted">{tl("contactText")}</p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row md:shrink-0">
+          <Link href="/contact" className={buttonClasses("primary")}>
+            {tl("contactButton")}
+          </Link>
+          <Link href="/demande" className={buttonClasses("secondary")}>
+            {tl("requestButton")}
+          </Link>
+        </div>
+      </div>
+    </section>
+    <footer className="bg-primary-strong text-small text-primary-soft">
       <div className="mx-auto grid max-w-page gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
         <div className="space-y-3">
           <p className="inline-flex items-center gap-2.5 font-serif text-h3 text-white">
@@ -41,6 +63,7 @@ export async function Footer() {
             <li><Link href="/comparateur" className={link}>{t("compare")}</Link></li>
             <li><Link href="/comment-ca-marche" className={link}>{tn("howItWorks")}</Link></li>
             <li><Link href="/demande" className={link}>{tn("request")}</Link></li>
+            <li><Link href="/contact" className={link}>{t("contact")}</Link></li>
           </ul>
         </nav>
 
@@ -65,5 +88,6 @@ export async function Footer() {
         </p>
       </div>
     </footer>
+    </>
   );
 }

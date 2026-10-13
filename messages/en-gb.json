@@ -27,7 +27,8 @@
     "langShort": {
       "fr": "FR",
       "en-gb": "EN"
-    }
+    },
+    "contact": "Contact"
   },
   "footer": {
     "legal": "Legal notice",
@@ -44,7 +45,8 @@
     "tools": "Tools",
     "platform": "The platform",
     "legalTitle": "Information",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "contact": "Contact us"
   },
   "home": {
     "title": "Understand before you decide",
@@ -121,7 +123,8 @@
     "toc": "On this page",
     "asideTitle": "Thinking about it?",
     "asideText": "Prepare a request: you then choose 1 to 3 verified surgeons. Free, with no commitment.",
-    "jumpTo": "Jump to"
+    "jumpTo": "Jump to",
+    "askQuestion": "A question about this procedure? Contact us"
   },
   "directory": {
     "title": "Verified surgeons",
@@ -298,6 +301,7 @@
         "[TO COMPLETE after the data protection impact assessment and appointment of the DPO.]",
         "Data collected: planned procedure, closed medical questions, contact details. Legal basis: your explicit consent (UK GDPR Article 9(2)(a)).",
         "Recipients: only the surgeons you select. Hosting: European Union.",
+        "Contact enquiries: subject, first name, email, phone and message, used only to reply to you and kept for no more than 12 months. Follow-up (without the procedure or the message) is kept in Google Workspace, a processor bound by a data processing agreement. [To be validated by the DPO.]",
         "Retention: 6 months after your request is sent. You can access, correct or delete your data or withdraw consent at any time, and complain to the Information Commissioner's Office (ICO)."
       ],
       "description": "How we protect your health data: purposes, consent, retention periods, hosting and how to exercise your rights."
@@ -450,6 +454,17 @@
       "subject": "New application: {name}",
       "body": "{name} ({city}, {country}) has applied. Run the country checks before replying.",
       "action": "Open the application in the CMS"
+    },
+    "contact": {
+      "subject": "We have received your message",
+      "greeting": "Hello {name},",
+      "body": "Thank you for writing to us. Your enquiry has been recorded.",
+      "next": "We will get back to you within 2 working days, in the way you chose. Please do not reply to this email with any medical information."
+    },
+    "contactTeam": {
+      "subject": "Nouvelle demande de contact ({subject})",
+      "body": "Une demande de contact (objet : {subject}) attend une réponse. Son contenu se lit dans le back-office.",
+      "action": "Ouvrir la demande dans le CMS"
     }
   },
   "manage": {
@@ -558,7 +573,11 @@
     }
   },
   "layout": {
-    "announce": "Our pages follow a strict editorial charter and are being reviewed by a medical committee."
+    "announce": "Our pages follow a strict editorial charter and are being reviewed by a medical committee.",
+    "contactTitle": "A question or a project?",
+    "contactText": "Write to us or prepare your consultation request straight away. We reply within 2 working days, free and with no commitment.",
+    "contactButton": "Contact us",
+    "requestButton": "Prepare a consultation request"
   },
   "compare": {
     "title": "Compare procedures",
@@ -586,5 +605,80 @@
     "guides": "Guides",
     "glossary": "Glossary",
     "hint": "Try “nose”, “scar”, “anaesthetic” or “implants”."
+  },
+  "contact": {
+    "title": "Contact us",
+    "lead": "A question about the platform, a project you are still thinking about, a press enquiry or a question about your data: leave your details and we will get back to you within 2 working days.",
+    "description": "Contact the Éclaira team: questions, procedure plans, press, partnerships or personal data. We reply within 2 working days.",
+    "projectHint": "Already clear about your plans? The consultation request lets you choose 1 to 3 verified surgeons directly.",
+    "projectLink": "Prepare a consultation request",
+    "sections": {
+      "subject": "Your enquiry",
+      "contact": "Your details",
+      "callback": "How to reach you"
+    },
+    "fields": {
+      "subject": "What is your enquiry about?",
+      "intervention": "Procedure you are interested in (optional)",
+      "timeframe": "When are you thinking of going ahead? (optional)",
+      "firstName": "First name",
+      "email": "Email address",
+      "phone": "Phone",
+      "phoneHint": "Required if you would like a call back.",
+      "channel": "How would you like us to contact you?",
+      "slot": "Preferred time (optional)",
+      "message": "Your message",
+      "messageHint": "1,000 characters maximum. Do not include any medical information (treatments, history, photos): if needed, it will be asked for in a secure setting.",
+      "choose": "Choose…",
+      "consent": "I agree to my details being used to reply to my enquiry. They are kept for no more than 12 months.",
+      "privacy": "Find out more about your data",
+      "submit": "Send my enquiry",
+      "submitting": "Sending…",
+      "required": "required",
+      "website": "Website (leave blank)"
+    },
+    "options": {
+      "subject": {
+        "project": "I have a procedure in mind",
+        "question": "A question about the platform",
+        "surgeon": "I am a surgeon",
+        "press": "Press or partnership",
+        "privacy": "My personal data",
+        "other": "Other"
+      },
+      "timeframe": {
+        "lt3m": "Within 3 months",
+        "3to6m": "3 to 6 months",
+        "6to12m": "6 to 12 months",
+        "gt12m": "More than 12 months",
+        "unknown": "Not sure yet"
+      },
+      "channel": {
+        "email": "By email",
+        "phone": "By phone"
+      },
+      "slot": {
+        "morning": "Morning (9am–12pm)",
+        "lunch": "Lunchtime (12pm–2pm)",
+        "afternoon": "Afternoon (2pm–6pm)",
+        "evening": "Evening (6pm–8pm)",
+        "any": "Any time"
+      }
+    },
+    "errors": {
+      "required": "This field is required.",
+      "firstName": "Your first name must be 60 characters or fewer.",
+      "email": "Enter a valid email address.",
+      "phone": "Enter a valid phone number.",
+      "phoneRequired": "Enter a number so we can call you back.",
+      "message": "Your message must be 1,000 characters or fewer.",
+      "consent": "We need your agreement to reply to you.",
+      "summary": "There are errors in the form: please check the highlighted fields.",
+      "spam": "Your enquiry could not be sent. Please try again in a few seconds.",
+      "unavailable": "The service is temporarily unavailable. Please try again later."
+    },
+    "successTitle": "Your enquiry has been sent",
+    "success": "Thank you. A confirmation email is on its way. We will get back to you within 2 working days, in the way you chose.",
+    "successRequest": "You can also prepare your consultation request now."
   }
 }

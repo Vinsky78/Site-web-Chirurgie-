@@ -107,6 +107,12 @@ Une fiche modifiée par un autre compte qu'un relecteur médical repasse en brou
 | `npm run content:check` | Cohérence fr / en-gb des fiches, guides et messages, charte éditoriale (aussi `node "Website surgery.js" check`) |
 | `npm run content:standalone` | Page HTML autonome listant les interventions, dans `site-autonome/` (aussi `node "Website surgery.js" standalone`) |
 
+## Demandes de contact
+
+- **Formulaire** `/contact` : objet, projet (intervention et délai, facultatifs), message sans information médicale, coordonnées, moyen et créneau de rappel, consentement. Accessible depuis le bandeau en bas de chaque page, l'en-tête et chaque fiche (préremplie).
+- **Enregistrement** dans la collection « Demandes de contact » du CMS (migration `contact_requests`), avec une référence courte (`C-XXXXXX`). Accusé de réception au visiteur, alerte à l'équipe (`TEAM_EMAIL`) sans le contenu.
+- **Suivi dans Google Sheets** (`CONTACT_SHEET_WEBHOOK_URL`, `CONTACT_SHEET_TOKEN`) : statuts, prochaine action, relances quotidiennes et purge à 12 mois. Ni l'intervention ni le message n'y sont envoyés. Mise en place : [docs/workflow-contact.md](docs/workflow-contact.md).
+
 ## Outils pour le visiteur et GEO
 
 - **Recherche** (`/recherche`, `/en-gb/search`) : interventions, guides et lexique, sans tenir compte des accents ni des majuscules.

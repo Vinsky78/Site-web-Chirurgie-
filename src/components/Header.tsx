@@ -47,6 +47,7 @@ export async function Header() {
               surgeons: t("surgeons"),
               guides: t("guides"),
               howItWorks: t("howItWorks"),
+              contact: t("contact"),
               search: t("search"),
               searchLabel: t("searchLabel"),
               request: t("request"),

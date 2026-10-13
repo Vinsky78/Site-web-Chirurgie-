@@ -13,6 +13,7 @@ interface Labels {
   surgeons: string;
   guides: string;
   howItWorks: string;
+  contact: string;
   search: string;
   searchLabel: string;
   request: string;
@@ -23,7 +24,7 @@ interface Labels {
 }
 
 /**
- * Navigation principale : barre sur une ligne à partir de 1 024 px, menu
+ * Navigation principale : barre sur une ligne à partir de 1 280 px, menu
  * repliable en dessous. Le menu mobile se referme à chaque changement de page.
  */
 export function HeaderNav({ labels, groups, locale, locales }: { labels: Labels; groups: MenuGroup[]; locale: Locale; locales: readonly Locale[] }) {
@@ -39,7 +40,7 @@ export function HeaderNav({ labels, groups, locale, locales }: { labels: Labels;
         aria-expanded={open}
         aria-controls="main-menu"
         onClick={() => setOpenOn(open ? null : pathname)}
-        className="inline-flex min-h-11 items-center gap-2 rounded-control border border-border px-3 text-label lg:hidden"
+        className="inline-flex min-h-11 items-center gap-2 rounded-control border border-border px-3 text-label xl:hidden"
       >
         <span aria-hidden="true">{open ? "✕" : "☰"}</span>
         {open ? labels.menuClose : labels.menuOpen}
@@ -47,9 +48,9 @@ export function HeaderNav({ labels, groups, locale, locales }: { labels: Labels;
 
       <div
         id="main-menu"
-        className={`${open ? "flex" : "hidden"} absolute inset-x-0 top-full max-h-[calc(100dvh-4.5rem)] flex-col gap-1 overflow-y-auto overscroll-contain border-b border-border bg-surface px-4 pb-6 pt-2 shadow-float lg:static lg:max-h-none lg:overflow-visible lg:flex lg:flex-1 lg:flex-row lg:items-center lg:justify-end lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
+        className={`${open ? "flex" : "hidden"} absolute inset-x-0 top-full max-h-[calc(100dvh-4.5rem)] flex-col gap-1 overflow-y-auto overscroll-contain border-b border-border bg-surface px-4 pb-6 pt-2 shadow-float xl:static xl:max-h-none xl:overflow-visible xl:flex xl:flex-1 xl:flex-row xl:items-center xl:justify-end xl:gap-6 xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none`}
       >
-        <ul className="flex flex-col gap-1 text-label lg:flex-row lg:items-center lg:gap-6">
+        <ul className="flex flex-col gap-1 text-label xl:flex-row xl:items-center xl:gap-6">
           <MegaMenu label={labels.interventions} groups={groups} allLabel={labels.allInterventions} />
           <li>
             <Link href="/guides" className={link}>
@@ -66,15 +67,20 @@ export function HeaderNav({ labels, groups, locale, locales }: { labels: Labels;
               {labels.howItWorks}
             </Link>
           </li>
+          <li>
+            <Link href="/contact" className={link}>
+              {labels.contact}
+            </Link>
+          </li>
         </ul>
 
-        <div className="mt-4 flex flex-wrap items-center gap-4 border-t border-border pt-4 lg:mt-0 lg:border-0 lg:pt-0">
+        <div className="mt-4 flex flex-wrap items-center gap-4 border-t border-border pt-4 xl:mt-0 xl:border-0 xl:pt-0">
           <Link href="/recherche" aria-label={labels.searchLabel} className={`${link} gap-2`}>
             <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
               <circle cx="8.5" cy="8.5" r="5.5" />
               <path d="M13 13l4 4" />
             </svg>
-            <span className="lg:sr-only">{labels.search}</span>
+            <span className="xl:sr-only">{labels.search}</span>
           </Link>
           <ul aria-label={labels.language} className="flex items-center gap-1 text-small">
             {locales.map((l, i) => (
@@ -94,7 +100,7 @@ export function HeaderNav({ labels, groups, locale, locales }: { labels: Labels;
               </li>
             ))}
           </ul>
-          <Link href="/demande" className={buttonClasses("primary", "w-full lg:w-auto")}>
+          <Link href="/demande" className={buttonClasses("primary", "w-full xl:w-auto")}>
             {labels.request}
           </Link>
         </div>

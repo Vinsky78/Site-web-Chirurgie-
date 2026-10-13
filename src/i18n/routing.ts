@@ -29,6 +29,7 @@ export const routing = defineRouting({
     "/demande": { fr: "/demande", "en-gb": "/request" },
     "/comment-ca-marche": { fr: "/comment-ca-marche", "en-gb": "/how-it-works" },
     "/rejoindre": { fr: "/rejoindre", "en-gb": "/join" },
+    "/contact": "/contact",
     // Outils pilotés par paramètres : non indexés.
     "/comparateur": { fr: "/comparateur", "en-gb": "/compare" },
     "/recherche": { fr: "/recherche", "en-gb": "/search" },

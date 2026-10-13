@@ -25,6 +25,7 @@ export async function GET() {
       ["Interventions", "/interventions"],
       ["Guides", "/guides"],
       ["Comment ça marche / How it works", "/comment-ca-marche"],
+      ["Contact", "/contact"],
     ];
     lines.push(`## Pages principales (${locale})`, "");
     for (const [label, href] of pages) lines.push(`- [${label}](${absoluteUrl(locale, href)})`);

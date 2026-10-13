@@ -90,7 +90,7 @@ Une seule police préchargée (Inter), pour la vitesse d'affichage.
 ## Ergonomie
 
 - En-tête fixe sur une ligne : logo, navigation, recherche, langue et bouton de demande.
-- Sous 1 024 px, la navigation se replie dans un bouton « Menu ».
+- Sous 1 280 px, la navigation se replie dans un bouton « Menu ».
 - Fiches : repères « En bref » en haut, sommaire et demande dans une colonne qui
   reste visible sur ordinateur, barre de demande fixe en bas sur mobile.
 - Accueil : recherche immédiate et accès par zone du corps dès le premier écran.

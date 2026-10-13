@@ -27,7 +27,8 @@
     "langShort": {
       "fr": "FR",
       "en-gb": "EN"
-    }
+    },
+    "contact": "Contact"
   },
   "footer": {
     "legal": "Mentions légales",
@@ -44,7 +45,8 @@
     "tools": "Outils",
     "platform": "La plateforme",
     "legalTitle": "Informations",
-    "rights": "Tous droits réservés."
+    "rights": "Tous droits réservés.",
+    "contact": "Nous contacter"
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -121,7 +123,8 @@
     "toc": "Sur cette page",
     "asideTitle": "Un projet en tête ?",
     "asideText": "Préparez une demande : vous choisirez ensuite 1 à 3 chirurgiens vérifiés. Gratuit et sans engagement.",
-    "jumpTo": "Aller à"
+    "jumpTo": "Aller à",
+    "askQuestion": "Une question sur cette intervention ? Nous contacter"
   },
   "directory": {
     "title": "Chirurgiens vérifiés",
@@ -299,6 +302,7 @@
         "Responsable de traitement : [société]. Délégué à la protection des données : [contact].",
         "Données collectées : projet d'intervention, critères médicaux fermés, coordonnées. Base légale : votre consentement explicite (article 9.2.a du RGPD).",
         "Destinataires : uniquement les chirurgiens que vous sélectionnez. Hébergement : Union européenne, hébergeur certifié HDS.",
+        "Demandes de contact : objet, prénom, e-mail, téléphone et message, utilisés uniquement pour vous répondre et conservés 12 mois au plus. Le suivi (sans intervention ni message) est tenu dans Google Workspace, sous-traitant lié par un contrat de traitement. [À faire valider par le DPO.]",
         "Durée de conservation : 6 mois après l'envoi de la demande. Vous pouvez à tout moment accéder à vos données, les rectifier, les effacer ou retirer votre consentement, et introduire une réclamation auprès de la CNIL."
       ],
       "description": "Comment nous protégeons vos données de santé : finalités, consentement, durées de conservation, hébergement et exercice de vos droits."
@@ -451,6 +455,17 @@
       "subject": "Nouvelle candidature : {name}",
       "body": "{name} ({city}, {country}) a déposé une candidature. Faites les contrôles du pays avant toute réponse.",
       "action": "Ouvrir la candidature dans le CMS"
+    },
+    "contact": {
+      "subject": "Nous avons bien reçu votre message",
+      "greeting": "Bonjour {name},",
+      "body": "Merci de nous avoir écrit. Votre demande est bien enregistrée.",
+      "next": "Nous vous recontactons sous 2 jours ouvrés, par le moyen que vous avez choisi. Ne répondez pas à cet e-mail avec des informations médicales."
+    },
+    "contactTeam": {
+      "subject": "Nouvelle demande de contact ({subject})",
+      "body": "Une demande de contact (objet : {subject}) attend une réponse. Son contenu se lit dans le back-office.",
+      "action": "Ouvrir la demande dans le CMS"
     }
   },
   "manage": {
@@ -559,7 +574,11 @@
     }
   },
   "layout": {
-    "announce": "Les fiches sont rédigées selon une charte stricte et en cours de relecture par un comité médical."
+    "announce": "Les fiches sont rédigées selon une charte stricte et en cours de relecture par un comité médical.",
+    "contactTitle": "Une question, un projet ?",
+    "contactText": "Écrivez-nous ou préparez directement votre demande de consultation. Réponse sous 2 jours ouvrés, gratuitement et sans engagement.",
+    "contactButton": "Nous contacter",
+    "requestButton": "Préparer une demande de consultation"
   },
   "compare": {
     "title": "Comparer des interventions",
@@ -587,5 +606,80 @@
     "guides": "Guides",
     "glossary": "Lexique",
     "hint": "Essayez « nez », « cicatrice », « anesthésie » ou « implants »."
+  },
+  "contact": {
+    "title": "Nous contacter",
+    "lead": "Une question sur la plateforme, un projet encore en réflexion, une demande presse ou concernant vos données : laissez-nous vos coordonnées, nous vous recontactons sous 2 jours ouvrés.",
+    "description": "Contactez l'équipe Éclaira : question, projet d'intervention, presse, partenariat ou données personnelles. Réponse sous 2 jours ouvrés.",
+    "projectHint": "Votre projet est déjà défini ? La demande de consultation vous permet de choisir directement 1 à 3 chirurgiens vérifiés.",
+    "projectLink": "Préparer une demande de consultation",
+    "sections": {
+      "subject": "Votre demande",
+      "contact": "Vos coordonnées",
+      "callback": "Comment vous recontacter"
+    },
+    "fields": {
+      "subject": "Objet de votre demande",
+      "intervention": "Intervention qui vous intéresse (facultatif)",
+      "timeframe": "Dans quel délai envisagez-vous ce projet ? (facultatif)",
+      "firstName": "Prénom",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone",
+      "phoneHint": "Obligatoire si vous souhaitez être rappelé.",
+      "channel": "Comment souhaitez-vous être recontacté ?",
+      "slot": "Créneau préféré (facultatif)",
+      "message": "Votre message",
+      "messageHint": "1 000 caractères au maximum. N'indiquez aucune information médicale (traitements, antécédents, photos) : elles seront demandées, si besoin, dans un cadre sécurisé.",
+      "choose": "Choisir…",
+      "consent": "J'accepte que mes coordonnées soient utilisées pour répondre à ma demande. Elles sont conservées 12 mois au plus.",
+      "privacy": "En savoir plus sur vos données",
+      "submit": "Envoyer ma demande",
+      "submitting": "Envoi en cours…",
+      "required": "obligatoire",
+      "website": "Site web (laisser vide)"
+    },
+    "options": {
+      "subject": {
+        "project": "J'ai un projet d'intervention",
+        "question": "Une question sur la plateforme",
+        "surgeon": "Je suis chirurgien",
+        "press": "Presse ou partenariat",
+        "privacy": "Mes données personnelles",
+        "other": "Autre"
+      },
+      "timeframe": {
+        "lt3m": "Moins de 3 mois",
+        "3to6m": "3 à 6 mois",
+        "6to12m": "6 à 12 mois",
+        "gt12m": "Plus de 12 mois",
+        "unknown": "Je ne sais pas encore"
+      },
+      "channel": {
+        "email": "Par e-mail",
+        "phone": "Par téléphone"
+      },
+      "slot": {
+        "morning": "Matin (9 h – 12 h)",
+        "lunch": "Midi (12 h – 14 h)",
+        "afternoon": "Après-midi (14 h – 18 h)",
+        "evening": "Soir (18 h – 20 h)",
+        "any": "Peu importe"
+      }
+    },
+    "errors": {
+      "required": "Ce champ est obligatoire.",
+      "firstName": "Le prénom ne doit pas dépasser 60 caractères.",
+      "email": "Indiquez une adresse e-mail valide.",
+      "phone": "Indiquez un numéro de téléphone valide.",
+      "phoneRequired": "Indiquez un numéro pour être rappelé.",
+      "message": "Le message ne doit pas dépasser 1 000 caractères.",
+      "consent": "Votre accord est nécessaire pour vous répondre.",
+      "summary": "Le formulaire contient des erreurs : vérifiez les champs signalés.",
+      "spam": "Votre demande n'a pas pu être envoyée. Réessayez dans quelques secondes.",
+      "unavailable": "Le service est momentanément indisponible. Réessayez plus tard."
+    },
+    "successTitle": "Votre demande est bien envoyée",
+    "success": "Merci. Un e-mail de confirmation vient de vous être envoyé. Nous vous recontactons sous 2 jours ouvrés, par le moyen que vous avez choisi.",
+    "successRequest": "Vous pouvez aussi préparer dès maintenant votre demande de consultation."
   }
 }

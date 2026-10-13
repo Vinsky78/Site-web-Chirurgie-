@@ -52,8 +52,8 @@ export function MegaMenu({ label, groups, allLabel }: { label: string; groups: M
         </span>
       </button>
       {visible && (
-        <div id="mega-menu" className="z-40 bg-surface lg:absolute lg:inset-x-0 lg:top-full lg:border-b lg:border-border lg:shadow-float">
-          <div className="mx-auto max-w-page py-3 lg:px-4 lg:py-6">
+        <div id="mega-menu" className="z-40 bg-surface xl:absolute xl:inset-x-0 xl:top-full xl:border-b xl:border-border xl:shadow-float">
+          <div className="mx-auto max-w-page py-3 xl:px-4 xl:py-6">
             <div className="grid gap-6 sm:grid-cols-3">
               {groups.map((group) => (
                 <div key={group.id}>
