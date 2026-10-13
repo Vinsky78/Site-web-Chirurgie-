@@ -1,6 +1,18 @@
 import type { Locale } from "@/i18n/routing";
 
-export const INTERVENTION_IDS = ["rhinoplasty", "abdominoplasty", "breast-augmentation"] as const;
+export const INTERVENTION_IDS = [
+  "rhinoplasty",
+  "abdominoplasty",
+  "breast-augmentation",
+  "liposuction",
+  "blepharoplasty",
+  "facelift",
+  "otoplasty",
+  "breast-lift",
+  "breast-reduction",
+  "gynecomastia",
+  "fat-grafting",
+] as const;
 export type InterventionId = (typeof INTERVENTION_IDS)[number];
 
 export const CATEGORY_IDS = ["face", "body", "breast"] as const;
@@ -95,6 +107,12 @@ export const GUIDE_IDS = [
   "quote-and-cooling-off",
   "warning-signs-after-surgery",
   "right-time",
+  "preparing-for-surgery",
+  "after-surgery-at-home",
+  "scar-care",
+  "anaesthesia",
+  "complications-and-rights",
+  "aesthetic-medicine-vs-surgery",
 ] as const;
 export type GuideId = (typeof GUIDE_IDS)[number];
 
