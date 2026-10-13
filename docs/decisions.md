@@ -20,6 +20,7 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 
 - Société établie en France, aucun médecin associé au capital.
 - Pas de destinations hors Europe au lancement.
+- Lancement à Paris et Lyon ; abonnement chirurgien de 150 à 250 € HT par mois, testé auprès des 20 premiers ; hébergement HDS chez OVHcloud (validé le 13 octobre 2026, détail dans « Lancement et croissance »).
 - Analyse juridique à faire valider par un avocat dans chaque pays avant ouverture.
 
 ## Choix techniques provisoires (à confirmer en Phase 4)
@@ -107,4 +108,5 @@ Le rapport complet est dans le document « Phase 1 – Stratégie et conformité
 - **Spécialité et interventions** : une intervention hors spécialité est refusée, à la candidature comme sur la fiche (rhinoplastie : plastique, ORL, maxillo-faciale ; abdominoplastie et augmentation mammaire : plastique).
 - **Candidatures** : collection `surgeon-applications` du CMS, créée seulement par le site, lue par les administrateurs. Données professionnelles, aucun texte libre. Accusé de réception au candidat, alerte à `TEAM_EMAIL`. Une candidature refusée est supprimée après 12 mois (à faire à la main dans `/admin` en attendant une tâche automatique).
 - **Bêta** : `REQUESTS_PAUSED=1` ferme le formulaire de demande (page et action serveur) sans fermer le reste du site.
+- **Choix validés le 13 octobre 2026** : villes de lancement Paris et Lyon ; abonnement chirurgien de 150 à 250 € HT par mois, montant fixé après test auprès des 20 premiers, 3 mois offerts aux premiers inscrits de chaque ville ; hébergeur HDS OVHcloud (base PostgreSQL managée en France), Clever Cloud en repli. `HDS_PROVIDER=OVHcloud` en production.
 - **Mise en production** : `npm run launch:check` contrôle la configuration (HTTPS, base hors poste local, hébergeur HDS déclaré, clés de chiffrement, secrets, CMS, chirurgiens fictifs désactivés, e-mails) sans afficher aucun secret.
