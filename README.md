@@ -104,6 +104,16 @@ Une fiche modifiée par un autre compte qu'un relecteur médical repasse en brou
 | `npm run cms:migrate:create` | Génère une migration après modification d'une collection (`src/cms/collections`) |
 | `npm run cms:seed` | Crée le premier administrateur et importe les fiches de `src/content` |
 | `npm run cms:types` | Régénère `src/payload-types.ts` après modification d'une collection |
+| `npm run content:check` | Cohérence fr / en-gb des fiches, guides et messages, charte éditoriale (aussi `node "Website surgery.js" check`) |
+| `npm run content:standalone` | Page HTML autonome listant les interventions, dans `site-autonome/` (aussi `node "Website surgery.js" standalone`) |
+
+## Outils pour le visiteur et GEO
+
+- **Recherche** (`/recherche`, `/en-gb/search`) : interventions, guides et lexique, sans tenir compte des accents ni des majuscules.
+- **Comparateur** (`/comparateur`, `/en-gb/compare`) : deux ou trois interventions côte à côte (anesthésie, durée, hospitalisation, convalescence, principaux risques).
+- Ces deux pages sont pilotées par paramètres : `noindex` et exclues de `robots.txt`.
+- **`/llms.txt`** : résumé du site pour les assistants IA (format llmstxt.org). Comme le sitemap, il ne cite que les contenus relus par le comité médical.
+- **En-tête** : barre d'annonce fermable et menu déroulant des interventions par domaine.
 
 ## Structure
 

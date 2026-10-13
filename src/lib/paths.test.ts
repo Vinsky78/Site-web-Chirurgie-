@@ -2,11 +2,11 @@ import { describe, expect, it } from "vitest";
 import { isRootFile, isStrayFile } from "./paths";
 
 describe("adresses ressemblant à des fichiers", () => {
-  it.each(["/llms.txt", "/apple-touch-icon.png", "/wp-login.php", "/foo.txt/interventions"])("%s renvoie vers la 404", (path) => {
+  it.each(["/ads.txt", "/apple-touch-icon.png", "/wp-login.php", "/foo.txt/interventions"])("%s renvoie vers la 404", (path) => {
     expect(isStrayFile(path)).toBe(true);
   });
 
-  it.each(["/favicon.ico", "/icon.svg", "/robots.txt", "/sitemap.xml"])("%s reste servi par l'application", (path) => {
+  it.each(["/favicon.ico", "/icon.svg", "/robots.txt", "/sitemap.xml", "/llms.txt"])("%s reste servi par l'application", (path) => {
     expect(isRootFile(path)).toBe(true);
     expect(isStrayFile(path)).toBe(false);
   });

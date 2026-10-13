@@ -22,7 +22,9 @@
     "cms:migrate:create": "payload migrate:create",
     "cms:types": "payload generate:types",
     "cms:importmap": "payload generate:importmap",
-    "cms:seed": "payload run scripts/cms-seed.mts"
+    "cms:seed": "payload run scripts/cms-seed.mts",
+    "content:check": "tsx scripts/website-surgery.mts check",
+    "content:standalone": "tsx scripts/website-surgery.mts standalone"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.90.2",

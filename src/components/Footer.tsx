@@ -29,6 +29,16 @@ export async function Footer() {
             </Link>
           </li>
           <li>
+            <Link href="/comparateur" className="underline underline-offset-4">
+              {t("compare")}
+            </Link>
+          </li>
+          <li>
+            <Link href="/recherche" className="underline underline-offset-4">
+              {t("search")}
+            </Link>
+          </li>
+          <li>
             <Link href="/rejoindre" className="underline underline-offset-4">
               {t("join")}
             </Link>

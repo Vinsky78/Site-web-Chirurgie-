@@ -98,10 +98,21 @@ test.describe("SEO technique", () => {
   });
 
   test("une adresse ressemblant à un fichier renvoie la 404 du site, pas une erreur", async ({ page }) => {
-    const response = await page.goto("/llms.txt");
+    const response = await page.goto("/ads.txt");
     expect(response?.status()).toBe(404);
     await expect(page.locator("html")).toHaveAttribute("lang", "fr");
     await expect(page.getByRole("heading", { level: 1, name: "Page introuvable" })).toBeVisible();
+  });
+
+  test("/llms.txt résume le site pour les assistants IA, sans les brouillons", async ({ request }) => {
+    const response = await request.get("/llms.txt");
+    expect(response.status()).toBe(200);
+    expect(response.headers()["content-type"]).toContain("text/plain");
+    const body = await response.text();
+    expect(body).toMatch(/^# /);
+    expect(body).toContain("/sitemap.xml");
+    // Fiches en brouillon : jamais citées tant qu'elles ne sont pas relues.
+    expect(body).not.toContain("/interventions/rhinoplastie");
   });
 
   test("les pages publiques n'imposent pas de relance de navigation (Critical-CH)", async ({ request }) => {

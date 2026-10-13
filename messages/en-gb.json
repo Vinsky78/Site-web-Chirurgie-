@@ -16,7 +16,11 @@
       "en-gb": "English (UK)"
     },
     "guides": "Guides",
-    "howItWorks": "How it works"
+    "howItWorks": "How it works",
+    "compare": "Compare",
+    "search": "Search",
+    "allInterventions": "All procedures",
+    "announceClose": "Close announcement"
   },
   "footer": {
     "legal": "Legal notice",
@@ -26,7 +30,9 @@
     "independence": "Independent platform: no commission on procedures, no paid rankings.",
     "pro": "Professional area",
     "glossary": "Glossary",
-    "join": "Are you a surgeon?"
+    "join": "Are you a surgeon?",
+    "compare": "Compare procedures",
+    "search": "Search"
   },
   "home": {
     "title": "Understand before you decide",
@@ -516,5 +522,35 @@
       "spam": "The application could not be sent. Please try again.",
       "unavailable": "The service is temporarily unavailable. Please try again later."
     }
+  },
+  "layout": {
+    "announce": "Our pages follow a strict editorial charter and are being reviewed by a medical committee."
+  },
+  "compare": {
+    "title": "Compare procedures",
+    "lead": "Put the anaesthetic, duration, hospital stay, recovery and main risks of two or three procedures side by side.",
+    "choose": "Procedure {n}",
+    "none": "None",
+    "button": "Compare",
+    "empty": "Choose at least two procedures to compare them.",
+    "category": "Area",
+    "anaesthesia": "Anaesthetic",
+    "duration": "Duration",
+    "hospitalStay": "Hospital stay",
+    "recovery": "Recovery",
+    "risks": "Main risks",
+    "view": "Full page",
+    "note": "This table is a general guide. Only a surgeon, after an examination, can tell you what applies to your situation."
+  },
+  "search": {
+    "title": "Search",
+    "lead": "Look for a procedure, a guide or a glossary term.",
+    "label": "Your search",
+    "button": "Search",
+    "results": "{count, plural, =0 {No results} one {# result} other {# results}} for “{q}”",
+    "interventions": "Procedures",
+    "guides": "Guides",
+    "glossary": "Glossary",
+    "hint": "Try “nose”, “scar”, “anaesthetic” or “implants”."
   }
 }

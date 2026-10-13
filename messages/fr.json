@@ -16,7 +16,11 @@
       "en-gb": "English (UK)"
     },
     "guides": "Guides",
-    "howItWorks": "Comment ça marche"
+    "howItWorks": "Comment ça marche",
+    "compare": "Comparateur",
+    "search": "Rechercher",
+    "allInterventions": "Toutes les interventions",
+    "announceClose": "Fermer l'annonce"
   },
   "footer": {
     "legal": "Mentions légales",
@@ -26,7 +30,9 @@
     "independence": "Plateforme indépendante : aucune commission sur les interventions, aucun classement payant.",
     "pro": "Espace pro",
     "glossary": "Lexique",
-    "join": "Vous êtes chirurgien ?"
+    "join": "Vous êtes chirurgien ?",
+    "compare": "Comparer des interventions",
+    "search": "Rechercher"
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -517,5 +523,35 @@
       "spam": "La candidature n'a pas pu être envoyée. Merci de réessayer.",
       "unavailable": "Le service est momentanément indisponible. Merci de réessayer plus tard."
     }
+  },
+  "layout": {
+    "announce": "Les fiches sont rédigées selon une charte stricte et en cours de relecture par un comité médical."
+  },
+  "compare": {
+    "title": "Comparer des interventions",
+    "lead": "Mettez côte à côte l'anesthésie, la durée, l'hospitalisation, la convalescence et les principaux risques de deux ou trois interventions.",
+    "choose": "Intervention {n}",
+    "none": "Aucune",
+    "button": "Comparer",
+    "empty": "Choisissez au moins deux interventions pour les comparer.",
+    "category": "Domaine",
+    "anaesthesia": "Anesthésie",
+    "duration": "Durée",
+    "hospitalStay": "Hospitalisation",
+    "recovery": "Convalescence",
+    "risks": "Principaux risques",
+    "view": "Fiche complète",
+    "note": "Ce tableau est un repère général. Seul un chirurgien, après examen, peut vous dire ce qui s'applique à votre situation."
+  },
+  "search": {
+    "title": "Rechercher",
+    "lead": "Cherchez une intervention, un guide ou un terme du lexique.",
+    "label": "Votre recherche",
+    "button": "Rechercher",
+    "results": "{count, plural, =0 {Aucun résultat} one {# résultat} other {# résultats}} pour « {q} »",
+    "interventions": "Interventions",
+    "guides": "Guides",
+    "glossary": "Lexique",
+    "hint": "Essayez « nez », « cicatrice », « anesthésie » ou « implants »."
   }
 }

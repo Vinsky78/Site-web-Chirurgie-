@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Chirurgie</title>
+<style>
+:root{color-scheme:light dark;--bg:#fafaf8;--fg:#1c1c1a;--mut:#5d5d58;--card:#fff;--bd:#d9d9d2;--ac:#0f5c5c}
+@media(prefers-color-scheme:dark){:root{--bg:#161615;--fg:#eeeee9;--mut:#a5a59d;--card:#1f1f1d;--bd:#3a3a36;--ac:#6cc3c3}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+.wrap{max-width:60rem;margin:0 auto;padding:1rem 1.25rem 3rem}
+header{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between}
+h1{font-size:1.5rem;margin:.5rem 0}
+button,input{font:inherit;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:.5rem;padding:.6rem .9rem;min-height:44px}
+button{cursor:pointer}button[aria-pressed=true]{border-color:var(--ac);color:var(--ac);font-weight:600}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.notice{border-left:4px solid var(--ac);background:var(--card);padding:.75rem 1rem;border-radius:.25rem;color:var(--mut)}
+.tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}.tools input{flex:1 1 14rem}
+ul{list-style:none;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr))}
+li{background:var(--card);border:1px solid var(--bd);border-radius:.75rem;padding:1rem}
+li h2{font-size:1.1rem;margin:.1rem 0 .4rem}li p{margin:.3rem 0;color:var(--mut)}
+.tag{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ac)}.draft{font-size:.8rem;color:var(--mut);font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1 id="t"></h1><div role="group" aria-label="Langue"><button data-l="fr">FR</button> <button data-l="en-gb">EN</button></div></header>
+<p class="notice" id="n"></p>
+<div class="tools"><input id="q" type="search"><span id="cats" role="group"></span></div>
+<ul id="list" aria-live="polite"></ul>
+</div>
+<script>
+const DATA={"fr":[{"id":"rhinoplasty","slug":"rhinoplastie","category":"face","title":"Rhinoplastie","summary":"La rhinoplastie modifie la forme du nez. Comprendre l'intervention, ses risques, la convalescence et les questions à poser au chirurgien.","updatedAt":"2026-10-07","reviewed":false,"risks":7},{"id":"abdominoplasty","slug":"abdominoplastie","category":"body","title":"Abdominoplastie","summary":"L'abdominoplastie retire l'excédent de peau du ventre et peut réparer les muscles abdominaux. Indications, risques, cicatrice et convalescence.","updatedAt":"2026-10-07","reviewed":false,"risks":7},{"id":"breast-augmentation","slug":"augmentation-mammaire","category":"breast","title":"Augmentation mammaire","summary":"L'augmentation mammaire augmente le volume des seins par implants ou par transfert de graisse. Types d'implants, risques, suivi à long terme.","updatedAt":"2026-10-07","reviewed":false,"risks":8}],"en-gb":[{"id":"rhinoplasty","slug":"rhinoplasty","category":"face","title":"Rhinoplasty (nose reshaping)","summary":"Rhinoplasty changes the shape of the nose. What the operation involves, its risks, recovery and the questions to ask your surgeon.","updatedAt":"2026-10-07","reviewed":false,"risks":7},{"id":"abdominoplasty","slug":"tummy-tuck","category":"body","title":"Tummy tuck (abdominoplasty)","summary":"A tummy tuck removes excess skin from the abdomen and can repair separated muscles. Who it suits, its risks, scarring and recovery.","updatedAt":"2026-10-07","reviewed":false,"risks":7},{"id":"breast-augmentation","slug":"breast-augmentation","category":"breast","title":"Breast augmentation","summary":"Breast augmentation increases breast size with implants or fat transfer. Implant types, risks and long-term follow-up.","updatedAt":"2026-10-07","reviewed":false,"risks":8}]};
+const UI={"fr":{"title":"Chirurgie : information","search":"Rechercher une intervention","draft":"Brouillon, non relu par un chirurgien","notice":"Information générale, ne remplace pas une consultation médicale. Toute intervention comporte des risques.","cats":{"face":"Visage","body":"Corps","breast":"Seins"},"all":"Toutes","empty":"Aucun résultat."},"en-gb":{"title":"Surgery: information","search":"Search for a procedure","draft":"Draft, not yet reviewed by a surgeon","notice":"General information, not a substitute for a medical consultation. Every procedure carries risks.","cats":{"face":"Face","body":"Body","breast":"Breast"},"all":"All","empty":"No results."}};
+const $=s=>document.querySelector(s);
+const state={l:(navigator.language||"fr").toLowerCase().startsWith("fr")?"fr":"en-gb",cat:"all",q:""};
+try{const s=localStorage.getItem("lang");if(s in DATA)state.l=s}catch{}
+const el=(tag,props={},...kids)=>{const e=Object.assign(document.createElement(tag),props);e.append(...kids);return e};
+function render(){
+  const u=UI[state.l];document.documentElement.lang=state.l==="fr"?"fr":"en-GB";document.title=u.title;
+  $("#t").textContent=u.title;$("#n").textContent=u.notice;$("#q").placeholder=u.search;$("#q").setAttribute("aria-label",u.search);
+  document.querySelectorAll("[data-l]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===state.l));
+  const cats=$("#cats");cats.replaceChildren(...["all",...Object.keys(u.cats)].map(c=>{
+    const b=el("button",{textContent:c==="all"?u.all:u.cats[c]});b.setAttribute("aria-pressed",state.cat===c);
+    b.onclick=()=>{state.cat=c;render()};return b}));
+  const q=state.q.trim().toLowerCase();
+  const items=DATA[state.l].filter(i=>(state.cat==="all"||i.category===state.cat)&&(!q||(i.title+" "+i.summary).toLowerCase().includes(q)));
+  $("#list").replaceChildren(...(items.length?items.map(i=>el("li",{},
+    el("span",{className:"tag",textContent:u.cats[i.category]||i.category}),
+    el("h2",{textContent:i.title}),el("p",{textContent:i.summary}),
+    ...(i.reviewed?[]:[el("p",{className:"draft",textContent:u.draft})]))):[el("li",{textContent:u.empty})]));
+}
+document.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{state.l=b.dataset.l;try{localStorage.setItem("lang",state.l)}catch{}render()});
+$("#q").oninput=e=>{state.q=e.target.value;render()};
+render();
+</script>
+</body>
+</html>

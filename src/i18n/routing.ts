@@ -29,6 +29,9 @@ export const routing = defineRouting({
     "/demande": { fr: "/demande", "en-gb": "/request" },
     "/comment-ca-marche": { fr: "/comment-ca-marche", "en-gb": "/how-it-works" },
     "/rejoindre": { fr: "/rejoindre", "en-gb": "/join" },
+    // Outils pilotés par paramètres : non indexés.
+    "/comparateur": { fr: "/comparateur", "en-gb": "/compare" },
+    "/recherche": { fr: "/recherche", "en-gb": "/search" },
     "/informations/[page]": { fr: "/informations/[page]", "en-gb": "/information/[page]" },
     // Lien personnel du patient : non indexé, hors sitemap.
     "/ma-demande/[token]": { fr: "/ma-demande/[token]", "en-gb": "/my-request/[token]" },

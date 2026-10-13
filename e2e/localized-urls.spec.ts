@@ -3,10 +3,12 @@ import { expect, test } from "@playwright/test";
 test.describe("adresses traduites par marché", () => {
   test("le parcours britannique reste sur des adresses anglaises", async ({ page }) => {
     await page.goto("/en-gb");
-    await page.getByRole("navigation", { name: /main/i }).getByRole("link", { name: /procedures/i }).click();
+    const nav = page.getByRole("navigation", { name: /main/i });
+    await nav.getByRole("button", { name: /procedures/i }).click();
+    await nav.getByRole("link", { name: /all procedures/i }).click();
     await expect(page).toHaveURL(/\/en-gb\/procedures$/);
 
-    await page.getByRole("link", { name: "Tummy tuck (abdominoplasty)" }).click();
+    await page.locator("main").getByRole("link", { name: "Tummy tuck (abdominoplasty)" }).click();
     await expect(page).toHaveURL(/\/en-gb\/procedures\/tummy-tuck$/);
     await expect(page.getByRole("heading", { level: 1, name: "Tummy tuck (abdominoplasty)" })).toBeVisible();
 
