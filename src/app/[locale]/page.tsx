@@ -96,6 +96,11 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             </li>
           ))}
         </ul>
+        <p className="mt-6">
+          <Link href="/comment-ca-marche" className="underline underline-offset-4">
+            {t("howItWorks")}
+          </Link>
+        </p>
       </section>
 
       <section aria-labelledby="interventions" className="mx-auto max-w-page px-4 pb-16">

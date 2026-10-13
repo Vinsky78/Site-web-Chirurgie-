@@ -38,6 +38,11 @@ export async function Header() {
               </Link>
             </li>
             <li>
+              <Link href="/comment-ca-marche" className="underline-offset-4 hover:underline">
+                {t("howItWorks")}
+              </Link>
+            </li>
+            <li>
               <Link
                 href="/demande"
                 className={buttonClasses("primary")}

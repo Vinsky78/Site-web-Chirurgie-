@@ -12,6 +12,14 @@ export const INTERVENTION_IDS = [
   "breast-reduction",
   "gynecomastia",
   "fat-grafting",
+  "arm-lift",
+  "thigh-lift",
+  "body-lift",
+  "buttock-augmentation",
+  "labiaplasty",
+  "breast-implant-revision",
+  "brow-lift",
+  "genioplasty",
 ] as const;
 export type InterventionId = (typeof INTERVENTION_IDS)[number];
 
@@ -113,6 +121,12 @@ export const GUIDE_IDS = [
   "anaesthesia",
   "complications-and-rights",
   "aesthetic-medicine-vs-surgery",
+  "cost-and-financing",
+  "combining-procedures",
+  "health-prerequisites",
+  "body-image-and-expectations",
+  "breast-implants-long-term",
+  "revision-surgery",
 ] as const;
 export type GuideId = (typeof GUIDE_IDS)[number];
 

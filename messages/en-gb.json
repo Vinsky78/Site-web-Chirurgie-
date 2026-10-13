@@ -15,7 +15,8 @@
       "fr": "Français (France)",
       "en-gb": "English (UK)"
     },
-    "guides": "Guides"
+    "guides": "Guides",
+    "howItWorks": "How it works"
   },
   "footer": {
     "legal": "Legal notice",
@@ -52,6 +53,7 @@
     "reflectionText": "UK professional standards recommend at least two weeks between your consultation and agreeing to surgery. That time is yours.",
     "guidesTitle": "Guides to help you decide",
     "allGuides": "All guides",
+    "howItWorks": "How the platform works: step by step and FAQs",
     "allInterventions": "All procedures"
   },
   "categories": {

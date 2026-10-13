@@ -24,6 +24,8 @@ const PAGES = [
   "/fr/informations/confidentialite",
   "/fr/pro/connexion",
   "/fr/rejoindre",
+  "/fr/comment-ca-marche",
+  "/en-gb/how-it-works",
   "/fr/page-inexistante",
 ];
 

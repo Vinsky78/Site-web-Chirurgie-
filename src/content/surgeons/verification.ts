@@ -23,6 +23,14 @@ export const SPECIALTIES_BY_INTERVENTION: Record<InterventionId, readonly Specia
   "breast-reduction": ["plastic-surgery"],
   gynecomastia: ["plastic-surgery"],
   "fat-grafting": ["plastic-surgery"],
+  "arm-lift": ["plastic-surgery"],
+  "thigh-lift": ["plastic-surgery"],
+  "body-lift": ["plastic-surgery"],
+  "buttock-augmentation": ["plastic-surgery"],
+  labiaplasty: ["plastic-surgery"],
+  "breast-implant-revision": ["plastic-surgery"],
+  "brow-lift": ["plastic-surgery", "oculoplastic", "maxillofacial"],
+  genioplasty: ["plastic-surgery", "maxillofacial"],
 };
 
 /** Interventions déclarées qui ne relèvent pas de la spécialité. */
