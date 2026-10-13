@@ -33,7 +33,9 @@ test.describe("dossiers d'intervention, guides et lexique", () => {
 
   test("les guides sont dans la navigation et renvoient vers les fiches citées", async ({ page }) => {
     await page.goto("/fr");
-    await page.getByRole("navigation", { name: /principale/i }).getByRole("link", { name: "Guides" }).click();
+    const nav = page.getByRole("navigation", { name: /principale/i });
+    await nav.getByRole("button", { name: "Menu" }).click();
+    await nav.getByRole("link", { name: "Guides" }).click();
     await expect(page).toHaveURL(/\/fr\/guides$/);
     await page.getByRole("link", { name: /choisir son chirurgien/i }).click();
     await expect(page).toHaveURL(/\/fr\/guides\/choisir-son-chirurgien$/);

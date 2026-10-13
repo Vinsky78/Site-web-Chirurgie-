@@ -4,6 +4,7 @@ test.describe("adresses traduites par marché", () => {
   test("le parcours britannique reste sur des adresses anglaises", async ({ page }) => {
     await page.goto("/en-gb");
     const nav = page.getByRole("navigation", { name: /main/i });
+    await nav.getByRole("button", { name: "Menu" }).click();
     await nav.getByRole("button", { name: /procedures/i }).click();
     await nav.getByRole("link", { name: /all procedures/i }).click();
     await expect(page).toHaveURL(/\/en-gb\/procedures$/);

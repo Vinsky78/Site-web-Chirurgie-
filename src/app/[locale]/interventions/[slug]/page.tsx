@@ -139,10 +139,21 @@ export default async function InterventionPage({ params }: Props) {
   const terms = termsUsedBy(intervention, await getGlossary(locale as Locale));
   const format = await getFormatter();
   const review = intervention.medicalReview;
+  const toc = [
+    ["description", t("whatIs")],
+    ["indications", t("indications")],
+    ["contre-indications", t("contraindications")],
+    ["risques", t("risks")],
+    ["convalescence", t("recovery")],
+    ["alternatives", t("alternatives")],
+    ["faq", t("faq")],
+  ] as const;
   const formatDate = (iso: string) => format.dateTime(new Date(iso), { dateStyle: "long" });
 
   return (
-    <article className="mx-auto max-w-reading px-4 py-12">
+    <article className="mx-auto max-w-page px-4 pb-24 pt-10 lg:pb-12">
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-12">
+      <div className="max-w-reading">
       <JsonLd data={structuredData(intervention, t("listTitle"))} />
 
       <nav aria-label={t("breadcrumb")} className="text-small text-muted">
@@ -181,6 +192,15 @@ export default async function InterventionPage({ params }: Props) {
           {t("draftBanner")}
         </p>
       )}
+
+      <dl aria-label={t("keyFacts")} className="mt-6 grid gap-3 sm:grid-cols-3">
+        {(["anaesthesia", "duration", "hospitalStay"] as const).map((key) => (
+          <div key={key} className="rounded-card border border-border bg-surface p-4">
+            <dt className="text-small font-semibold uppercase tracking-wider text-clay">{t(key)}</dt>
+            <dd className="mt-1 text-small">{intervention.procedure[key]}</dd>
+          </div>
+        ))}
+      </dl>
 
       <DossierNav locale={locale as Locale} intervention={intervention} subpages={subpages} current="overview" />
 
@@ -223,17 +243,6 @@ export default async function InterventionPage({ params }: Props) {
             </Link>
           </p>
         )}
-      </Section>
-
-      <Section id="deroulement" title={t("procedure")}>
-        <dl className="grid gap-4 sm:grid-cols-3">
-          {(["anaesthesia", "duration", "hospitalStay"] as const).map((key) => (
-            <div key={key} className="rounded-card border border-border bg-surface p-4">
-              <dt className="text-small font-medium text-primary">{t(key)}</dt>
-              <dd className="mt-1">{intervention.procedure[key]}</dd>
-            </div>
-          ))}
-        </dl>
       </Section>
 
       <Section id="convalescence" title={t("recovery")}>
@@ -323,6 +332,46 @@ export default async function InterventionPage({ params }: Props) {
           {t("cta")}
         </Link>
       </p>
+      </div>
+
+      {/* Colonne latérale (≥ 1 024 px) : sommaire et demande restent visibles pendant la lecture. */}
+      <aside className="hidden lg:block">
+        <div className="sticky top-24 space-y-6">
+          <nav aria-label={t("toc")} className="rounded-card border border-border bg-surface p-5">
+            <p className="font-serif text-h3 text-primary-strong">{t("toc")}</p>
+            <ul className="mt-3 space-y-1.5 text-small">
+              {toc.map(([id, label]) => (
+                <li key={id}>
+                  <a href={`#${id}`} className="text-muted underline-offset-4 hover:text-primary hover:underline">
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="rounded-card bg-primary-strong p-5 text-white">
+            <p className="font-serif text-h3">{t("asideTitle")}</p>
+            <p className="mt-2 text-small text-primary-soft">{t("asideText")}</p>
+            <Link
+              href={{ pathname: "/demande", query: { intervention: intervention.id } }}
+              className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-control bg-white px-4 py-2 text-center text-label text-primary-strong hover:bg-primary-soft"
+            >
+              {t("cta")}
+            </Link>
+          </div>
+        </div>
+      </aside>
+      </div>
+
+      {/* Barre d'action mobile : la demande reste à portée de pouce. */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface/95 p-3 backdrop-blur lg:hidden">
+        <Link
+          href={{ pathname: "/demande", query: { intervention: intervention.id } }}
+          className={buttonClasses("primary", "w-full")}
+        >
+          {t("cta")}
+        </Link>
+      </div>
     </article>
   );
 }

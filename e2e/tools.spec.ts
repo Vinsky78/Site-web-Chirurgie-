@@ -1,6 +1,14 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("outils : recherche et comparateur", () => {
+  test("la recherche du bandeau d'accueil mène aux résultats", async ({ page }) => {
+    await page.goto("/fr");
+    await page.getByLabel("Quelle intervention vous intéresse ?").fill("paupières");
+    await page.getByRole("search").getByRole("button", { name: "Rechercher" }).click();
+    await expect(page).toHaveURL(/\/fr\/recherche\?q=paupi/);
+    await expect(page.locator("main").getByRole("link", { name: /Blépharoplastie/ }).first()).toBeVisible();
+  });
+
   test("la recherche trouve une intervention sans accents et mène à sa fiche", async ({ page }) => {
     await page.goto("/fr/recherche");
     await page.getByLabel("Votre recherche").fill("blepharo");
@@ -30,6 +38,7 @@ test.describe("outils : recherche et comparateur", () => {
   test("le menu des interventions s'ouvre et mène à une fiche", async ({ page }) => {
     await page.goto("/fr");
     const nav = page.getByRole("navigation", { name: /principale/i });
+    await nav.getByRole("button", { name: "Menu" }).click();
     await nav.getByRole("button", { name: "Interventions" }).click();
     await nav.getByRole("link", { name: "Rhinoplastie" }).click();
     await expect(page).toHaveURL(/\/fr\/interventions\/rhinoplastie$/);

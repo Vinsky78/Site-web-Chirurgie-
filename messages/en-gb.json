@@ -20,7 +20,14 @@
     "compare": "Compare",
     "search": "Search",
     "allInterventions": "All procedures",
-    "announceClose": "Close announcement"
+    "announceClose": "Close announcement",
+    "menuOpen": "Menu",
+    "menuClose": "Close",
+    "searchLabel": "Search the site",
+    "langShort": {
+      "fr": "FR",
+      "en-gb": "EN"
+    }
   },
   "footer": {
     "legal": "Legal notice",
@@ -32,7 +39,12 @@
     "glossary": "Glossary",
     "join": "Are you a surgeon?",
     "compare": "Compare procedures",
-    "search": "Search"
+    "search": "Search",
+    "discover": "Explore",
+    "tools": "Tools",
+    "platform": "The platform",
+    "legalTitle": "Information",
+    "rights": "All rights reserved."
   },
   "home": {
     "title": "Understand before you decide",
@@ -60,7 +72,24 @@
     "guidesTitle": "Guides to help you decide",
     "allGuides": "All guides",
     "howItWorks": "How the platform works: step by step and FAQs",
-    "allInterventions": "All procedures"
+    "allInterventions": "All procedures",
+    "eyebrow": "Independent medical information",
+    "searchLabel": "Which procedure are you interested in?",
+    "searchPlaceholder": "E.g. rhinoplasty, eyelids, scar…",
+    "searchButton": "Search",
+    "browseBy": "Or browse by area:",
+    "trust": [
+      "Risks always explained",
+      "Verified surgeons",
+      "No commission"
+    ],
+    "stepsTitle": "How it works, in 3 steps",
+    "steps": [
+      "You get informed: risks, recovery, alternatives.",
+      "You prepare a request, with no photos or free-text medical details.",
+      "You choose 1 to 3 verified surgeons. Free, no commitment."
+    ],
+    "stepsLink": "See the full process"
   },
   "categories": {
     "face": "Face",
@@ -87,7 +116,12 @@
     "noPromise": "No result can be guaranteed. Results vary from person to person.",
     "cta": "Prepare a consultation request",
     "listTitle": "Procedures",
-    "listLead": "Factual guides to understand each procedure, its risks and alternatives."
+    "listLead": "Factual guides to understand each procedure, its risks and alternatives.",
+    "keyFacts": "At a glance",
+    "toc": "On this page",
+    "asideTitle": "Thinking about it?",
+    "asideText": "Prepare a request: you then choose 1 to 3 verified surgeons. Free, with no commitment.",
+    "jumpTo": "Jump to"
   },
   "directory": {
     "title": "Verified surgeons",

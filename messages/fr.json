@@ -20,7 +20,14 @@
     "compare": "Comparateur",
     "search": "Rechercher",
     "allInterventions": "Toutes les interventions",
-    "announceClose": "Fermer l'annonce"
+    "announceClose": "Fermer l'annonce",
+    "menuOpen": "Menu",
+    "menuClose": "Fermer",
+    "searchLabel": "Rechercher sur le site",
+    "langShort": {
+      "fr": "FR",
+      "en-gb": "EN"
+    }
   },
   "footer": {
     "legal": "Mentions légales",
@@ -32,7 +39,12 @@
     "glossary": "Lexique",
     "join": "Vous êtes chirurgien ?",
     "compare": "Comparer des interventions",
-    "search": "Rechercher"
+    "search": "Rechercher",
+    "discover": "Découvrir",
+    "tools": "Outils",
+    "platform": "La plateforme",
+    "legalTitle": "Informations",
+    "rights": "Tous droits réservés."
   },
   "home": {
     "title": "Comprendre avant de décider",
@@ -60,7 +72,24 @@
     "guidesTitle": "Guides pour décider",
     "allGuides": "Tous les guides",
     "howItWorks": "Comment fonctionne la plateforme : parcours et questions fréquentes",
-    "allInterventions": "Toutes les interventions"
+    "allInterventions": "Toutes les interventions",
+    "eyebrow": "Information médicale indépendante",
+    "searchLabel": "Quelle intervention vous intéresse ?",
+    "searchPlaceholder": "Ex. : rhinoplastie, paupières, cicatrice…",
+    "searchButton": "Rechercher",
+    "browseBy": "Ou parcourir par zone :",
+    "trust": [
+      "Risques toujours détaillés",
+      "Chirurgiens vérifiés",
+      "Aucune commission"
+    ],
+    "stepsTitle": "Comment ça marche, en 3 étapes",
+    "steps": [
+      "Vous vous informez : risques, convalescence, alternatives.",
+      "Vous préparez une demande, sans photo ni texte médical libre.",
+      "Vous choisissez 1 à 3 chirurgiens vérifiés. Gratuit, sans engagement."
+    ],
+    "stepsLink": "Voir le parcours détaillé"
   },
   "categories": {
     "face": "Visage",
@@ -87,7 +116,12 @@
     "noPromise": "Aucun résultat ne peut être garanti. Les résultats varient d'une personne à l'autre.",
     "cta": "Préparer une demande de consultation",
     "listTitle": "Interventions",
-    "listLead": "Des fiches factuelles pour comprendre chaque intervention, ses risques et ses alternatives."
+    "listLead": "Des fiches factuelles pour comprendre chaque intervention, ses risques et ses alternatives.",
+    "keyFacts": "En bref",
+    "toc": "Sur cette page",
+    "asideTitle": "Un projet en tête ?",
+    "asideText": "Préparez une demande : vous choisirez ensuite 1 à 3 chirurgiens vérifiés. Gratuit et sans engagement.",
+    "jumpTo": "Aller à"
   },
   "directory": {
     "title": "Chirurgiens vérifiés",
