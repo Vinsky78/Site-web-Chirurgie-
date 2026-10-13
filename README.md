@@ -8,7 +8,7 @@ Plateforme européenne d'information sur la chirurgie et la médecine esthétiqu
 
 - Next.js 16 (App Router, Server Components), TypeScript strict, Tailwind CSS 4.
 - Deux marchés : France (`/fr`) et Royaume-Uni (`/en-gb`), avec des contenus localisés et non simplement traduits.
-- Accueil, liste des interventions, fiches intervention (11 : rhinoplastie, abdominoplastie, augmentation mammaire, liposuccion, blépharoplastie, lifting du visage, otoplastie, lifting des seins, réduction mammaire, gynécomastie, lipofilling) avec risques, contre-indications, alternatives et droits du patient du pays.
+- Accueil, liste des interventions, fiches intervention (19 : rhinoplastie, abdominoplastie, augmentation mammaire, liposuccion, blépharoplastie, lifting du visage, otoplastie, lifting des seins, réduction mammaire, gynécomastie, lipofilling, lifting des bras, lifting des cuisses, lifting circulaire du corps, augmentation des fesses, nymphoplastie, changement d'implants mammaires, lifting des sourcils, génioplastie), 18 guides pratiques et une page « Comment ça marche » avec sa FAQ (`/fr/comment-ca-marche`, `/en-gb/how-it-works`) avec risques, contre-indications, alternatives et droits du patient du pays.
 - Dossiers d'intervention : 5 sous-pages par fiche (risques, prix, convalescence, avant de se décider, alternatives), reliées par un sommaire et un fil d'Ariane.
 - Guides (`/fr/guides`) : choisir son chirurgien, se faire opérer à l'étranger, préparer sa consultation, devis et délai de réflexion, signaux d'alerte après une opération, est-ce le bon moment.
 - Lexique (`/fr/lexique`, `/en-gb/glossary`) : définitions courtes, reliées automatiquement aux fiches qui emploient chaque terme.

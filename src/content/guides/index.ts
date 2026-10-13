@@ -37,7 +37,7 @@ export async function getGuideAlternateSlugs(id: GuideId): Promise<Partial<Recor
 
 /** Thèmes de la page des guides, dans l'ordre d'un parcours : décider, se faire opérer, se protéger. */
 export const GUIDE_THEMES = {
-  decide: ["choosing-a-surgeon", "preparing-consultation", "quote-and-cooling-off", "right-time", "aesthetic-medicine-vs-surgery"],
-  surgery: ["preparing-for-surgery", "anaesthesia", "after-surgery-at-home", "scar-care"],
-  safety: ["warning-signs-after-surgery", "complications-and-rights", "surgery-abroad"],
+  decide: ["choosing-a-surgeon", "preparing-consultation", "quote-and-cooling-off", "right-time", "aesthetic-medicine-vs-surgery", "cost-and-financing", "combining-procedures", "body-image-and-expectations"],
+  surgery: ["health-prerequisites", "preparing-for-surgery", "anaesthesia", "after-surgery-at-home", "scar-care"],
+  safety: ["warning-signs-after-surgery", "complications-and-rights", "revision-surgery", "breast-implants-long-term", "surgery-abroad"],
 } as const satisfies Record<string, readonly GuideId[]>;

@@ -3,6 +3,7 @@ import * as migration_20261007_222932_directory from './20261007_222932_director
 import * as migration_20261007_234308_editorial from './20261007_234308_editorial';
 import * as migration_20261008_170747_lancement from './20261008_170747_lancement';
 import * as migration_20261013_110456_nouvelles_interventions from './20261013_110456_nouvelles_interventions';
+import * as migration_20261013_112934_contenus_reference from './20261013_112934_contenus_reference';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20261013_110456_nouvelles_interventions.up,
     down: migration_20261013_110456_nouvelles_interventions.down,
-    name: '20261013_110456_nouvelles_interventions'
+    name: '20261013_110456_nouvelles_interventions',
+  },
+  {
+    up: migration_20261013_112934_contenus_reference.up,
+    down: migration_20261013_112934_contenus_reference.down,
+    name: '20261013_112934_contenus_reference'
   },
 ];

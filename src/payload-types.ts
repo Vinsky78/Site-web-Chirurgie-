@@ -179,7 +179,15 @@ export interface Intervention {
     | 'breast-lift'
     | 'breast-reduction'
     | 'gynecomastia'
-    | 'fat-grafting';
+    | 'fat-grafting'
+    | 'arm-lift'
+    | 'thigh-lift'
+    | 'body-lift'
+    | 'buttock-augmentation'
+    | 'labiaplasty'
+    | 'breast-implant-revision'
+    | 'brow-lift'
+    | 'genioplasty';
   category: 'face' | 'body' | 'breast';
   slug: string;
   title: string;
@@ -253,7 +261,15 @@ export interface InterventionSubpage {
     | 'breast-lift'
     | 'breast-reduction'
     | 'gynecomastia'
-    | 'fat-grafting';
+    | 'fat-grafting'
+    | 'arm-lift'
+    | 'thigh-lift'
+    | 'body-lift'
+    | 'buttock-augmentation'
+    | 'labiaplasty'
+    | 'breast-implant-revision'
+    | 'brow-lift'
+    | 'genioplasty';
   kind: 'risks' | 'cost' | 'recovery' | 'decision' | 'alternatives';
   title: string;
   summary: string;
@@ -315,7 +331,13 @@ export interface Guide {
     | 'scar-care'
     | 'anaesthesia'
     | 'complications-and-rights'
-    | 'aesthetic-medicine-vs-surgery';
+    | 'aesthetic-medicine-vs-surgery'
+    | 'cost-and-financing'
+    | 'combining-procedures'
+    | 'health-prerequisites'
+    | 'body-image-and-expectations'
+    | 'breast-implants-long-term'
+    | 'revision-surgery';
   slug: string;
   title: string;
   summary: string;
@@ -358,6 +380,14 @@ export interface Guide {
         | 'breast-reduction'
         | 'gynecomastia'
         | 'fat-grafting'
+        | 'arm-lift'
+        | 'thigh-lift'
+        | 'body-lift'
+        | 'buttock-augmentation'
+        | 'labiaplasty'
+        | 'breast-implant-revision'
+        | 'brow-lift'
+        | 'genioplasty'
       )[]
     | null;
   /**
@@ -449,6 +479,14 @@ export interface Surgeon {
     | 'breast-reduction'
     | 'gynecomastia'
     | 'fat-grafting'
+    | 'arm-lift'
+    | 'thigh-lift'
+    | 'body-lift'
+    | 'buttock-augmentation'
+    | 'labiaplasty'
+    | 'breast-implant-revision'
+    | 'brow-lift'
+    | 'genioplasty'
   )[];
   /**
    * Factuelle : parcours, spécialité. Aucune promesse, aucun superlatif.
@@ -519,6 +557,14 @@ export interface SurgeonApplication {
     | 'breast-reduction'
     | 'gynecomastia'
     | 'fat-grafting'
+    | 'arm-lift'
+    | 'thigh-lift'
+    | 'body-lift'
+    | 'buttock-augmentation'
+    | 'labiaplasty'
+    | 'breast-implant-revision'
+    | 'brow-lift'
+    | 'genioplasty'
   )[];
   languages?: ('fr' | 'en' | 'de' | 'nl' | 'es' | 'it' | 'ar' | 'pt')[] | null;
   locale?: string | null;

@@ -24,6 +24,10 @@ const PAGES = [
   "/fr/informations/confidentialite",
   "/fr/pro/connexion",
   "/fr/rejoindre",
+  "/fr/comment-ca-marche",
+  "/en-gb/how-it-works",
+  "/fr/interventions/augmentation-des-fesses",
+  "/fr/guides/cout-et-financement-chirurgie-esthetique",
   "/fr/page-inexistante",
 ];
 

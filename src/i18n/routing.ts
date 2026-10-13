@@ -27,6 +27,7 @@ export const routing = defineRouting({
     "/chirurgiens/[slug]": { fr: "/chirurgiens/[slug]", "en-gb": "/surgeons/[slug]" },
     "/chirurgiens/ville/[city]": { fr: "/chirurgiens/ville/[city]", "en-gb": "/surgeons/city/[city]" },
     "/demande": { fr: "/demande", "en-gb": "/request" },
+    "/comment-ca-marche": { fr: "/comment-ca-marche", "en-gb": "/how-it-works" },
     "/rejoindre": { fr: "/rejoindre", "en-gb": "/join" },
     "/informations/[page]": { fr: "/informations/[page]", "en-gb": "/information/[page]" },
     // Lien personnel du patient : non indexé, hors sitemap.

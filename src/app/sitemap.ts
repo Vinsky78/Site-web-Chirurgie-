@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
 
   for (const locale of routing.locales) {
-    for (const href of ["/", "/interventions", "/guides", "/lexique", "/rejoindre"] satisfies Href[]) {
+    for (const href of ["/", "/interventions", "/guides", "/lexique", "/comment-ca-marche", "/rejoindre"] satisfies Href[]) {
       entries.push({ url: absoluteUrl(locale, href), alternates: { languages: hreflangAlternates(() => href) } });
     }
     for (const id of INFO_PAGE_IDS) {
